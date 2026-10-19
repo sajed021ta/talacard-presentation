@@ -1,0 +1,11 @@
+html.render #stage{min-height:0;height:100vh;width:100vw}
+html.render #opener,html.render .phone-holder,html.render .cap,html.render .kv{transition:none!important}
+html.render #stage.m-app #opener{visibility:hidden!important}
+html.render #stage.m-open .phone-holder,html.render #stage.m-close .phone-holder{visibility:hidden!important}
+html.render .cap .eye{display:none}
+html.render #chooser{display:none}
+.opener-copy{display:flex;flex-direction:column;align-items:center;gap:24px}
+#capT em,#tag em{background:none!important;-webkit-text-fill-color:var(--studio-accent,#B88A2A);color:var(--studio-accent,#B88A2A)!important}
+.studio-positioned{position:absolute!important;inset:auto!important;left:var(--place-x)!important;top:var(--place-y)!important;width:var(--place-w)!important;height:var(--place-h)!important;padding:0!important;max-width:none!important;overflow:hidden!important}
+#capTxt.studio-positioned{position:fixed!important;display:flex;justify-content:center;z-index:10}
+.opener-copy.studio-positioned{z-index:10}.dev.studio-positioned{z-index:3}

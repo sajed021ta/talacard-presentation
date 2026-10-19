@@ -34,7 +34,7 @@ test('public viewer stays read-only; publication requires secret and validates m
  const get=await worker.fetch(new Request(url+'/default-content.json'),e);assert.deepEqual(await get.json(),p);
  assert.equal((await worker.fetch(new Request(url+'/default-content.json',{headers:{'If-None-Match':first.etag}}),e)).status,304);
  response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers,body:JSON.stringify(p)}),e);assert.equal(response.status,409);
- p.decks[0].scenes[0].title='new title';
+ p.decks[0].scenes[0].title='new title';delete p.decks[0].scenes[0].titleRuns;
  response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers:{...headers,'If-Match':first.etag},body:JSON.stringify(p)}),e);assert.equal(response.status,200);
  p.decks[0].scenes[0].media='/media/missing.mp4';
  response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers:{...headers,'If-Match':(await response.json()).etag},body:JSON.stringify(p)}),e);assert.equal(response.status,409);
@@ -53,7 +53,7 @@ test('local saves publish media before the project, skip repeat uploads, retry o
  await sync.run();assert.equal(sync.status().status,'retrying');assert.ok(fs.existsSync(path.join(root,'content.json')));
  offline=false;await sync.run();assert.equal(sync.status().status,'published');assert.equal(uploads,1);assert.ok(await e.BUCKET.head('media/test.mp4'));
  await sync.run();assert.equal(uploads,1);
- p.decks[1].scenes[0].title='a second edit';fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));await sync.run();assert.equal(sync.status().status,'published');assert.equal(uploads,1);
+ p.decks[1].scenes[0].title='a second edit';delete p.decks[1].scenes[0].titleRuns;fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));await sync.run();assert.equal(sync.status().status,'published',sync.status().error);assert.equal(uploads,1);
  const remote=await e.BUCKET.get('project/current.json');await e.BUCKET.put('project/current.json',JSON.stringify({...p,activeDeck:'app'}),{customMetadata:{revision:'other-device'}});
- p.decks[1].scenes[0].title='unsent local edit';fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));await sync.run();assert.equal(sync.status().status,'conflict');assert.equal((await e.BUCKET.head('project/current.json')).customMetadata.revision,'other-device');
+ p.decks[1].scenes[0].title='unsent local edit';delete p.decks[1].scenes[0].titleRuns;fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));await sync.run();assert.equal(sync.status().status,'conflict');assert.equal((await e.BUCKET.head('project/current.json')).customMetadata.revision,'other-device');
 });

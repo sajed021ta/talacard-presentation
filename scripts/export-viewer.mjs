@@ -9,9 +9,11 @@ const mediaSource = process.argv[3] ? path.resolve(process.argv[3]) : path.join(
 validateProject(JSON.parse(fs.readFileSync(path.join(root, 'content.json'))));
 fs.mkdirSync(output, { recursive:true });
 fs.copyFileSync(path.join(root, 'public/viewer.html'), path.join(output, 'index.html'));
-for (const f of ['viewer.js', 'viewer.css', 'studio.css', 'model.js', 'navigation.js', 'placement.js','text.js','text.css','effects.js']) fs.copyFileSync(path.join(root, 'public', f), path.join(output, f));
+for (const f of ['viewer.js', 'viewer.css', 'studio.css', 'model.js', 'navigation.js', 'placement.js','text.js','text.css','effects.js','backdrop.js']) fs.copyFileSync(path.join(root, 'public', f), path.join(output, f));
 fs.copyFileSync(path.join(root, 'content.json'), path.join(output, 'default-content.json'));
 fs.cpSync(path.join(root, 'public/legacy'), path.join(output, 'legacy'), { recursive:true });
+fs.cpSync(path.join(root,'public/legacy-previous'),path.join(output,'legacy-previous'),{recursive:true});
+fs.cpSync(path.join(root,'public/reference'),path.join(output,'reference'),{recursive:true});
 fs.mkdirSync(path.join(output, 'original'), { recursive:true });
 fs.copyFileSync(path.join(root, 'original/style.css'), path.join(output, 'original/style.css'));
 fs.cpSync(path.join(root, 'original/assets'), path.join(output, 'original/assets'), { recursive:true });

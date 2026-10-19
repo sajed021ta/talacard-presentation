@@ -15,14 +15,16 @@ The TalaCard owner edits individual presentation pages and presents the result t
 Make the existing Claude artifact independently runnable and maintainable in the owner's GitHub repository, with editable text, images, videos, timing and page order.
 
 ## Capabilities and Constraints
-- Preserve the original six app chapters and fourteen steps, visual identity and manual page controls. The chapter menu is on the right and current chapter pages are across the top; no bottom flow map or video timeline.
-- Archive the complete user-authored artifact and its twenty extracted images/fonts.
+- Follow the pinned 2026-10-19 Claude reference across four decks: app (24 reference steps plus the preserved historical branch-detail page, 25 total), proposal (12 pages), kiosk (22 steps), and delivery from balance (13 steps). The chapter menu is on the right and current chapter pages are across the top; page changes remain manual.
+- Preserve the original archive and its twenty extracted images/fonts unchanged. Keep the refreshed reference separately, with 44 exact image/font assets recorded by hash and source provenance.
 - Include the nine explicitly provided videos; do not substitute neighboring versions.
-- A second twelve-page proposal deck follows the supplied PDF; claims come only from the PDF.
+- The twelve-page proposal deck follows the supplied PDF; claims come only from the PDF.
+- Refresh source-owned app text through a three-way merge against the original app baseline. Preserve owner-edited text, rich formatting, media, desktop/mobile placements, custom pages and proposal content. Repeated migration must not duplicate pages or replace subsequent edits. Render the retained historical branch-detail page through `legacy-previous`.
 - Provide live editing, media selection/upload, add/duplicate/reorder/delete, undo/redo, automatic local save and authenticated cloud content sync, import/export, and a presentation view.
 - Edit titles and independent description boxes with a shared Word-like toolbar: YekanX/Tahoma/Arial, size, color, bold, italic, underline, alignment and line spacing. Character formatting applies to selected text or the whole active box; alignment and line spacing apply to the box. Keep YekanX and RTL as defaults. Store structured text runs rather than HTML.
 - Add, delete, reorder and move/resize description boxes independently. Existing descriptions expose sentence boxes without rewriting saved content until edited; a split action preserves text formatting while separating sentences. Support up to forty description boxes per scene and independent desktop/mobile placement.
 - Apply image/video zoom, four-direction pan, fade and blur effects, with duration (0.2–120 seconds), delay (0–60 seconds), amount, easing, repeat and replay controls. Effect repetition and video looping are separate settings; effect completion never advances the page. Respect reduced-motion preferences.
+- Offer the reference's animated gold guilloche or a plain selected color under motion/appearance. Video pages use the same reference backdrop. Shared playback controls pause and resume source timers, backdrop motion, media effects and videos together; embedded source timers advance only from the parent player.
 - Persist locally without credentials. Never put GitHub tokens into browser code. GitHub synchronization uses the owner's normal Git workflow. Content updates sync independently to durable cloud storage; no browser credentials.
 - Use the local studio for editing and autosave; the public link presents the synchronized content read-only. Show local-save and cloud-sync states separately, including retry and version-conflict recovery.
 - The source Claude URL remains read-only; this is an independent copy.
@@ -31,7 +33,7 @@ Make the existing Claude artifact independently runnable and maintainable in the
 Persian, RTL, YekanX from the supplied artifact, gold/charcoal/light surfaces, original phone frames and supplied product motion. Preserve the incumbent rather than create a replacement identity.
 
 ## Evidence on Hand
-`original/source.html`, extracted artifact files, supplied media under `public/media`, and `references/proposal.pdf`. Illustration frames are preserved images, not fully editable vector app screens.
+The original archive under `original/`, supplied media under `public/media`, and `references/proposal.pdf`. The refreshed authority is [the pinned Claude artifact](https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r), captured as `references/artifact-2026-10-19.json`; its step catalog is `public/reference/catalog.json`, assets are under `public/reference/assets`, and renderer is under `public/legacy`. `scripts/merge-reference.mjs` uses `references/original-app-content.json` as the merge baseline. Illustration frames remain preserved images rather than fully editable vector app screens.
 
 ## Product Principles
 - Content editing does not require changing rendering code.

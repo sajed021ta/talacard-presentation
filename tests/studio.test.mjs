@@ -11,13 +11,14 @@ const fixture = JSON.parse(fs.readFileSync(new URL('../content.json', import.met
 
 test('both supplied decks retain all original scenes and the nine selected movies', () => {
   validateProject(fixture);
-  assert.equal(fixture.decks[0].scenes.length, 14);
+  assert.ok(fixture.decks[0].scenes.length>=14);
   assert.equal(fixture.decks[1].scenes.length, 12);
   const supplied = JSON.parse(fs.readFileSync(new URL('../ASSETS.json', import.meta.url))).filter(m => m.path.endsWith('.mp4')).map(m => '/' + m.path.replace(/^public\//,''));
   assert.equal(supplied.length, 9);
   const available = new Set(fixture.library.filter(m => m.type === 'video').map(m => m.src));
   assert.ok(supplied.every(src => available.has(src)), 'supplied films remain available alongside owner uploads');
-  assert.deepEqual(fixture.decks[0].scenes.map(s => s.legacyScene), Array.from({length:14}, (_, i) => i));
+  const originalIds=new Set(fixture.decks[0].scenes.map(s=>s.id));
+  assert.ok(Array.from({length:14},(_,i)=>'app-'+(i+1)).every(id=>originalIds.has(id)),'original pages survive reference additions');
 });
 
 test('content is plain text and media stays portable; malformed imports are rejected', () => {

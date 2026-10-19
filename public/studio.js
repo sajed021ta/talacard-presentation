@@ -1,3 +1,4 @@
+import {paintBackdrop} from './backdrop.js';
 import {richEditorMarkup,mountRichEditor} from './rich-editor.js';
 import {renderTitle,renderDescription,textBlocks,ensureTextBlocks,syncDescription} from './text.js';
 import {applyMediaEffect,controlMediaEffect,seekMediaEffect,DEFAULT_EFFECT} from './effects.js';
@@ -98,11 +99,12 @@ function loadLegacy() {
 }
 function renderStage(restart = false) {
   const s = scene(), canvas = $('#scene-canvas');
-  const signature = `${s.id}|${s.layout}|${s.media}|${s.poster}`;
+  const signature = `${s.id}|${s.layout}|${s.media}|${s.poster}|${s.legacyDeck||"previous"}`;
   canvas.style.setProperty('--scene-bg', s.background); canvas.style.setProperty('--scene-ink', s.textColor); canvas.style.setProperty('--scene-accent', s.accent); canvas.style.setProperty('--scene-size', s.fontSize + 'px'); canvas.style.setProperty('--media-fit', s.fit); canvas.style.setProperty('--media-position', s.position + '%');
   if (s.layout === 'legacy') {
-    if (!frame || !frame.isConnected) {
-      iframeReady = false; canvas.replaceChildren(); frame = document.createElement('iframe'); frame.title = 'نمایش فلو اصلی اپ طلاکارت'; frame.src = '/legacy/index.html#render'; canvas.append(frame);loadLegacy();
+    const renderer=s.legacyDeck&&s.legacyDeck!=='previous'?'/legacy/index.html#render':'/legacy-previous/index.html#render';
+    if (!frame || !frame.isConnected || frame.getAttribute('src')!==renderer) {
+      iframeReady = false; canvas.replaceChildren(); frame = document.createElement('iframe'); frame.title = 'نمایش فلو اصلی اپ طلاکارت'; frame.src = renderer; canvas.append(frame);loadLegacy();
     } else loadLegacy();
     sceneSignature = signature; resizeStage(); return;
   }
@@ -147,7 +149,7 @@ function resizeStage() {
   const scale = fullscreen ? Math.min(stage.clientWidth / w, stage.clientHeight / h) : stage.clientWidth / w;
   canvas.style.transform = `scale(${scale})`;
   canvas.style.setProperty('--handle-factor', String(1/scale));
-  applyPlacement(canvas,scene());
+  applyPlacement(canvas,scene());paintBackdrop(canvas,scene(),elapsed,reduce);
   const content=canvas.querySelector('.scene-content');if(content)renderDescription(content,content.querySelector('.scene-description'),scene(),placementMode(canvas));
   renderHandles();
 }
@@ -188,10 +190,10 @@ function updateProgress() {
 function tick(now) {
   const dt = Math.min(.1, Math.max(0, (now - previousFrame) / 1000)); previousFrame = now;
   if (project && playing && (!frame || iframeReady)) {
-    const advance = Math.max(0, Math.min(dt, scene().duration - elapsed));
-    elapsed = Math.min(scene().duration, elapsed + dt); sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
+    const advance = dt;
+    elapsed += dt; sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
 
-    updateProgress();
+    paintBackdrop($('#scene-canvas'),scene(),elapsed,reduce);updateProgress();
   }
   requestAnimationFrame(tick);
 }
@@ -204,7 +206,7 @@ function renderInspector() {
   const s = scene(), form = $('#scene-form'); $('#editing-number').textContent = `صفحهٔ ${fa(index + 1)}`;
   document.querySelectorAll('.editor-tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
   if (tab === 'content') {
-    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + field('بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در منوی سمت راست زیر یک بخش قرار می‌گیرند.') + richEditorMarkup(s) + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.find(d => d.id === 'app')?.scenes.filter(x => x.layout === 'legacy').map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
+    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + field('بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در منوی سمت راست زیر یک بخش قرار می‌گیرند.') + richEditorMarkup(s) + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.flatMap(d=>d.scenes).filter(x=>x.layout==='legacy'&&(x.legacyDeck||'previous')===(s.legacyDeck||'previous')).filter((x,i,list)=>list.findIndex(y=>y.legacyScene===x.legacyScene)===i).map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
   } else if (tab === 'media') {
     const selected = project.library.find(m => m.src === s.media);
     form.innerHTML = (s.layout === 'legacy' ? '<p class="hint">انتخاب عکس یا ویدیو، این صفحه را به قالب «متن و رسانه کنار هم» تغییر می‌دهد. برای برگشت، قالب «فلو اصلی اپ» را انتخاب کن.</p><hr class="editor-divider">' : '') + '<div class="media-preview" id="current-media"></div><button type="button" class="button upload-button" id="upload-media">' + icon('upload') + 'انتخاب عکس یا ویدیو از دستگاه</button><p class="hint">PNG، JPG، WebP، GIF، MP4 یا WebM · حداکثر ۹۵ مگابایت</p><hr class="editor-divider">' + select('نمایش رسانه', 'fit', [['contain','نمایش کامل · بدون برش'],['cover','پر کردن قاب · با برش']], s.fit) + field('جای رسانه در قاب', 'position', s.position, 'range', 'min="0" max="100" step="1"') + `<label class="field checkbox"><input type="checkbox" data-key="loop" ${s.loop ? 'checked' : ''}><span>لوپ ویدیو تا رفتن به صفحهٔ بعد</span></label>` + '<button type="button" id="choose-poster" class="text-button">انتخاب تصویر کاور ویدیو</button><button type="button" id="remove-media" class="text-button danger">حذف رسانه از این صفحه</button><hr class="editor-divider"><h3 class="field-title">کتابخانهٔ رسانه</h3><div class="media-choices" id="media-library"></div>';
@@ -215,7 +217,7 @@ function renderInspector() {
     $('#upload-media').onclick = () => uploadDialog(false); $('#choose-poster').onclick = () => uploadDialog(true);
     $('#remove-media').onclick = () => { checkpoint(); scene().media = ''; scene().poster = ''; setPlaying(false); renderStage(); renderInspector(); renderList(); changed(); };
   } else {
-    form.innerHTML = field('مدت انیمیشن صفحه (ثانیه)', 'duration', s.duration, 'number', 'min="1" max="180" step="0.1"') + select('ورود به صفحه', 'transition', [['fade','محو آرام'],['reveal','آشکار شدن سینمایی'],['slide','حرکت افقی'],['none','بدون افکت']], s.transition) + field('شدت حرکت', 'intensity', s.intensity, 'range', 'min="0" max="1" step="0.05"', 'حرکت کم برای خواندن متن و نمایش محصول مناسب‌تر است.') + '<hr class="editor-divider">' + field('اندازهٔ عنوان', 'fontSize', s.fontSize, 'range', 'min="20" max="64" step="1"') + '<div class="field-row">' + field('رنگ متن', 'textColor', s.textColor, 'color') + field('رنگ تأکید', 'accent', s.accent, 'color') + '</div>' + field('رنگ زمینه', 'background', s.background, 'color') + (s.layout === 'legacy' ? '<p class="hint">انیمیشن داخلی فلو اپ همان نسخهٔ اصلی است؛ تنظیم افکت ورود برای قالب‌های رسانه‌ای اعمال می‌شود.</p>' : '') + '<p class="hint">در حالت کاهش حرکت سیستم، افکت‌های تزئینی حذف می‌شوند. ویدیوها خودکار و بی‌صدا شروع می‌شوند. تغییر صفحه فقط با انتخاب شماست.</p>';
+    form.innerHTML = select('پس‌زمینه و نمایش رسانه','presentationStyle',[['reference','همراه با مرجع · خطوط طلایی متحرک'],['plain','ساده · رنگ انتخابی']],s.presentationStyle||'plain')+field('مدت انیمیشن صفحه (ثانیه)', 'duration', s.duration, 'number', 'min="1" max="180" step="0.1"') + select('ورود به صفحه', 'transition', [['fade','محو آرام'],['reveal','آشکار شدن سینمایی'],['slide','حرکت افقی'],['none','بدون افکت']], s.transition) + field('شدت حرکت', 'intensity', s.intensity, 'range', 'min="0" max="1" step="0.05"', 'حرکت کم برای خواندن متن و نمایش محصول مناسب‌تر است.') + '<hr class="editor-divider">' + field('اندازهٔ عنوان', 'fontSize', s.fontSize, 'range', 'min="20" max="64" step="1"') + '<div class="field-row">' + field('رنگ متن', 'textColor', s.textColor, 'color') + field('رنگ تأکید', 'accent', s.accent, 'color') + '</div>' + field('رنگ زمینه', 'background', s.background, 'color') + (s.layout === 'legacy' ? '<p class="hint">انیمیشن داخلی فلو اپ همان نسخهٔ اصلی است؛ تنظیم افکت ورود برای قالب‌های رسانه‌ای اعمال می‌شود.</p>' : '') + '<p class="hint">در حالت کاهش حرکت سیستم، افکت‌های تزئینی حذف می‌شوند. ویدیوها خودکار و بی‌صدا شروع می‌شوند. تغییر صفحه فقط با انتخاب شماست.</p>';
   }
   if(tab==='content')richCleanup=mountRichEditor(form,s,{checkpoint,onEdit:()=>{refreshText();renderList();renderFlow();changed()},onSelectBlock:id=>{activeTextBlockId=id;renderHandles()},onStructure:id=>{activeTextBlockId=id;renderInspector();requestAnimationFrame(()=>$('#scene-form [data-word-id="'+id+'"]')?.focus())}});
   if(tab==='media')mountMediaEffects(form,s);
@@ -351,7 +353,7 @@ function writeBox(kind,box) {
    if(frame)sendLegacy('text',{scene:scene()});else {const content=canvas.querySelector('.scene-content');renderDescription(content,content.querySelector('.scene-description'),scene(),mode)}
   }else{
    scene().placement||={};scene().placement[mode]||={};scene().placement[mode][kind]=box;
-   if(frame)sendLegacy('placement',{placement:scene().placement[mode]});else applyPlacement(canvas,scene());
+   if(frame)sendLegacy('placement',{placement:scene().placement[mode]});else applyPlacement(canvas,scene());paintBackdrop(canvas,scene(),elapsed,reduce);
   }
   positionHandle(kind,box);
 }

@@ -1,3 +1,4 @@
+import {paintBackdrop} from './backdrop.js';
 import {renderTitle,renderDescription,textBlocks,ensureTextBlocks,syncDescription} from './text.js';
 import {applyMediaEffect,controlMediaEffect,seekMediaEffect,DEFAULT_EFFECT} from './effects.js';
 import {renderNavigation} from './navigation.js';
@@ -38,11 +39,12 @@ function loadLegacy() {
 }
 function renderStage(restart = false) {
   const s = scene(), canvas = $('#scene-canvas');
-  const signature = `${s.id}|${s.layout}|${s.media}|${s.poster}`;
+  const signature = `${s.id}|${s.layout}|${s.media}|${s.poster}|${s.legacyDeck||"previous"}`;
   canvas.style.setProperty('--scene-bg', s.background); canvas.style.setProperty('--scene-ink', s.textColor); canvas.style.setProperty('--scene-accent', s.accent); canvas.style.setProperty('--scene-size', s.fontSize + 'px'); canvas.style.setProperty('--media-fit', s.fit); canvas.style.setProperty('--media-position', s.position + '%');
   if (s.layout === 'legacy') {
-    if (!frame || !frame.isConnected) {
-      iframeReady = false; canvas.replaceChildren(); frame = document.createElement('iframe'); frame.title = 'نمایش فلو اصلی اپ طلاکارت'; frame.src = '/legacy/index.html#render'; canvas.append(frame);loadLegacy();
+    const renderer=s.legacyDeck&&s.legacyDeck!=='previous'?'/legacy/index.html#render':'/legacy-previous/index.html#render';
+    if (!frame || !frame.isConnected || frame.getAttribute('src')!==renderer) {
+      iframeReady = false; canvas.replaceChildren(); frame = document.createElement('iframe'); frame.title = 'نمایش فلو اصلی اپ طلاکارت'; frame.src = renderer; canvas.append(frame);loadLegacy();
     } else loadLegacy();
     sceneSignature = signature; resizeStage(); return;
   }
@@ -90,7 +92,7 @@ function resizeStage() {
   canvas.style.translate = 'none'; canvas.style.transformOrigin = '0 0';
   canvas.style.transform = `scale(${scale})`;
   canvas.style.setProperty('--handle-factor', String(1/scale));
-  applyPlacement(canvas,scene());
+  applyPlacement(canvas,scene());paintBackdrop(canvas,scene(),elapsed,reduce);
   const content=canvas.querySelector('.scene-content');if(content)renderDescription(content,content.querySelector('.scene-description'),scene(),placementMode(canvas));
 }
 new ResizeObserver(resizeStage).observe($('#stage'));
@@ -129,10 +131,10 @@ function updateProgress() {
 function tick(now) {
   const dt = Math.min(.1, Math.max(0, (now - previousFrame) / 1000)); previousFrame = now;
   if (project && playing && (!frame || iframeReady)) {
-    const advance = Math.max(0, Math.min(dt, scene().duration - elapsed));
-    elapsed = Math.min(scene().duration, elapsed + dt); sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
+    const advance = dt;
+    elapsed += dt; sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
 
-    updateProgress();
+    paintBackdrop($('#scene-canvas'),scene(),elapsed,reduce);updateProgress();
   }
   requestAnimationFrame(tick);
 }

@@ -1,0 +1,598 @@
+{
+  "app": [
+    {
+      "legacyDeck": "app",
+      "legacyScene": 0,
+      "chapter": "معرفی",
+      "label": "طلاکارت × دیجی‌کالا",
+      "title": "طلای دیجیتال، در دست",
+      "highlight": "در دست",
+      "description": "خرید، فروش و تحویل فیزیکی، همه در یک اپ",
+      "duration": 4.2
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 1,
+      "chapter": "خانه",
+      "label": "خانه",
+      "title": "همه‌ی طلای تو، روی یک نمایشگر",
+      "highlight": "یک نمایشگر",
+      "description": "موجودی طلا و نقد داخل همان دستگاهی دیده می‌شود که کاربر در ATM طلاکارت هم می‌بیند.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 2,
+      "chapter": "خرید",
+      "label": "وارد کردن مقدار",
+      "title": "یک گرم طلا؟ چهار لمس",
+      "highlight": "چهار لمس",
+      "description": "عدد با صفحه‌کلید خود اپ وارد می‌شود و هر رقم همان لحظه روی نمایشگر می‌نشیند.",
+      "duration": 5.7
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 3,
+      "chapter": "خرید",
+      "label": "پلتفرم‌ها بالا می‌آیند",
+      "title": "دیجی‌کالا، اولِ صف",
+      "highlight": "اولِ صف",
+      "description": "کیبورد کنار می‌رود و قیمت پلتفرم‌ها بالا می‌آید. دیجی‌کالا اول فهرست است و خرید داخل طلاکارت انجام می‌شود.",
+      "duration": 5
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 4,
+      "chapter": "خرید",
+      "label": "رسید خرید",
+      "title": "رسید، تازه از دستگاه",
+      "highlight": "تازه از دستگاه",
+      "description": "برگه‌ی رسید از شیار بیرون می‌آید: قیمت لحظه‌ای، کارمزد و مبلغ پرداختی.",
+      "duration": 5.2
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 5,
+      "chapter": "خرید",
+      "label": "خرید موفق",
+      "title": "چراغ سبز!",
+      "highlight": "چراغ سبز!",
+      "description": "خرید ثبت شد و طلا در حساب کاربر نشست.",
+      "duration": 3.8
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 6,
+      "chapter": "فروش",
+      "label": "فروش",
+      "title": "حالا برعکس",
+      "highlight": "برعکس",
+      "description": "از زبانه‌ی فروش، همان صفحه‌کلید و همان چهار لمس. این بار پلتفرم‌های فروش بالا می‌آیند.",
+      "duration": 7.5
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 7,
+      "chapter": "فروش",
+      "label": "پلتفرم‌های فروش",
+      "title": "باز هم دیجی‌کالا اول",
+      "highlight": "دیجی‌کالا اول",
+      "description": "قیمت خرید هر پلتفرم کنار هم است. کاربر روی بهترین گزینه فروش را تمام می‌کند.",
+      "duration": 5
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 8,
+      "chapter": "فروش",
+      "label": "رسید فروش",
+      "title": "مبلغ دریافتی، بدون حدس",
+      "highlight": "بدون حدس",
+      "description": "رسید فروش با مبلغ دریافتی چاپ می‌شود و کاربر آن را تأیید می‌کند.",
+      "duration": 5
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 9,
+      "chapter": "فروش",
+      "label": "فروش موفق",
+      "title": "فروش انجام شد",
+      "highlight": "انجام شد",
+      "description": "نتیجه روی نمایشگر تیره‌ی دستگاه می‌آید.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 10,
+      "chapter": "تحویل فیزیکی",
+      "label": "کارت هدف",
+      "title": "هر گرم، یک قدم تا کارت",
+      "highlight": "یک قدم تا کارت",
+      "description": "نوار «کارت هدف» در خانه با موجودی طلا پر می‌شود؛ ۱.۳ گرم یعنی بیش از نیمه‌ی راه تا کارت ۲ گرمی.",
+      "duration": 5.8
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 11,
+      "chapter": "تحویل فیزیکی",
+      "label": "مسیر طلایی",
+      "title": "یک بازی کوچک: مسیر طلایی",
+      "highlight": "مسیر طلایی",
+      "description": "هر خرید، کاربر را روی مسیر جلو می‌برد. تا کارت ۲ گرمی فقط ۰.۷ گرم مانده است.",
+      "duration": 3.4
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 12,
+      "chapter": "تحویل فیزیکی",
+      "label": "هدف کامل شد",
+      "title": "هدف کامل شد، کارت آماده است",
+      "highlight": "کارت آماده است",
+      "description": "با خرید ۰.۷ گرم باقیمانده، نوار تا ۲ گرم پر می‌شود، کارت کامل می‌شود و تحویل فیزیکی باز می‌شود.",
+      "duration": 6.4
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 13,
+      "chapter": "تحویل فیزیکی",
+      "label": "نزدیک‌ترین طلاپرداز",
+      "title": "نزدیک‌ترین طلاپرداز",
+      "highlight": "طلاپرداز",
+      "description": "نقشه باز می‌شود و روی نزدیک‌ترین طلاپرداز فعال زوم می‌کند.",
+      "duration": 5.2
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 14,
+      "chapter": "تحویل فیزیکی",
+      "label": "مسیریابی",
+      "title": "از نقشه، تا خود طلاپرداز",
+      "highlight": "تا خود طلاپرداز",
+      "description": "با لمس مسیریاب، کیوسک از همان نقطه‌ی نقشه بیرون می‌آید و کنار اپ می‌نشیند.",
+      "duration": 4.6
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 15,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "تحویل طلاکارت",
+      "title": "تحویل طلاکارت",
+      "highlight": "طلاکارت",
+      "description": "کاربر با ۲ گرم موجودی به طلاپرداز رسیده؛ اپ کنار دستگاه، تحویل را از منو انتخاب می‌کند.",
+      "duration": 3
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 16,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "انتخاب پلتفرم",
+      "title": "طلا در دیجی‌کالا",
+      "highlight": "دیجی‌کالا",
+      "description": "پلتفرمی که طلای کاربر در آن نگه‌داری می‌شود؛ دیجی‌کالا اول فهرست است.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 17,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "انتخاب طلاکارت",
+      "title": "از موجودی، ۲ گرم",
+      "highlight": "۲ گرم",
+      "description": "کاربر وزن کارتی را که می‌خواهد از موجودی‌اش تحویل بگیرد انتخاب می‌کند.",
+      "duration": 3.4
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 18,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "کد ملی",
+      "title": "کد ملی، برای اطمینان",
+      "highlight": "برای اطمینان",
+      "description": "کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.",
+      "duration": 5.6
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 19,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "تأیید تحویل",
+      "title": "یک نگاه، یک تأیید",
+      "highlight": "یک تأیید",
+      "description": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.",
+      "duration": 3.8
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 20,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "کد پیامک",
+      "title": "کد پیامک، تأیید شد",
+      "highlight": "تأیید شد",
+      "description": "کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.",
+      "duration": 4.4
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 21,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "در حال بررسی",
+      "title": "لطفاً منتظر بمانید…",
+      "highlight": "منتظر بمانید…",
+      "description": "طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.",
+      "duration": 3.2
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 22,
+      "chapter": "تحویل در طلاپرداز",
+      "label": "دریافت و بازگشت",
+      "title": "کارت در دست، موجودی به‌روز",
+      "highlight": "موجودی به‌روز",
+      "description": "طلاکارت ۲ گرمی از طلاپرداز بیرون می‌آید و همان لحظه از موجودی اپ کم می‌شود.",
+      "duration": 7.4
+    },
+    {
+      "legacyDeck": "app",
+      "legacyScene": 23,
+      "chapter": "جمع‌بندی",
+      "label": "پایان",
+      "title": "یک اتصال، سه سرویس",
+      "highlight": "سه سرویس",
+      "description": "خرید، فروش و تحویل فیزیکی برای کاربران دیجی‌کالا",
+      "duration": 4.6
+    }
+  ],
+  "kiosk": [
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 0,
+      "chapter": "معرفی",
+      "label": "طلاپرداز",
+      "title": "از حساب دیجی‌کالا، تا کارت طلا",
+      "highlight": "تا کارت طلا",
+      "description": "خرید و تحویل طلاکارت در طلاپرداز، در چند لمس",
+      "duration": 3.8
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 1,
+      "chapter": "ورود",
+      "label": "کارت بانکی",
+      "title": "کارت بانکی، در شیار",
+      "highlight": "در شیار",
+      "description": "کاربر کارت بانکی‌اش را وارد طلاپرداز می‌کند تا هویتش تأیید شود.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 2,
+      "chapter": "ورود",
+      "label": "رمز کارت",
+      "title": "چهار رقم، روی دستگاه",
+      "highlight": "روی دستگاه",
+      "description": "رمز کارت با صفحه‌کلید فیزیکی خود طلاپرداز وارد می‌شود.",
+      "duration": 4.4
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 3,
+      "chapter": "ورود",
+      "label": "انتخاب خدمت",
+      "title": "خرید طلاکارت",
+      "highlight": "طلاکارت",
+      "description": "از منوی طلاپرداز، کاربر خرید طلاکارت را انتخاب می‌کند.",
+      "duration": 3.4
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 4,
+      "chapter": "تأیید شماره",
+      "label": "شماره همراه",
+      "title": "شماره همراه، رقم به رقم",
+      "highlight": "رقم به رقم",
+      "description": "شماره‌ی همراه وارد می‌شود تا کد تأیید برایش پیامک شود.",
+      "duration": 5.2
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 5,
+      "chapter": "تأیید شماره",
+      "label": "کد تأیید",
+      "title": "کد پیامک، تأیید شد",
+      "highlight": "تأیید شد",
+      "description": "کد یک‌بارمصرف روی همان صفحه‌کلید وارد می‌شود.",
+      "duration": 3.8
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 6,
+      "chapter": "خرید",
+      "label": "انتخاب طلاکارت",
+      "title": "طلاکارت ۲ گرمی",
+      "highlight": "۲ گرمی",
+      "description": "کاربر وزن کارت را انتخاب می‌کند؛ قیمت هر کارت کنارش است.",
+      "duration": 3.4
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 7,
+      "chapter": "خرید",
+      "label": "انتخاب پلتفرم",
+      "title": "دیجی‌کالا، اولِ فهرست",
+      "highlight": "اولِ فهرست",
+      "description": "پلتفرمی که کاربر در آن حساب طلا دارد؛ دیجی‌کالا اولین گزینه است.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 8,
+      "chapter": "خرید",
+      "label": "تأیید و پرداخت",
+      "title": "یک نگاه، یک تأیید",
+      "highlight": "یک تأیید",
+      "description": "وزن، کارمزد و هزینه‌ی نهایی پیش از پرداخت روی صفحه است.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 9,
+      "chapter": "خرید",
+      "label": "در حال بررسی",
+      "title": "لطفاً منتظر بمانید…",
+      "highlight": "منتظر بمانید…",
+      "description": "طلاپرداز درخواست را با حساب دیجی‌کالای کاربر بررسی می‌کند.",
+      "duration": 2.8
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 10,
+      "chapter": "دریافت کارت",
+      "label": "دریافت طلاکارت",
+      "title": "کارت طلا، از دستگاه",
+      "highlight": "از دستگاه",
+      "description": "طلاکارت ۲ گرمی از شیار طلاپرداز بیرون می‌آید.",
+      "duration": 5.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 11,
+      "chapter": "دریافت کارت",
+      "label": "کارت در دست",
+      "title": "طلای واقعی، در دست",
+      "highlight": "در دست",
+      "description": "کارت پلمب‌شده با قابلیت اصالت‌سنجی؛ همان طلایی که در دیجی‌کالا خریده شد.",
+      "duration": 4.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 12,
+      "chapter": "تحویل از موجودی",
+      "label": "تحویل طلاکارت",
+      "title": "این بار، تحویل از موجودی",
+      "highlight": "تحویل از موجودی",
+      "description": "کاربری که در دیجی‌کالا طلا دارد، از همین منو تحویل طلاکارت را انتخاب می‌کند.",
+      "duration": 5
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 13,
+      "chapter": "تحویل از موجودی",
+      "label": "انتخاب پلتفرم",
+      "title": "طلا در دیجی‌کالا",
+      "highlight": "دیجی‌کالا",
+      "description": "پلتفرمی که طلای کاربر در آن نگه‌داری می‌شود؛ دیجی‌کالا اول فهرست است.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 14,
+      "chapter": "تحویل از موجودی",
+      "label": "انتخاب طلاکارت",
+      "title": "از موجودی، ۲ گرم",
+      "highlight": "۲ گرم",
+      "description": "کاربر وزن کارتی را که می‌خواهد از موجودی‌اش تحویل بگیرد انتخاب می‌کند.",
+      "duration": 3.4
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 15,
+      "chapter": "تحویل از موجودی",
+      "label": "کد ملی",
+      "title": "کد ملی، برای اطمینان",
+      "highlight": "برای اطمینان",
+      "description": "کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.",
+      "duration": 5.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 16,
+      "chapter": "تحویل از موجودی",
+      "label": "تأیید تحویل",
+      "title": "یک نگاه، یک تأیید",
+      "highlight": "یک تأیید",
+      "description": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.",
+      "duration": 3.8
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 17,
+      "chapter": "تحویل از موجودی",
+      "label": "کد پیامک",
+      "title": "کد پیامک، تأیید شد",
+      "highlight": "تأیید شد",
+      "description": "کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.",
+      "duration": 4.4
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 18,
+      "chapter": "تحویل از موجودی",
+      "label": "در حال بررسی",
+      "title": "لطفاً منتظر بمانید…",
+      "highlight": "منتظر بمانید…",
+      "description": "طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.",
+      "duration": 3.2
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 19,
+      "chapter": "تحویل از موجودی",
+      "label": "دریافت طلاکارت",
+      "title": "طلاکارت، از دستگاه",
+      "highlight": "از دستگاه",
+      "description": "طلاکارت ۲ گرمی از شیار طلاپرداز تحویل داده می‌شود.",
+      "duration": 5.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 20,
+      "chapter": "تحویل از موجودی",
+      "label": "موجودی دیجی‌کالا",
+      "title": "در دیجی‌کالا هم، کسر شد",
+      "highlight": "کسر شد",
+      "description": "۲ گرم تحویل‌شده همان لحظه از دارایی طلای کاربر در دیجی‌کالا کم می‌شود.",
+      "duration": 5.6
+    },
+    {
+      "legacyDeck": "kiosk",
+      "legacyScene": 21,
+      "chapter": "جمع‌بندی",
+      "label": "پایان",
+      "title": "خرید یا تحویل، یک طلاپرداز",
+      "highlight": "یک طلاپرداز",
+      "description": "خرید، تحویل و اصالت‌سنجی در شبکه‌ی طلاپردازهای طلاکارت",
+      "duration": 4.2
+    }
+  ],
+  "deliv": [
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 0,
+      "chapter": "معرفی",
+      "label": "تحویل در طلاپرداز",
+      "title": "طلایی که در دیجی‌کالا داری، در دست تو",
+      "highlight": "در دست تو",
+      "description": "تحویل طلاکارت در طلاپرداز، بدون صف و فرم",
+      "duration": 3.8
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 1,
+      "chapter": "ورود",
+      "label": "کارت بانکی",
+      "title": "کارت بانکی، در شیار",
+      "highlight": "در شیار",
+      "description": "کاربر کارت بانکی‌اش را وارد طلاپرداز می‌کند تا هویتش تأیید شود.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 2,
+      "chapter": "ورود",
+      "label": "رمز کارت",
+      "title": "چهار رقم، روی دستگاه",
+      "highlight": "روی دستگاه",
+      "description": "رمز کارت با صفحه‌کلید فیزیکی خود طلاپرداز وارد می‌شود.",
+      "duration": 4.4
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 3,
+      "chapter": "انتخاب",
+      "label": "تحویل طلاکارت",
+      "title": "تحویل طلاکارت",
+      "highlight": "طلاکارت",
+      "description": "از منوی طلاپرداز، کاربر تحویل طلاکارت را انتخاب می‌کند.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 4,
+      "chapter": "انتخاب",
+      "label": "انتخاب پلتفرم",
+      "title": "طلا در دیجی‌کالا",
+      "highlight": "دیجی‌کالا",
+      "description": "پلتفرمی که طلای کاربر در آن نگه‌داری می‌شود؛ دیجی‌کالا اول فهرست است.",
+      "duration": 3.6
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 5,
+      "chapter": "انتخاب",
+      "label": "انتخاب طلاکارت",
+      "title": "از موجودی، ۲ گرم",
+      "highlight": "۲ گرم",
+      "description": "کاربر وزن کارتی را که می‌خواهد از موجودی‌اش تحویل بگیرد انتخاب می‌کند.",
+      "duration": 3.4
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 6,
+      "chapter": "احراز هویت",
+      "label": "کد ملی",
+      "title": "کد ملی، برای اطمینان",
+      "highlight": "برای اطمینان",
+      "description": "کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.",
+      "duration": 5.6
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 7,
+      "chapter": "احراز هویت",
+      "label": "تأیید تحویل",
+      "title": "یک نگاه، یک تأیید",
+      "highlight": "یک تأیید",
+      "description": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.",
+      "duration": 3.8
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 8,
+      "chapter": "احراز هویت",
+      "label": "کد پیامک",
+      "title": "کد پیامک، تأیید شد",
+      "highlight": "تأیید شد",
+      "description": "کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.",
+      "duration": 4.4
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 9,
+      "chapter": "تحویل",
+      "label": "در حال بررسی",
+      "title": "لطفاً منتظر بمانید…",
+      "highlight": "منتظر بمانید…",
+      "description": "طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.",
+      "duration": 3.2
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 10,
+      "chapter": "تحویل",
+      "label": "دریافت طلاکارت",
+      "title": "طلاکارت، از دستگاه",
+      "highlight": "از دستگاه",
+      "description": "طلاکارت ۲ گرمی از شیار طلاپرداز تحویل داده می‌شود.",
+      "duration": 5.6
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 11,
+      "chapter": "تحویل",
+      "label": "کارت در دست",
+      "title": "طلای واقعی، در دست",
+      "highlight": "در دست",
+      "description": "کارت پلمب‌شده با قابلیت اصالت‌سنجی؛ همان طلایی که در دیجی‌کالا داشت.",
+      "duration": 4.6
+    },
+    {
+      "legacyDeck": "deliv",
+      "legacyScene": 12,
+      "chapter": "جمع‌بندی",
+      "label": "پایان",
+      "title": "طلای دیجی‌کالا، به شکل طلاکارت",
+      "highlight": "به شکل طلاکارت",
+      "description": "تحویل فیزیکی در شبکه‌ی طلاپردازهای طلاکارت",
+      "duration": 4.2
+    }
+  ]
+}
