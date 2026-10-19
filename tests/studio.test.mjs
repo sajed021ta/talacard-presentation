@@ -66,3 +66,17 @@ test('local server: persistence, conflict protection, uploads, video seeking, an
   const results = await Promise.all([1,2].map(n => fetch(base + '/api/project', { method:'PUT', headers, body:JSON.stringify({ ...current, project:{...current.project, activeDeck:n===1?'app':'proposal'} }) })));
   assert.deepEqual(results.map(r => r.status).sort(), [200,409]);
 });
+
+test('scene geometry accepts portable device layouts and rejects off-canvas or invalid boxes', async () => {
+  const {adjustBox} = await import('../public/placement.js');
+  const p=clone(fixture), s=p.decks[1].scenes[0];
+  s.placement={desktop:{copy:{x:55,y:15,w:40,h:30},media:{x:5,y:10,w:45,h:80}},compact:{copy:{x:5,y:5,w:90,h:35}}};
+  validateProject(p);
+  for(const bad of [{x:-1,y:0,w:10,h:10},{x:90,y:0,w:20,h:10},{x:0,y:0,w:NaN,h:10},{x:0,y:0,w:7,h:10}]) {
+    s.placement.desktop.copy=bad;assert.throws(()=>validateProject(p));
+  }
+  assert.deepEqual(adjustBox({x:5,y:10,w:40,h:50},-30,90),{x:0,y:50,w:40,h:50});
+  assert.deepEqual(adjustBox({x:5,y:10,w:40,h:50},90,-90,true),{x:5,y:10,w:95,h:8});
+  const serialized=clone(fixture);serialized.decks[0].scenes[0].placement={desktop:{copy:{x:5,y:10,w:40,h:50}}};
+  validateProject(JSON.parse(JSON.stringify(serialized)));
+});

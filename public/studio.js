@@ -1,3 +1,5 @@
+import {renderNavigation} from './navigation.js';
+import {applyPlacement, readPlacement, adjustBox, placementMode} from './placement.js';
 import { clone, validateProject, chapters, blankScene, timeLabel } from './model.js';
 
 const $ = s => document.querySelector(s);
@@ -40,7 +42,7 @@ function changed() { updateStatus(); draft(); }
 function editMode(value) {
   document.body.classList.toggle('editing', value); $('#toggle-edit').textContent = value ? 'نمایش ارائه' : 'ویرایش صفحه‌ها';
   const hash = value ? '#edit' : ''; if (location.hash !== hash) window.history.replaceState(null, '', location.pathname + location.search + hash);
-  resizeStage();
+  animateStage(); resizeStage(); renderHandles();
 }
 
 function renderDecks() {
@@ -49,36 +51,15 @@ function renderDecks() {
 }
 function renderList() {
   $('#page-count').textContent = fa(deck().scenes.length);
-  const list = $('#scene-list'); list.replaceChildren();
-  deck().scenes.forEach((s, i) => {
-    const b = document.createElement('button'); b.className = 'scene-item' + (i === index ? ' selected' : ''); b.dataset.scene = i; b.setAttribute('aria-current', i === index ? 'step' : 'false');
-    const thumb = document.createElement('span'); thumb.className = 'scene-thumb';
-    if (s.poster || (s.media && !/\.(mp4|webm)$/i.test(s.media))) { const im = new Image(); im.src = s.poster || s.media; im.alt = ''; im.loading = 'lazy'; thumb.append(im); }
-    else thumb.innerHTML = icon(s.layout === 'legacy' ? 'phone' : 'picture');
-    const num = document.createElement('b'); num.className = 'thumb-number'; num.textContent = fa(i + 1); thumb.append(num);
-    const info = document.createElement('span'); info.className = 'scene-info';
-    const title = document.createElement('strong'); title.textContent = s.label || s.title; const sub = document.createElement('small'); sub.textContent = `${s.chapter} · ${fa(s.duration)} ثانیه`;
-    info.append(title, sub); b.append(thumb, info); list.append(b);
-  });
   $('#scene-heading').textContent = `${fa(index + 1)} از ${fa(deck().scenes.length)} · ${scene().label}`;
   $('#editing-number').textContent = `صفحهٔ ${fa(index + 1)}`;
   $('#move-up').disabled = index === 0; $('#move-down').disabled = index === deck().scenes.length - 1; $('#delete').disabled = deck().scenes.length === 1;
 }
 function renderFlow() {
-  $('#flow-description').textContent = deck().flowDescription;
-  $('#flow-count').textContent = `${fa(deck().scenes.length)} صفحه · ${fa(timeLabel(deck().scenes.reduce((n, s) => n + s.duration, 0)))}`;
-  $('#flow-grid').replaceChildren(); $('#chapter-progress').replaceChildren();
-  for (const chapter of chapters(deck())) {
-    const section = document.createElement('div'); section.className = 'flow-section'; const h = document.createElement('h3'); h.textContent = chapter; section.append(h);
-    const segment = document.createElement('button'); segment.className = 'chapter-segment'; segment.title = chapter; segment.setAttribute('aria-label', `رفتن به ${chapter}`);
-    const meter = document.createElement('span'); meter.append(document.createElement('i')); const label = document.createElement('strong'); label.textContent = chapter; segment.append(meter, label);
-    const scenes = deck().scenes.map((s, i) => [s, i]).filter(([s]) => s.chapter === chapter);
-    segment.style.flex = String(scenes.reduce((n, [s]) => n + s.duration, 0)); segment.onclick = () => choose(scenes[0][1]); segment.dataset.chapter = chapter;
-    $('#chapter-progress').append(segment);
-    for (const [s, i] of scenes) { const b = document.createElement('button'); b.classList.toggle('current', i === index); b.dataset.scene = i; const number = document.createElement('b'); number.textContent = fa(i + 1); b.append(number, document.createTextNode(s.label)); section.append(b); }
-    $('#flow-grid').append(section);
-  }
-  updateProgress();
+  renderNavigation(deck(), index, choose);
+  const toggle = $('#loop-video'), video = /\.(mp4|webm)$/i.test(scene().media);
+  toggle.closest('label').hidden = !video;
+  toggle.checked = scene().loop;
 }
 function titleInto(el, s) {
   el.textContent = s.title;
@@ -94,7 +75,7 @@ function loadLegacy() {
   $('#stage').setAttribute('aria-busy','true');
   let cover=$('#scene-canvas .legacy-loading');
   if(!cover){cover=document.createElement('div');cover.className='legacy-loading';cover.setAttribute('role','status');cover.textContent='در حال آماده‌سازی صفحه…';$('#scene-canvas').append(cover)}
-  sendLegacy('load', { index: scene().legacyScene, scene: scene(), number: index + 1, preview: !playing && elapsed === 0, request:++legacyRequest });
+  sendLegacy('load', { index: scene().legacyScene, scene: scene(), number: index + 1, preview: !playing && elapsed === 0, compact:placementMode(canvasElement()) === 'compact', request:++legacyRequest });
 }
 function renderStage(restart = false) {
   const s = scene(), canvas = $('#scene-canvas');
@@ -115,7 +96,7 @@ function renderStage(restart = false) {
       const visual = document.createElement('div'); visual.className = 'scene-media';
       if (s.media) {
         const isVideo = /\.(mp4|webm)$/i.test(s.media); const media = document.createElement(isVideo ? 'video' : 'img');
-        if (isVideo) { media.muted = true; media.playsInline = true; media.preload = 'metadata'; if (s.poster) media.poster = s.poster; media.addEventListener('loadeddata', () => { if (playing) playVideo(media); }); }
+        if (isVideo) { media.autoplay = true; media.controls = false; media.muted = true; media.playsInline = true; media.preload = 'metadata'; if (s.poster) media.poster = s.poster; media.addEventListener('loadeddata', () => { if (playing) playVideo(media); }); }
         else media.alt = s.label;
         media.src = s.media;
         media.addEventListener('error', () => { const message = document.createElement('div'); message.className = 'media-error'; message.textContent = 'این رسانه باز نشد. در بخش رسانه، فایل را دوباره انتخاب کنید.'; visual.append(message); }, { once:true });
@@ -129,11 +110,11 @@ function renderStage(restart = false) {
   const content = canvas.querySelector('.scene-content');
   titleInto(content.querySelector('h2'), s); content.querySelector('p').textContent = s.description; content.querySelector('.scene-chapter b').textContent = fa(index + 1); content.querySelector('.scene-chapter span').textContent = s.chapter;
   const v = content.querySelector('video'); if (v) { v.loop = s.loop; if (playing) playVideo(v); }
-  if (restart) animateStage(); resizeStage();
+  if (restart) animateStage(); resizeStage(); applyPlacement(canvas, s); renderHandles();
 }
 function animateStage() {
   stageAnimations.forEach(a => a.cancel()); stageAnimations = [];
-  const s = scene(), content = $('#scene-canvas .scene-content'); if (!content || reduce || s.transition === 'none') return;
+  const s = scene(), content = $('#scene-canvas .scene-content'); if (!content || reduce || document.body.classList.contains('editing') || s.transition === 'none') return;
   const distance = 20 + 35 * s.intensity;
   const first = s.transition === 'slide' ? { opacity:.4, transform:`translateX(${-distance}px)` } : s.transition === 'reveal' ? { opacity:.35, clipPath:'inset(12% 0 0 0)', filter:'blur(5px)', transform:`translateY(${distance}px)` } : { opacity:.35, transform:'translateY(15px)' };
   const a = content.animate([first, { opacity:1, transform:'none', filter:'blur(0px)', clipPath:'inset(0)' }], { duration:850 + s.intensity * 500, easing:'cubic-bezier(.22,1,.36,1)', fill:'both' }); a.pause(); a.currentTime = !playing && elapsed===0 ? a.effect.getComputedTiming().endTime : elapsed * 1000; stageAnimations.push(a);
@@ -146,25 +127,29 @@ function resizeStage() {
   const fullscreen = document.fullscreenElement === stage;
   const scale = fullscreen ? Math.min(stage.clientWidth / w, stage.clientHeight / h) : stage.clientWidth / w;
   canvas.style.transform = `scale(${scale})`;
+  canvas.style.setProperty('--handle-factor', String(1/scale));
+  applyPlacement(canvas,scene());
+  renderHandles();
 }
 new ResizeObserver(resizeStage).observe($('#stage'));
 window.addEventListener('resize', resizeStage);
 window.addEventListener('message', e => {
   if (e.origin !== location.origin || e.source !== frame?.contentWindow) return;
   if (e.data?.type === 'talacard-ready') { iframeReady = true; loadLegacy(); if (elapsed) advanceLegacyTo(elapsed); }
+  if(e.data?.type==='talacard-layout' && e.data.sceneId===scene().id){legacyBoxes=e.data.boxes;renderHandles();}
   if(e.data?.type==='talacard-loaded'&&e.data.request===legacyRequest){$('#scene-canvas .legacy-loading')?.remove();$('#stage').setAttribute('aria-busy','false');$('#stage').dataset.renderedScene=e.data.sceneId}
 });
 
-function playVideo(v) { v.play().catch(() => { if (playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
+function playVideo(v) { v.play().catch(error => { if (error.name !== 'AbortError' && v.isConnected && playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
 function setPlaying(value) {
   if(value && !playing && elapsed===0){if(frame){playing=true;loadLegacy()}else stageAnimations.forEach(a=>a.currentTime=0)}
   playing = value; previousFrame = performance.now(); $('#play').innerHTML = icon(value ? 'pause' : 'play'); $('#play').setAttribute('aria-label', value ? 'توقف' : 'پخش');
   $('#scene-canvas').querySelectorAll('video').forEach(v => value ? playVideo(v) : v.pause());
 }
-function choose(i, keepPlaying = playing) {
+function choose(i, keepPlaying = true) {
   if (!project) return;
-  index = (i + deck().scenes.length) % deck().scenes.length; elapsed = 0;
-  renderList(); renderFlow(); renderInspector(); renderStage(true); setPlaying(keepPlaying); updateProgress();
+  index = (i + deck().scenes.length) % deck().scenes.length; elapsed = 0; legacyBoxes={};
+  renderList(); renderFlow(); renderInspector(); renderStage(true); setPlaying(true); updateProgress();
 }
 function advanceLegacyTo(seconds) { let remaining = seconds * 1000; while (remaining > 0) { const step = Math.min(100, remaining); sendLegacy('advance', { delta:step }); remaining -= step; } }
 function seek(seconds) {
@@ -176,21 +161,14 @@ function seek(seconds) {
 }
 function updateProgress() {
   if (!project) return;
-  const list = deck().scenes, before = list.slice(0, index).reduce((n, s) => n + s.duration, 0), total = list.reduce((n, s) => n + s.duration, 0);
-  $('#clock').textContent = fa(`${timeLabel(before + elapsed)} / ${timeLabel(total)}`); $('#scene-clock').textContent = fa(`${timeLabel(elapsed)} / ${timeLabel(scene().duration)}`); $('#seek').value = String(Math.min(1000, elapsed / scene().duration * 1000));
-  for (const segment of $('#chapter-progress').children) {
-    const ch = segment.dataset.chapter; let completed = 0, amount = 0;
-    list.forEach((s, i) => { if (s.chapter === ch) { amount += s.duration; if (i < index) completed += s.duration; else if (i === index) completed += elapsed; } });
-    segment.querySelector('i').style.width = (completed / amount * 100) + '%'; segment.classList.toggle('current', ch === scene().chapter);
-  }
+  $('#page-location').textContent = `صفحهٔ ${fa(index + 1)} از ${fa(deck().scenes.length)}`;
 }
 function tick(now) {
   const dt = Math.min(.1, Math.max(0, (now - previousFrame) / 1000)); previousFrame = now;
   if (project && playing && (!frame || iframeReady)) {
-    elapsed += dt; sendLegacy('advance', { delta:dt * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
-    if (elapsed >= scene().duration) {
-      if (index === deck().scenes.length - 1) { elapsed = scene().duration; setPlaying(false); } else choose(index + 1, true);
-    }
+    const advance = Math.max(0, Math.min(dt, scene().duration - elapsed));
+    elapsed = Math.min(scene().duration, elapsed + dt); sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
+
     updateProgress();
   }
   requestAnimationFrame(tick);
@@ -203,10 +181,10 @@ function renderInspector() {
   const s = scene(), form = $('#scene-form'); $('#editing-number').textContent = `صفحهٔ ${fa(index + 1)}`;
   document.querySelectorAll('.editor-tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
   if (tab === 'content') {
-    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + field('بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در فلو زیر یک بخش قرار می‌گیرند.') + `<label class="field"><span>عنوان</span><textarea class="title-field" data-key="title" maxlength="1000">${escapeText(s.title)}</textarea></label>` + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + `<label class="field"><span>توضیحات</span><textarea data-key="description" rows="6" maxlength="8000">${escapeText(s.description)}</textarea></label>` + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.find(d => d.id === 'app')?.scenes.filter(x => x.layout === 'legacy').map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
+    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + field('بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در منوی سمت راست زیر یک بخش قرار می‌گیرند.') + `<label class="field"><span>عنوان</span><textarea class="title-field" data-key="title" maxlength="1000">${escapeText(s.title)}</textarea></label>` + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + `<label class="field"><span>توضیحات</span><textarea data-key="description" rows="6" maxlength="8000">${escapeText(s.description)}</textarea></label>` + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.find(d => d.id === 'app')?.scenes.filter(x => x.layout === 'legacy').map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
   } else if (tab === 'media') {
     const selected = project.library.find(m => m.src === s.media);
-    form.innerHTML = (s.layout === 'legacy' ? '<p class="hint">انتخاب عکس یا ویدیو، این صفحه را به قالب «متن و رسانه کنار هم» تغییر می‌دهد. برای برگشت، قالب «فلو اصلی اپ» را انتخاب کن.</p><hr class="editor-divider">' : '') + '<div class="media-preview" id="current-media"></div><button type="button" class="button upload-button" id="upload-media">' + icon('upload') + 'انتخاب عکس یا ویدیو از دستگاه</button><p class="hint">PNG، JPG، WebP، GIF، MP4 یا WebM · حداکثر ۹۵ مگابایت</p><hr class="editor-divider">' + select('نمایش رسانه', 'fit', [['contain','نمایش کامل · بدون برش'],['cover','پر کردن قاب · با برش']], s.fit) + field('جای رسانه در قاب', 'position', s.position, 'range', 'min="0" max="100" step="1"') + `<label class="field checkbox"><input type="checkbox" data-key="loop" ${s.loop ? 'checked' : ''}><span>تکرار ویدیو تا پایان صفحه</span></label>` + '<button type="button" id="choose-poster" class="text-button">انتخاب تصویر کاور ویدیو</button><button type="button" id="remove-media" class="text-button danger">حذف رسانه از این صفحه</button><hr class="editor-divider"><h3 class="field-title">کتابخانهٔ رسانه</h3><div class="media-choices" id="media-library"></div>';
+    form.innerHTML = (s.layout === 'legacy' ? '<p class="hint">انتخاب عکس یا ویدیو، این صفحه را به قالب «متن و رسانه کنار هم» تغییر می‌دهد. برای برگشت، قالب «فلو اصلی اپ» را انتخاب کن.</p><hr class="editor-divider">' : '') + '<div class="media-preview" id="current-media"></div><button type="button" class="button upload-button" id="upload-media">' + icon('upload') + 'انتخاب عکس یا ویدیو از دستگاه</button><p class="hint">PNG، JPG، WebP، GIF، MP4 یا WebM · حداکثر ۹۵ مگابایت</p><hr class="editor-divider">' + select('نمایش رسانه', 'fit', [['contain','نمایش کامل · بدون برش'],['cover','پر کردن قاب · با برش']], s.fit) + field('جای رسانه در قاب', 'position', s.position, 'range', 'min="0" max="100" step="1"') + `<label class="field checkbox"><input type="checkbox" data-key="loop" ${s.loop ? 'checked' : ''}><span>لوپ ویدیو تا رفتن به صفحهٔ بعد</span></label>` + '<button type="button" id="choose-poster" class="text-button">انتخاب تصویر کاور ویدیو</button><button type="button" id="remove-media" class="text-button danger">حذف رسانه از این صفحه</button><hr class="editor-divider"><h3 class="field-title">کتابخانهٔ رسانه</h3><div class="media-choices" id="media-library"></div>';
     const preview = $('#current-media');
     if (s.poster || s.media) { const isVideo = !s.poster && /\.(mp4|webm)$/i.test(s.media); const el = document.createElement(isVideo ? 'video' : 'img'); el.src = s.poster || s.media; if (isVideo) { el.muted = true; el.preload = 'metadata'; } else el.alt = ''; preview.append(el); const name = document.createElement('span'); name.className = 'media-name'; name.textContent = selected?.name || 'رسانهٔ فعلی'; preview.append(name); }
     else preview.innerHTML = icon(s.layout === 'legacy' ? 'phone' : 'picture');
@@ -214,8 +192,10 @@ function renderInspector() {
     $('#upload-media').onclick = () => uploadDialog(false); $('#choose-poster').onclick = () => uploadDialog(true);
     $('#remove-media').onclick = () => { checkpoint(); scene().media = ''; scene().poster = ''; setPlaying(false); renderStage(); renderInspector(); renderList(); changed(); };
   } else {
-    form.innerHTML = field('مدت نمایش (ثانیه)', 'duration', s.duration, 'number', 'min="1" max="180" step="0.1"') + select('ورود به صفحه', 'transition', [['fade','محو آرام'],['reveal','آشکار شدن سینمایی'],['slide','حرکت افقی'],['none','بدون افکت']], s.transition) + field('شدت حرکت', 'intensity', s.intensity, 'range', 'min="0" max="1" step="0.05"', 'حرکت کم برای خواندن متن و نمایش محصول مناسب‌تر است.') + '<hr class="editor-divider">' + field('اندازهٔ عنوان', 'fontSize', s.fontSize, 'range', 'min="20" max="64" step="1"') + '<div class="field-row">' + field('رنگ متن', 'textColor', s.textColor, 'color') + field('رنگ تأکید', 'accent', s.accent, 'color') + '</div>' + field('رنگ زمینه', 'background', s.background, 'color') + (s.layout === 'legacy' ? '<p class="hint">انیمیشن داخلی فلو اپ همان نسخهٔ اصلی است؛ تنظیم افکت ورود برای قالب‌های رسانه‌ای اعمال می‌شود.</p>' : '') + '<p class="hint">در حالت کاهش حرکت سیستم، افکت‌های تزئینی حذف می‌شوند. پخش ویدیو با انتخاب شما شروع می‌شود.</p>';
+    form.innerHTML = field('مدت انیمیشن صفحه (ثانیه)', 'duration', s.duration, 'number', 'min="1" max="180" step="0.1"') + select('ورود به صفحه', 'transition', [['fade','محو آرام'],['reveal','آشکار شدن سینمایی'],['slide','حرکت افقی'],['none','بدون افکت']], s.transition) + field('شدت حرکت', 'intensity', s.intensity, 'range', 'min="0" max="1" step="0.05"', 'حرکت کم برای خواندن متن و نمایش محصول مناسب‌تر است.') + '<hr class="editor-divider">' + field('اندازهٔ عنوان', 'fontSize', s.fontSize, 'range', 'min="20" max="64" step="1"') + '<div class="field-row">' + field('رنگ متن', 'textColor', s.textColor, 'color') + field('رنگ تأکید', 'accent', s.accent, 'color') + '</div>' + field('رنگ زمینه', 'background', s.background, 'color') + (s.layout === 'legacy' ? '<p class="hint">انیمیشن داخلی فلو اپ همان نسخهٔ اصلی است؛ تنظیم افکت ورود برای قالب‌های رسانه‌ای اعمال می‌شود.</p>' : '') + '<p class="hint">در حالت کاهش حرکت سیستم، افکت‌های تزئینی حذف می‌شوند. ویدیوها خودکار و بی‌صدا شروع می‌شوند. تغییر صفحه فقط با انتخاب شماست.</p>';
   }
+  form.insertAdjacentHTML('beforeend', '<hr class="editor-divider"><p class="hint">در پیش‌نمایش، دستگیرهٔ متن یا رسانه را بکش. برای اندازه، گوشهٔ قاب را بکش. کلیدهای جهت روی دستگیره جابه‌جا می‌کنند؛ Shift + جهت اندازه را عوض می‌کند. چیدمان موبایل و دسکتاپ مستقل است.</p><button type="button" id="reset-placement" class="text-button">بازنشانی چیدمان این صفحه</button>');
+  $('#reset-placement').onclick=()=>{checkpoint();delete scene().placement;legacyBoxes={};renderStage();changed();};
   form.querySelectorAll('[data-key]').forEach(input => {
     let hasCheckpoint = false;
     input.addEventListener('focus', () => { hasCheckpoint = false; });
@@ -224,8 +204,9 @@ function renderInspector() {
       if (input.type === 'number' && (!input.value || !Number.isFinite(value) || value < Number(input.min) || value > Number(input.max))) return;
       if (scene()[key] === value) return;
       if (!hasCheckpoint) { checkpoint(); hasCheckpoint = true; }
-      scene()[key] = value; setPlaying(false); elapsed = 0; renderStage(['transition','intensity'].includes(key)); renderList(); renderFlow(); changed();
+      scene()[key] = value; if(key !== 'loop') { elapsed = 0; } renderStage(['transition','intensity'].includes(key)); renderList(); renderFlow(); changed();
       if (key === 'layout') renderInspector();
+      if (key === 'loop') $('#loop-video').checked=value;
     });
   });
 }
@@ -233,15 +214,14 @@ function renderInspector() {
 $('#scene-form').addEventListener('submit', e => e.preventDefault());
 $('#scene-form').addEventListener('click', e => {
   const b = e.target.closest('[data-media]'); if (!b) return; const m = project.library.find(x => x.id === b.dataset.media); if (!m) return;
-  checkpoint(); Object.assign(scene(), { media:m.src, poster:m.poster }); if (['legacy','title'].includes(scene().layout)) scene().layout = 'split'; setPlaying(false); elapsed = 0; renderStage(true); renderInspector(); renderList(); changed();
+  checkpoint(); Object.assign(scene(), { media:m.src, poster:m.poster }); if (['legacy','title'].includes(scene().layout)) scene().layout = 'split'; setPlaying(true); elapsed = 0; renderStage(true); renderInspector(); renderList(); changed();
 });
 $('.editor-tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b) { tab = b.dataset.tab; renderInspector(); } });
-for (const list of [$('#scene-list'), $('#flow-grid')]) list.addEventListener('click', e => { const b = e.target.closest('[data-scene]'); if (b) choose(Number(b.dataset.scene), false); });
+
 $('#deck-select').onchange = () => { checkpoint(); deckId = $('#deck-select').value; project.activeDeck = deckId; index = 0; sceneSignature = ''; renderDecks(); choose(0, false); changed(); };
-$('#toggle-edit').onclick = () => { setPlaying(false); editMode(!document.body.classList.contains('editing')); };
-$('#play').onclick = () => { if (!playing && elapsed >= scene().duration) seek(0); setPlaying(!playing); };
-$('#prev').onclick = () => choose(index - 1); $('#next').onclick = () => choose(index + 1); $('#restart').onclick = () => seek(0);
-$('#seek').addEventListener('input', () => seek(Number($('#seek').value) / 1000 * scene().duration));
+$('#toggle-edit').onclick = () => { editMode(!document.body.classList.contains('editing')); };
+$('#play').onclick = () => { setPlaying(!playing); };
+$('#prev').onclick = () => choose(index - 1); $('#next').onclick = () => choose(index + 1); $('#restart').onclick = () => {seek(0);setPlaying(true)};
 $('#add-scene').onclick = () => { if (deck().scenes.length >= 200) return toast('هر پروژه حداکثر ۲۰۰ صفحه دارد.', true); checkpoint(); deck().scenes.splice(index + 1, 0, blankScene()); choose(index + 1, false); tab = 'content'; renderInspector(); changed(); };
 $('#duplicate').onclick = () => { if (deck().scenes.length >= 200) return toast('هر پروژه حداکثر ۲۰۰ صفحه دارد.', true); checkpoint(); const copy = clone(scene()); copy.id = `page-${crypto.randomUUID()}`; copy.label = `${copy.label} · کپی`.slice(0,200); deck().scenes.splice(index + 1, 0, copy); choose(index + 1, false); changed(); };
 $('#delete').onclick = () => { if (deck().scenes.length <= 1) return; checkpoint(); deck().scenes.splice(index, 1); choose(Math.min(index, deck().scenes.length - 1), false); changed(); toast('صفحه حذف شد؛ با «برگرداندن تغییر» قابل بازیابی است.'); };
@@ -285,7 +265,7 @@ $('#media-file').onchange = async () => {
     const targetScene = project.decks.find(d => d.id === target.deckId)?.scenes.find(s => s.id === target.sceneId);
     checkpoint(); project.library.push({ ...value, name:file.name.slice(0,200), originalName:file.name.slice(0,500) });
     if (targetScene) { if (target.poster) targetScene.poster = value.src; else { targetScene.media = value.src; targetScene.poster = value.poster; if (['legacy','title'].includes(targetScene.layout)) targetScene.layout = 'split'; } }
-    setPlaying(false); renderStage(true); renderInspector(); renderList(); changed(); toast('رسانه اضافه شد؛ برای ثبت انتخاب، پروژه را ذخیره کن.');
+    setPlaying(true); renderStage(true); renderInspector(); renderList(); changed(); toast('رسانه اضافه شد؛ برای ثبت انتخاب، پروژه را ذخیره کن.');
   } catch (e) { toast(e.message || 'افزودن فایل انجام نشد.', true); }
 };
 
@@ -304,8 +284,8 @@ document.addEventListener('keydown', e => {
   if (editing) return;
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); (e.shiftKey ? $('#redo') : $('#undo')).click(); }
   else if (e.code === 'Space' && !e.target.closest('button,a')) { e.preventDefault(); $('#play').click(); }
-  else if (e.key === 'ArrowLeft') { e.preventDefault(); choose(index + 1); }
-  else if (e.key === 'ArrowRight') { e.preventDefault(); choose(index - 1); }
+  else if (!e.target.closest('.placement-handle') && e.key === 'ArrowLeft') { e.preventDefault(); choose(index + 1); }
+  else if (!e.target.closest('.placement-handle') && e.key === 'ArrowRight') { e.preventDefault(); choose(index - 1); }
   else if (e.key === 'Escape') closeMenu();
 });
 window.addEventListener('beforeunload', e => { if (project && dirty()) { e.preventDefault(); e.returnValue = ''; } });
@@ -324,3 +304,65 @@ async function init() {
   } catch (e) { $('#save-status').textContent = 'خطا در بارگذاری'; $('#scene-canvas').textContent = 'پروژه بارگذاری نشد. فایل content.json و اجرای سرور را بررسی کنید.'; toast(e.message, true); }
 }
 init();
+
+function canvasElement(){return $('#scene-canvas');}
+$('#loop-video').onchange=()=>{checkpoint(); scene().loop=$('#loop-video').checked;const v=$('#scene-canvas video');if(v){v.loop=scene().loop;if(playing && v.ended){v.currentTime=0;playVideo(v)}}renderInspector();changed();};
+
+// Handles live in the scaled design canvas, so pointer deltas remain accurate
+// at editor zoom, on touch screens, and in fullscreen. One gesture = one undo.
+let legacyBoxes = {}, activeGesture;
+function currentBox(kind) {
+  const canvas=canvasElement();
+  const el=canvas.querySelector('.scene-'+kind);
+  return scene().placement?.[placementMode(canvas)]?.[kind] || (frame ? legacyBoxes[kind] : el ? readPlacement(canvas,el) : null);
+}
+function writeBox(kind,box) {
+  const canvas=canvasElement(), mode=placementMode(canvas);
+  scene().placement ||= {}; scene().placement[mode] ||= {};
+  scene().placement[mode][kind]=box;
+  if(frame) sendLegacy('placement',{placement:scene().placement[mode]});
+  else applyPlacement(canvas,scene());
+  positionHandle(kind,box);
+}
+function positionHandle(kind,box) {
+  const el=canvasElement().querySelector(`.placement-handle[data-kind="${kind}"]`); if(!el)return;
+  Object.assign(el.style,{left:box.x+'%',top:box.y+'%',width:box.w+'%',height:box.h+'%'});
+}
+function renderHandles() {
+  const canvas=canvasElement(); if(!project || activeGesture)return;
+  canvas.querySelectorAll('.placement-handle').forEach(el=>el.remove());
+  if(!document.body.classList.contains('editing'))return;
+  for(const kind of ['copy','media']) {
+    const raw=currentBox(kind); if(!raw)continue; const box=adjustBox(raw,0,0);
+    const handle=document.createElement('div');handle.className='placement-handle';handle.dataset.kind=kind;
+    const label=kind==='copy'?'متن':'رسانه';
+    const move=document.createElement('button');move.type='button';move.className='move-handle';move.textContent='جابه‌جایی '+label;move.setAttribute('aria-label','جابه‌جایی '+label);move.dataset.action='move';
+    const size=document.createElement('button');size.type='button';size.className='resize-handle';size.setAttribute('aria-label','تغییر اندازهٔ '+label);size.dataset.action='resize';
+    handle.append(move,size);canvas.append(handle);positionHandle(kind,box);
+  }
+}
+canvasElement().addEventListener('pointerdown',e=>{
+  const button=e.target.closest('.placement-handle button');if(!button||e.button!==0)return;
+  e.preventDefault();const kind=button.parentElement.dataset.kind, box=currentBox(kind);if(!box)return;
+  checkpoint();stageAnimations.forEach(a=>{try{a.finish()}catch{}});
+  activeGesture={kind,start:adjustBox(box,0,0),x:e.clientX,y:e.clientY,resize:button.dataset.action==='resize',button,pointer:e.pointerId,sceneId:scene().id};
+  button.setPointerCapture(e.pointerId);document.body.classList.add('placing');
+});
+canvasElement().addEventListener('pointermove',e=>{
+  const g=activeGesture;if(!g||g.pointer!==e.pointerId||scene().id!==g.sceneId)return;
+  const rect=canvasElement().getBoundingClientRect();
+  writeBox(g.kind,adjustBox(g.start,(e.clientX-g.x)/rect.width*100,(e.clientY-g.y)/rect.height*100,g.resize));
+});
+function finishGesture(e) {
+  if(!activeGesture||activeGesture.pointer!==e.pointerId)return;
+  const g=activeGesture;activeGesture=null;document.body.classList.remove('placing');
+  if(g.button.hasPointerCapture(e.pointerId))g.button.releasePointerCapture(e.pointerId);
+  changed();renderHandles();
+}
+for(const event of ['pointerup','pointercancel','lostpointercapture'])canvasElement().addEventListener(event,finishGesture);
+canvasElement().addEventListener('keydown',e=>{
+  const button=e.target.closest('.placement-handle button');if(!button||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
+  e.preventDefault();e.stopPropagation();const kind=button.parentElement.dataset.kind,box=currentBox(kind);if(!box)return;
+  checkpoint();const dx=e.key==='ArrowLeft'?-1:e.key==='ArrowRight'?1:0,dy=e.key==='ArrowUp'?-1:e.key==='ArrowDown'?1:0;
+  writeBox(kind,adjustBox(box,dx,dy,e.shiftKey||button.dataset.action==='resize'));changed();
+});

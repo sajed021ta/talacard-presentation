@@ -214,6 +214,20 @@ function tick(){const e=playing?performance.now()-t0:elapsed,frac=Math.min(1,e/S
   const sec=Math.floor((before+S[idx].d*frac)/1000),ts=Math.round(total/1000);
   $('#time').textContent=fa(`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')} / ${Math.floor(ts/60)}:${String(ts%60).padStart(2,'0')}`);requestAnimationFrame(tick)}
 
+let placementScene=null,placementMode='desktop';
+function layoutTargets(){return {copy:$('.m-open,.m-close')?$('.opener-copy'):$('#capTxt'),media:$('.m-open,.m-close')?null:$('.dev')}}
+function placeLegacy(boxes={}){
+ for(const [kind,el] of Object.entries(layoutTargets())){if(!el)continue;const box=boxes[kind];el.classList.toggle('studio-positioned',!!box);
+  for(const key of ['x','y','w','h'])if(box)el.style.setProperty('--place-'+key,box[key]+'%');else el.style.removeProperty('--place-'+key);
+ }
+ fit();
+}
+function reportLayout(){
+ if(!placementScene)return;
+ const boxes={};const c=$('#stage').getBoundingClientRect();
+ for(const [kind,el] of Object.entries(layoutTargets())){if(!el)continue;const r=el.getBoundingClientRect();boxes[kind]={x:(r.left-c.left)/c.width*100,y:(r.top-c.top)/c.height*100,w:r.width/c.width*100,h:r.height/c.height*100}}
+ parent.postMessage({type:'talacard-layout',sceneId:placementScene.id,boxes},location.origin);
+}
 // The studio owns time. In #render mode delayed actions and animations advance
 // together, so pause freezes the full scene, including simulated taps.
 window.addEventListener('message',e=>{
@@ -221,7 +235,9 @@ window.addEventListener('message',e=>{
  const m=e.data;
  if(m.action==='load'){
   playing=false;const target=Math.max(0,Math.min(S.length-1,Number(m.index)||0));
-  const c=m.scene;const escaped=x=>String(x).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const c=m.scene;placementScene=c;placementMode=m.compact?'compact':'desktop';
+  document.querySelectorAll('.studio-positioned').forEach(el=>el.classList.remove('studio-positioned'));
+  const escaped=x=>String(x).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const at=c.highlight?c.title.indexOf(c.highlight):-1;
   S[target].t=at>=0?escaped(c.title.slice(0,at))+'<em>'+escaped(c.highlight)+'</em>'+escaped(c.title.slice(at+c.highlight.length)):escaped(c.title);
   S[target].p=c.description;
@@ -235,8 +251,10 @@ window.addEventListener('message',e=>{
   $('#capN').textContent=fa(m.number||1);$('#capTxt').getAnimations().forEach(a=>a.cancel());$('#capTxt').style.opacity=1;
   if(m.index===0||m.index===13){title($('#tag'));$('#sub').textContent=c.description}
   if(m.preview){for(let pass=0;pass<3;pass++)document.getAnimations().forEach(a=>{try{a.finish()}catch{}})}
+  placeLegacy(c.placement?.[placementMode]);reportLayout();
   parent.postMessage({type:'talacard-loaded',sceneId:c.id,request:m.request},location.origin);
- }else if(m.action==='advance'&&typeof window.__advance==='function')window.__advance(Math.max(0,Math.min(250,m.delta||0)));
+ }else if(m.action==='placement'){placementScene.placement||={};placementScene.placement[placementMode]=m.placement;placeLegacy(m.placement);reportLayout();}
+ else if(m.action==='advance'&&typeof window.__advance==='function')window.__advance(Math.max(0,Math.min(250,m.delta||0)));
 });
 
 /* background: slow guilloche drift */
@@ -254,7 +272,7 @@ function drawBg(){const W=cv.width,H=cv.height;cx.clearRect(0,0,W,H);
   if(!reduce&&playing){ph+=.004}setTimeout(()=>requestAnimationFrame(drawBg),40)}
 function fit(){const d=$('.dev').getBoundingClientRect();const s=Math.max(.42,Math.min(1,(d.height-110)/886,(d.width-24)/450));
   $('#phone').style.transform=`scale(${s})`;$('#ph').style.width=395*s+'px';$('#ph').style.height=886*s+'px';$('#ph').style.marginBottom='70px';bg()}
-addEventListener('resize',fit);
+addEventListener('resize',()=>{fit();if(placementScene){placementMode=innerWidth<=760?'compact':'desktop';placeLegacy(placementScene.placement?.[placementMode]);reportLayout()}});
 window.__total=total;
 const start=()=>{fit();drawBg();go(0);requestAnimationFrame(tick);window.__ready=true;parent.postMessage({type:"talacard-ready"},location.origin)};
 Promise.all([...DECODED,document.fonts?document.fonts.ready:0]).then(start);

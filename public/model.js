@@ -23,6 +23,7 @@ export function validateProject(project) {
       if (!id(s.id) || sceneIds.has(s.id) || !text(s.chapter, 100) || !text(s.label, 200) || !text(s.title, 1000) || !text(s.highlight, 1000) || !text(s.description, 8000)) throw new Error('متن یا شناسهٔ یکی از صفحه‌ها معتبر نیست.');
       sceneIds.add(s.id);
       if (!LAYOUTS.includes(s.layout) || !TRANSITIONS.includes(s.transition) || !number(s.duration, 1, 180) || !number(s.fontSize, 20, 64) || !number(s.intensity, 0, 1) || !number(s.position, 0, 100) || !Number.isInteger(s.legacyScene) || s.legacyScene < 0 || s.legacyScene > 13 || !['contain', 'cover'].includes(s.fit) || typeof s.loop !== 'boolean') throw new Error('تنظیمات یکی از صفحه‌ها معتبر نیست.');
+      if (s.placement !== undefined) validatePlacement(s.placement);
       if (!mediaPath(s.media) || !mediaPath(s.poster) || !color(s.background) || !color(s.textColor) || !color(s.accent)) throw new Error('مسیر رسانه یا رنگ یکی از صفحه‌ها معتبر نیست.');
     }
   }
@@ -42,4 +43,14 @@ export function blankScene() {
 export function timeLabel(seconds) {
   const sec = Math.max(0, Math.floor(seconds));
   return `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+}
+
+export function validatePlacement(placement) {
+  if (!placement || typeof placement !== 'object' || Array.isArray(placement)) throw new Error('چیدمان صفحه معتبر نیست.');
+  for (const [mode, boxes] of Object.entries(placement)) {
+    if (!['desktop','compact'].includes(mode) || !boxes || typeof boxes !== 'object' || Array.isArray(boxes)) throw new Error('چیدمان صفحه معتبر نیست.');
+    for (const [kind, box] of Object.entries(boxes)) {
+      if (!['copy','media'].includes(kind) || !box || !['x','y','w','h'].every(k => typeof box[k] === 'number' && Number.isFinite(box[k])) || box.x < 0 || box.y < 0 || box.w < 8 || box.h < 8 || box.x + box.w > 100.001 || box.y + box.h > 100.001) throw new Error('قاب متن یا رسانه باید داخل صفحه باشد.');
+    }
+  }
 }

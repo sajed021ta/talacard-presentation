@@ -1,3 +1,5 @@
+import {renderNavigation} from './navigation.js';
+import {applyPlacement, readPlacement, adjustBox, placementMode} from './placement.js';
 import {validateProject,chapters,timeLabel} from './model.js';
 const $=s=>document.querySelector(s);
 const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
@@ -15,20 +17,10 @@ function renderDecks() {
   document.title = deck().name;
 }
 function renderFlow() {
-  $('#flow-description').textContent = deck().flowDescription;
-  $('#flow-count').textContent = `${fa(deck().scenes.length)} صفحه · ${fa(timeLabel(deck().scenes.reduce((n, s) => n + s.duration, 0)))}`;
-  $('#flow-grid').replaceChildren(); $('#chapter-progress').replaceChildren();
-  for (const chapter of chapters(deck())) {
-    const section = document.createElement('div'); section.className = 'flow-section'; const h = document.createElement('h3'); h.textContent = chapter; section.append(h);
-    const segment = document.createElement('button'); segment.className = 'chapter-segment'; segment.title = chapter; segment.setAttribute('aria-label', `رفتن به ${chapter}`);
-    const meter = document.createElement('span'); meter.append(document.createElement('i')); const label = document.createElement('strong'); label.textContent = chapter; segment.append(meter, label);
-    const scenes = deck().scenes.map((s, i) => [s, i]).filter(([s]) => s.chapter === chapter);
-    segment.style.flex = String(scenes.reduce((n, [s]) => n + s.duration, 0)); segment.onclick = () => choose(scenes[0][1]); segment.dataset.chapter = chapter;
-    $('#chapter-progress').append(segment);
-    for (const [s, i] of scenes) { const b = document.createElement('button'); b.classList.toggle('current', i === index); b.dataset.scene = i; const number = document.createElement('b'); number.textContent = fa(i + 1); b.append(number, document.createTextNode(s.label)); section.append(b); }
-    $('#flow-grid').append(section);
-  }
-  updateProgress();
+  renderNavigation(deck(), index, choose);
+  const toggle = $('#loop-video'), video = /\.(mp4|webm)$/i.test(scene().media);
+  toggle.closest('label').hidden = !video;
+  toggle.checked = scene().loop;
 }
 function titleInto(el, s) {
   el.textContent = s.title;
@@ -44,7 +36,7 @@ function loadLegacy() {
   $('#stage').setAttribute('aria-busy','true');
   let cover=$('#scene-canvas .legacy-loading');
   if(!cover){cover=document.createElement('div');cover.className='legacy-loading';cover.setAttribute('role','status');cover.textContent='در حال آماده‌سازی صفحه…';$('#scene-canvas').append(cover)}
-  sendLegacy('load', { index: scene().legacyScene, scene: scene(), number: index + 1, preview: !playing && elapsed === 0, request:++legacyRequest });
+  sendLegacy('load', { index: scene().legacyScene, scene: scene(), number: index + 1, preview: !playing && elapsed === 0, compact:placementMode(canvasElement()) === 'compact', request:++legacyRequest });
 }
 function renderStage(restart = false) {
   const s = scene(), canvas = $('#scene-canvas');
@@ -65,7 +57,7 @@ function renderStage(restart = false) {
       const visual = document.createElement('div'); visual.className = 'scene-media';
       if (s.media) {
         const isVideo = /\.(mp4|webm)$/i.test(s.media); const media = document.createElement(isVideo ? 'video' : 'img');
-        if (isVideo) { media.muted = true; media.playsInline = true; media.preload = 'metadata'; if (s.poster) media.poster = s.poster; media.addEventListener('loadeddata', () => { if (playing) playVideo(media); }); }
+        if (isVideo) { media.autoplay = true; media.controls = false; media.muted = true; media.playsInline = true; media.preload = 'metadata'; if (s.poster) media.poster = s.poster; media.addEventListener('loadeddata', () => { if (playing) playVideo(media); }); }
         else media.alt = s.label;
         media.src = s.media;
         media.addEventListener('error', () => { const message = document.createElement('div'); message.className = 'media-error'; message.textContent = 'این رسانه باز نشد. در بخش رسانه، فایل را دوباره انتخاب کنید.'; visual.append(message); }, { once:true });
@@ -79,7 +71,7 @@ function renderStage(restart = false) {
   const content = canvas.querySelector('.scene-content');
   titleInto(content.querySelector('h2'), s); content.querySelector('p').textContent = s.description; content.querySelector('.scene-chapter b').textContent = fa(index + 1); content.querySelector('.scene-chapter span').textContent = s.chapter;
   const v = content.querySelector('video'); if (v) { v.loop = s.loop; if (playing) playVideo(v); }
-  if (restart) animateStage(); resizeStage();
+  if (restart) animateStage(); resizeStage(); applyPlacement(canvas, s);
 }
 function animateStage() {
   stageAnimations.forEach(a => a.cancel()); stageAnimations = [];
@@ -94,8 +86,13 @@ function resizeStage() {
   const compact = document.documentElement.clientWidth <= 760; const w = compact ? 700 : 1240, h = compact ? 1000 : 820;
   canvas.style.width = w + 'px'; canvas.style.height = h + 'px'; canvas.classList.toggle('compact', compact);
   const fullscreen = document.fullscreenElement === stage;
-  const scale = fullscreen ? Math.min(stage.clientWidth / w, stage.clientHeight / h) : stage.clientWidth / w;
+  const scale = Math.min(stage.clientWidth / w, stage.clientHeight / h);
+  canvas.style.left = (stage.clientWidth - w * scale) / 2 + 'px';
+  canvas.style.top = (stage.clientHeight - h * scale) / 2 + 'px';
+  canvas.style.translate = 'none'; canvas.style.transformOrigin = '0 0';
   canvas.style.transform = `scale(${scale})`;
+  canvas.style.setProperty('--handle-factor', String(1/scale));
+  applyPlacement(canvas,scene());
 }
 new ResizeObserver(resizeStage).observe($('#stage'));
 window.addEventListener('resize', resizeStage);
@@ -105,16 +102,16 @@ window.addEventListener('message', e => {
   if(e.data?.type==='talacard-loaded'&&e.data.request===legacyRequest){$('#scene-canvas .legacy-loading')?.remove();$('#stage').setAttribute('aria-busy','false');$('#stage').dataset.renderedScene=e.data.sceneId}
 });
 
-function playVideo(v) { v.play().catch(() => { if (playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
+function playVideo(v) { v.play().catch(error => { if (error.name !== 'AbortError' && v.isConnected && playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
 function setPlaying(value) {
   if(value && !playing && elapsed===0){if(frame){playing=true;loadLegacy()}else stageAnimations.forEach(a=>a.currentTime=0)}
   playing = value; previousFrame = performance.now(); $('#play').innerHTML = icon(value ? 'pause' : 'play'); $('#play').setAttribute('aria-label', value ? 'توقف' : 'پخش');
   $('#scene-canvas').querySelectorAll('video').forEach(v => value ? playVideo(v) : v.pause());
 }
-function choose(i, keepPlaying = playing) {
+function choose(i, keepPlaying = true) {
   if (!project) return;
   index = (i + deck().scenes.length) % deck().scenes.length; elapsed = 0;
-  renderFlow(); renderStage(true); setPlaying(keepPlaying); updateProgress();
+  renderFlow(); renderStage(true); setPlaying(true); updateProgress();
 }
 function advanceLegacyTo(seconds) { let remaining = seconds * 1000; while (remaining > 0) { const step = Math.min(100, remaining); sendLegacy('advance', { delta:step }); remaining -= step; } }
 function seek(seconds) {
@@ -126,21 +123,14 @@ function seek(seconds) {
 }
 function updateProgress() {
   if (!project) return;
-  const list = deck().scenes, before = list.slice(0, index).reduce((n, s) => n + s.duration, 0), total = list.reduce((n, s) => n + s.duration, 0);
-  $('#clock').textContent = fa(`${timeLabel(before + elapsed)} / ${timeLabel(total)}`); $('#scene-clock').textContent = fa(`${timeLabel(elapsed)} / ${timeLabel(scene().duration)}`); $('#seek').value = String(Math.min(1000, elapsed / scene().duration * 1000));
-  for (const segment of $('#chapter-progress').children) {
-    const ch = segment.dataset.chapter; let completed = 0, amount = 0;
-    list.forEach((s, i) => { if (s.chapter === ch) { amount += s.duration; if (i < index) completed += s.duration; else if (i === index) completed += elapsed; } });
-    segment.querySelector('i').style.width = (completed / amount * 100) + '%'; segment.classList.toggle('current', ch === scene().chapter);
-  }
+  $('#page-location').textContent = `صفحهٔ ${fa(index + 1)} از ${fa(deck().scenes.length)}`;
 }
 function tick(now) {
   const dt = Math.min(.1, Math.max(0, (now - previousFrame) / 1000)); previousFrame = now;
   if (project && playing && (!frame || iframeReady)) {
-    elapsed += dt; sendLegacy('advance', { delta:dt * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
-    if (elapsed >= scene().duration) {
-      if (index === deck().scenes.length - 1) { elapsed = scene().duration; setPlaying(false); } else choose(index + 1, true);
-    }
+    const advance = Math.max(0, Math.min(dt, scene().duration - elapsed));
+    elapsed = Math.min(scene().duration, elapsed + dt); sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
+
     updateProgress();
   }
   requestAnimationFrame(tick);
@@ -149,13 +139,14 @@ function tick(now) {
 
 for(const [id,name] of Object.entries({prev:'prev',next:'next',play:'play',fullscreen:'fullscreen'}))$('#'+id).innerHTML=icon(name);
 $('#prev').onclick=()=>choose(index-1);$('#next').onclick=()=>choose(index+1);
-$('#restart').onclick=()=>seek(0);
-$('#play').onclick=()=>{if(!playing&&elapsed>=scene().duration)seek(0);setPlaying(!playing)};
-$('#seek').oninput=()=>seek(Number($('#seek').value)/1000*scene().duration);
-$('#flow-grid').onclick=e=>{const b=e.target.closest('[data-scene]');if(b)choose(Number(b.dataset.scene),false)};
+$('#restart').onclick=()=>{seek(0);setPlaying(true)};
+$('#play').onclick=()=>{setPlaying(!playing)};
 $('#deck-select').onchange=()=>{deckId=$('#deck-select').value;const url=new URL(location.href);url.searchParams.set('deck',deckId);history.replaceState(null,'',url);renderDecks();choose(0,false)};
 $('#fullscreen').onclick=async()=>{try{await $('#stage').requestFullscreen();resizeStage();toast('فاصله: پخش/توقف · کلیدهای جهت: صفحهٔ بعد/قبل · Esc: خروج')}catch{toast('نمایش تمام‌صفحه در این مرورگر فعال نیست.')}};
 document.addEventListener('fullscreenchange',resizeStage);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false)});
 document.addEventListener('keydown',e=>{if(!project||e.target.closest('input,select,button,a'))return;if(e.code==='Space'){e.preventDefault();$('#play').click()}else if(e.key==='ArrowLeft'){e.preventDefault();choose(index+1)}else if(e.key==='ArrowRight'){e.preventDefault();choose(index-1)}});
 try{const r=await fetch('/default-content.json');if(!r.ok)throw new Error();project=validateProject(await r.json());const requested=new URL(location.href).searchParams.get('deck');deckId=project.decks.some(d=>d.id===requested)?requested:project.activeDeck;renderDecks();choose(0,false);previousFrame=performance.now();requestAnimationFrame(tick)}catch{$('#scene-canvas').textContent='بارگذاری ارائه انجام نشد؛ صفحه را دوباره باز کنید.'}
+
+function canvasElement(){return $('#scene-canvas');}
+$('#loop-video').onchange=()=>{ scene().loop=$('#loop-video').checked;const v=$('#scene-canvas video');if(v){v.loop=scene().loop;if(playing && v.ended){v.currentTime=0;playVideo(v)}}};

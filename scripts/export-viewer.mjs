@@ -9,7 +9,7 @@ const mediaSource = process.argv[3] ? path.resolve(process.argv[3]) : path.join(
 validateProject(JSON.parse(fs.readFileSync(path.join(root, 'content.json'))));
 fs.mkdirSync(output, { recursive:true });
 fs.copyFileSync(path.join(root, 'public/viewer.html'), path.join(output, 'index.html'));
-for (const f of ['viewer.js', 'viewer.css', 'model.js']) fs.copyFileSync(path.join(root, 'public', f), path.join(output, f));
+for (const f of ['viewer.js', 'viewer.css', 'studio.css', 'model.js', 'navigation.js', 'placement.js']) fs.copyFileSync(path.join(root, 'public', f), path.join(output, f));
 fs.copyFileSync(path.join(root, 'content.json'), path.join(output, 'default-content.json'));
 fs.cpSync(path.join(root, 'public/legacy'), path.join(output, 'legacy'), { recursive:true });
 fs.mkdirSync(path.join(output, 'original'), { recursive:true });
@@ -18,7 +18,8 @@ fs.cpSync(path.join(root, 'original/assets'), path.join(output, 'original/assets
 fs.mkdirSync(path.join(output, 'media'), { recursive:true });
 for (const f of fs.readdirSync(path.join(root, 'public/media'))) {
   const source = fs.existsSync(path.join(mediaSource, f)) ? path.join(mediaSource, f) : path.join(root, 'public/media', f);
-  fs.copyFileSync(source, path.join(output, 'media', f));
+  const destination = path.join(output, 'media', f);
+  if (path.resolve(source) !== path.resolve(destination)) fs.copyFileSync(source, destination);
 }
 console.log('Viewer exported. No editor, upload endpoint, source archive, or proposal PDF is included.');
 console.log('For hosting with per-file limits, supply a directory of optimized videos as the third argument.');
