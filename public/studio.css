@@ -78,4 +78,4 @@ body.editing .preview-column{padding:16px 20px 30px}body.editing .rail-heading h
 .scene-canvas.compact .scene-content.split>.scene-copy:not(.placed){grid-column:1;grid-row:1}.scene-canvas.compact .scene-content.split>.scene-media:not(.placed){grid-column:1;grid-row:2}
 
 .save-state{display:flex;flex-direction:column;gap:3px;min-width:160px;font-size:11px;line-height:1.5}.save-state #save-status{padding:0!important;max-width:none!important}.save-state #cloud-status{color:var(--muted)}.save-state #cloud-status[data-state=published]{color:#476554}.save-state #cloud-status[data-state=conflict]{color:var(--danger)}
-@media(max-width:1190px){.save-state{min-width:132px}}@media(max-width:760px){.save-state{min-width:0;flex:1}.toolbar-actions .save-state #save-status{margin:0;font-size:10px}.save-state #cloud-status{font-size:10px}.toolbar-actions .button{padding-inline:7px}}
+@media(max-width:1190px){.save-state{min-width:132px}}@media(max-width:760px){.save-state{min-width:0;flex:1}.toolbar-actions .save-state #save-status{margin:0;font-size:11px}.save-state #cloud-status{font-size:11px}.toolbar-actions .button{padding-inline:7px}}

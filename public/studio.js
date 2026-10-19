@@ -42,7 +42,23 @@ function draft() {
 }
 function scheduleAutoSave(){clearTimeout(autoSaveTimer);if(project&&dirty()&&!autoSaveBlocked)autoSaveTimer=setTimeout(()=>save({automatic:true}),900)}
 function changed() { updateStatus(); draft(); scheduleAutoSave(); }
-async function readSyncStatus(){if(!backend)return;try{const r=await fetch('/api/sync',{cache:'no-store'});if(r.ok){syncState=await r.json();updateStatus()}}catch{}}
+async function readSyncStatus(){
+ if(!backend)return;
+ try{
+  const r=await fetch('/api/sync',{cache:'no-store'});if(!r.ok)return;syncState=await r.json();
+  // Another local editor can save while this tab is idle. Pull its saved state
+  // only when this tab has no pending edit; never overwrite an active draft.
+  if(syncState.revision && syncState.revision!==revision && !dirty() && !saving && !document.activeElement?.closest('#scene-form')){
+   const response=await fetch('/api/project',{cache:'no-store'});const latest=await response.json();
+   if(response.ok && latest.revision!==revision && !dirty() && !saving){
+    const previousId=scene().id;project=validateProject(latest.project);revision=latest.revision;savedJSON=JSON.stringify(project);
+    if(!project.decks.some(d=>d.id===deckId))deckId=project.activeDeck;
+    index=Math.max(0,deck().scenes.findIndex(s=>s.id===previousId));renderDecks();choose(index);draft();
+   }
+  }
+  updateStatus();
+ }catch{}
+}
 
 function editMode(value) {
   document.body.classList.toggle('editing', value); $('#toggle-edit').textContent = value ? 'نمایش ارائه' : 'ویرایش صفحه‌ها';
