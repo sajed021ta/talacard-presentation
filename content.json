@@ -332,17 +332,33 @@
           "duration": 10.1,
           "layout": "split",
           "legacyScene": 0,
-          "media": "/media/intro.mp4",
-          "poster": "/media/intro.jpg",
-          "fit": "cover",
+          "media": "/media/upload-f0cd292e-6011-4129-9310-63ce04ae43ff.mp4",
+          "poster": "",
+          "fit": "contain",
           "position": 62,
           "transition": "reveal",
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
+          "accent": "#e7c569",
           "fontSize": 40,
-          "loop": true
+          "loop": true,
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0.0012618924942484663,
+                "y": 0,
+                "w": 65.61693062811541,
+                "h": 100
+              },
+              "copy": {
+                "x": 36.40714215449053,
+                "y": 16.268719187614625,
+                "w": 59.64059557557082,
+                "h": 66.520338903251
+              }
+            }
+          }
         },
         {
           "id": "proposal-2",
@@ -474,7 +490,23 @@
           "textColor": "#222225",
           "accent": "#A87816",
           "fontSize": 40,
-          "loop": true
+          "loop": true,
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0.0012618924942484663,
+                "y": 0,
+                "w": 48.141853940998836,
+                "h": 76.16248993225962
+              },
+              "copy": {
+                "x": 54.58342666369298,
+                "y": 7.002309790030157,
+                "w": 43.77576280296049,
+                "h": 39.253432573779264
+              }
+            }
+          }
         },
         {
           "id": "proposal-8",
@@ -685,6 +717,14 @@
       "poster": "/media/proposal-11.jpg",
       "type": "image",
       "originalName": "PDF page 11, artwork crop"
+    },
+    {
+      "id": "upload-f0cd292e-6011-4129-9310-63ce04ae43ff",
+      "src": "/media/upload-f0cd292e-6011-4129-9310-63ce04ae43ff.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1).mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1).mp4"
     }
   ]
 }
