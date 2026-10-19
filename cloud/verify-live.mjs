@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+const conf=JSON.parse(fs.readFileSync('.private/cloud.json'));
+const local=await (await fetch('http://127.0.0.1:4177/api/sync')).json();
+console.log('Local sync:',{status:local.status,asset:local.asset,error:local.error});
+const denied=await fetch(conf.url+'/api/sync/project',{method:'PUT',headers:{'Content-Type':'application/json'},body:'{}'});assert.equal(denied.status,401);
+const text=fs.readFileSync('content.json','utf8'),sha=crypto.createHash('sha256').update(text).digest('hex');
+const status=await (await fetch(conf.url+'/api/sync/status',{headers:{Authorization:'Bearer '+conf.token}})).json();
+console.log('Cloud content matches saved file:',status.revision===sha);
+if(status.revision!==sha)process.exit(2);
+const response=await fetch(conf.url+'/default-content.json',{cache:'no-store'});const published=await response.json();assert.deepEqual(published,JSON.parse(text));
+const media=published.decks.flatMap(d=>d.scenes).find(s=>s.media.endsWith('.mp4')).media;
+const range=await fetch(conf.url+media,{headers:{Range:'bytes=0-31'}});assert.equal(range.status,206);assert.equal((await range.arrayBuffer()).byteLength,32);
+console.log('Verified: protected writes, live project equality, and video range playback.');
