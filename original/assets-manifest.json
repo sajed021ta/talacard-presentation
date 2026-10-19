@@ -2,101 +2,141 @@
   {
     "file": "assets/18892ffc31be2992.ttf",
     "mime": "font/ttf",
-    "bytes": 84820
+    "bytes": 84820,
+    "originalBytes": 84820,
+    "sha256": "18892ffc31be2992d32e96b0dc992b939a3b862d1c09d623d0f7fc0e875119f8"
   },
   {
     "file": "assets/8280274331e5fdf8.ttf",
     "mime": "font/ttf",
-    "bytes": 85392
+    "bytes": 85392,
+    "originalBytes": 85392,
+    "sha256": "8280274331e5fdf833e7fc17a34f5568cb0fbffa0f9565ed40faaf559404c542"
   },
   {
     "file": "assets/3c8442fb10f298d0.ttf",
     "mime": "font/ttf",
-    "bytes": 85364
+    "bytes": 85364,
+    "originalBytes": 85364,
+    "sha256": "3c8442fb10f298d002acf3e21932c48d53ad1dc95132b3d273d0fe0304fd848a"
   },
   {
     "file": "assets/d1496589b6847c4a.ttf",
     "mime": "font/ttf",
-    "bytes": 84964
+    "bytes": 84964,
+    "originalBytes": 84964,
+    "sha256": "d1496589b6847c4a9b555bdbdf938838e2c29fe1375eb09a038155e1a28fe7db"
   },
   {
     "file": "assets/75d58ad2c84bf400.ttf",
     "mime": "font/ttf",
-    "bytes": 83352
+    "bytes": 83352,
+    "originalBytes": 83352,
+    "sha256": "75d58ad2c84bf40056a438110d7bb6eeed34594d4321fa9867671fe5994b7a54"
   },
   {
     "file": "assets/8c811a5f2b621041.webp",
     "mime": "image/webp",
-    "bytes": 29576
+    "bytes": 29576,
+    "originalBytes": 29576,
+    "sha256": "8c811a5f2b621041774479d211a9bc0f6d4e972da88aa0a734515190cb30a4a9"
   },
   {
     "file": "assets/26e6f8b5bb62d3c0.webp",
     "mime": "image/webp",
-    "bytes": 20808
+    "bytes": 20808,
+    "originalBytes": 20808,
+    "sha256": "26e6f8b5bb62d3c00851719e1213eef05f914d12d165e3f6a2f56c23614d01d9"
   },
   {
     "file": "assets/a0210219bbcad161.webp",
     "mime": "image/webp",
-    "bytes": 18076
+    "bytes": 18076,
+    "originalBytes": 18076,
+    "sha256": "a0210219bbcad161d497b9e6ff7fb2698badf6679dd8f35010cdd1f947ad7a61"
   },
   {
     "file": "assets/51c563562c995b3d.webp",
     "mime": "image/webp",
-    "bytes": 13616
+    "bytes": 13616,
+    "originalBytes": 13616,
+    "sha256": "51c563562c995b3d77a3f0d8112f5918ae5ef5aa157f88557300a653db320ec5"
   },
   {
     "file": "assets/98ea29b045cf577a.webp",
     "mime": "image/webp",
-    "bytes": 10422
+    "bytes": 10422,
+    "originalBytes": 10422,
+    "sha256": "98ea29b045cf577a19b7da72bcfd60473bb8906d56a17ae3abb87d3b972562a4"
   },
   {
     "file": "assets/6d2303fa8b5ad253.webp",
     "mime": "image/webp",
-    "bytes": 18122
+    "bytes": 18122,
+    "originalBytes": 18122,
+    "sha256": "6d2303fa8b5ad253a0e00efc14251453b20b92af99d99a64795e45ceea4faea3"
   },
   {
     "file": "assets/db1b05602a4ba430.webp",
     "mime": "image/webp",
-    "bytes": 13688
+    "bytes": 13688,
+    "originalBytes": 13688,
+    "sha256": "db1b05602a4ba4306b18a46ce0d2d84941759f376ffb8ed9896018ef2b2999f9"
   },
   {
     "file": "assets/ee71d3ecac421965.webp",
     "mime": "image/webp",
-    "bytes": 11108
+    "bytes": 11108,
+    "originalBytes": 11108,
+    "sha256": "ee71d3ecac42196573d8fb0237b4ff11576e295a4afa04ccb83570ad8a422cb7"
   },
   {
     "file": "assets/53f9e7adccfcaf63.webp",
     "mime": "image/webp",
-    "bytes": 28774
+    "bytes": 28774,
+    "originalBytes": 28774,
+    "sha256": "53f9e7adccfcaf63a8ad0595527a3e3941348ef1e20bf4d39482d85191ddc348"
   },
   {
     "file": "assets/ea09fdef2cd8e6c8.webp",
     "mime": "image/webp",
-    "bytes": 57392
+    "bytes": 57392,
+    "originalBytes": 57392,
+    "sha256": "ea09fdef2cd8e6c811ca267b4d252a80e6cb11a71135f4d2f0094d946bab172a"
   },
   {
     "file": "assets/476c21cc9c436877.webp",
     "mime": "image/webp",
-    "bytes": 16518
+    "bytes": 16518,
+    "originalBytes": 16518,
+    "sha256": "476c21cc9c43687768e9b48112ef72343bab8ec84ab3c61aa8be856cab5df43e"
   },
   {
     "file": "assets/cfc0fce9445047db.webp",
     "mime": "image/webp",
-    "bytes": 118
+    "bytes": 118,
+    "originalBytes": 118,
+    "sha256": "cfc0fce9445047dbae66528e803c484e7f892e36128a358a9676142d2727427d"
   },
   {
     "file": "assets/93d367c36be55526.webp",
     "mime": "image/webp",
-    "bytes": 74
+    "bytes": 74,
+    "originalBytes": 74,
+    "sha256": "93d367c36be5552622bf09a2a2bcdeaa54699c95b0eba856b47780f761689c54"
   },
   {
     "file": "assets/5210d819a86651af.webp",
     "mime": "image/webp",
-    "bytes": 72
+    "bytes": 72,
+    "originalBytes": 72,
+    "sha256": "5210d819a86651af2fcfecc0016cf2f58ebb09a281846b2b69d73b8dba638a0e"
   },
   {
     "file": "assets/5410795da58e46c6.webp",
     "mime": "image/webp",
-    "bytes": 66
+    "bytes": 66,
+    "originalBytes": 66,
+    "sha256": "5410795da58e46c6d79399de683075ef9400548ce4203346b75e1a247126a175"
   }
 ]

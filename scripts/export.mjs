@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { validateProject } from '../public/model.js';
+const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const dest = path.join(root, 'dist');
+validateProject(JSON.parse(fs.readFileSync(path.join(root, 'content.json'))));
+fs.mkdirSync(dest, { recursive:true });
+fs.cpSync(path.join(root, 'public'), dest, { recursive:true });
+fs.cpSync(path.join(root, 'original'), path.join(dest, 'original'), { recursive:true });
+fs.copyFileSync(path.join(root, 'content.json'), path.join(dest, 'default-content.json'));
+console.log('Static presentation exported to dist/. Serve at the web root. Editing existing content can be saved in this browser or exported as JSON. File upload and disk saving require the local Node server.');

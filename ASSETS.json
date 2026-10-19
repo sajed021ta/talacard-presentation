@@ -1,0 +1,266 @@
+[
+  {
+    "path": "public/media/infrastructure.mp4",
+    "source": "animation.mp4",
+    "origin": "User-supplied video",
+    "sha256": "309c605e66935f83fd83666c4099d7cb560d16c60f207fd6f47fecc9898b0ee5"
+  },
+  {
+    "path": "public/media/infrastructure.jpg",
+    "source": "animation.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "822efff9957c7994f16f488e9e0e8311609dad4272ae2c41a357228c54c10015"
+  },
+  {
+    "path": "public/media/intro.mp4",
+    "source": "Create a premium cinematic 3D product animation using the provided image as the exact starting frame.mp4",
+    "origin": "User-supplied video",
+    "sha256": "2a3d39266b0bd0046adf4ab05b1dd580d517dda82346333110310292e14e3249"
+  },
+  {
+    "path": "public/media/intro.jpg",
+    "source": "Create a premium cinematic 3D product animation using the provided image as the exact starting frame.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "3fe32c4ceee0a7bfa676b9663c2ad6fdd7091cb3bde97cbf9c5df642a163a681"
+  },
+  {
+    "path": "public/media/partnership.mp4",
+    "source": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4",
+    "origin": "User-supplied video",
+    "sha256": "c215f32c1ad6469a3f7ea6c16b99e50f1eb79938b5979e933718925f63f67ffa"
+  },
+  {
+    "path": "public/media/partnership.jpg",
+    "source": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "249b071d20e7850b8d67e1584608224bdd685429f81df9f1e1f2a2d85ebc6655"
+  },
+  {
+    "path": "public/media/three-paths.mp4",
+    "source": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4",
+    "origin": "User-supplied video",
+    "sha256": "70679f005cf8cf8abd2489a2ccb324387b27345850685ff6cc33d586c3c40e03"
+  },
+  {
+    "path": "public/media/three-paths.jpg",
+    "source": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "65528a0c641a68874f5319a4a288372f884b90f71c4ea4dac84715da125c2b5b"
+  },
+  {
+    "path": "public/media/atm.mp4",
+    "source": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the (1).mp4",
+    "origin": "User-supplied video",
+    "sha256": "8a183dd14bc4201ace48dfbbc380b92bb0a829608c94d81e287f852097ef859f"
+  },
+  {
+    "path": "public/media/atm.jpg",
+    "source": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the (1).mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "e44fe0f1c16d197bcfd21b38eae174fdd72603d21c0abbc7d2ea52e1b0b824c4"
+  },
+  {
+    "path": "public/media/physical-access.mp4",
+    "source": "Keep the transparent blocks in a smooth loop motion at the bottom, with very subtle movement. The da.mp4",
+    "origin": "User-supplied video",
+    "sha256": "3477897c64512eb103c39ead2e9546e273750a2122ccba6e8b19ca9e8f4427da"
+  },
+  {
+    "path": "public/media/physical-access.jpg",
+    "source": "Keep the transparent blocks in a smooth loop motion at the bottom, with very subtle movement. The da.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "3640cb610bd78ec8701ad9f8a567ba469fad1e0c3c810b8a7b1d226254cd3c52"
+  },
+  {
+    "path": "public/media/digital-platform.mp4",
+    "source": "Start with a single browser window. Then the window smoothly flips and unfolds into multiple layered.mp4",
+    "origin": "User-supplied video",
+    "sha256": "3dd7154afd7d88380c95a27c9cf003a50349d019993493929b397ac640f7a97e"
+  },
+  {
+    "path": "public/media/digital-platform.jpg",
+    "source": "Start with a single browser window. Then the window smoothly flips and unfolds into multiple layered.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "1fc4612a31d8b9e23f8c11f4ee0c6c6459bb0c1d5af852f7588b77b0ebc5f9c6"
+  },
+  {
+    "path": "public/media/access-door.mp4",
+    "source": "The door in front of the man is closed at the beginning, then slowly opens inward with a smooth and.mp4",
+    "origin": "User-supplied video",
+    "sha256": "59e1ce1df5f7bc14ea9bc9dd4253d3c8d27404b4e429ff464aaa35cd1403e2c1"
+  },
+  {
+    "path": "public/media/access-door.jpg",
+    "source": "The door in front of the man is closed at the beginning, then slowly opens inward with a smooth and.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "aaed2be4f4ec62bb0e23ffdbc51ffd701bdfac4b0f70516553086679664934a3"
+  },
+  {
+    "path": "public/media/closing.mp4",
+    "source": "Transform the right reference image to match the left reference image. Keep the exact same camera an.mp4",
+    "origin": "User-supplied video",
+    "sha256": "4aee7a56af90b7c40521daee975314c8f9521f841242babe01f0674e8695a18a"
+  },
+  {
+    "path": "public/media/closing.jpg",
+    "source": "Transform the right reference image to match the left reference image. Keep the exact same camera an.mp4",
+    "origin": "User-supplied video; frame extracted with AVFoundation",
+    "sha256": "22f5604d8fe4df3c8b243bdc37b0a05043e5438b918f3f3abedc97dde8ccee93"
+  },
+  {
+    "path": "public/media/proposal-9.jpg",
+    "source": "PDF page 9, artwork crop",
+    "origin": "User-supplied proposal PDF, cropped artwork",
+    "sha256": "5a7f3f97b0798095e005f3804f4e61a67bf8beeea99ea27affd51eca03804ddc"
+  },
+  {
+    "path": "public/media/proposal-9.jpg",
+    "source": "PDF page 9, artwork crop",
+    "origin": "User-supplied proposal PDF, cropped artwork",
+    "sha256": "5a7f3f97b0798095e005f3804f4e61a67bf8beeea99ea27affd51eca03804ddc"
+  },
+  {
+    "path": "public/media/proposal-10.jpg",
+    "source": "PDF page 10, artwork crop",
+    "origin": "User-supplied proposal PDF, cropped artwork",
+    "sha256": "66bbb5b9fc8d3f4592ff87a9217d21c9010747e231a012f0128b48d797dfae63"
+  },
+  {
+    "path": "public/media/proposal-10.jpg",
+    "source": "PDF page 10, artwork crop",
+    "origin": "User-supplied proposal PDF, cropped artwork",
+    "sha256": "66bbb5b9fc8d3f4592ff87a9217d21c9010747e231a012f0128b48d797dfae63"
+  },
+  {
+    "path": "public/media/proposal-11.jpg",
+    "source": "PDF page 11, artwork crop",
+    "origin": "User-supplied proposal PDF, cropped artwork",
+    "sha256": "909f34cbea958cab78bd769dd57f3da13dfb9fd5b4ef8a7baf1ea6f170e263e1"
+  },
+  {
+    "path": "public/media/proposal-11.jpg",
+    "source": "PDF page 11, artwork crop",
+    "origin": "User-supplied proposal PDF, cropped artwork",
+    "sha256": "909f34cbea958cab78bd769dd57f3da13dfb9fd5b4ef8a7baf1ea6f170e263e1"
+  },
+  {
+    "path": "original/assets/98ea29b045cf577a.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "98ea29b045cf577a19b7da72bcfd60473bb8906d56a17ae3abb87d3b972562a4"
+  },
+  {
+    "path": "original/assets/a0210219bbcad161.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "a0210219bbcad161d497b9e6ff7fb2698badf6679dd8f35010cdd1f947ad7a61"
+  },
+  {
+    "path": "original/assets/ea09fdef2cd8e6c8.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "ea09fdef2cd8e6c811ca267b4d252a80e6cb11a71135f4d2f0094d946bab172a"
+  },
+  {
+    "path": "original/assets/18892ffc31be2992.ttf",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "18892ffc31be2992d32e96b0dc992b939a3b862d1c09d623d0f7fc0e875119f8"
+  },
+  {
+    "path": "original/assets/5410795da58e46c6.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "5410795da58e46c6d79399de683075ef9400548ce4203346b75e1a247126a175"
+  },
+  {
+    "path": "original/assets/5210d819a86651af.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "5210d819a86651af2fcfecc0016cf2f58ebb09a281846b2b69d73b8dba638a0e"
+  },
+  {
+    "path": "original/assets/8280274331e5fdf8.ttf",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "8280274331e5fdf833e7fc17a34f5568cb0fbffa0f9565ed40faaf559404c542"
+  },
+  {
+    "path": "original/assets/d1496589b6847c4a.ttf",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "d1496589b6847c4a9b555bdbdf938838e2c29fe1375eb09a038155e1a28fe7db"
+  },
+  {
+    "path": "original/assets/51c563562c995b3d.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "51c563562c995b3d77a3f0d8112f5918ae5ef5aa157f88557300a653db320ec5"
+  },
+  {
+    "path": "original/assets/db1b05602a4ba430.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "db1b05602a4ba4306b18a46ce0d2d84941759f376ffb8ed9896018ef2b2999f9"
+  },
+  {
+    "path": "original/assets/53f9e7adccfcaf63.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "53f9e7adccfcaf63a8ad0595527a3e3941348ef1e20bf4d39482d85191ddc348"
+  },
+  {
+    "path": "original/assets/476c21cc9c436877.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "476c21cc9c43687768e9b48112ef72343bab8ec84ab3c61aa8be856cab5df43e"
+  },
+  {
+    "path": "original/assets/6d2303fa8b5ad253.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "6d2303fa8b5ad253a0e00efc14251453b20b92af99d99a64795e45ceea4faea3"
+  },
+  {
+    "path": "original/assets/93d367c36be55526.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "93d367c36be5552622bf09a2a2bcdeaa54699c95b0eba856b47780f761689c54"
+  },
+  {
+    "path": "original/assets/ee71d3ecac421965.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "ee71d3ecac42196573d8fb0237b4ff11576e295a4afa04ccb83570ad8a422cb7"
+  },
+  {
+    "path": "original/assets/8c811a5f2b621041.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "8c811a5f2b621041774479d211a9bc0f6d4e972da88aa0a734515190cb30a4a9"
+  },
+  {
+    "path": "original/assets/75d58ad2c84bf400.ttf",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "75d58ad2c84bf40056a438110d7bb6eeed34594d4321fa9867671fe5994b7a54"
+  },
+  {
+    "path": "original/assets/cfc0fce9445047db.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "cfc0fce9445047dbae66528e803c484e7f892e36128a358a9676142d2727427d"
+  },
+  {
+    "path": "original/assets/26e6f8b5bb62d3c0.webp",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "26e6f8b5bb62d3c00851719e1213eef05f914d12d165e3f6a2f56c23614d01d9"
+  },
+  {
+    "path": "original/assets/3c8442fb10f298d0.ttf",
+    "source": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
+    "origin": "Extracted from the user-authored artifact",
+    "sha256": "3c8442fb10f298d002acf3e21932c48d53ad1dc95132b3d273d0fe0304fd848a"
+  }
+]

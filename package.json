@@ -1,0 +1,14 @@
+{
+  "name": "talacard-presentation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Editable Persian TalaCard presentation studio, with the preserved original artifact.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check server.mjs && node --check public/studio.js && node --check public/legacy/app.js",
+    "export": "node scripts/export.mjs"
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T12:16:47.281456+00:00",
+  "title": "Design System: TalaCard presentation studio",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Charcoal",
+        "tonalRamp": [
+          "oklch(15% 0.01 285)",
+          "oklch(27% 0.01 285)",
+          "oklch(39% 0.01 285)",
+          "oklch(51% 0.01 285)",
+          "oklch(63% 0.01 285)",
+          "oklch(75% 0.01 285)",
+          "oklch(87% 0.01 285)",
+          "oklch(95% 0.01 285)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Metadata Gray",
+        "tonalRamp": [
+          "oklch(15% 0.01 285)",
+          "oklch(27% 0.01 285)",
+          "oklch(39% 0.01 285)",
+          "oklch(51% 0.01 285)",
+          "oklch(63% 0.01 285)",
+          "oklch(75% 0.01 285)",
+          "oklch(87% 0.01 285)",
+          "oklch(95% 0.01 285)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(27% 0 0)",
+          "oklch(39% 0 0)",
+          "oklch(51% 0 0)",
+          "oklch(63% 0 0)",
+          "oklch(75% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "workspace": {
+        "role": "neutral",
+        "displayName": "Workspace Gray",
+        "tonalRamp": [
+          "oklch(15% 0.005 285)",
+          "oklch(27% 0.005 285)",
+          "oklch(39% 0.005 285)",
+          "oklch(51% 0.005 285)",
+          "oklch(63% 0.005 285)",
+          "oklch(75% 0.005 285)",
+          "oklch(87% 0.005 285)",
+          "oklch(95% 0.005 285)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Panel Border",
+        "tonalRamp": [
+          "oklch(15% 0.006 285)",
+          "oklch(27% 0.006 285)",
+          "oklch(39% 0.006 285)",
+          "oklch(51% 0.006 285)",
+          "oklch(63% 0.006 285)",
+          "oklch(75% 0.006 285)",
+          "oklch(87% 0.006 285)",
+          "oklch(95% 0.006 285)"
+        ]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "TalaCard Gold",
+        "tonalRamp": [
+          "oklch(15% 0.1 87)",
+          "oklch(27% 0.1 87)",
+          "oklch(39% 0.1 87)",
+          "oklch(51% 0.1 87)",
+          "oklch(63% 0.1 87)",
+          "oklch(75% 0.1 87)",
+          "oklch(87% 0.1 87)",
+          "oklch(95% 0.1 87)"
+        ]
+      },
+      "gold-dark": {
+        "role": "primary",
+        "displayName": "Readable Gold",
+        "tonalRamp": [
+          "oklch(15% 0.09 77)",
+          "oklch(27% 0.09 77)",
+          "oklch(39% 0.09 77)",
+          "oklch(51% 0.09 77)",
+          "oklch(63% 0.09 77)",
+          "oklch(75% 0.09 77)",
+          "oklch(87% 0.09 77)",
+          "oklch(95% 0.09 77)"
+        ]
+      },
+      "selected": {
+        "role": "primary",
+        "displayName": "Selected Gold Wash",
+        "tonalRamp": [
+          "oklch(15% 0.03 87)",
+          "oklch(27% 0.03 87)",
+          "oklch(39% 0.03 87)",
+          "oklch(51% 0.03 87)",
+          "oklch(63% 0.03 87)",
+          "oklch(75% 0.03 87)",
+          "oklch(87% 0.03 87)",
+          "oklch(95% 0.03 87)"
+        ]
+      },
+      "danger": {
+        "role": "semantic",
+        "displayName": "Destructive Red",
+        "tonalRamp": [
+          "oklch(15% 0.15 28)",
+          "oklch(27% 0.15 28)",
+          "oklch(39% 0.15 28)",
+          "oklch(51% 0.15 28)",
+          "oklch(63% 0.15 28)",
+          "oklch(75% 0.15 28)",
+          "oklch(87% 0.15 28)",
+          "oklch(95% 0.15 28)"
+        ]
+      },
+      "field-line": {
+        "role": "neutral",
+        "displayName": "Field Border",
+        "tonalRamp": [
+          "oklch(15% 0.008 285)",
+          "oklch(27% 0.008 285)",
+          "oklch(39% 0.008 285)",
+          "oklch(51% 0.008 285)",
+          "oklch(63% 0.008 285)",
+          "oklch(75% 0.008 285)",
+          "oklch(87% 0.008 285)",
+          "oklch(95% 0.008 285)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Media-scene display",
+        "purpose": "Default scene heading; overridden by page size setting."
+      },
+      "legacy-headline": {
+        "displayName": "Original caption headline",
+        "purpose": "Fluid heavy heading within the preserved player."
+      },
+      "title": {
+        "displayName": "Inspector title",
+        "purpose": "Panel heading."
+      },
+      "body": {
+        "displayName": "Editor body",
+        "purpose": "Base editor text."
+      },
+      "scene-body": {
+        "displayName": "Scene copy",
+        "purpose": "Readable description beside media."
+      },
+      "label": {
+        "displayName": "Control label",
+        "purpose": "Compact semibold actions and fields."
+      },
+      "helper": {
+        "displayName": "Metadata",
+        "purpose": "Hints, timing and scene metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "studio-stage",
+        "value": "0 18px 50px -38px #22222566",
+        "purpose": "Soft separation of preview from workspace."
+      },
+      {
+        "name": "project-menu",
+        "value": "0 12px 28px #2222251a",
+        "purpose": "Floating menu overlay."
+      },
+      {
+        "name": "toast",
+        "value": "0 8px 25px #22222522",
+        "purpose": "Temporary status overlay."
+      },
+      {
+        "name": "legacy-stage",
+        "value": "0 0 39px #2222290A",
+        "purpose": "Original player only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.22,1,.36,1)",
+        "purpose": "Incumbent scene and phone easing."
+      },
+      {
+        "name": "easeIO",
+        "value": "cubic-bezier(.65,0,.35,1)",
+        "purpose": "Retained original-player easing token."
+      },
+      {
+        "name": "scene-entry",
+        "value": "850ms + intensity × 500ms",
+        "purpose": "Timeline-driven entry for added media scenes."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-rails",
+        "value": "1800px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1190px"
+      },
+      {
+        "name": "narrow-rails",
+        "value": "960px"
+      },
+      {
+        "name": "mobile-editor",
+        "value": "760px"
+      },
+      {
+        "name": "original-player-stack",
+        "value": "900px"
+      }
+    ],
+    "previewNotes": "Tonal ramps are synthesized OKLCH panel previews, not additional shipped color primitives. Font snippets inherit the local YekanX face from the host; CSS includes literal fallback values."
+  },
+  "components": [
+    {
+      "name": "Save button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Charcoal primary action for local project saving.",
+      "html": "<button class=\"ds-primary\" dir=\"rtl\">ذخیرهٔ پروژه</button>",
+      "css": ".ds-primary{font-family:var(--font,YekanX,Tahoma,sans-serif);border:1px solid var(--line,#e4e4e8);background:var(--paper,#fff);color:var(--ink,#222225);padding:9px 15px;border-radius:9px;line-height:1.5;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;font-weight:600;font-size:12px;min-height:38px;cursor:pointer;background:var(--ink,#222225);color:white;border-color:var(--ink,#222225)}.ds-primary:hover{background:#414146}.ds-primary:focus-visible{outline:2px solid var(--gold-dark,#8c6418);outline-offset:3px}.ds-primary:disabled{opacity:.35;cursor:not-allowed}"
+    },
+    {
+      "name": "Secondary mode button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet mode toggle beside Save.",
+      "html": "<button class=\"ds-secondary\" dir=\"rtl\">نمایش ارائه</button>",
+      "css": ".ds-secondary{font-family:var(--font,YekanX,Tahoma,sans-serif);border:1px solid var(--line,#e4e4e8);background:var(--paper,#fff);color:var(--ink,#222225);padding:9px 15px;border-radius:9px;line-height:1.5;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;font-weight:600;font-size:12px;min-height:38px;cursor:pointer;}.ds-secondary:hover{background:#f2f2f4}.ds-secondary:focus-visible{outline:2px solid var(--gold-dark,#8c6418);outline-offset:3px}"
+    },
+    {
+      "name": "Inspector text field",
+      "kind": "input",
+      "refersTo": "text-field",
+      "description": "Page-specific editing field with persistent label.",
+      "html": "<label class=\"ds-field\" dir=\"rtl\"><span>نام در فهرست صفحه‌ها</span><input value=\"خانه\"></label>",
+      "css": ".ds-field{font-family:var(--font,YekanX,Tahoma,sans-serif);display:block;color:var(--ink,#222225);max-width:290px}.ds-field span{display:block;font-weight:600;font-size:12px;margin-bottom:8px}.ds-field input{font-family:var(--font,YekanX,Tahoma,sans-serif);font-size:14px;width:100%;background:#fff;border:1px solid #d9d9df;border-radius:8px;padding:10px;color:var(--ink,#222225);min-height:40px;caret-color:var(--gold-dark,#8c6418)}.ds-field input:focus-visible{outline:2px solid var(--gold-dark,#8c6418);outline-offset:3px}"
+    },
+    {
+      "name": "Selected scene navigation",
+      "kind": "nav",
+      "refersTo": "scene-row-selected",
+      "description": "Current page and duration in the scene rail.",
+      "html": "<nav dir=\"rtl\" aria-label=\"صفحه‌ها\"><button class=\"ds-scene\" aria-current=\"step\"><strong>خانه</strong><small>خانه · ۳۶ ثانیه</small></button></nav>",
+      "css": ".ds-scene{font-family:var(--font,YekanX,Tahoma,sans-serif);display:block;text-align:start;width:218px;padding:10px 8px;border-radius:10px;border:1px solid #e7c56988;background:var(--selected,#faf3df);color:var(--ink,#222225);cursor:pointer}.ds-scene strong{display:block;font-size:11px;font-weight:600}.ds-scene small{display:block;font-size:11px;color:var(--muted,#65676e);margin-top:5px}.ds-scene:hover{background:var(--workspace,#f3f3f5)}.ds-scene:focus-visible{outline:2px solid var(--gold-dark,#8c6418);outline-offset:3px}"
+    },
+    {
+      "name": "Flow card",
+      "kind": "card",
+      "refersTo": "flow-card",
+      "description": "Chapter container with a current-page button.",
+      "html": "<section class=\"ds-flow\" dir=\"rtl\"><h3>خانه</h3><button aria-current=\"step\">خانه</button></section>",
+      "css": ".ds-flow{font-family:var(--font,YekanX,Tahoma,sans-serif);padding:15px;background:var(--paper,#fff);border-radius:14px;width:200px;color:var(--ink,#222225)}.ds-flow h3{font-size:14px;margin:0 0 12px}.ds-flow button{font-family:var(--font,YekanX,Tahoma,sans-serif);width:100%;padding:9px;text-align:start;border:1px solid var(--gold,#e7c569);background:var(--selected,#faf3df);font-size:12px;border-radius:9px;line-height:1.6;cursor:pointer}.ds-flow button:hover{border-color:var(--gold,#e7c569)}.ds-flow button:focus-visible{outline:2px solid var(--gold-dark,#8c6418);outline-offset:3px}"
+    },
+    {
+      "name": "Inspector tabs",
+      "kind": "nav",
+      "description": "Content, media and motion settings within the inspector.",
+      "html": "<nav class=\"ds-tabs\" dir=\"rtl\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\">محتوا</button><button role=\"tab\" aria-selected=\"false\">رسانه</button><button role=\"tab\" aria-selected=\"false\">حرکت و ظاهر</button></nav>",
+      "css": ".ds-tabs{display:flex;padding:0 12px;border-bottom:1px solid var(--line,#e4e4e8);width:290px}.ds-tabs button{font-family:var(--font,YekanX,Tahoma,sans-serif);flex:1;white-space:nowrap;font-size:11px;padding:12px 3px;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted,#65676e);cursor:pointer}.ds-tabs button[aria-selected=true]{border-bottom-color:var(--gold-dark,#8c6418);color:var(--ink,#222225);font-weight:700}.ds-tabs button:focus-visible{outline:2px solid var(--gold-dark,#8c6418);outline-offset:3px}"
+    },
+    {
+      "name": "Playback action",
+      "kind": "button",
+      "description": "Gold play control with the original outlined SVG vocabulary.",
+      "html": "<button class=\"ds-play\" aria-label=\"پخش\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m9 5 11 7-11 7z\"/></svg></button>",
+      "css": ".ds-play{width:42px;height:42px;display:inline-grid;place-items:center;background:var(--gold,#e7c569);border:0;border-radius:8px;color:var(--ink,#222225);cursor:pointer}.ds-play svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ds-play:hover{background:#dfb650}.ds-play:focus-visible{outline:2px solid var(--gold-dark,#8c6418);outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Preserved TalaCard Stage",
+    "overview": "A Persian editing workspace surrounds the preserved TalaCard presentation. White panels, quiet gray workspace, charcoal type and restrained gold selection keep the supplied phone compositions and motion in the foreground. YekanX and RTL remain the shared identity across editor and player.",
+    "keyCharacteristics": [
+      "Persian RTL with extracted YekanX font files.",
+      "White and gray editing chrome; charcoal actions and gold selection.",
+      "Original six chapters and fourteen scenes retained as the app deck.",
+      "Page-specific live preview with text, image and video controls."
+    ],
+    "rules": [
+      {
+        "name": "The Preserved Stage Rule",
+        "body": "Extend the editing chrome around the incumbent presentation; retain its supplied phone frames, artwork and motion.",
+        "section": "colors"
+      },
+      {
+        "name": "The Gold State Rule",
+        "body": "Use gold for selection, progress and playback emphasis; use charcoal for the save action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Persian First Rule",
+        "body": "Keep YekanX and RTL as the default; isolate time readouts and seek controls in LTR.",
+        "section": "typography"
+      }
+    ],
+    "dos": [
+      "Do retain the supplied TalaCard identity and original chapter/scene structure.",
+      "Do keep the selected scene synchronized across list, inspector and stage.",
+      "Do preserve the visible mobile save state and add-page control.",
+      "Do use supplied images and videos with contain fitting by default; scene settings may explicitly choose another fit."
+    ],
+    "donts": [
+      "Don't replace YekanX, RTL or the white/gray/charcoal/gold identity.",
+      "Don't apply the phone's metallic depth or partner-brand teal to editor controls.",
+      "Don't treat text inside raster app frames as editable live text."
+    ]
+  }
+}

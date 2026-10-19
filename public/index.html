@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#222225">
+  <title>استودیوی ارائهٔ طلاکارت</title>
+  <link rel="stylesheet" href="studio.css">
+  <script type="module" src="studio.js"></script>
+</head>
+<body>
+  <header class="toolbar">
+    <a class="brand" href="#" aria-label="نمایش ارائهٔ طلاکارت"><svg viewBox="0 0 30 32" aria-hidden="true"><path d="M20 2v20H9v7H2V16h10V2M27 2v27H16v-7"/></svg><span>طلاکارت<small>استودیوی ارائه</small></span></a>
+    <label class="deck-picker"><span class="sr-only">انتخاب پروژه</span><select id="deck-select"></select></label>
+    <div class="toolbar-actions">
+      <span id="save-status" role="status">در حال بارگذاری…</span>
+      <button id="undo" class="icon-button" title="برگرداندن تغییر · Ctrl/⌘ Z" aria-label="برگرداندن تغییر"></button>
+      <button id="redo" class="icon-button" title="انجام دوباره · Ctrl/⌘ Shift Z" aria-label="انجام دوباره"></button>
+      <button id="save" class="button primary">ذخیرهٔ پروژه</button>
+      <button id="toggle-edit" class="button">ویرایش صفحه‌ها</button>
+      <button id="more" class="icon-button" aria-label="گزینه‌های پروژه" aria-expanded="false"></button>
+      <div id="project-menu" class="project-menu" hidden>
+        <button id="export-json">دریافت فایل پروژه (JSON)</button>
+        <button id="import-json">بارگذاری فایل پروژه</button>
+        <button id="present">نمایش تمام‌صفحه</button>
+        <a href="/original/index.html" target="_blank" rel="noopener">باز کردن نسخهٔ اصلی</a>
+        <button id="show-help">راهنمای ویرایش</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="scene-sidebar" aria-label="فهرست صفحه‌ها">
+      <div class="rail-heading"><h1>صفحه‌ها <span id="page-count"></span></h1><button id="add-scene" class="icon-button" aria-label="افزودن صفحه"></button></div>
+      <div id="scene-list" class="scene-list"></div>
+      <div class="rail-footer">هر صفحه را انتخاب کن؛ نتیجه را همان‌جا ببین.</div>
+    </aside>
+
+    <div class="preview-column">
+      <div class="preview-heading"><span id="scene-heading"></span><div><button id="restart" class="text-button">از ابتدا</button><button id="fullscreen" class="icon-button" aria-label="نمایش تمام‌صفحه"></button></div></div>
+      <section id="stage" class="stage" aria-label="پیش‌نمایش صفحه"><div id="scene-canvas" class="scene-canvas"></div></section>
+      <div class="player" role="group" aria-label="کنترل پخش">
+        <button id="prev" class="icon-button" aria-label="صفحهٔ قبل"></button>
+        <button id="play" class="icon-button play-button" aria-label="پخش"></button>
+        <button id="next" class="icon-button" aria-label="صفحهٔ بعد"></button>
+        <div id="chapter-progress" class="chapter-progress"></div>
+        <span id="clock" class="clock" dir="ltr">0:00 / 0:00</span>
+      </div>
+      <div class="scrub-row"><label class="sr-only" for="seek">زمان صفحهٔ فعلی</label><input id="seek" type="range" min="0" max="1000" value="0"><span id="scene-clock" dir="ltr"></span></div>
+      <section class="flow"><div class="flow-heading"><h2>فلو</h2><span id="flow-count"></span></div><p id="flow-description"></p><div id="flow-grid"></div></section>
+    </div>
+
+    <aside id="inspector" class="inspector" aria-label="ویرایش صفحه">
+      <div class="inspector-heading"><div><span id="editing-number"></span><h2>ویرایش صفحه</h2></div><span class="live-badge"><i></i>پیش‌نمایش زنده</span></div>
+      <div class="editor-tabs" role="tablist" aria-label="تنظیمات صفحه">
+        <button role="tab" data-tab="content" aria-selected="true">محتوا</button><button role="tab" data-tab="media" aria-selected="false">رسانه</button><button role="tab" data-tab="motion" aria-selected="false">حرکت و ظاهر</button>
+      </div>
+      <form id="scene-form" autocomplete="off"></form>
+      <div class="scene-actions"><button id="move-up" class="icon-button" aria-label="انتقال صفحه به قبل"></button><button id="move-down" class="icon-button" aria-label="انتقال صفحه به بعد"></button><button id="duplicate" class="button">ساخت کپی</button><button id="delete" class="icon-button danger" aria-label="حذف صفحه"></button></div>
+    </aside>
+  </main>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="help"><div class="dialog-heading"><h2>ویرایش ارائه</h2><button id="close-help" class="icon-button" aria-label="بستن راهنما"></button></div><p>از فهرست سمت راست، صفحه را انتخاب کن. در بخش محتوا متن را تغییر بده؛ در رسانه، فیلم یا عکس انتخاب کن. نتیجه فوراً در پیش‌نمایش دیده می‌شود.</p><p>«ذخیرهٔ پروژه» متن و تنظیمات را روی همین دستگاه ذخیره می‌کند. عکس‌ها و ویدیوهای انتخابی هم در پوشهٔ پروژه نگهداری می‌شوند. فایل JSON فقط محتوا و مسیر رسانه‌ها را دارد؛ برای انتقال کامل، پوشهٔ پروژه را همراه رسانه‌ها جابه‌جا کن.</p><p>می‌توانی بین نسخهٔ اپ و پروپوزال جابه‌جا شوی. قالب «فلو اصلی اپ» انیمیشن‌های موجود را حفظ می‌کند. برای نمایش فیلم یا عکس، یکی از قالب‌های رسانه‌ای را انتخاب کن.</p><p>میان‌برها: فاصله برای پخش/توقف، کلیدهای جهت برای رفتن به صفحهٔ بعد و قبل، Ctrl/⌘ S برای ذخیره و Ctrl/⌘ Z برای برگرداندن تغییر. در فیلدهای متن، تایپ و میان‌برهای معمول ویرایش فعال‌اند.</p></dialog>
+  <input id="json-file" type="file" accept="application/json,.json" hidden>
+  <input id="media-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm" hidden>
+</body>
+</html>
