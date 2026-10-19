@@ -43,3 +43,7 @@ The original user-authored source is archived in `original/source.html`. Host-in
 ## Navigation and direct layout editing · 2026-10-19
 
 Four Node tests passed, including backward-compatible geometry validation and bounded pointer math. Browser checks covered the RTL chapter menu, top subpages/current-page state, absence of the bottom flow and seek timeline, muted video autoplay, loop toggle, no timed page advance, pointer text move, pointer media resize, save/reload, reset, and legacy caption keyboard movement. Desktop and compact editor/viewer captures are in ignored `.impeccable/review/`. Original app scene acknowledgements and media playback produced no console errors.
+
+## Automatic local save and cloud content sync
+
+Six tests pass: previous server/model checks plus authenticated Worker publication, missing-media rejection, conditional updates, immutable asset checks, upload-before-project ordering, repeated-upload avoidance, offline retry and remote-conflict protection. The original-video assertion now permits owner uploads alongside the nine supplied videos. Live verification checks editor autosave without a button click, public JSON revision, protected writes and video byte ranges.

@@ -13,7 +13,10 @@ test('both supplied decks retain all original scenes and the nine selected movie
   validateProject(fixture);
   assert.equal(fixture.decks[0].scenes.length, 14);
   assert.equal(fixture.decks[1].scenes.length, 12);
-  assert.equal(new Set(fixture.library.filter(m => m.type === 'video').map(m => m.src)).size, 9);
+  const supplied = JSON.parse(fs.readFileSync(new URL('../ASSETS.json', import.meta.url))).filter(m => m.path.endsWith('.mp4')).map(m => '/' + m.path.replace(/^public\//,''));
+  assert.equal(supplied.length, 9);
+  const available = new Set(fixture.library.filter(m => m.type === 'video').map(m => m.src));
+  assert.ok(supplied.every(src => available.has(src)), 'supplied films remain available alongside owner uploads');
   assert.deepEqual(fixture.decks[0].scenes.map(s => s.legacyScene), Array.from({length:14}, (_, i) => i));
 });
 

@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import crypto from 'node:crypto';
 import { validateProject } from './public/model.js';
+import { createCloudSync } from './cloud/sync.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif', '.mp4': 'video/mp4', '.webm': 'video/webm', '.ttf': 'font/ttf', '.pdf': 'application/pdf' };
@@ -19,7 +20,8 @@ async function body(req, max) {
 
 export function createApp(root = ROOT) {
   let saveQueue = Promise.resolve();
-  return http.createServer(async (req, res) => {
+  const sync = createCloudSync(root);
+  const server = http.createServer(async (req, res) => {
     try {
       const host = req.headers.host || '';
       if (!/^(127\.0\.0\.1|localhost)(:\d+)?$/.test(host)) return json(res, 403, { error: 'فقط دسترسی محلی مجاز است.' });
@@ -29,6 +31,8 @@ export function createApp(root = ROOT) {
         if (req.headers['x-talacard-studio'] !== '1') return json(res, 403, { error: 'درخواست ویرایش معتبر نیست.' });
       }
       const contentFile = path.join(root, 'content.json');
+      if (url.pathname === '/api/sync' && req.method === 'GET') return json(res, 200, sync.status());
+      if (url.pathname === '/api/sync/retry' && req.method === 'POST') { sync.schedule(0); return json(res, 202, sync.status()); }
       if (url.pathname === '/api/project' && req.method === 'GET') {
         const data = fs.readFileSync(contentFile); return json(res, 200, { project: JSON.parse(data), revision: revision(data) });
       }
@@ -47,7 +51,8 @@ export function createApp(root = ROOT) {
           return revision(data);
         });
         saveQueue = operation.catch(() => {});
-        return json(res, 200, { revision: await operation });
+        const savedRevision = await operation; sync.schedule();
+        return json(res, 200, { revision: savedRevision, sync:sync.status() });
       }
       if (url.pathname === '/api/media' && req.method === 'POST') {
         const type = (req.headers['content-type'] || '').split(';')[0];
@@ -84,6 +89,8 @@ export function createApp(root = ROOT) {
       const stream = fs.createReadStream(file, { start, end }); stream.on('error', () => res.destroy()); stream.pipe(res);
     } catch (e) { if (!res.headersSent) json(res, e.status || 400, { error: e.message || 'درخواست انجام نشد.' }); else res.destroy(); }
   });
+  server.on('close', () => sync.close());
+  return server;
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -7,3 +7,5 @@ dist-share/
 content.backup.json
 .env
 .env.*
+.private/
+.site-build/

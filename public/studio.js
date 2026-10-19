@@ -12,6 +12,7 @@ for (const [id, name] of Object.entries({ undo:'undo', redo:'redo', more:'more',
 
 let project, savedJSON = '', revision = '', backend = true, deckId, index = 0, tab = 'content';
 let playing = false, elapsed = 0, previousFrame = 0, frame, iframeReady = false, sceneSignature = '', stageAnimations = [], saving = false, toastTimer, draftTimer;
+let autoSaveTimer, autoSaveBlocked=false, localSaveError=false, syncState={status:'pending'}, syncPoll;
 const history = [], future = [];
 let legacyRequest = 0;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -26,7 +27,8 @@ function toast(message, error = false) {
 }
 function updateStatus() {
   const status = $('#save-status');
-  status.textContent = saving ? 'در حال ذخیره…' : dirty() ? 'تغییرات ذخیره نشده' : backend ? 'همهٔ تغییرات ذخیره شد' : 'نسخهٔ نمایشی · ذخیره در مرورگر';
+  status.textContent = saving ? 'در حال ذخیره…' : autoSaveBlocked ? 'تداخل ذخیره؛ فایل پروژه را دریافت کن' : dirty() ? localSaveError ? 'ذخیره نشد؛ تلاش دوباره…' : 'در انتظار ذخیرهٔ خودکار…' : backend ? 'ذخیره شد روی دستگاه' : 'ذخیره شد در مرورگر';
+  const cloud=$('#cloud-status');if(cloud){const current=syncState.status;cloud.textContent=!backend?'نسخهٔ آفلاین':current==='published'&&syncState.revision===revision&&!dirty()?'همگام با لینک عمومی':current==='syncing'?'در حال ارسال به سایت…':current==='conflict'?'تداخل نسخهٔ آنلاین':current==='retrying'?'ذخیره شد؛ تلاش دوباره برای سایت':current==='disabled'?'اتصال سایت فعال نیست':'در انتظار همگام‌سازی';cloud.title=syncState.error||'ذخیره و انتشار خودکار فعال است';cloud.dataset.state=current;}
   status.classList.toggle('unsaved', dirty()); $('#save').disabled = saving;
   $('#undo').disabled = !history.length; $('#redo').disabled = !future.length;
 }
@@ -38,7 +40,10 @@ function draft() {
     catch { toast('فضای مرورگر برای نسخهٔ پشتیبان کافی نیست؛ پروژه را ذخیره کنید.', true); }
   }, 300);
 }
-function changed() { updateStatus(); draft(); }
+function scheduleAutoSave(){clearTimeout(autoSaveTimer);if(project&&dirty()&&!autoSaveBlocked)autoSaveTimer=setTimeout(()=>save({automatic:true}),900)}
+function changed() { updateStatus(); draft(); scheduleAutoSave(); }
+async function readSyncStatus(){if(!backend)return;try{const r=await fetch('/api/sync',{cache:'no-store'});if(r.ok){syncState=await r.json();updateStatus()}}catch{}}
+
 function editMode(value) {
   document.body.classList.toggle('editing', value); $('#toggle-edit').textContent = value ? 'نمایش ارائه' : 'ویرایش صفحه‌ها';
   const hash = value ? '#edit' : ''; if (location.hash !== hash) window.history.replaceState(null, '', location.pathname + location.search + hash);
@@ -230,19 +235,20 @@ function restore(value) { project = value; deckId = project.activeDeck; index = 
 $('#undo').onclick = () => { if (history.length) { future.push(clone(project)); restore(history.pop()); } };
 $('#redo').onclick = () => { if (future.length) { history.push(clone(project)); restore(future.pop()); } };
 
-async function save() {
+async function save({automatic=false}={}) {
+  clearTimeout(autoSaveTimer); autoSaveTimer=null;
   if (saving) return;
   try {
     validateProject(project);
-    if (!backend) { localStorage.setItem('talacard-static-project-v1', JSON.stringify(project)); savedJSON = JSON.stringify(project); changed(); toast('در این مرورگر ذخیره شد. برای انتقال، فایل پروژه را دریافت کن.'); return; }
+    if (!backend) { localStorage.setItem('talacard-static-project-v1', JSON.stringify(project)); savedJSON = JSON.stringify(project); changed(); if(!automatic)toast('در این مرورگر ذخیره شد. اتصال انتشار آنلاین در این نسخه فعال نیست.'); return; }
     saving = true; updateStatus(); const snapshot = clone(project);
     const response = await fetch('/api/project', { method:'PUT', headers:{ 'Content-Type':'application/json', 'X-TalaCard-Studio':'1' }, body:JSON.stringify({ project:snapshot, revision }) });
-    const result = await response.json(); if (!response.ok) throw new Error(result.error || 'ذخیره انجام نشد.');
-    revision = result.revision; savedJSON = JSON.stringify(snapshot); draft(); toast('پروژه و تنظیمات همهٔ صفحه‌ها روی دستگاه ذخیره شد.');
-  } catch (e) { toast(e.message || 'ذخیره انجام نشد؛ فایل پروژه را دریافت کن.', true); }
-  finally { saving = false; updateStatus(); }
+    const result = await response.json(); if (!response.ok) {if(response.status===409)autoSaveBlocked=true;throw new Error(result.error || 'ذخیره انجام نشد.');}
+    revision = result.revision; savedJSON = JSON.stringify(snapshot); autoSaveBlocked=false; localSaveError=false; draft(); readSyncStatus(); if(!automatic)toast('روی دستگاه ذخیره شد؛ لینک عمومی خودکار به‌روز می‌شود.');
+  } catch (e) { localSaveError=true; if(!automatic||autoSaveBlocked)toast(e.message || 'ذخیره انجام نشد؛ دوباره تلاش می‌شود.', true); if(!autoSaveBlocked)autoSaveTimer=setTimeout(()=>save({automatic:true}),5000); }
+  finally { saving = false; updateStatus(); if(dirty()&&!autoSaveBlocked&&!autoSaveTimer)scheduleAutoSave(); }
 }
-$('#save').onclick = save;
+$('#save').onclick = () => {save();if(backend)fetch('/api/sync/retry',{method:'POST',headers:{'X-TalaCard-Studio':'1'}}).catch(()=>{});};
 function downloadJSON() { const blob = new Blob([JSON.stringify(project, null, 2) + '\n'], { type:'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'talacard-project.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000); }
 $('#export-json').onclick = () => { downloadJSON(); closeMenu(); };
 $('#import-json').onclick = () => { $('#json-file').value = ''; $('#json-file').click(); closeMenu(); };
@@ -300,6 +306,7 @@ async function init() {
     project = validateProject(result.project); revision = result.revision; savedJSON = JSON.stringify(project);
     try { const recovered = JSON.parse(localStorage.getItem('talacard-draft-v1') || 'null'); if (recovered && recovered.revision === revision) { project = validateProject(recovered.project); toast('تغییرات ذخیره‌نشدهٔ قبلی از مرورگر بازیابی شد.'); } } catch {}
     deckId = project.activeDeck; renderDecks(); editMode(location.hash === '#edit'); choose(0, false); updateStatus();
+    readSyncStatus(); syncPoll=setInterval(readSyncStatus,2500);scheduleAutoSave();
     previousFrame = performance.now(); requestAnimationFrame(tick);
   } catch (e) { $('#save-status').textContent = 'خطا در بارگذاری'; $('#scene-canvas').textContent = 'پروژه بارگذاری نشد. فایل content.json و اجرای سرور را بررسی کنید.'; toast(e.message, true); }
 }

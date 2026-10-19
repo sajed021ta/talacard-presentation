@@ -3,6 +3,7 @@ import {applyPlacement, readPlacement, adjustBox, placementMode} from './placeme
 import {validateProject,chapters,timeLabel} from './model.js';
 const $=s=>document.querySelector(s);
 const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+let contentETag=null;
 let project,deckId,index=0,playing=false,elapsed=0,previousFrame=0,frame,iframeReady=false,sceneSignature='',stageAnimations=[],legacyRequest=0,toastTimer;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const deck=()=>project.decks.find(d=>d.id===deckId);
@@ -146,7 +147,24 @@ $('#fullscreen').onclick=async()=>{try{await $('#stage').requestFullscreen();res
 document.addEventListener('fullscreenchange',resizeStage);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false)});
 document.addEventListener('keydown',e=>{if(!project||e.target.closest('input,select,button,a'))return;if(e.code==='Space'){e.preventDefault();$('#play').click()}else if(e.key==='ArrowLeft'){e.preventDefault();choose(index+1)}else if(e.key==='ArrowRight'){e.preventDefault();choose(index-1)}});
-try{const r=await fetch('/default-content.json');if(!r.ok)throw new Error();project=validateProject(await r.json());const requested=new URL(location.href).searchParams.get('deck');deckId=project.decks.some(d=>d.id===requested)?requested:project.activeDeck;renderDecks();choose(0,false);previousFrame=performance.now();requestAnimationFrame(tick)}catch{$('#scene-canvas').textContent='بارگذاری ارائه انجام نشد؛ صفحه را دوباره باز کنید.'}
+try{const r=await fetch('/default-content.json',{cache:'no-store'});contentETag=r.headers.get('ETag');if(!r.ok)throw new Error();project=validateProject(await r.json());const requested=new URL(location.href).searchParams.get('deck');deckId=project.decks.some(d=>d.id===requested)?requested:project.activeDeck;renderDecks();choose(0,false);previousFrame=performance.now();requestAnimationFrame(tick)}catch{$('#scene-canvas').textContent='بارگذاری ارائه انجام نشد؛ صفحه را دوباره باز کنید.'}
 
 function canvasElement(){return $('#scene-canvas');}
 $('#loop-video').onchange=()=>{ scene().loop=$('#loop-video').checked;const v=$('#scene-canvas video');if(v){v.loop=scene().loop;if(playing && v.ended){v.currentTime=0;playVideo(v)}}};
+
+// Content updates are independent of application deployment. Preserve the current page.
+let refreshing=false;
+setInterval(async()=>{
+ if(document.hidden||refreshing||!project)return;refreshing=true;
+ try{
+  const response=await fetch('/default-content.json',{cache:'no-store',headers:contentETag?{'If-None-Match':contentETag}:{}});
+  if(response.status===304||!response.ok)return;
+  const etag=response.headers.get('ETag');if(etag&&etag===contentETag)return;
+  const next=validateProject(await response.json());
+  if(!etag&&JSON.stringify(next)===JSON.stringify(project))return;
+  const id=scene().id,before=JSON.stringify(scene());project=next;contentETag=etag;
+  if(!project.decks.some(d=>d.id===deckId))deckId=project.activeDeck;
+  index=Math.max(0,deck().scenes.findIndex(s=>s.id===id));renderDecks();renderFlow();
+  if(JSON.stringify(scene())!==before)choose(index);else updateProgress();
+ }catch{}finally{refreshing=false}
+},5000);
