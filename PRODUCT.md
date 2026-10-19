@@ -20,7 +20,11 @@ Make the existing Claude artifact independently runnable and maintainable in the
 - Include the nine explicitly provided videos; do not substitute neighboring versions.
 - A second twelve-page proposal deck follows the supplied PDF; claims come only from the PDF.
 - Provide live editing, media selection/upload, add/duplicate/reorder/delete, undo/redo, automatic local save and authenticated cloud content sync, import/export, and a presentation view.
+- Edit titles and independent description boxes with a shared Word-like toolbar: YekanX/Tahoma/Arial, size, color, bold, italic, underline, alignment and line spacing. Character formatting applies to selected text or the whole active box; alignment and line spacing apply to the box. Keep YekanX and RTL as defaults. Store structured text runs rather than HTML.
+- Add, delete, reorder and move/resize description boxes independently. Existing descriptions expose sentence boxes without rewriting saved content until edited; a split action preserves text formatting while separating sentences. Support up to forty description boxes per scene and independent desktop/mobile placement.
+- Apply image/video zoom, four-direction pan, fade and blur effects, with duration (0.2–120 seconds), delay (0–60 seconds), amount, easing, repeat and replay controls. Effect repetition and video looping are separate settings; effect completion never advances the page. Respect reduced-motion preferences.
 - Persist locally without credentials. Never put GitHub tokens into browser code. GitHub synchronization uses the owner's normal Git workflow. Content updates sync independently to durable cloud storage; no browser credentials.
+- Use the local studio for editing and autosave; the public link presents the synchronized content read-only. Show local-save and cloud-sync states separately, including retry and version-conflict recovery.
 - The source Claude URL remains read-only; this is an independent copy.
 
 ## Brand Commitments

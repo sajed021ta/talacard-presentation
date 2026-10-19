@@ -23,6 +23,7 @@ export function validateProject(project) {
       if (!id(s.id) || sceneIds.has(s.id) || !text(s.chapter, 100) || !text(s.label, 200) || !text(s.title, 1000) || !text(s.highlight, 1000) || !text(s.description, 8000)) throw new Error('متن یا شناسهٔ یکی از صفحه‌ها معتبر نیست.');
       sceneIds.add(s.id);
       if (!LAYOUTS.includes(s.layout) || !TRANSITIONS.includes(s.transition) || !number(s.duration, 1, 180) || !number(s.fontSize, 20, 64) || !number(s.intensity, 0, 1) || !number(s.position, 0, 100) || !Number.isInteger(s.legacyScene) || s.legacyScene < 0 || s.legacyScene > 13 || !['contain', 'cover'].includes(s.fit) || typeof s.loop !== 'boolean') throw new Error('تنظیمات یکی از صفحه‌ها معتبر نیست.');
+      validateRichScene(s);
       if (s.placement !== undefined) validatePlacement(s.placement);
       if (!mediaPath(s.media) || !mediaPath(s.poster) || !color(s.background) || !color(s.textColor) || !color(s.accent)) throw new Error('مسیر رسانه یا رنگ یکی از صفحه‌ها معتبر نیست.');
     }
@@ -53,4 +54,38 @@ export function validatePlacement(placement) {
       if (!['copy','media'].includes(kind) || !box || !['x','y','w','h'].every(k => typeof box[k] === 'number' && Number.isFinite(box[k])) || box.x < 0 || box.y < 0 || box.w < 8 || box.h < 8 || box.x + box.w > 100.001 || box.y + box.h > 100.001) throw new Error('قاب متن یا رسانه باید داخل صفحه باشد.');
     }
   }
+}
+
+export const MEDIA_EFFECTS=['none','zoom-in','zoom-out','zoom-in-out','pan-left','pan-right','pan-up','pan-down','fade-in','blur-in'];
+export function validateTextFormat(value={}){
+ if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('قالب متن معتبر نیست.');
+ for(const [k,v] of Object.entries(value)){
+  if(['bold','italic','underline'].includes(k)&&typeof v==='boolean')continue;
+  if(k==='color'&&typeof v==='string'&&/^#[0-9a-fA-F]{6}$/.test(v))continue;
+  if(k==='fontFamily'&&['YekanX','Tahoma','Arial'].includes(v))continue;
+  if(k==='fontSize'&&Number.isFinite(v)&&v>=12&&v<=96)continue;
+  if(k==='lineHeight'&&Number.isFinite(v)&&v>=1&&v<=3)continue;
+  if(k==='align'&&['right','center','left','justify'].includes(v))continue;
+  if(k==='text'&&typeof v==='string')continue;
+  throw new Error('یکی از تنظیمات متن معتبر نیست.');
+ }
+}
+export function validateRuns(runs,max){
+ if(!Array.isArray(runs)||runs.length>500)throw new Error('ساختار متن معتبر نیست.');
+ let length=0;for(const r of runs){if(!r||typeof r.text!=='string')throw new Error('متن معتبر نیست.');validateTextFormat(r);length+=r.text.length}
+ if(length>max)throw new Error('متن بیش از حد طولانی است.');
+}
+export function validateRichScene(s){
+ if(s.titleRuns!==undefined){validateRuns(s.titleRuns,1000);if(s.titleRuns.map(r=>r.text).join('')!==s.title)throw new Error('عنوان و قالب متن هماهنگ نیستند.')}
+ if(s.titleFormat!==undefined)validateTextFormat(s.titleFormat);
+ if(s.textBlocks!==undefined){
+  if(!Array.isArray(s.textBlocks)||s.textBlocks.length>40)throw new Error('هر صفحه حداکثر ۴۰ باکس متن دارد.');
+  const ids=new Set();for(const b of s.textBlocks){if(!b||!/^[a-zA-Z0-9_-]{1,80}$/.test(b.id)||ids.has(b.id))throw new Error('شناسهٔ باکس متن معتبر نیست.');ids.add(b.id);validateRuns(b.runs,8000);if(b.format!==undefined)validateTextFormat(b.format);
+   if(b.placement!==undefined){if(!b.placement||typeof b.placement!=='object'||Array.isArray(b.placement))throw new Error('جای متن معتبر نیست.');for(const [mode,box] of Object.entries(b.placement))validatePlacement({[mode]:{copy:box}})}
+  }
+  if(s.textBlocks.map(b=>b.runs.map(r=>r.text).join('')).join('\n')!==s.description)throw new Error('توضیحات و باکس‌ها هماهنگ نیستند.');
+ }
+ if(s.mediaEffect!==undefined){const f=s.mediaEffect;
+  if(!f||!MEDIA_EFFECTS.includes(f.type)||!Number.isFinite(f.duration)||f.duration<.2||f.duration>120||!Number.isFinite(f.delay)||f.delay<0||f.delay>60||!Number.isFinite(f.amount)||f.amount<1||f.amount>60||typeof f.repeat!=='boolean'||!['linear','ease-out','ease-in-out'].includes(f.easing))throw new Error('تنظیمات افکت رسانه معتبر نیست.');
+ }
 }

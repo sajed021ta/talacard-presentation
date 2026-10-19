@@ -1,3 +1,4 @@
+import {renderTitle,renderDescription} from '../text.js';
 
 if(location.hash==='#render'){(function(){
  document.documentElement.classList.add('render');
@@ -195,6 +196,7 @@ document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{go(+b.dataset.j);$(
 const total=S.reduce((a,s)=>a+s.d,0);
 let idx=0,playing=true,t0=0,elapsed=0,adv=null,lastCap='';
 function setCap(s){const c=CH[s.c];$('#capN').textContent=c.n;$('#capC').textContent=c.t;
+  if(location.hash==='#render'){lastCap=s.t||'';return;}
   if(s.t&&s.t!==lastCap){lastCap=s.t;const tx=$('#capTxt');
     const swap=()=>{$('#capT').innerHTML=s.t;$('#capD').textContent=s.p;A(tx,[{opacity:0,transform:'translateY(14px)',filter:'blur(4px)'},{opacity:1,transform:'none',filter:'blur(0)'}],{duration:700,fill:'none'})};
     if(reduce||!$('#capT').innerHTML)swap();else A(tx,[{opacity:1},{opacity:0,transform:'translateY(-10px)'}],{duration:260,easing:EIN,fill:'none'}).onfinish=swap}}
@@ -222,10 +224,19 @@ function placeLegacy(boxes={}){
  }
  fit();
 }
+function renderLegacyText(c){
+ const isIntro=$('#stage').classList.contains('m-open')||$('#stage').classList.contains('m-close');
+ renderTitle($('#capT'),{...c,titleFormat:{fontSize:c.fontSize,...c.titleFormat}});
+ renderTitle($('#tag'),{...c,titleFormat:{fontSize:c.fontSize+14,...c.titleFormat}});
+ renderDescription($('#stage'),isIntro?$('#sub'):$('#capD'),c,placementMode,true);
+ // Only the active caption owns free text boxes. The hidden caption stays plain.
+ if(isIntro)$('#capD').textContent=c.description;else $('#sub').textContent=c.description;
+}
 function reportLayout(){
  if(!placementScene)return;
  const boxes={};const c=$('#stage').getBoundingClientRect();
  for(const [kind,el] of Object.entries(layoutTargets())){if(!el)continue;const r=el.getBoundingClientRect();boxes[kind]={x:(r.left-c.left)/c.width*100,y:(r.top-c.top)/c.height*100,w:r.width/c.width*100,h:r.height/c.height*100}}
+ $('#stage').querySelectorAll('[data-text-block]').forEach(el=>{const r=el.getBoundingClientRect();boxes['text:'+el.dataset.textBlock]={x:(r.left-c.left)/c.width*100,y:(r.top-c.top)/c.height*100,w:r.width/c.width*100,h:r.height/c.height*100}});
  parent.postMessage({type:'talacard-layout',sceneId:placementScene.id,boxes},location.origin);
 }
 // The studio owns time. In #render mode delayed actions and animations advance
@@ -242,18 +253,15 @@ window.addEventListener('message',e=>{
   S[target].t=at>=0?escaped(c.title.slice(0,at))+'<em>'+escaped(c.highlight)+'</em>'+escaped(c.title.slice(at+c.highlight.length)):escaped(c.title);
   S[target].p=c.description;
   document.getAnimations().forEach(a=>a.cancel());go(target);
-  const title=(target)=>{target.textContent=c.title; if(c.highlight){
-   const text=target.firstChild,at=c.title.indexOf(c.highlight);
-   if(at>=0){const range=document.createRange();range.setStart(text,at);range.setEnd(text,at+c.highlight.length);const em=document.createElement('em');em.style.cssText='font-style:normal;color:'+c.accent;range.surroundContents(em)}
-  }};
-  title($('#capT'));$('#capD').textContent=c.description;$('#capC').textContent=c.chapter;
+  $('#capC').textContent=c.chapter;
   $('#stage').style.background=c.background;$('#bgcanvas').style.opacity=c.background==='#F3F1F4'?'1':'0';$('.cap').style.background=c.background==='#F3F1F4'?'':'linear-gradient(to left,'+c.background+' 40%,transparent)';$('#stage').style.setProperty('--studio-accent',c.accent);$('#stage').style.setProperty('--ink-d',c.textColor);$('#capT').style.fontSize=c.fontSize+'px';$('#tag').style.fontSize=(c.fontSize+14)+'px';$('#stage').style.setProperty('--gold-d',c.accent);$('#capD').style.color=c.textColor;
   $('#capN').textContent=fa(m.number||1);$('#capTxt').getAnimations().forEach(a=>a.cancel());$('#capTxt').style.opacity=1;
-  if(m.index===0||m.index===13){title($('#tag'));$('#sub').textContent=c.description}
+  renderLegacyText(c);
   if(m.preview){for(let pass=0;pass<3;pass++)document.getAnimations().forEach(a=>{try{a.finish()}catch{}})}
   placeLegacy(c.placement?.[placementMode]);reportLayout();
   parent.postMessage({type:'talacard-loaded',sceneId:c.id,request:m.request},location.origin);
- }else if(m.action==='placement'){placementScene.placement||={};placementScene.placement[placementMode]=m.placement;placeLegacy(m.placement);reportLayout();}
+ }else if(m.action==='text'){placementScene=m.scene;renderLegacyText(placementScene);reportLayout();}
+ else if(m.action==='placement'){placementScene.placement||={};placementScene.placement[placementMode]=m.placement;placeLegacy(m.placement);reportLayout();}
  else if(m.action==='advance'&&typeof window.__advance==='function')window.__advance(Math.max(0,Math.min(250,m.delta||0)));
 });
 

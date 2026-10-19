@@ -1,3 +1,6 @@
+import {richEditorMarkup,mountRichEditor} from './rich-editor.js';
+import {renderTitle,renderDescription,textBlocks,ensureTextBlocks,syncDescription} from './text.js';
+import {applyMediaEffect,controlMediaEffect,seekMediaEffect,DEFAULT_EFFECT} from './effects.js';
 import {renderNavigation} from './navigation.js';
 import {applyPlacement, readPlacement, adjustBox, placementMode} from './placement.js';
 import { clone, validateProject, chapters, blankScene, timeLabel } from './model.js';
@@ -14,7 +17,7 @@ let project, savedJSON = '', revision = '', backend = true, deckId, index = 0, t
 let playing = false, elapsed = 0, previousFrame = 0, frame, iframeReady = false, sceneSignature = '', stageAnimations = [], saving = false, toastTimer, draftTimer;
 let autoSaveTimer, autoSaveBlocked=false, localSaveError=false, syncState={status:'pending'}, syncPoll;
 const history = [], future = [];
-let legacyRequest = 0;
+let legacyRequest = 0, richCleanup=null, activeTextBlockId=null;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const deck = () => project.decks.find(d => d.id === deckId);
 const scene = () => deck().scenes[index];
@@ -82,12 +85,7 @@ function renderFlow() {
   toggle.closest('label').hidden = !video;
   toggle.checked = scene().loop;
 }
-function titleInto(el, s) {
-  el.textContent = s.title;
-  if (!s.highlight) return;
-  const at = s.title.indexOf(s.highlight); if (at < 0) return;
-  const text = el.firstChild, range = document.createRange(); range.setStart(text, at); range.setEnd(text, at + s.highlight.length); const em = document.createElement('em'); range.surroundContents(em);
-}
+function titleInto(el,s){renderTitle(el,s)}
 function sendLegacy(action, extra = {}) {
   if (iframeReady && frame?.contentWindow) frame.contentWindow.postMessage({ type:'talacard', action, ...extra }, location.origin);
 }
@@ -112,7 +110,7 @@ function renderStage(restart = false) {
     canvas.querySelectorAll('video').forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); });
     frame = null; iframeReady = false; stageAnimations.forEach(a => a.cancel()); stageAnimations = [];
     const content = document.createElement('div'); content.className = `scene-content ${s.layout}`;
-    const copy = document.createElement('div'); copy.className = 'scene-copy'; const chapter = document.createElement('div'); chapter.className = 'scene-chapter'; chapter.append(document.createElement('b'), document.createElement('span')); copy.append(chapter, document.createElement('h2'), document.createElement('p')); content.append(copy);
+    const copy = document.createElement('div'); copy.className = 'scene-copy'; const chapter = document.createElement('div'); chapter.className = 'scene-chapter'; chapter.append(document.createElement('b'), document.createElement('span')); const description=document.createElement('div');description.className='scene-description';copy.append(chapter, document.createElement('h2'), description); content.append(copy);
     if (s.layout !== 'title') {
       const visual = document.createElement('div'); visual.className = 'scene-media';
       if (s.media) {
@@ -129,9 +127,9 @@ function renderStage(restart = false) {
   }
   $('#stage').setAttribute('aria-busy','false');$('#stage').dataset.renderedScene=s.id;
   const content = canvas.querySelector('.scene-content');
-  titleInto(content.querySelector('h2'), s); content.querySelector('p').textContent = s.description; content.querySelector('.scene-chapter b').textContent = fa(index + 1); content.querySelector('.scene-chapter span').textContent = s.chapter;
+  titleInto(content.querySelector('h2'), s); renderDescription(content,content.querySelector('.scene-description'),s,placementMode(canvas)); content.querySelector('.scene-chapter b').textContent = fa(index + 1); content.querySelector('.scene-chapter span').textContent = s.chapter;
   const v = content.querySelector('video'); if (v) { v.loop = s.loop; if (playing) playVideo(v); }
-  if (restart) animateStage(); resizeStage(); applyPlacement(canvas, s); renderHandles();
+  if (restart) animateStage(); resizeStage(); applyPlacement(canvas, s); applyMediaEffect(canvas,s,{playing,restart,reduce}); renderHandles();
 }
 function animateStage() {
   stageAnimations.forEach(a => a.cancel()); stageAnimations = [];
@@ -139,7 +137,7 @@ function animateStage() {
   const distance = 20 + 35 * s.intensity;
   const first = s.transition === 'slide' ? { opacity:.4, transform:`translateX(${-distance}px)` } : s.transition === 'reveal' ? { opacity:.35, clipPath:'inset(12% 0 0 0)', filter:'blur(5px)', transform:`translateY(${distance}px)` } : { opacity:.35, transform:'translateY(15px)' };
   const a = content.animate([first, { opacity:1, transform:'none', filter:'blur(0px)', clipPath:'inset(0)' }], { duration:850 + s.intensity * 500, easing:'cubic-bezier(.22,1,.36,1)', fill:'both' }); a.pause(); a.currentTime = !playing && elapsed===0 ? a.effect.getComputedTiming().endTime : elapsed * 1000; stageAnimations.push(a);
-  const media = content.querySelector('.scene-media'); if (media && s.intensity > 0) { const drift = media.animate([{ transform:'scale(1)' }, { transform:`scale(${1 + .025 * s.intensity})` }], { duration:s.duration * 1000, fill:'both' }); drift.pause(); drift.currentTime = elapsed * 1000; stageAnimations.push(drift); }
+  const media = content.querySelector('.scene-media'); if (media && s.intensity > 0 && !s.mediaEffect) { const drift = media.animate([{ transform:'scale(1)' }, { transform:`scale(${1 + .025 * s.intensity})` }], { duration:s.duration * 1000, fill:'both' }); drift.pause(); drift.currentTime = elapsed * 1000; stageAnimations.push(drift); }
 }
 function resizeStage() {
   const stage = $('#stage'), canvas = $('#scene-canvas'); if (!stage || !project) return;
@@ -150,6 +148,7 @@ function resizeStage() {
   canvas.style.transform = `scale(${scale})`;
   canvas.style.setProperty('--handle-factor', String(1/scale));
   applyPlacement(canvas,scene());
+  const content=canvas.querySelector('.scene-content');if(content)renderDescription(content,content.querySelector('.scene-description'),scene(),placementMode(canvas));
   renderHandles();
 }
 new ResizeObserver(resizeStage).observe($('#stage'));
@@ -164,6 +163,7 @@ window.addEventListener('message', e => {
 function playVideo(v) { v.play().catch(error => { if (error.name !== 'AbortError' && v.isConnected && playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
 function setPlaying(value) {
   if(value && !playing && elapsed===0){if(frame){playing=true;loadLegacy()}else stageAnimations.forEach(a=>a.currentTime=0)}
+  controlMediaEffect($('#scene-canvas'),value);
   playing = value; previousFrame = performance.now(); $('#play').innerHTML = icon(value ? 'pause' : 'play'); $('#play').setAttribute('aria-label', value ? 'توقف' : 'پخش');
   $('#scene-canvas').querySelectorAll('video').forEach(v => value ? playVideo(v) : v.pause());
 }
@@ -176,6 +176,7 @@ function advanceLegacyTo(seconds) { let remaining = seconds * 1000; while (remai
 function seek(seconds) {
   const wasPlaying = playing; setPlaying(false); elapsed = Math.max(0, Math.min(scene().duration, seconds));
   if (frame) { loadLegacy(); advanceLegacyTo(elapsed); }
+  seekMediaEffect($('#scene-canvas'),elapsed);
   for (const a of stageAnimations) a.currentTime = elapsed * 1000;
   const v = $('#scene-canvas video'); if (v) { const t = Number.isFinite(v.duration) && v.duration > 0 ? (v.loop ? elapsed % v.duration : Math.min(elapsed, v.duration)) : elapsed; try { v.currentTime = t; } catch {} }
   updateProgress(); setPlaying(wasPlaying);
@@ -199,10 +200,11 @@ const field = (label, key, value, type = 'text', extra = '', hint = '') => `<lab
 const select = (label, key, options, current) => `<label class="field"><span>${label}</span><select data-key="${key}">${options.map(([value, text]) => `<option value="${value}" ${value === current ? 'selected' : ''}>${text}</option>`).join('')}</select></label>`;
 function renderInspector() {
   if (!project) return;
+  richCleanup?.();richCleanup=null;
   const s = scene(), form = $('#scene-form'); $('#editing-number').textContent = `صفحهٔ ${fa(index + 1)}`;
   document.querySelectorAll('.editor-tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
   if (tab === 'content') {
-    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + field('بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در منوی سمت راست زیر یک بخش قرار می‌گیرند.') + `<label class="field"><span>عنوان</span><textarea class="title-field" data-key="title" maxlength="1000">${escapeText(s.title)}</textarea></label>` + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + `<label class="field"><span>توضیحات</span><textarea data-key="description" rows="6" maxlength="8000">${escapeText(s.description)}</textarea></label>` + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.find(d => d.id === 'app')?.scenes.filter(x => x.layout === 'legacy').map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
+    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + field('بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در منوی سمت راست زیر یک بخش قرار می‌گیرند.') + richEditorMarkup(s) + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.find(d => d.id === 'app')?.scenes.filter(x => x.layout === 'legacy').map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
   } else if (tab === 'media') {
     const selected = project.library.find(m => m.src === s.media);
     form.innerHTML = (s.layout === 'legacy' ? '<p class="hint">انتخاب عکس یا ویدیو، این صفحه را به قالب «متن و رسانه کنار هم» تغییر می‌دهد. برای برگشت، قالب «فلو اصلی اپ» را انتخاب کن.</p><hr class="editor-divider">' : '') + '<div class="media-preview" id="current-media"></div><button type="button" class="button upload-button" id="upload-media">' + icon('upload') + 'انتخاب عکس یا ویدیو از دستگاه</button><p class="hint">PNG، JPG، WebP، GIF، MP4 یا WebM · حداکثر ۹۵ مگابایت</p><hr class="editor-divider">' + select('نمایش رسانه', 'fit', [['contain','نمایش کامل · بدون برش'],['cover','پر کردن قاب · با برش']], s.fit) + field('جای رسانه در قاب', 'position', s.position, 'range', 'min="0" max="100" step="1"') + `<label class="field checkbox"><input type="checkbox" data-key="loop" ${s.loop ? 'checked' : ''}><span>لوپ ویدیو تا رفتن به صفحهٔ بعد</span></label>` + '<button type="button" id="choose-poster" class="text-button">انتخاب تصویر کاور ویدیو</button><button type="button" id="remove-media" class="text-button danger">حذف رسانه از این صفحه</button><hr class="editor-divider"><h3 class="field-title">کتابخانهٔ رسانه</h3><div class="media-choices" id="media-library"></div>';
@@ -215,8 +217,10 @@ function renderInspector() {
   } else {
     form.innerHTML = field('مدت انیمیشن صفحه (ثانیه)', 'duration', s.duration, 'number', 'min="1" max="180" step="0.1"') + select('ورود به صفحه', 'transition', [['fade','محو آرام'],['reveal','آشکار شدن سینمایی'],['slide','حرکت افقی'],['none','بدون افکت']], s.transition) + field('شدت حرکت', 'intensity', s.intensity, 'range', 'min="0" max="1" step="0.05"', 'حرکت کم برای خواندن متن و نمایش محصول مناسب‌تر است.') + '<hr class="editor-divider">' + field('اندازهٔ عنوان', 'fontSize', s.fontSize, 'range', 'min="20" max="64" step="1"') + '<div class="field-row">' + field('رنگ متن', 'textColor', s.textColor, 'color') + field('رنگ تأکید', 'accent', s.accent, 'color') + '</div>' + field('رنگ زمینه', 'background', s.background, 'color') + (s.layout === 'legacy' ? '<p class="hint">انیمیشن داخلی فلو اپ همان نسخهٔ اصلی است؛ تنظیم افکت ورود برای قالب‌های رسانه‌ای اعمال می‌شود.</p>' : '') + '<p class="hint">در حالت کاهش حرکت سیستم، افکت‌های تزئینی حذف می‌شوند. ویدیوها خودکار و بی‌صدا شروع می‌شوند. تغییر صفحه فقط با انتخاب شماست.</p>';
   }
+  if(tab==='content')richCleanup=mountRichEditor(form,s,{checkpoint,onEdit:()=>{refreshText();renderList();renderFlow();changed()},onSelectBlock:id=>{activeTextBlockId=id;renderHandles()},onStructure:id=>{activeTextBlockId=id;renderInspector();requestAnimationFrame(()=>$('#scene-form [data-word-id="'+id+'"]')?.focus())}});
+  if(tab==='media')mountMediaEffects(form,s);
   form.insertAdjacentHTML('beforeend', '<hr class="editor-divider"><p class="hint">در پیش‌نمایش، دستگیرهٔ متن یا رسانه را بکش. برای اندازه، گوشهٔ قاب را بکش. کلیدهای جهت روی دستگیره جابه‌جا می‌کنند؛ Shift + جهت اندازه را عوض می‌کند. چیدمان موبایل و دسکتاپ مستقل است.</p><button type="button" id="reset-placement" class="text-button">بازنشانی چیدمان این صفحه</button>');
-  $('#reset-placement').onclick=()=>{checkpoint();delete scene().placement;legacyBoxes={};renderStage();changed();};
+  $('#reset-placement').onclick=()=>{checkpoint();delete scene().placement;for(const b of scene().textBlocks||[])delete b.placement;legacyBoxes={};renderStage();changed();};
   form.querySelectorAll('[data-key]').forEach(input => {
     let hasCheckpoint = false;
     input.addEventListener('focus', () => { hasCheckpoint = false; });
@@ -336,15 +340,19 @@ $('#loop-video').onchange=()=>{checkpoint(); scene().loop=$('#loop-video').check
 let legacyBoxes = {}, activeGesture;
 function currentBox(kind) {
   const canvas=canvasElement();
+  if(kind.startsWith('text:')){const id=kind.slice(5),block=textBlocks(scene()).find(b=>b.id===id),el=canvas.querySelector('[data-text-block="'+id+'"]');return block?.placement?.[placementMode(canvas)] || (frame?legacyBoxes[kind]:el?readPlacement(canvas,el):null)}
   const el=canvas.querySelector('.scene-'+kind);
   return scene().placement?.[placementMode(canvas)]?.[kind] || (frame ? legacyBoxes[kind] : el ? readPlacement(canvas,el) : null);
 }
 function writeBox(kind,box) {
-  const canvas=canvasElement(), mode=placementMode(canvas);
-  scene().placement ||= {}; scene().placement[mode] ||= {};
-  scene().placement[mode][kind]=box;
-  if(frame) sendLegacy('placement',{placement:scene().placement[mode]});
-  else applyPlacement(canvas,scene());
+  const canvas=canvasElement(),mode=placementMode(canvas);
+  if(kind.startsWith('text:')){
+   const block=ensureTextBlocks(scene()).find(b=>b.id===kind.slice(5));if(!block)return;block.placement||={};block.placement[mode]=box;syncDescription(scene());
+   if(frame)sendLegacy('text',{scene:scene()});else {const content=canvas.querySelector('.scene-content');renderDescription(content,content.querySelector('.scene-description'),scene(),mode)}
+  }else{
+   scene().placement||={};scene().placement[mode]||={};scene().placement[mode][kind]=box;
+   if(frame)sendLegacy('placement',{placement:scene().placement[mode]});else applyPlacement(canvas,scene());
+  }
   positionHandle(kind,box);
 }
 function positionHandle(kind,box) {
@@ -355,10 +363,10 @@ function renderHandles() {
   const canvas=canvasElement(); if(!project || activeGesture)return;
   canvas.querySelectorAll('.placement-handle').forEach(el=>el.remove());
   if(!document.body.classList.contains('editing'))return;
-  for(const kind of ['copy','media']) {
+  for(const kind of ['copy','media',...(activeTextBlockId?['text:'+activeTextBlockId]:[])]) {
     const raw=currentBox(kind); if(!raw)continue; const box=adjustBox(raw,0,0);
     const handle=document.createElement('div');handle.className='placement-handle';handle.dataset.kind=kind;
-    const label=kind==='copy'?'متن':'رسانه';
+    const label=kind==='copy'?'عنوان و متن':kind==='media'?'رسانه':'باکس متن';
     const move=document.createElement('button');move.type='button';move.className='move-handle';move.textContent='جابه‌جایی '+label;move.setAttribute('aria-label','جابه‌جایی '+label);move.dataset.action='move';
     const size=document.createElement('button');size.type='button';size.className='resize-handle';size.setAttribute('aria-label','تغییر اندازهٔ '+label);size.dataset.action='resize';
     handle.append(move,size);canvas.append(handle);positionHandle(kind,box);
@@ -389,3 +397,22 @@ canvasElement().addEventListener('keydown',e=>{
   checkpoint();const dx=e.key==='ArrowLeft'?-1:e.key==='ArrowRight'?1:0,dy=e.key==='ArrowUp'?-1:e.key==='ArrowDown'?1:0;
   writeBox(kind,adjustBox(box,dx,dy,e.shiftKey||button.dataset.action==='resize'));changed();
 });
+
+function refreshText(){
+ if(frame){sendLegacy('text',{scene:scene()});return}
+ const canvas=canvasElement(),content=canvas.querySelector('.scene-content');if(!content)return;
+ renderTitle(content.querySelector('h2'),scene());renderDescription(content,content.querySelector('.scene-description'),scene(),placementMode(canvas));renderHandles();
+}
+function mountMediaEffects(form,s){
+ const fx={...DEFAULT_EFFECT,...s.mediaEffect};const area=document.createElement('section');area.className='media-effects';
+ area.innerHTML='<h3 class="field-title">افکت رسانه</h3>'+select('نوع افکت','effect-type',[['none','بدون افکت'],['zoom-in','زوم به داخل'],['zoom-out','زوم به بیرون'],['zoom-in-out','زوم رفت و برگشت'],['pan-left','حرکت به چپ'],['pan-right','حرکت به راست'],['pan-up','حرکت به بالا'],['pan-down','حرکت به پایین'],['fade-in','آشکار شدن آرام'],['blur-in','از محو به واضح']],fx.type)+field('مدت افکت (ثانیه)','effect-duration',fx.duration,'number','min="0.2" max="120" step="0.1"')+field('شروع پس از (ثانیه)','effect-delay',fx.delay,'number','min="0" max="60" step="0.1"')+field('شدت افکت (درصد)','effect-amount',fx.amount,'number','min="1" max="60" step="1"')+select('شتاب حرکت','effect-easing',[['ease-out','پایان آرام'],['ease-in-out','شروع و پایان آرام'],['linear','سرعت ثابت']],fx.easing)+`<label class="field checkbox"><input type="checkbox" data-effect="repeat" ${fx.repeat?'checked':''}><span>تکرار افکت</span></label><button type="button" class="button" id="replay-effect">بازپخش افکت</button><p class="hint">افکت روی عکس یا ویدیو اعمال می‌شود. زمان و تکرار افکت از لوپ ویدیو مستقل است.</p>`;
+ const divider=form.querySelector('.editor-divider');if(divider)divider.before(area);else form.append(area);
+ area.querySelectorAll('[data-key]').forEach(el=>{el.dataset.effect=el.dataset.key.replace('effect-','');delete el.dataset.key});
+ area.querySelectorAll('[data-effect]').forEach(el=>el.addEventListener('input',()=>{
+  const key=el.dataset.effect;const value=el.type==='checkbox'?el.checked:el.type==='number'?Number(el.value):el.value;
+  if(el.type==='number'&&(!el.value||!Number.isFinite(value)||value<Number(el.min)||value>Number(el.max)))return;
+  checkpoint();s.mediaEffect={...DEFAULT_EFFECT,...s.mediaEffect,[key]:value};applyMediaEffect(canvasElement(),s,{playing:true,restart:true,reduce});setPlaying(true);changed();
+ }));
+ area.querySelector('#replay-effect').onclick=()=>{applyMediaEffect(canvasElement(),s,{playing:true,restart:true,reduce});setPlaying(true)};
+}
+canvasElement().addEventListener('click',e=>{const block=e.target.closest('[data-text-block]');if(block){activeTextBlockId=block.dataset.textBlock;renderHandles()}});

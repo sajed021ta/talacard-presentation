@@ -27,7 +27,9 @@ test('public viewer stays read-only; publication requires secret and validates m
  const e=env(),worker=createWorker({'/index.html':{type:'text/html',body:Buffer.from('<h1>viewer</h1>').toString('base64')}});
  assert.equal((await worker.fetch(new Request(url+'/'),e)).status,200);
  assert.equal((await worker.fetch(new Request(url+'/api/sync/status'),e)).status,401);
- const p=project();let response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers,body:JSON.stringify(p)}),e);
+ const p=project(),rich=p.decks[1].scenes[0];
+ rich.textBlocks=[{id:'body-1',runs:[{text:'متن قالب‌دار',bold:true}],format:{align:'center'}}];rich.description='متن قالب‌دار';rich.mediaEffect={type:'zoom-out',duration:20,delay:0,amount:20,repeat:false,easing:'ease-out'};
+ let response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers,body:JSON.stringify(p)}),e);
  assert.equal(response.status,200);const first=await response.json();
  const get=await worker.fetch(new Request(url+'/default-content.json'),e);assert.deepEqual(await get.json(),p);
  assert.equal((await worker.fetch(new Request(url+'/default-content.json',{headers:{'If-None-Match':first.etag}}),e)).status,304);

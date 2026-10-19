@@ -1,3 +1,5 @@
+import {renderTitle,renderDescription,textBlocks,ensureTextBlocks,syncDescription} from './text.js';
+import {applyMediaEffect,controlMediaEffect,seekMediaEffect,DEFAULT_EFFECT} from './effects.js';
 import {renderNavigation} from './navigation.js';
 import {applyPlacement, readPlacement, adjustBox, placementMode} from './placement.js';
 import {validateProject,chapters,timeLabel} from './model.js';
@@ -23,12 +25,7 @@ function renderFlow() {
   toggle.closest('label').hidden = !video;
   toggle.checked = scene().loop;
 }
-function titleInto(el, s) {
-  el.textContent = s.title;
-  if (!s.highlight) return;
-  const at = s.title.indexOf(s.highlight); if (at < 0) return;
-  const text = el.firstChild, range = document.createRange(); range.setStart(text, at); range.setEnd(text, at + s.highlight.length); const em = document.createElement('em'); range.surroundContents(em);
-}
+function titleInto(el,s){renderTitle(el,s)}
 function sendLegacy(action, extra = {}) {
   if (iframeReady && frame?.contentWindow) frame.contentWindow.postMessage({ type:'talacard', action, ...extra }, location.origin);
 }
@@ -53,7 +50,7 @@ function renderStage(restart = false) {
     canvas.querySelectorAll('video').forEach(v => { v.pause(); v.removeAttribute('src'); v.load(); });
     frame = null; iframeReady = false; stageAnimations.forEach(a => a.cancel()); stageAnimations = [];
     const content = document.createElement('div'); content.className = `scene-content ${s.layout}`;
-    const copy = document.createElement('div'); copy.className = 'scene-copy'; const chapter = document.createElement('div'); chapter.className = 'scene-chapter'; chapter.append(document.createElement('b'), document.createElement('span')); copy.append(chapter, document.createElement('h2'), document.createElement('p')); content.append(copy);
+    const copy = document.createElement('div'); copy.className = 'scene-copy'; const chapter = document.createElement('div'); chapter.className = 'scene-chapter'; chapter.append(document.createElement('b'), document.createElement('span')); const description=document.createElement('div');description.className='scene-description';copy.append(chapter, document.createElement('h2'), description); content.append(copy);
     if (s.layout !== 'title') {
       const visual = document.createElement('div'); visual.className = 'scene-media';
       if (s.media) {
@@ -70,9 +67,9 @@ function renderStage(restart = false) {
   }
   $('#stage').setAttribute('aria-busy','false');$('#stage').dataset.renderedScene=s.id;
   const content = canvas.querySelector('.scene-content');
-  titleInto(content.querySelector('h2'), s); content.querySelector('p').textContent = s.description; content.querySelector('.scene-chapter b').textContent = fa(index + 1); content.querySelector('.scene-chapter span').textContent = s.chapter;
+  titleInto(content.querySelector('h2'), s); renderDescription(content,content.querySelector('.scene-description'),s,placementMode(canvas)); content.querySelector('.scene-chapter b').textContent = fa(index + 1); content.querySelector('.scene-chapter span').textContent = s.chapter;
   const v = content.querySelector('video'); if (v) { v.loop = s.loop; if (playing) playVideo(v); }
-  if (restart) animateStage(); resizeStage(); applyPlacement(canvas, s);
+  if (restart) animateStage(); resizeStage(); applyPlacement(canvas, s); applyMediaEffect(canvas,s,{playing,restart,reduce});
 }
 function animateStage() {
   stageAnimations.forEach(a => a.cancel()); stageAnimations = [];
@@ -80,7 +77,7 @@ function animateStage() {
   const distance = 20 + 35 * s.intensity;
   const first = s.transition === 'slide' ? { opacity:.4, transform:`translateX(${-distance}px)` } : s.transition === 'reveal' ? { opacity:.35, clipPath:'inset(12% 0 0 0)', filter:'blur(5px)', transform:`translateY(${distance}px)` } : { opacity:.35, transform:'translateY(15px)' };
   const a = content.animate([first, { opacity:1, transform:'none', filter:'blur(0px)', clipPath:'inset(0)' }], { duration:850 + s.intensity * 500, easing:'cubic-bezier(.22,1,.36,1)', fill:'both' }); a.pause(); a.currentTime = !playing && elapsed===0 ? a.effect.getComputedTiming().endTime : elapsed * 1000; stageAnimations.push(a);
-  const media = content.querySelector('.scene-media'); if (media && s.intensity > 0) { const drift = media.animate([{ transform:'scale(1)' }, { transform:`scale(${1 + .025 * s.intensity})` }], { duration:s.duration * 1000, fill:'both' }); drift.pause(); drift.currentTime = elapsed * 1000; stageAnimations.push(drift); }
+  const media = content.querySelector('.scene-media'); if (media && s.intensity > 0 && !s.mediaEffect) { const drift = media.animate([{ transform:'scale(1)' }, { transform:`scale(${1 + .025 * s.intensity})` }], { duration:s.duration * 1000, fill:'both' }); drift.pause(); drift.currentTime = elapsed * 1000; stageAnimations.push(drift); }
 }
 function resizeStage() {
   const stage = $('#stage'), canvas = $('#scene-canvas'); if (!stage || !project) return;
@@ -94,6 +91,7 @@ function resizeStage() {
   canvas.style.transform = `scale(${scale})`;
   canvas.style.setProperty('--handle-factor', String(1/scale));
   applyPlacement(canvas,scene());
+  const content=canvas.querySelector('.scene-content');if(content)renderDescription(content,content.querySelector('.scene-description'),scene(),placementMode(canvas));
 }
 new ResizeObserver(resizeStage).observe($('#stage'));
 window.addEventListener('resize', resizeStage);
@@ -106,6 +104,7 @@ window.addEventListener('message', e => {
 function playVideo(v) { v.play().catch(error => { if (error.name !== 'AbortError' && v.isConnected && playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
 function setPlaying(value) {
   if(value && !playing && elapsed===0){if(frame){playing=true;loadLegacy()}else stageAnimations.forEach(a=>a.currentTime=0)}
+  controlMediaEffect($('#scene-canvas'),value);
   playing = value; previousFrame = performance.now(); $('#play').innerHTML = icon(value ? 'pause' : 'play'); $('#play').setAttribute('aria-label', value ? 'توقف' : 'پخش');
   $('#scene-canvas').querySelectorAll('video').forEach(v => value ? playVideo(v) : v.pause());
 }
@@ -118,6 +117,7 @@ function advanceLegacyTo(seconds) { let remaining = seconds * 1000; while (remai
 function seek(seconds) {
   const wasPlaying = playing; setPlaying(false); elapsed = Math.max(0, Math.min(scene().duration, seconds));
   if (frame) { loadLegacy(); advanceLegacyTo(elapsed); }
+  seekMediaEffect($('#scene-canvas'),elapsed);
   for (const a of stageAnimations) a.currentTime = elapsed * 1000;
   const v = $('#scene-canvas video'); if (v) { const t = Number.isFinite(v.duration) && v.duration > 0 ? (v.loop ? elapsed % v.duration : Math.min(elapsed, v.duration)) : elapsed; try { v.currentTime = t; } catch {} }
   updateProgress(); setPlaying(wasPlaying);
