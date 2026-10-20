@@ -81,7 +81,7 @@ function renderList() {
   $('#move-up').disabled = index === 0; $('#move-down').disabled = index === deck().scenes.length - 1; $('#delete').disabled = deck().scenes.length === 1;
 }
 function renderFlow() {
-  renderNavigation(deck(), index, choose);
+  renderNavigation(deck(), index, choose, {addPage:addSubpage});
   const toggle = $('#loop-video'), video = /\.(mp4|webm)$/i.test(scene().media);
   toggle.closest('label').hidden = !video;
   toggle.checked = scene().loop;
@@ -250,6 +250,13 @@ $('#toggle-edit').onclick = () => { editMode(!document.body.classList.contains('
 $('#play').onclick = () => { setPlaying(!playing); };
 $('#prev').onclick = () => choose(index - 1); $('#next').onclick = () => choose(index + 1); $('#restart').onclick = () => {seek(0);setPlaying(true)};
 $('#add-scene').onclick = () => { if (deck().scenes.length >= 200) return toast('هر پروژه حداکثر ۲۰۰ صفحه دارد.', true); checkpoint(); deck().scenes.splice(index + 1, 0, blankScene()); choose(index + 1, false); tab = 'content'; renderInspector(); changed(); };
+function addSubpage(chapter){
+ if(deck().scenes.length>=200)return toast('هر پروژه حداکثر ۲۰۰ صفحه دارد.',true);
+ checkpoint();const siblings=deck().scenes.map((s,i)=>({s,i})).filter(({s})=>s.chapter===chapter),after=siblings.at(-1).i+1;
+ const current=scene(),page={...blankScene(),chapter,label:`زیرصفحهٔ ${fa(siblings.length+1)}`,background:current.background,textColor:current.textColor,accent:current.accent,presentationStyle:current.presentationStyle||'plain'};
+ deck().scenes.splice(after,0,page);tab='content';choose(after);changed();
+ requestAnimationFrame(()=>{$('#scene-form [data-key="label"]')?.focus()});
+}
 $('#duplicate').onclick = () => { if (deck().scenes.length >= 200) return toast('هر پروژه حداکثر ۲۰۰ صفحه دارد.', true); checkpoint(); const copy = clone(scene()); copy.id = `page-${crypto.randomUUID()}`; copy.label = `${copy.label} · کپی`.slice(0,200); deck().scenes.splice(index + 1, 0, copy); choose(index + 1, false); changed(); };
 $('#delete').onclick = () => { if (deck().scenes.length <= 1) return; checkpoint(); deck().scenes.splice(index, 1); choose(Math.min(index, deck().scenes.length - 1), false); changed(); toast('صفحه حذف شد؛ با «برگرداندن تغییر» قابل بازیابی است.'); };
 for (const [id, delta] of [['move-up',-1],['move-down',1]]) $('#' + id).onclick = () => { const target = index + delta; if (target < 0 || target >= deck().scenes.length) return; checkpoint(); const [s] = deck().scenes.splice(index, 1); deck().scenes.splice(target, 0, s); choose(target, false); changed(); };

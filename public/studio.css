@@ -39,6 +39,7 @@
 .page-tabs{display:flex;gap:5px;overflow-x:auto;min-width:0;border-bottom:1px solid var(--line);padding:0 0 7px;margin-bottom:10px}
 .page-tabs button{white-space:nowrap;flex-shrink:0;padding:10px 14px;background:transparent;color:var(--muted);font-size:12px;border-radius:8px;min-height:40px}
 .page-tabs button:hover{background:#eaeaec}.page-tabs button[aria-current=page]{background:var(--ink);color:white;font-weight:600}
+.page-tabs .add-subpage{position:sticky;inset-inline-end:0;z-index:2;border:1px dashed var(--gold-dark);color:var(--gold-dark);background:var(--paper)}.page-tabs .add-subpage:hover{background:var(--selected)}
 .preview-column{width:100%}.preview-heading{gap:12px}.preview-heading>span{overflow-wrap:anywhere}
 .player{margin-top:12px;border-radius:12px}.page-location{margin-inline:auto;font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}
 .loop-control{display:flex;gap:6px;align-items:center;font-size:12px;white-space:nowrap;cursor:pointer;min-height:40px}.loop-control input{accent-color:var(--gold-dark);width:16px;height:16px}
