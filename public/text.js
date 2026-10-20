@@ -35,17 +35,30 @@ export function renderRuns(el,runs,highlight='',accent=''){
   }offset+=r.text.length;
  }
 }
-export function renderTitle(el,scene){formatElement(el,scene.titleFormat);renderRuns(el,scene.titleRuns||[{text:scene.title}],scene.highlight,scene.accent)}
+export function renderTitle(el,scene){formatElement(el,scene.titleFormat);renderRichContent(el,scene.titleRuns||[{text:scene.title}],scene.titleFormat,scene.highlight,scene.accent)}
 export function renderDescription(root,container,scene,mode,legacy=false){
  root.querySelectorAll(':scope > .placed-text').forEach(el=>el.remove());container.replaceChildren();
  const computed=getComputedStyle(container),blocks=textBlocks(scene),explicit=Array.isArray(scene.textBlocks);
  for(const block of blocks){
   const el=container.ownerDocument.createElement(explicit?'div':'span');el.className='scene-text-box rich-text-block'+(explicit?'':' original-flow');el.dataset.textBlock=block.id;
-  renderRuns(el,block.runs);formatElement(el,block.format);
+  renderRichContent(el,block.runs,block.format);formatElement(el,block.format);
   const box=block.placement?.[mode];
   if(box){
    const placeholder=el.cloneNode(true);placeholder.removeAttribute('data-text-block');placeholder.classList.add('text-placeholder');container.append(placeholder);
    el.classList.add('placed-text');Object.assign(el.style,{position:legacy?'fixed':'absolute',left:box.x+'%',top:box.y+'%',width:box.w+'%',height:box.h+'%',fontSize:block.format?.fontSize?block.format.fontSize+'px':computed.fontSize,lineHeight:block.format?.lineHeight||computed.lineHeight,fontFamily:block.format?.fontFamily||computed.fontFamily,color:block.format?.color||computed.color});root.append(el);
   }else container.append(el);
  }
+}
+
+export function bulletLines(runs){const text=runsText(runs);let offset=0;return text.split('\n').map(line=>{const value=sliceRuns(runs,offset,offset+line.length);offset+=line.length+1;return value})}
+export function renderRichContent(el,runs,format={},highlight='',accent=''){
+ if(format?.list!=='bullet'){renderRuns(el,runs,highlight,accent);return}
+ const list=el.ownerDocument.createElement('ul');list.className='rich-bullet-list';const lines=bulletLines(runs);let offset=0;const highlightAt=highlight?runsText(runs).indexOf(highlight):-1;
+ for(const [i,line] of lines.entries()){
+  const item=el.ownerDocument.createElement('li');item.className='rich-bullet-item';
+  const lineText=runsText(line),lineHighlight=highlightAt>=offset&&highlightAt+highlight.length<=offset+lineText.length?highlight:'';
+  renderRuns(item,line,lineHighlight,accent);if(i<lines.length-1){const separator=el.ownerDocument.createElement('span');separator.className='list-line-break';separator.textContent='\n';item.append(separator)}
+  list.append(item);offset+=lineText.length+1;
+ }
+ el.replaceChildren(list);
 }

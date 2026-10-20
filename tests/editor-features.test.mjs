@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {validateProject,clone,validateRichScene,sceneMediaPaths,renameChapter} from '../public/model.js';
-import {splitSentences,textBlocks,ensureTextBlocks,syncDescription,sliceRuns,runsText} from '../public/text.js';
+import {splitSentences,textBlocks,ensureTextBlocks,syncDescription,sliceRuns,runsText,bulletLines} from '../public/text.js';
 import {effectFrames,applyMediaEffect,controlMediaEffect} from '../public/effects.js';
 const baseline=JSON.parse(fs.readFileSync(new URL('../content.json',import.meta.url)));
 
@@ -49,4 +49,9 @@ test('multiple scene media retain individual playback, effects and device placem
 });
 test('renaming a chapter updates all siblings while preventing accidental merge or empty names',()=>{
  const d={scenes:[{chapter:'همکاری'},{chapter:'همکاری'},{chapter:'معرفی'}]};renameChapter(d,'همکاری','همکاران');assert.deepEqual(d.scenes.map(s=>s.chapter),['همکاران','همکاران','معرفی']);assert.throws(()=>renameChapter(d,'همکاران','معرفی'));assert.throws(()=>renameChapter(d,'همکاران',' '));
+});
+
+test('bullet lists preserve individual inline styles, blank lines and safe portable block formatting',()=>{
+ const runs=[{text:'اول',color:'#b43838'},{text:'\nدوم\n\nسوم',bold:true}];const lines=bulletLines(runs);assert.equal(lines.length,4);assert.deepEqual(lines[0],[{text:'اول',color:'#b43838'}]);assert.deepEqual(lines[1],[{text:'دوم',bold:true}]);assert.deepEqual(lines[2],[]);assert.equal(lines.map(runsText).join('\n'),runsText(runs));
+ const p=clone(baseline),s=p.decks[1].scenes[0];s.textBlocks=[{id:'bullets',runs,format:{list:'bullet',align:'right'}}];syncDescription(s);validateProject(JSON.parse(JSON.stringify(p)));s.textBlocks[0].format.list='html';assert.throws(()=>validateProject(p));
 });

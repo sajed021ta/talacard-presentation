@@ -64,6 +64,7 @@ export function validateTextFormat(value={}){
  if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('قالب متن معتبر نیست.');
  for(const [k,v] of Object.entries(value)){
   if(['bold','italic','underline'].includes(k)&&typeof v==='boolean')continue;
+  if(k==='list'&&['none','bullet'].includes(v))continue;
   if(k==='color'&&typeof v==='string'&&/^#[0-9a-fA-F]{6}$/.test(v))continue;
   if(k==='fontFamily'&&['YekanX','Tahoma','Arial'].includes(v))continue;
   if(k==='fontSize'&&Number.isFinite(v)&&v>=12&&v<=96)continue;
