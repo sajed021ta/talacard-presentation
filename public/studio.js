@@ -1,3 +1,4 @@
+import {mountHomePicker} from './home.js';
 import {reconcileProjects,applyProjectInPlace} from './reconcile.js';
 import {renderMediaItems,mediaItemBox,controlMediaItems,seekMediaItems} from './multimedia.js';
 import {paintBackdrop} from './backdrop.js';
@@ -21,6 +22,7 @@ let playing = false, elapsed = 0, previousFrame = 0, frame, iframeReady = false,
 let autoSaveTimer, autoSaveBlocked=false, localSaveError=false, syncState={status:'pending'}, syncPoll;
 const history = [], future = [];
 let legacyRequest = 0, richCleanup=null, activeTextBlockId=null,activeMediaItemId=null,mediaInsertMode='replace';
+let homePicker;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const deck = () => project.decks.find(d => d.id === deckId);
 const scene = () => deck().scenes[index];
@@ -59,7 +61,7 @@ async function readSyncStatus(){
    if(response.ok && latest.revision!==revision && !dirty() && !saving){
     const previousId=scene().id;project=validateProject(latest.project);revision=latest.revision;savedJSON=JSON.stringify(project);
     if(!project.decks.some(d=>d.id===deckId))deckId=project.activeDeck;
-    index=Math.max(0,deck().scenes.findIndex(s=>s.id===previousId));renderDecks();choose(index);draft();
+    index=Math.max(0,deck().scenes.findIndex(s=>s.id===previousId));renderDecks();choose(index);if(homePicker?.visible)setPlaying(false);draft();
    }
   }
   updateStatus();
@@ -250,7 +252,7 @@ $('#scene-form').addEventListener('click', e => {
 });
 $('.editor-tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b) { tab = b.dataset.tab; renderInspector(); } });
 
-$('#deck-select').onchange = () => { checkpoint(); deckId = $('#deck-select').value; project.activeDeck = deckId; index = 0; sceneSignature = ''; renderDecks(); choose(0, false); changed(); };
+$('#deck-select').onchange = () => { checkpoint(); deckId = $('#deck-select').value;const url=new URL(location.href);url.searchParams.set('deck',deckId);window.history.replaceState(null,'',url); project.activeDeck = deckId; index = 0; sceneSignature = ''; renderDecks(); choose(0, false); changed(); };
 $('#toggle-edit').onclick = () => { editMode(!document.body.classList.contains('editing')); };
 $('#play').onclick = () => { setPlaying(!playing); };
 $('#prev').onclick = () => choose(index - 1); $('#next').onclick = () => choose(index + 1); $('#restart').onclick = () => {seek(0);setPlaying(true)};
@@ -334,7 +336,7 @@ async function fullscreen() { closeMenu(); try { await $('#stage').requestFullsc
 $('#fullscreen').onclick = fullscreen; $('#present').onclick = fullscreen;
 document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) document.body.classList.remove('presenting'); resizeStage(); });
 document.addEventListener('keydown', e => {
-  if (!project) return;
+  if (!project||homePicker?.visible) return;
   const editing = e.target.closest('input,textarea,select,[contenteditable=true]');
   if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
   if ($('#help').open) return;
@@ -367,7 +369,7 @@ async function init() {
       }
     }catch{}
 
-    deckId = project.activeDeck; renderDecks(); editMode(location.hash === '#edit'); choose(0, false); updateStatus();
+    const requested=new URL(location.href).searchParams.get('deck');deckId=project.decks.some(d=>d.id===requested)?requested:project.activeDeck;renderDecks();editMode(location.hash === '#edit');choose(0,false);updateStatus();setupHome();
     readSyncStatus(); syncPoll=setInterval(readSyncStatus,2500);scheduleAutoSave();
     previousFrame = performance.now(); requestAnimationFrame(tick);
   } catch (e) { $('#save-status').textContent = 'خطا در بارگذاری'; $('#scene-canvas').textContent = 'پروژه بارگذاری نشد. فایل content.json و اجرای سرور را بررسی کنید.'; toast(e.message, true); }
@@ -481,4 +483,16 @@ function mountExtraInspector(form,s){
   area.querySelector('#delete-extra').onclick=()=>{checkpoint();s.mediaItems=s.mediaItems.filter(m=>m.id!==item.id);activeMediaItemId=null;renderStage();renderInspector();changed()};
  }
  mountMediaEffects(form,item||s);
+}
+
+function setupHome(){
+ homePicker=mountHomePicker(project,id=>{
+  const url=new URL(location.href);url.searchParams.set('deck',id);if(url.hash==='#home')url.hash='';window.history.pushState(null,'',url);enterDeck(id);
+ });
+ function enterDeck(id){homePicker.hide();editMode(location.hash==='#edit');deckId=id;index=0;renderDecks();choose(0);resizeStage();requestAnimationFrame(()=>{$('#stage').tabIndex=-1;$('#stage').focus({preventScroll:true})})}
+ function showHome(){setPlaying(false);homePicker.show();document.title='طلاکارت · انتخاب بخش ارائه'}
+ $('#home-button').onclick=()=>{const url=new URL(location.href);url.searchParams.delete('deck');url.hash='home';window.history.pushState(null,'',url);showHome()};
+ $('.brand').onclick=event=>{event.preventDefault();$('#home-button').click()};
+ addEventListener('popstate',()=>{const requested=new URL(location.href).searchParams.get('deck');if(project.decks.some(d=>d.id===requested))enterDeck(requested);else showHome()});
+ const requested=new URL(location.href).searchParams.get('deck');if(!project.decks.some(d=>d.id===requested)&&location.hash!=='#edit')showHome();
 }

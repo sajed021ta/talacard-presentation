@@ -1,0 +1,18 @@
+{
+  "homecrop": {
+    "src": "/reference/assets/8fd8ff7f04043f06.webp",
+    "sha256": "8fd8ff7f04043f068e2c49b5ef8690ddae373e07def309374df13d863ef94ecb"
+  },
+  "atm": {
+    "src": "/reference/assets/932b58fc924a03a1.webp",
+    "sha256": "932b58fc924a03a193c343c944000a3b5146a59cc2fa4e0a95f7cda46caa1f3d"
+  },
+  "card": {
+    "src": "/reference/assets/a2cc2bf20f679f82.webp",
+    "sha256": "a2cc2bf20f679f82eebeba0336d97b1ad1ee77200b9135b8b62ebc1235c07c60"
+  },
+  "logo3d": {
+    "src": "/reference/assets/03fa24a263eed294.webp",
+    "sha256": "03fa24a263eed294aa0c37f2f6f2258411814aa155fdcbd56338dbc73f5cebce"
+  }
+}

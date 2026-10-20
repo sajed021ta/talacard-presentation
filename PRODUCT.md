@@ -52,3 +52,8 @@ The original archive under `original/`, supplied media under `public/media`, and
 - Unify current backgrounds to the reference white/gold geometry once, including historical renderers; provide an explicit apply-to-all action for subsequent background edits.
 - Refresh against the 2026-10-20 source catalog with source-aware index remapping, preserving owner copy/rich runs, custom pages and media. Keep the removed confirmation page using its 2026-10-19 renderer snapshot.
 - Include every extra media/poster path in local disk checks, cloud upload ordering and server publication validation.
+
+## First-page navigation — 2026-10-20
+- Root presentation URLs show the supplied four-card chooser with exact reference images and white/gold animated ground: طلاپرداز → kiosk, اپ طلاکارت → app, کارت طلا → deliv (physical delivery from balance), طلاکارت → proposal. Preserve every existing editable deck.
+- Every card opens its corresponding deck at its first scene; each destination has a shareable ?deck= URL. Direct #edit keeps the owner editing workflow. Add a «صفحهٔ اول» action and make browser Back return to the chooser.
+- Use supplied reference artwork, retained RTL order and responsive two-column cards on mobile; no placeholder or inactive cards.
