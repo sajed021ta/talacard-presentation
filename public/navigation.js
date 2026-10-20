@@ -1,6 +1,6 @@
 const fa = value => String(value).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 // Shared by the editor and the public viewer, keeping the same reading order.
-export function renderNavigation(deck, index, choose, {addPage} = {}) {
+export function renderNavigation(deck, index, choose, {addPage,renamePage} = {}) {
   const chapter = deck.scenes[index].chapter;
   const chapters = [...new Set(deck.scenes.map(s => s.chapter))];
   const list = document.querySelector('#chapter-list'), pages = document.querySelector('#page-tabs');
@@ -22,7 +22,7 @@ export function renderNavigation(deck, index, choose, {addPage} = {}) {
     add.textContent='+ افزودن زیرصفحه';add.setAttribute('aria-label',`افزودن زیرصفحه به ${chapter}`);
     add.onclick=()=>addPage(chapter);pages.append(add);
   }
-  document.querySelector('#scene-heading').textContent = `${chapter} / ${deck.scenes[index].label}`;
+  if(renamePage){const rename=document.createElement('button');rename.type='button';rename.className='edit-only';rename.textContent='تغییر نام زیرصفحه';rename.onclick=()=>renamePage();pages.append(rename)}
   const count = document.querySelector('#page-count'); if (count) count.textContent = fa(deck.scenes.length);
   document.querySelector('#page-location').textContent = `صفحهٔ ${fa(index + 1)} از ${fa(deck.scenes.length)}`;
   // Only the horizontal strip scrolls. Selecting a page never jumps the document.
