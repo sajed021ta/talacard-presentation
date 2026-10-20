@@ -20,6 +20,8 @@ fs.copyFileSync(path.join(root, 'original/style.css'), path.join(output, 'origin
 fs.cpSync(path.join(root, 'original/assets'), path.join(output, 'original/assets'), { recursive:true });
 fs.mkdirSync(path.join(output, 'media'), { recursive:true });
 for (const f of fs.readdirSync(path.join(root, 'public/media'))) {
+  // Movies live in durable cloud storage; keep large uploads out of hosted source Git.
+  if(/\.(mp4|webm)$/i.test(f))continue;
   const source = fs.existsSync(path.join(mediaSource, f)) ? path.join(mediaSource, f) : path.join(root, 'public/media', f);
   const destination = path.join(output, 'media', f);
   if (path.resolve(source) !== path.resolve(destination)) fs.copyFileSync(source, destination);
