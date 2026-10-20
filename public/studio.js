@@ -1,3 +1,4 @@
+import {reconcileProjects,applyProjectInPlace} from './reconcile.js';
 import {renderMediaItems,mediaItemBox,controlMediaItems,seekMediaItems} from './multimedia.js';
 import {paintBackdrop} from './backdrop.js';
 import {richEditorMarkup,mountRichEditor} from './rich-editor.js';
@@ -41,7 +42,7 @@ function checkpoint() { history.push(clone(project)); if (history.length > 60) h
 function draft() {
   clearTimeout(draftTimer);
   draftTimer = setTimeout(() => {
-    try { if (dirty()) localStorage.setItem('talacard-draft-v1', JSON.stringify({ revision, project })); else localStorage.removeItem('talacard-draft-v1'); }
+    try { if (dirty()) localStorage.setItem('talacard-draft-v1', JSON.stringify({ revision, project, baseProject:JSON.parse(savedJSON) })); else localStorage.removeItem('talacard-draft-v1'); }
     catch { toast('فضای مرورگر برای نسخهٔ پشتیبان کافی نیست؛ پروژه را ذخیره کنید.', true); }
   }, 300);
 }
@@ -274,10 +275,26 @@ async function save({automatic=false}={}) {
   try {
     validateProject(project);
     if (!backend) { localStorage.setItem('talacard-static-project-v1', JSON.stringify(project)); savedJSON = JSON.stringify(project); changed(); if(!automatic)toast('در این مرورگر ذخیره شد. اتصال انتشار آنلاین در این نسخه فعال نیست.'); return; }
-    saving = true; updateStatus(); const snapshot = clone(project);
-    const response = await fetch('/api/project', { method:'PUT', headers:{ 'Content-Type':'application/json', 'X-TalaCard-Studio':'1' }, body:JSON.stringify({ project:snapshot, revision }) });
-    const result = await response.json(); if (!response.ok) {if(response.status===409)autoSaveBlocked=true;throw new Error(result.error || 'ذخیره انجام نشد.');}
-    revision = result.revision; savedJSON = JSON.stringify(snapshot); autoSaveBlocked=false; localSaveError=false; draft(); readSyncStatus(); if(!automatic)toast('روی دستگاه ذخیره شد؛ لینک عمومی خودکار به‌روز می‌شود.');
+    saving = true; updateStatus();let attempts=0;
+    for(;;){
+      const snapshot=clone(project);validateProject(snapshot);
+      const response=await fetch('/api/project',{method:'PUT',headers:{'Content-Type':'application/json','X-TalaCard-Studio':'1'},body:JSON.stringify({project:snapshot,revision})});
+      const result=await response.json();
+      if(response.status===409&&attempts<3){
+        const latestResponse=await fetch('/api/project',{cache:'no-store'});if(!latestResponse.ok)throw Error('دریافت نسخهٔ جدید انجام نشد؛ دوباره ذخیره کن.');
+        const latest=await latestResponse.json(),merged=reconcileProjects(JSON.parse(savedJSON),project,validateProject(latest.project));
+        if(merged.conflicts.length){autoSaveBlocked=true;throw Error('یک بخش از محتوا در دو پنجره هم‌زمان تغییر کرده است. تغییرات این پنجره حفظ شده؛ از گزینه‌های پروژه فایل JSON را دریافت کن تا نسخه‌ها بررسی شوند.');}
+        validateProject(merged.project);const selected=scene().id;applyProjectInPlace(project,merged.project);revision=latest.revision;savedJSON=JSON.stringify(latest.project);attempts++;
+        if(!project.decks.some(d=>d.id===deckId))deckId=project.activeDeck;
+        index=Math.max(0,deck().scenes.findIndex(s=>s.id===selected));renderDecks();renderList();renderFlow();renderStage();
+        if(!document.activeElement?.closest('#scene-form')||scene().id!==selected)renderInspector();
+        autoSaveBlocked=false;draft();continue;
+      }
+      if(!response.ok){if(response.status===409)autoSaveBlocked=true;throw Error(result.error||'ذخیره انجام نشد.');}
+      revision=result.revision;savedJSON=JSON.stringify(snapshot);autoSaveBlocked=false;localSaveError=false;draft();readSyncStatus();
+      if(!automatic)toast('روی دستگاه ذخیره شد؛ لینک عمومی خودکار به‌روز می‌شود.');break;
+    }
+
   } catch (e) { localSaveError=true; if(!automatic||autoSaveBlocked)toast(e.message || 'ذخیره انجام نشد؛ دوباره تلاش می‌شود.', true); if(!autoSaveBlocked)autoSaveTimer=setTimeout(()=>save({automatic:true}),5000); }
   finally { saving = false; updateStatus(); if(dirty()&&!autoSaveBlocked&&!autoSaveTimer)scheduleAutoSave(); }
 }
@@ -338,7 +355,18 @@ async function init() {
     try { const r = await fetch('/api/project'); if (!r.ok) throw new Error(); result = await r.json(); if (!result.project) throw new Error(); }
     catch { backend = false; const r = await fetch('/default-content.json'); if (!r.ok) throw new Error('فایل محتوای پروژه پیدا نشد.'); const baseline = validateProject(await r.json()); result = { project:baseline, revision:'static' }; try { const stored = localStorage.getItem('talacard-static-project-v1'); if (stored) result.project = validateProject(JSON.parse(stored)); } catch {} }
     project = validateProject(result.project); revision = result.revision; savedJSON = JSON.stringify(project);
-    try { const recovered = JSON.parse(localStorage.getItem('talacard-draft-v1') || 'null'); if (recovered && recovered.revision === revision) { project = validateProject(recovered.project); toast('تغییرات ذخیره‌نشدهٔ قبلی از مرورگر بازیابی شد.'); } } catch {}
+    try {
+      const recovered=JSON.parse(localStorage.getItem('talacard-draft-v1')||'null');
+      if(recovered){
+        if(recovered.revision===revision){project=validateProject(recovered.project);toast('تغییرات ذخیره‌نشدهٔ قبلی از مرورگر بازیابی شد.');}
+        else if(recovered.baseProject){
+          const merged=reconcileProjects(recovered.baseProject,validateProject(recovered.project),project);
+          if(!merged.conflicts.length){project=validateProject(merged.project);toast('تغییرات ذخیره‌نشده با نسخهٔ جدید ادغام شد.');}
+          else{project=validateProject(recovered.project);savedJSON=JSON.stringify(validateProject(recovered.baseProject));revision=recovered.revision;autoSaveBlocked=true;toast('تغییرات قبلی حفظ شده‌اند؛ یک بخش در دو نسخه تغییر کرده است. از گزینه‌های پروژه خروجی JSON بگیر.',true);}
+        }
+      }
+    }catch{}
+
     deckId = project.activeDeck; renderDecks(); editMode(location.hash === '#edit'); choose(0, false); updateStatus();
     readSyncStatus(); syncPoll=setInterval(readSyncStatus,2500);scheduleAutoSave();
     previousFrame = performance.now(); requestAnimationFrame(tick);
