@@ -1,6 +1,6 @@
 {
-  "count": 37,
-  "totalBytes": 909275930,
+  "count": 39,
+  "totalBytes": 984439991,
   "files": [
     {
       "path": "public/media/access-door.mp4",
@@ -312,6 +312,22 @@
       "gitBlobSha": "2d2e439ccb95563e596e5379b24bd09b22f23c94",
       "name": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4",
       "originalName": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4"
+    },
+    {
+      "path": "public/media/upload-1c88b27b-49f9-4bfe-8e0d-6e3a2190fcc6.mp4",
+      "bytes": 37524801,
+      "sha256": "8e357712ed0f8148d94999d2610b46175345c941718dc8f1bff782f4be65ad82",
+      "gitBlobSha": "55a7e51e9fc00d2d50d44e49b36b4d8c8f13005d",
+      "name": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_1.mp4",
+      "originalName": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_1.mp4"
+    },
+    {
+      "path": "public/media/upload-2893a8ef-575f-4cfa-9edb-02fee3a631c8.mp4",
+      "bytes": 37639260,
+      "sha256": "8b2b3aeaf79e70a194023a3eecb3098f8e127b0746e28bb528c8449dd3b2ada4",
+      "gitBlobSha": "a870a97948f37e13eb677658afa93313c7eef571",
+      "name": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_3.mp4",
+      "originalName": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_3.mp4"
     }
   ]
 }

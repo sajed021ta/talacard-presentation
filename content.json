@@ -4223,9 +4223,9 @@
           "id": "ref-deliv-0",
           "chapter": "معرفی",
           "label": "تحویل در طلاپرداز",
-          "title": "طلایی که در دیجی‌کالا داری، در دست تو",
+          "title": "از طلای دیجیتال تا طلاکارت",
           "highlight": "در دست تو",
-          "description": "تحویل طلاکارت در طلاپرداز، بدون صف و فرم",
+          "description": "",
           "duration": 3.8,
           "layout": "legacy",
           "legacyScene": 0,
@@ -4241,21 +4241,28 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "deliv",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "از طلای دیجیتال تا طلاکارت"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": []
         },
         {
           "id": "ref-deliv-1",
           "chapter": "ورود",
           "label": "کارت بانکی",
-          "title": "مشخصات فنی و امنیتی طلاکارت\n",
+          "title": "\n",
           "highlight": "با کارت بانکی",
-          "description": "کاربر کارت بانکی خود را وارد کرده تا فرایند خرید و یا تحویل طلاکارت آغاز شود.",
+          "description": "",
           "duration": 4.5,
-          "layout": "legacy",
+          "layout": "split",
           "legacyScene": 1,
-          "media": "",
+          "media": "/media/upload-1c88b27b-49f9-4bfe-8e0d-6e3a2190fcc6.mp4",
           "poster": "",
-          "fit": "contain",
+          "fit": "cover",
           "position": 50,
           "transition": "fade",
           "intensity": 0.45,
@@ -4268,34 +4275,41 @@
           "presentationStyle": "reference",
           "titleRuns": [
             {
-              "text": "مشخصات فنی و امنیتی طلاکارت\n"
+              "text": "\n"
             }
           ],
           "titleFormat": {},
           "placement": {
             "desktop": {
               "copy": {
-                "x": 32.36873292122101,
-                "y": 20.61112817382616,
+                "x": 31.99295812783258,
+                "y": 39.632193565603515,
                 "w": 63.677009047587305,
                 "h": 18.23855798392935
+              },
+              "media": {
+                "x": 0,
+                "y": 0,
+                "w": 100,
+                "h": 100
               }
             }
-          }
+          },
+          "textBlocks": []
         },
         {
           "id": "ref-deliv-2",
           "chapter": "ورود",
           "label": "رمز کارت",
-          "title": "خرید طلای فیزیکی با کارت بانکی",
+          "title": "\n",
           "highlight": "با کارت بانکی",
-          "description": "کاربر کارت بانکی خود را وارد کرده تا فرایند خرید و یا تحویل طلاکارت آغاز شود.",
+          "description": "۱. ساختار چندلایه کارت (Multi-Layer Structure)\n\n۲. متریال رنگی با لایه PVC مستقل در مغز کارت (Colored PVC Core)\n\n\nمشخصات فنی و امنیتی طلاکارت\n\n۳. امباس اختصاصی روی پلاک طلا (Custom Gold Embossing)\n\n۴. طراحی مقاوم در برابر جداسازی سالم پلاک طلا (Tamper-Resistant Design)\n\n۵. فویل‌کوبی حرارتی پیشرفته (Hot Foil Stamping)\n\n۶. کلیشه‌های اختصاصی فویل‌کوبی طلاکارت (Proprietary Stamping Dies)\n\n۷. برجسته‌سازی اختصاصی سطح کارت (Precision Embossing)\n\n۸. چاپ و پرداخت ویژه UV (UV Printing & Finishing)\n\n۹. جزئیات گرافیکی اختصاصی با دقت بالا (High-Precision Security Graphics)\n\n۱۰. طراحی فیزیکی چندلایه با رویکرد بازدارندگی از دست‌کاری (Multi-Layer Tamper-Resistant Design)\n",
           "duration": 5.1,
-          "layout": "legacy",
+          "layout": "split",
           "legacyScene": 2,
-          "media": "",
+          "media": "/media/upload-2893a8ef-575f-4cfa-9edb-02fee3a631c8.mp4",
           "poster": "",
-          "fit": "contain",
+          "fit": "cover",
           "position": 50,
           "transition": "fade",
           "intensity": 0.45,
@@ -4305,247 +4319,223 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-3",
-          "chapter": "انتخاب",
-          "label": "تحویل طلاکارت",
-          "title": "تبدیل طلای دیجیتال به فیزیکی",
-          "highlight": "به فیزیکی",
-          "description": "کاربران دیجی‌کالا می‌توانند موجودی طلای آنلاین خود را به صورت فیزیکی تحویل بگیرند.",
-          "duration": 4.3,
-          "layout": "legacy",
-          "legacyScene": 3,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-4",
-          "chapter": "انتخاب",
-          "label": "انتخاب پلتفرم",
-          "title": "انتخاب پلتفرم دیجی‌کالا",
-          "highlight": "دیجی‌کالا",
-          "description": "کاربران با توجه به دارایی خود، پلتفرم مورد نظر را انتخاب خواهند کرد.",
-          "duration": 3.6,
-          "layout": "legacy",
-          "legacyScene": 4,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-5",
-          "chapter": "انتخاب",
-          "label": "انتخاب طلاکارت",
-          "title": "انتخاب وزن طلاکارت",
-          "highlight": "طلاکارت",
-          "description": "با توجه به دارایی آنلاین کاربر، ایشان گزینه مورد نظر خود را از بین کارت‌های موجود انتخاب خواهد کرد.",
-          "duration": 3.4,
-          "layout": "legacy",
-          "legacyScene": 5,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-6",
-          "chapter": "احراز هویت",
-          "label": "کد ملی",
-          "title": "احراز از طریق کد ملی",
-          "highlight": "کد ملی",
-          "description": "به جهت عدم ذخیره‌سازی اطلاعات کاربران دیجی‌کالا، کد ملی تحویل‌گیرنده به همراه وزن انتخاب‌شده به پلتفرم دیجی‌کالا ارسال خواهد شد.",
-          "duration": 6.3,
-          "layout": "legacy",
-          "legacyScene": 6,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-7",
-          "chapter": "احراز هویت",
-          "label": "تأیید تحویل",
-          "title": "جزئیات سفارش کاربر",
-          "highlight": "سفارش کاربر",
-          "description": "نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر.",
-          "duration": 4.5,
-          "layout": "legacy",
-          "legacyScene": 7,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-8",
-          "chapter": "احراز هویت",
-          "label": "کد پیامک",
-          "title": "ارسال کد از طریق دیجی‌کالا",
-          "highlight": "دیجی‌کالا",
-          "description": "پس از احراز موفقیت‌آمیز کاربر و بررسی دارایی او، دیجی‌کالا کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد.",
-          "duration": 5.1,
-          "layout": "legacy",
-          "legacyScene": 8,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-9",
-          "chapter": "تحویل",
-          "label": "در حال بررسی",
-          "title": "پردازش و تحویل کارت",
-          "highlight": "تحویل کارت",
-          "description": "طلاپرداز کارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد.",
-          "duration": 3.9,
-          "layout": "legacy",
-          "legacyScene": 9,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-10",
-          "chapter": "تحویل",
-          "label": "دریافت طلاکارت",
-          "title": "پردازش و تحویل کارت",
-          "highlight": "تحویل کارت",
-          "description": "طلاپرداز کارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد.",
-          "duration": 4.5,
-          "layout": "legacy",
-          "legacyScene": 10,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-11",
-          "chapter": "تحویل",
-          "label": "کارت در دست",
-          "title": "طلاکارت، جریان طلا",
-          "highlight": "جریان طلا",
-          "description": "با دریافت طلاکارت، کاربر در جریان واقعی طلاکارت قرار خواهد گرفت.",
-          "duration": 4.6,
-          "layout": "legacy",
-          "legacyScene": 11,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-deliv-12",
-          "chapter": "جمع‌بندی",
-          "label": "پایان",
-          "title": "طلای دیجی‌کالا، به شکل طلاکارت",
-          "highlight": "به شکل طلاکارت",
-          "description": "تحویل فیزیکی در شبکه‌ی طلاپردازهای طلاکارت",
-          "duration": 4.2,
-          "layout": "legacy",
-          "legacyScene": 12,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "deliv",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0.0012610569473140497,
+                "y": 0,
+                "w": 45.195675684400825,
+                "h": 100
+              },
+              "copy": {
+                "x": 0,
+                "y": 0,
+                "w": 41.212812325567356,
+                "h": 30.756363371406373
+              }
+            }
+          },
+          "titleRuns": [
+            {
+              "text": "\n"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "۱. ساختار چندلایه کارت (Multi-Layer Structure)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 62.341923989540284,
+                  "y": 27.514377745456017,
+                  "w": 34.32543541774277,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-f4ebf59c-a895-4c0a-a36c-1fcbc72e2a0a",
+              "runs": [
+                {
+                  "text": "۲. متریال رنگی با لایه PVC مستقل در مغز کارت (Colored PVC Core)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 53.8545567536157,
+                  "y": 35.40347238304285,
+                  "w": 43.203165353822314,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-e76b877c-9c0f-45ef-bbee-363bd7a2febd",
+              "runs": [
+                {
+                  "text": "\nمشخصات فنی و امنیتی طلاکارت\n",
+                  "bold": true,
+                  "fontSize": 44
+                }
+              ],
+              "format": {
+                "fontSize": 44,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 40.51907121642562,
+                  "y": 8.500284213908262,
+                  "w": 56.2070433561467,
+                  "h": 20.52530541171962
+                }
+              }
+            },
+            {
+              "id": "text-0deea66f-4861-45af-829c-5d75f4360b46",
+              "runs": [
+                {
+                  "text": "۳. امباس اختصاصی روی پلاک طلا (Custom Gold Embossing)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 57.83971108680914,
+                  "y": 41.58717678105094,
+                  "w": 39.38136329335615,
+                  "h": 9.471172959800285
+                }
+              }
+            },
+            {
+              "id": "text-4cd7af1a-d8bc-4c0a-a427-5aea5d6373c4",
+              "runs": [
+                {
+                  "text": "۴. طراحی مقاوم در برابر جداسازی سالم پلاک طلا (Tamper-Resistant Design)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 44.33409383474303,
+                  "y": 47.465965270067294,
+                  "w": 53.02450637186854,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-e6bfc213-103a-4b0c-8fb1-69d4b1b824d6",
+              "runs": [
+                {
+                  "text": "۵. فویل‌کوبی حرارتی پیشرفته (Hot Foil Stamping)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 44.4661315413546,
+                  "y": 53.8089850649634,
+                  "w": 52.80731201171875,
+                  "h": 8.564129367214438
+                }
+              }
+            },
+            {
+              "id": "text-9fdedde5-34ca-4833-a0c0-1cb2ad97ab48",
+              "runs": [
+                {
+                  "text": "۶. کلیشه‌های اختصاصی فویل‌کوبی طلاکارت (Proprietary Stamping Dies)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 46.808590219040546,
+                  "y": 60.36807150413079,
+                  "w": 50.64047316874354,
+                  "h": 9.147500153319902
+                }
+              }
+            },
+            {
+              "id": "text-caf8cd46-34f2-41c7-b550-6921aaffb912",
+              "runs": [
+                {
+                  "text": "۷. برجسته‌سازی اختصاصی سطح کارت (Precision Embossing)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 56.054457987635594,
+                  "y": 66.39791442217009,
+                  "w": 41.44432130923941,
+                  "h": 8.51677563821507
+                }
+              }
+            },
+            {
+              "id": "text-7ea1be25-9bbb-4326-b197-44204e158c32",
+              "runs": [
+                {
+                  "text": "۸. چاپ و پرداخت ویژه UV (UV Printing & Finishing)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 60.315498793420716,
+                  "y": 72.37507936783992,
+                  "w": 37.425080606760076,
+                  "h": 9.062075795867594
+                }
+              }
+            },
+            {
+              "id": "text-3c1edb28-9a40-47c5-aee9-ab273f668306",
+              "runs": [
+                {
+                  "text": "۹. جزئیات گرافیکی اختصاصی با دقت بالا (High-Precision Security Graphics)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 46.95935209920583,
+                  "y": 78.40472396162761,
+                  "w": 51.17540343733859,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-cf659be7-99c4-4c4e-8729-3d261a3d8998",
+              "runs": [
+                {
+                  "text": "۱۰. طراحی فیزیکی چندلایه با رویکرد بازدارندگی از دست‌کاری (Multi-Layer Tamper-Resistant Design)\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 48.77850240912319,
+                  "y": 84.04987885439368,
+                  "w": 49.21994800409995,
+                  "h": 8
+                }
+              }
+            }
+          ]
         }
       ]
     }
@@ -4870,6 +4860,22 @@
       "type": "video",
       "name": "Animate the two glass hands performing a gentle, realistic handshake. The hands slowly move toward e.mp4",
       "originalName": "Animate the two glass hands performing a gentle, realistic handshake. The hands slowly move toward e.mp4"
+    },
+    {
+      "id": "upload-1c88b27b-49f9-4bfe-8e0d-6e3a2190fcc6",
+      "src": "/media/upload-1c88b27b-49f9-4bfe-8e0d-6e3a2190fcc6.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_1.mp4",
+      "originalName": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_1.mp4"
+    },
+    {
+      "id": "upload-2893a8ef-575f-4cfa-9edb-02fee3a631c8",
+      "src": "/media/upload-2893a8ef-575f-4cfa-9edb-02fee3a631c8.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_3.mp4",
+      "originalName": "Use the provided image as the final frame reference. Keep the camera completely static. Keep the key_3.mp4"
     }
   ],
   "backgroundVersion": "2026-10-20",
