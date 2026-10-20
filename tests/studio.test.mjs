@@ -30,14 +30,14 @@ test('content is plain text and media stays portable; malformed imports are reje
   for (const mutate of [p => p.decks[0].scenes[0].duration = 0, p => p.decks[0].scenes[0].fontSize = 200, p => p.decks[0].scenes[0].media = 'javascript:alert(1)', p => p.decks[0].scenes[1].id = p.decks[0].scenes[0].id, p => p.activeDeck = 'missing', p => p.library[0].poster = '/media/../x', p => p.decks[0].scenes = []]) {
     const p = clone(fixture); mutate(p); assert.throws(() => validateProject(p));
   }
-  const text = clone(fixture); text.decks[0].scenes[0].title = '<script>alert(1)</script>'; validateProject(text);
+  const text = clone(fixture); delete text.decks[0].scenes[0].titleRuns; text.decks[0].scenes[0].title = '<script>alert(1)</script>'; validateProject(text);
 });
 
 test('local server: persistence, conflict protection, uploads, video seeking, and origin guards', async t => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'talacard-test-'));
   fs.mkdirSync(path.join(root, 'public/media'), { recursive:true });
   fs.mkdirSync(path.join(root, 'original/assets'), { recursive:true });
-  const initial = clone(fixture); for (const d of initial.decks) for (const s of d.scenes) { s.media = ''; s.poster = ''; }
+  const initial = clone(fixture); for (const d of initial.decks) for (const s of d.scenes) { s.media = ''; s.poster = ''; s.mediaItems=[]; }
   fs.writeFileSync(path.join(root, 'content.json'), JSON.stringify(initial));
   fs.writeFileSync(path.join(root, 'public/index.html'), '<!doctype html><title>Studio</title>');
   fs.writeFileSync(path.join(root, 'secret.txt'), 'DO NOT SERVE');
@@ -52,7 +52,7 @@ test('local server: persistence, conflict protection, uploads, video seeking, an
   assert.equal((await fetch(base + '/%2e%2e%2fsecret.txt')).status, 403);
   const missingHeader = await fetch(base + '/api/project', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(snapshot) }); assert.equal(missingHeader.status, 403);
   const csrf = await fetch(base + '/api/project', { method:'PUT', headers:{ ...headers, Origin:'https://other.example' }, body:JSON.stringify(snapshot) }); assert.equal(csrf.status, 403);
-  snapshot.project.decks[0].scenes[0].title = 'عنوان ویرایش‌شده';
+  delete snapshot.project.decks[0].scenes[0].titleRuns; snapshot.project.decks[0].scenes[0].title = 'عنوان ویرایش‌شده';
   const save = await fetch(base + '/api/project', { method:'PUT', headers, body:JSON.stringify(snapshot) }); assert.equal(save.status, 200); const nextRevision = (await save.json()).revision;
   assert.notEqual(snapshot.revision, nextRevision);
   assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'content.json'))).decks[0].scenes[0].title, 'عنوان ویرایش‌شده');

@@ -57,3 +57,6 @@ The original archive under `original/`, supplied media under `public/media`, and
 - Root presentation URLs show the supplied four-card chooser with exact reference images and white/gold animated ground: طلاپرداز → kiosk, اپ طلاکارت → app, کارت طلا → deliv (physical delivery from balance), طلاکارت → proposal. Preserve every existing editable deck.
 - Every card opens its corresponding deck at its first scene; each destination has a shareable ?deck= URL. Direct #edit keeps the owner editing workflow. Add a «صفحهٔ اول» action and make browser Back return to the chooser.
 - Use supplied reference artwork, retained RTL order and responsive two-column cards on mobile; no placeholder or inactive cards.
+
+## Partnership content update — 2026-10-20
+The chooser uses the owner-supplied transparent ecosystem image. The studio content inspector exposes the gold-card chooser title, description, image library selection and target deck; all persist through normal autosave. The cooperation chapter includes a native four-column responsibility matrix from the supplied screenshot, with twelve rows and explicit undecided entries. Each header and cell is editable. New reference copy replaces only untouched source copy, preserving owner changes. Partner names use Digikala.

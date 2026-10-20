@@ -1,4 +1,4 @@
-import {mountHomePicker} from './home.js';
+import {HOME_SECTIONS,mountHomePicker} from './home.js';
 import {reconcileProjects,applyProjectInPlace} from './reconcile.js';
 import {renderMediaItems,mediaItemBox,controlMediaItems,seekMediaItems} from './multimedia.js';
 import {paintBackdrop} from './backdrop.js';
@@ -61,7 +61,7 @@ async function readSyncStatus(){
    if(response.ok && latest.revision!==revision && !dirty() && !saving){
     const previousId=scene().id;project=validateProject(latest.project);revision=latest.revision;savedJSON=JSON.stringify(project);
     if(!project.decks.some(d=>d.id===deckId))deckId=project.activeDeck;
-    index=Math.max(0,deck().scenes.findIndex(s=>s.id===previousId));renderDecks();choose(index);if(homePicker?.visible)setPlaying(false);draft();
+    index=Math.max(0,deck().scenes.findIndex(s=>s.id===previousId));renderDecks();choose(index);if(homePicker?.visible){homePicker.refresh();setPlaying(false);}draft();
    }
   }
   updateStatus();
@@ -225,6 +225,18 @@ function renderInspector() {
   }
   if(tab==='content')$('#rename-chapter').onclick=()=>{const value=$('#chapter-name').value;try{const copy=clone(deck());renameChapter(copy,s.chapter,value);if(value.trim()===s.chapter)return;checkpoint();renameChapter(deck(),s.chapter,value);renderStage();renderFlow();renderList();renderInspector();changed();toast('نام بخش و همهٔ زیرصفحه‌هایش تغییر کرد.')}catch(error){toast(error.message,true)}};
   if(tab==='content')richCleanup=mountRichEditor(form,s,{checkpoint,onEdit:()=>{refreshText();renderList();renderFlow();changed()},onSelectBlock:id=>{activeTextBlockId=id;renderHandles()},onStructure:id=>{activeTextBlockId=id;renderInspector();requestAnimationFrame(()=>$('#scene-form [data-word-id="'+id+'"]')?.focus())}});
+  if(tab==='content'){
+   if(s.table){const heading=document.createElement('h3');heading.textContent='جدول مسئولیت‌ها · ویرایش هر سلول';form.append(heading);const grid=document.createElement('div');grid.className='table-editor';[s.table.columns,...s.table.rows].forEach((row,ri)=>row.forEach((value,ci)=>{const input=document.createElement('input');input.value=value;input.maxLength=ri?500:200;input.setAttribute('aria-label',`جدول ردیف ${ri+1} ستون ${ci+1}`);input.onfocus=()=>checkpoint();input.oninput=()=>{row[ci]=input.value;refreshText();changed()};grid.append(input)}));form.append(grid)}
+   const settings=document.createElement('details');settings.className='home-card-editor';const label=document.createElement('summary');label.textContent='ویرایش کارت طلا در صفحهٔ اول';settings.append(label);
+   const base=HOME_SECTIONS.find(x=>x.id==='deliv'),card={...base,target:'deliv',...project.homeCards?.deliv};
+   for(const [key,title] of [['name','عنوان کارت'],['description','توضیح کارت'],['image','تصویر کارت'],['target','بخش مقصد کارت']]){
+    const field=document.createElement('label');field.className='field';const caption=document.createElement('span');caption.textContent=title;const input=document.createElement(key==='target'||key==='image'?'select':'input');
+    if(key==='target')for(const d of project.decks)input.add(new Option(d.name,d.id));
+    else if(key==='image'){input.add(new Option('تصویر اصلی کارت طلا',base.image));for(const m of project.library.filter(x=>x.type==='image'))input.add(new Option(m.name,m.src));if(![...input.options].some(o=>o.value===card.image))input.add(new Option('تصویر انتخاب‌شده',card.image));}
+    input.value=card[key];input.setAttribute('aria-label',title+' · صفحهٔ اول');if(input.tagName==='INPUT')input.maxLength=key==='name'?200:1000;
+    input.onfocus=()=>checkpoint();input.oninput=()=>{card[key]=input.value;project.homeCards||={};project.homeCards.deliv={name:card.name,description:card.description,image:card.image,target:card.target};homePicker?.refresh();changed()};field.append(caption,input);settings.append(field);
+   }const hint=document.createElement('p');hint.className='hint';hint.textContent='برای تصویر تازه، ابتدا آن را از بخش رسانه بارگذاری کنید. تغییرات این کارت خودکار روی صفحهٔ اول ذخیره می‌شوند.';settings.append(hint);form.prepend(settings);
+  }
   if(tab==='media')mountExtraInspector(form,s);
   if(tab==='motion'){const button=document.createElement('button');button.type='button';button.className='button';button.textContent='اعمال این پس‌زمینه به همهٔ صفحه‌ها';button.onclick=()=>{checkpoint();for(const d of project.decks)for(const page of d.scenes){page.background=s.background;page.presentationStyle=s.presentationStyle||'reference'}renderStage();changed();toast('پس‌زمینهٔ همهٔ صفحه‌ها یکسان شد.')};form.append(button)}
   form.insertAdjacentHTML('beforeend', '<hr class="editor-divider"><p class="hint">در پیش‌نمایش، دستگیرهٔ متن یا رسانه را بکش. برای اندازه، گوشهٔ قاب را بکش. کلیدهای جهت روی دستگیره جابه‌جا می‌کنند؛ Shift + جهت اندازه را عوض می‌کند. چیدمان موبایل و دسکتاپ مستقل است.</p><button type="button" id="reset-placement" class="text-button">بازنشانی چیدمان این صفحه</button>');
@@ -486,7 +498,7 @@ function mountExtraInspector(form,s){
 }
 
 function setupHome(){
- homePicker=mountHomePicker(project,id=>{
+ homePicker=mountHomePicker(()=>project,id=>{
   const url=new URL(location.href);url.searchParams.set('deck',id);if(url.hash==='#home')url.hash='';window.history.pushState(null,'',url);enterDeck(id);
  });
  function enterDeck(id){homePicker.hide();editMode(location.hash==='#edit');deckId=id;index=0;renderDecks();choose(0);resizeStage();requestAnimationFrame(()=>{$('#stage').tabIndex=-1;$('#stage').focus({preventScroll:true})})}

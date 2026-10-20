@@ -1,6 +1,6 @@
 {
   "url": "https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r",
-  "sha256": "8e3de686a180c1dac2cb0f80f5db8fb675fe122410692585b440b28d33dcd3f8",
+  "sha256": "5f3f00c75a0a0f95f10c60990858a17d6b1cc08bf3a4ec5b7388663a20606eb2",
   "assets": [
     {
       "path": "/reference/assets/2ef5001aa0950fc7.webp",
@@ -129,9 +129,9 @@
       "mime": "image/webp"
     },
     {
-      "path": "/reference/assets/0f71ce014de45f33.webp",
-      "sha256": "0f71ce014de45f33b09110c8d898ec76f35db9a2291cda4e449c011b2b0255f3",
-      "bytes": 40394,
+      "path": "/reference/assets/ad5ada32ba1aca6f.webp",
+      "sha256": "ad5ada32ba1aca6fb14cd14d57dd02da31c6d4e4d903bc702fa194c9f34bed15",
+      "bytes": 40488,
       "mime": "image/webp"
     },
     {
@@ -246,6 +246,12 @@
       "path": "/reference/assets/2bc090b4adeb9772.webp",
       "sha256": "2bc090b4adeb9772d37327a954ab10b619b869c16d14505717d8a074c0ce05ee",
       "bytes": 48544,
+      "mime": "image/webp"
+    },
+    {
+      "path": "/reference/assets/03fa24a263eed294.webp",
+      "sha256": "03fa24a263eed294aa0c37f2f6f2258411814aa155fdcbd56338dbc73f5cebce",
+      "bytes": 30612,
       "mime": "image/webp"
     },
     {

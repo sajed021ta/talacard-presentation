@@ -25,6 +25,7 @@ export function validateProject(project) {
       if (!LAYOUTS.includes(s.layout) || !TRANSITIONS.includes(s.transition) || !number(s.duration, 1, 180) || !number(s.fontSize, 20, 64) || !number(s.intensity, 0, 1) || !number(s.position, 0, 100) || !Number.isInteger(s.legacyScene) || s.legacyScene < 0 || s.legacyScene > 199 || !['contain', 'cover'].includes(s.fit) || typeof s.loop !== 'boolean') throw new Error('تنظیمات یکی از صفحه‌ها معتبر نیست.');
       if(s.legacyDeck!==undefined&&!['app','kiosk','deliv','previous','snapshot19'].includes(s.legacyDeck))throw new Error('مسیر نمایش معتبر نیست.');
       if(s.presentationStyle!==undefined&&!['reference','plain'].includes(s.presentationStyle))throw new Error('سبک پس‌زمینه معتبر نیست.');
+      if(s.table!==undefined){const t=s.table;if(!t||!Array.isArray(t.columns)||t.columns.length!==4||!t.columns.every(v=>text(v,200))||!Array.isArray(t.rows)||t.rows.length>30||!t.rows.every(row=>Array.isArray(row)&&row.length===4&&row.every(v=>text(v,500))))throw Error('جدول معتبر نیست.');}
       validateRichScene(s);
       validateMediaItems(s);
       if (s.placement !== undefined) validatePlacement(s.placement);
@@ -35,6 +36,7 @@ export function validateProject(project) {
   for (const m of project.library) {
     if (!id(m.id) || !text(m.name, 200) || !['image', 'video'].includes(m.type) || !mediaPath(m.src, false) || !mediaPath(m.poster) || !text(m.originalName, 500)) throw new Error('یکی از رسانه‌ها معتبر نیست.');
   }
+  if(project.homeCards!==undefined){for(const [key,card] of Object.entries(project.homeCards)){if(!['kiosk','app','deliv','proposal'].includes(key)||!card||!text(card.name,200)||!text(card.description,1000)||!deckIds.has(card.target)||!(mediaPath(card.image,false)||/^\/reference\/assets\/[a-zA-Z0-9_.-]+$/.test(card.image)))throw Error('تنظیمات کارت صفحهٔ اول معتبر نیست.');}}
   return project;
 }
 

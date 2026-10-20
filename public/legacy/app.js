@@ -16,7 +16,7 @@ if(location.hash.startsWith('#render')){(function(){
 })()}
 
 
-const IMG0={"home": "/reference/assets/2ef5001aa0950fc7.webp", "buyempty": "/reference/assets/600cf6f2566ccd18.webp", "buyfill": "/reference/assets/5393470de9297251.webp", "receipt": "/reference/assets/8ed79b27e645ceee.webp", "recempty": "/reference/assets/d0520a090533dd02.webp", "done": "/reference/assets/73c212aec25b39a2.webp", "sellfill": "/reference/assets/24c65242408b3355.webp", "sellrec": "/reference/assets/c8bafbd1dbcb09b2.webp", "sellempty": "/reference/assets/46465ea4e8d445a8.webp", "sellok": "/reference/assets/007c2eba98e96aaf.webp", "cardready": "/reference/assets/c87c2d7b92113163.webp", "branches": "/reference/assets/fc114780bf036b60.webp", "detail": "/reference/assets/16cc62463128367d.webp", "platempty": "/reference/assets/aa0a1fa486d57a12.webp", "sellplatempty": "/reference/assets/8e9b47de3f7594e0.webp", "atm": "/reference/assets/932b58fc924a03a1.webp", "homecrop": "/reference/assets/8fd8ff7f04043f06.webp", "cardnotyet": "/reference/assets/5cdc69e75b32df1a.webp", "k1": "/reference/assets/3ca50d7226ba51f8.webp", "k1e": "/reference/assets/82f6f4ff714ac6c5.webp", "k2": "/reference/assets/4f53d5c33ff56779.webp", "k3": "/reference/assets/0f71ce014de45f33.webp", "k4": "/reference/assets/fdd92d871a98f704.webp", "k5": "/reference/assets/8c3f5d4ea4a3af3f.webp", "k6": "/reference/assets/a1f5244f548ce3de.webp", "k7": "/reference/assets/91912a46f93c47c4.webp", "k8": "/reference/assets/79149c0df3825103.webp", "k9": "/reference/assets/0b3f80c183d1fe79.webp", "k10": "/reference/assets/0d7112d0b9334fb8.webp", "kiosk": "/reference/assets/2e49a4d17ce39722.webp", "card": "/reference/assets/a2cc2bf20f679f82.webp", "kn": "/reference/assets/4f58e403d73b99c6.webp", "kd": "/reference/assets/979c760042f7e525.webp", "brnotch": "/reference/assets/1f39260758ad8c79.webp", "brmap": "/reference/assets/38218e391a1234bd.webp", "dklogo": "/reference/assets/826a489ae54f8a91.webp", "goalbg": "/reference/assets/eec9ff1302a36947.webp", "notclean": "/reference/assets/b0debb2a40f5e484.webp", "bubble": "/reference/assets/3843cd030153db68.webp", "card1": "/reference/assets/85a6134e0e0ef4a5.webp", "k7b": "/reference/assets/2bc090b4adeb9772.webp"};
+const IMG0={"home": "/reference/assets/2ef5001aa0950fc7.webp", "buyempty": "/reference/assets/600cf6f2566ccd18.webp", "buyfill": "/reference/assets/5393470de9297251.webp", "receipt": "/reference/assets/8ed79b27e645ceee.webp", "recempty": "/reference/assets/d0520a090533dd02.webp", "done": "/reference/assets/73c212aec25b39a2.webp", "sellfill": "/reference/assets/24c65242408b3355.webp", "sellrec": "/reference/assets/c8bafbd1dbcb09b2.webp", "sellempty": "/reference/assets/46465ea4e8d445a8.webp", "sellok": "/reference/assets/007c2eba98e96aaf.webp", "cardready": "/reference/assets/c87c2d7b92113163.webp", "branches": "/reference/assets/fc114780bf036b60.webp", "detail": "/reference/assets/16cc62463128367d.webp", "platempty": "/reference/assets/aa0a1fa486d57a12.webp", "sellplatempty": "/reference/assets/8e9b47de3f7594e0.webp", "atm": "/reference/assets/932b58fc924a03a1.webp", "homecrop": "/reference/assets/8fd8ff7f04043f06.webp", "cardnotyet": "/reference/assets/5cdc69e75b32df1a.webp", "k1": "/reference/assets/3ca50d7226ba51f8.webp", "k1e": "/reference/assets/82f6f4ff714ac6c5.webp", "k2": "/reference/assets/4f53d5c33ff56779.webp", "k3": "/reference/assets/ad5ada32ba1aca6f.webp", "k4": "/reference/assets/fdd92d871a98f704.webp", "k5": "/reference/assets/8c3f5d4ea4a3af3f.webp", "k6": "/reference/assets/a1f5244f548ce3de.webp", "k7": "/reference/assets/91912a46f93c47c4.webp", "k8": "/reference/assets/79149c0df3825103.webp", "k9": "/reference/assets/0b3f80c183d1fe79.webp", "k10": "/reference/assets/0d7112d0b9334fb8.webp", "kiosk": "/reference/assets/2e49a4d17ce39722.webp", "card": "/reference/assets/a2cc2bf20f679f82.webp", "kn": "/reference/assets/4f58e403d73b99c6.webp", "kd": "/reference/assets/979c760042f7e525.webp", "brnotch": "/reference/assets/1f39260758ad8c79.webp", "brmap": "/reference/assets/38218e391a1234bd.webp", "dklogo": "/reference/assets/826a489ae54f8a91.webp", "goalbg": "/reference/assets/eec9ff1302a36947.webp", "notclean": "/reference/assets/b0debb2a40f5e484.webp", "bubble": "/reference/assets/3843cd030153db68.webp", "card1": "/reference/assets/85a6134e0e0ef4a5.webp", "k7b": "/reference/assets/2bc090b4adeb9772.webp", "logo3d": "/reference/assets/03fa24a263eed294.webp"};
 (()=>{
 document.getElementById('pkAppImg').src=IMG0.homecrop;document.getElementById('pkAtmImg').src=IMG0.atm;
 const IMG={},DECODED=[];
@@ -122,8 +122,9 @@ const sT=screen('trade');
 sT._topB=L(sT,'buyfill',0,0,375,340);sT._topS=L(sT,'sellfill',0,0,375,340);
 const amt=box(sT,'','amt');amt.innerHTML='<span class="num" id="num"></span><span class="unit">گرم</span>';
 function plat(src,emptySrc){const g=document.createElement('div');g.className='L';g.style.cssText='left:0;top:0;width:375px;height:866px;background:none';
-  L(g,emptySrc,0,345,375,461);
-  g._rows=[[444,76],[528,54],[590,54],[652,54]].map(([y,h])=>L(g,src,16,y,343,h));
+  /* the rows are part of the panel picture itself, so they can never go missing */
+  L(g,src,0,345,375,461);
+  g._rows=[];
   g._btn=L(g,src,30,738,316,54);sT.appendChild(g);return g}
 sT._pB=plat('buyfill','platempty');sT._pS=plat('sellfill','sellplatempty');
 sT._nav=L(sT,'buyfill',0,806,375,60);
@@ -222,47 +223,47 @@ const S_APP=[
    A($('#tDK'),[{transform:'translateX(-140px) rotate(6deg)',opacity:0},{transform:'none',opacity:1}],{duration:1000,fill:'none'});
    A($('#xm'),[{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'none'}],{duration:500,delay:750,fill:'backwards'});
    ['#tag','#sub'].forEach((s,i)=>A($(s),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:1100+i*220,fill:'backwards'}));}},
- {c:1,f:'خانه',t:'همه‌ی طلای تو، روی <em>یک نمایشگر</em>',p:'موجودی طلا و نقد داخل همان دستگاهی دیده می‌شود که کاربر در ATM طلاکارت هم می‌بیند.',d:3600,run(){mode('app');acct(1,CASH0);finger(0);show(sHome,'cut');set(sHome._img,{});
+ {c:1,f:'خانه',t:'صفحه اصلی <em>طلاکارت</em>',p:'موجودی طلا، موجودی نقدی و قیمت لحظه‌ای طلا در صفحه اصلی اپ به کاربر نمایش داده می‌شود.',d:3600,run(){mode('app');acct(1,CASH0);finger(0);show(sHome,'cut');set(sHome._img,{});
    A(sHome,[{opacity:0,transform:'scale(1.03)'},{opacity:1,transform:'none'}],{duration:900,fill:'backwards',delay:300});}},
 
- {c:2,f:'وارد کردن مقدار',t:'نیم گرم طلا؟ <em>چهار لمس</em>',p:'عدد با صفحه‌کلید خود اپ وارد می‌شود و هر رقم همان لحظه روی نمایشگر می‌نشیند.',d:5700,run(){mode('app');acct(1,CASH0);show(sHome,'cut');
+ {c:2,f:'وارد کردن مقدار',t:'وارد کردن <em>مقدار مورد نظر</em>',p:'کاربر مقدار طلای مورد نظر خود را به گرم یا تومان وارد می‌کند.',d:5700,run(){mode('app');acct(1,CASH0);show(sHome,'cut');
    trade('buy','kp');set(sT._kp,{transform:'translateY(400px)'});
    pressRegion(sHome,'home',190,294,113,37,12,300,()=>{show(sT,'push');A(sT._kp,[{transform:'translateY(400px)'},{transform:'translateY(-6px)',offset:.8},{transform:'none'}],{duration:760,delay:260})});
    typeSeq(['0','.','5','0'],'buy',2000,700);}},
- {c:2,f:'پلتفرم‌ها بالا می‌آیند',t:'دیجی‌کالا، <em>اولِ صف</em>',p:'کیبورد کنار می‌رود و قیمت پلتفرم‌ها بالا می‌آید. دیجی‌کالا اول فهرست است و خرید داخل طلاکارت انجام می‌شود.',d:5000,run(){mode('app');show(sT,'cut');trade('buy','kp');setAmt('0.50',false);keypadDown('buy',120);
+ {c:2,f:'پلتفرم‌ها بالا می‌آیند',t:'انتخاب پلتفرم <em>دیجی‌کالا</em>',p:'معادل قیمت طلای مورد نیاز کاربر با توجه به قیمت لحظه‌ای پلتفرم‌ها فهرست می‌شود.',d:5000,run(){mode('app');show(sT,'cut');trade('buy','kp');setAmt('0.50',false);keypadDown('buy',120);
    later(()=>tapAt(187,765,0,sT._pB._btn),3700);}},
- {c:2,f:'رسید خرید',t:'رسید، <em>تازه از دستگاه</em>',p:'برگه‌ی رسید از شیار بیرون می‌آید: قیمت لحظه‌ای، کارمزد و مبلغ پرداختی.',d:5200,run(){mode('app');show(sT,'cut');trade('buy','plat');finger(0);
+ {c:2,f:'رسید خرید',t:'جزئیات <em>سفارش خرید</em>',p:'قیمت لحظه‌ای، کارمزد و مبلغ پرداختی پیش از تکمیل خرید به کاربر نمایش داده می‌شود.',d:5200,run(){mode('app');show(sT,'cut');trade('buy','plat');finger(0);
    show(sRec,'sheet');printPaper(sRec,800);pressRegion(sRec,'receipt',16,756,343,48,14,3900);}},
- {c:2,f:'خرید موفق',t:'<em>چراغ سبز!</em>',p:'خرید ثبت شد و طلا در حساب کاربر نشست.',d:3800,run(){mode('app');finger(0);show(sDone,'fade',500);popPanel(sDone,150);}},
+ {c:2,f:'خرید موفق',t:'خرید <em>موفق</em>',p:'خرید ثبت می‌شود و طلای خریداری‌شده به موجودی کاربر اضافه خواهد شد.',d:3800,run(){mode('app');finger(0);show(sDone,'fade',500);popPanel(sDone,150);}},
 
- {c:3,f:'فروش',t:'حالا <em>برعکس</em>',p:'از زبانه‌ی فروش، همان صفحه‌کلید و همان چهار لمس. این بار پلتفرم‌های فروش بالا می‌آیند.',d:7500,run(){mode('app');acct(1.5,CASH_B);show(sDone,'cut');set(sDone._panel,{});set(sDone._btn,{});
+ {c:3,f:'فروش',t:'وارد کردن مقدار <em>طلای مورد نظر</em>',p:'کاربر از زبانه فروش، مقدار طلای مورد نظر یا معادل ریالی آن را برای فروش وارد می‌کند.',d:7500,run(){mode('app');acct(1.5,CASH_B);show(sDone,'cut');set(sDone._panel,{});set(sDone._btn,{});
    pressRegion(sDone,'done',16,760,343,40,12,300,()=>{show(sHome,'back')});
    later(()=>{trade('buy','kp');set(sT._kp,{transform:'translateY(400px)'})},1100);
    pressRegion(sHome,'home',190,294,113,37,12,1500,()=>{show(sT,'push');A(sT._kp,[{transform:'translateY(400px)'},{transform:'translateY(-6px)',offset:.8},{transform:'none'}],{duration:760,delay:260})});
    later(()=>tapAt(110,114,0,null,()=>{A(sT._topS,[{opacity:0},{opacity:1}],{duration:380});A(sT._topB,[{opacity:1},{opacity:0}],{duration:380});
      sT._kt.style.visibility='visible';A(sT._kt,[{opacity:0},{opacity:1}],{duration:380})}),3000);
    typeSeq(['0','.','2','0'],'sell',4100,620);}},
- {c:3,f:'پلتفرم‌های فروش',t:'باز هم <em>دیجی‌کالا اول</em>',p:'قیمت خرید هر پلتفرم کنار هم است. کاربر روی بهترین گزینه فروش را تمام می‌کند.',d:5000,run(){mode('app');show(sT,'cut');trade('sell','kp');setAmt('0.20',false);keypadDown('sell',120);
+ {c:3,f:'پلتفرم‌های فروش',t:'انتخاب پلتفرم <em>دیجی‌کالا</em>',p:'معادل قیمت طلای کاربر برای فروش با توجه به قیمت لحظه‌ای پلتفرم‌ها فهرست می‌شود.',d:5000,run(){mode('app');show(sT,'cut');trade('sell','kp');setAmt('0.20',false);keypadDown('sell',120);
    later(()=>tapAt(187,765,0,sT._pS._btn),3700);}},
- {c:3,f:'رسید فروش',t:'مبلغ دریافتی، <em>بدون حدس</em>',p:'رسید فروش با مبلغ دریافتی چاپ می‌شود و کاربر آن را تأیید می‌کند.',d:5000,run(){mode('app');show(sT,'cut');trade('sell','plat');finger(0);
+ {c:3,f:'رسید فروش',t:'جزئیات <em>سفارش فروش</em>',p:'قیمت لحظه‌ای، کارمزد و مبلغ دریافتی پیش از تکمیل فروش به کاربر نمایش داده می‌شود.',d:5000,run(){mode('app');show(sT,'cut');trade('sell','plat');finger(0);
    show(sSrec,'sheet');printPaper(sSrec,800);pressRegion(sSrec,'sellrec',16,756,343,48,14,3800);}},
- {c:3,f:'فروش موفق',t:'فروش <em>انجام شد</em>',p:'نتیجه روی نمایشگر تیره‌ی دستگاه می‌آید.',d:3600,run(){mode('app');finger(0);show(sSok,'fade',500);popPanel(sSok,150);}},
+ {c:3,f:'فروش موفق',t:'فروش <em>موفق</em>',p:'فروش ثبت می‌شود و مبلغ آن به موجودی نقدی کاربر اضافه خواهد شد.',d:3600,run(){mode('app');finger(0);show(sSok,'fade',500);popPanel(sSok,150);}},
 
- {c:4,f:'کارت هدف',t:'هر گرم، <em>یک قدم تا کارت</em>',p:'نوار «کارت هدف» در خانه با موجودی طلا پر می‌شود؛ ۱.۳ گرم یعنی بیش از نیمه‌ی راه تا کارت ۲ گرمی.',d:5800,run(){mode('app');setBal(1.3);setGoal(0);show(sSok,'cut');set(sSok._panel,{});set(sSok._btn,{});
+ {c:4,f:'کارت هدف',t:'طلاکارت <em>هدف</em>',p:'نوار کارت هدف با موجودی طلای کاربر پر می‌شود و فاصله تا دریافت طلاکارت مورد نظر را نشان می‌دهد.',d:5800,run(){mode('app');setBal(1.3);setGoal(0);show(sSok,'cut');set(sSok._panel,{});set(sSok._btn,{});
    pressRegion(sSok,'sellok',326,26,30,30,15,300,()=>show(sHome,'back'));
    animGoal(0,1.3,1500,1500);
    pressGoal(3700,()=>{set(sNot._sc,{});notEmpty();show(sNot,'push')});}},
- {c:4,f:'مسیر طلایی',t:'یک بازی کوچک: <em>مسیر طلایی</em>',p:'با ۱.۳ گرم، کارت ۲ گرمی تا همین‌جا پر شده؛ ۰.۷ گرم تا تحویلش مانده.',d:4000,run(){mode('app');setBal(1.3);sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);
+ {c:4,f:'مسیر طلایی',t:'مسیر <em>طلایی</em>',p:'ترغیب کاربر برای خرید طلای بیشتر تا دریافت طلاکارت بعدی.',d:4000,run(){mode('app');setBal(1.3);sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);
    const {lt,hide,ln}=notEmpty();later(()=>{ln.style.opacity=1},450);
    const n=40,ez=t=>1-Math.pow(1-t,3);for(let i=1;i<=n;i++)later(()=>{const h=110*(1-ez(i/n));lt.style.height=h+'px';ln.style.top=(339.5+h-.5)+'px';if(i===n){lt.remove();hide.remove();ln.remove()}},500+i*1700/n);}},
- {c:4,f:'انتخاب کارت پرشده',t:'کارتی که پر شده، <em>آماده‌ی تحویل</em>',p:'کاربر کارت ۱ گرمی را که موجودی‌اش کامل است انتخاب می‌کند؛ تحویلش همین حالا باز است.',d:5000,run(){mode('app');setBal(1.3);sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);
+ {c:4,f:'انتخاب کارت پرشده',t:'انتخاب <em>طلاکارت آماده</em>',p:'همچنین کاربر می‌تواند کارت‌هایی را که با موجودی او همخوانی دارد دریافت کند.',d:5000,run(){mode('app');setBal(1.3);sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);
    later(()=>{const c=L(sNot._sc,'cardnotyet',109,172,28,37.5);c.style.borderRadius='6px';c.style.zIndex=5;tapAt(232,190.5,0,c,()=>later(()=>c.remove(),600))},400);
    notPick(1100);
    later(()=>A(sNot._sc,[{transform:'none'},{transform:'translateY(-106px)'}],{duration:1300,easing:EIO}),3400);}},
- {c:4,f:'نزدیک‌ترین طلاپرداز',t:'نزدیک‌ترین <em>طلاپرداز</em>',p:'نقشه باز می‌شود و روی نزدیک‌ترین طلاپرداز فعال زوم می‌کند.',d:5200,run(){mode('app');setBal(1.3);notPicked();set(sNot._sc,{transform:'translateY(-106px)'});show(sNot,'cut');set(sBr._map,{});
+ {c:4,f:'نزدیک‌ترین طلاپرداز',t:'نزدیک‌ترین <em>طلاپرداز</em>',p:'نقشه باز می‌شود و با توجه به موقعیت فعلی کاربر، نزدیک‌ترین طلاپرداز به او نمایش داده می‌شود.',d:5200,run(){mode('app');setBal(1.3);notPicked();set(sNot._sc,{transform:'translateY(-106px)'});show(sNot,'cut');set(sBr._map,{});
    later(()=>{const c=L(sNot._sc,'cardready',48,834,280,36);c.style.borderRadius='14px';c.style.zIndex=5;tapAt(187,746,0,c,()=>{show(sBr,'push');later(()=>c.remove(),800)})},300);
    later(()=>A(sBr._map,[{transform:'none'},{transform:MAPZ}],{duration:1900,easing:EIO}),2300);}},
- {c:4,f:'طلاپرداز روی نقشه',t:'از نقشه، <em>تا خود طلاپرداز</em>',p:'با لمس طلاپرداز روی نقشه، دوربین عقب می‌کشد تا اپ و دستگاه با هم دیده شوند و مسیر تا طلاپرداز کشیده می‌شود.',d:3700,run(){mode('app');setBal(1.3);setGoal(1.3);show(sBr,'cut');set(sBr._map,{transform:MAPZ});finger(0);
+ {c:4,f:'طلاپرداز روی نقشه',t:'تحویل طلاکارت <em>از طلاپرداز</em>',p:'با انتخاب نزدیک‌ترین طلاپرداز، کاربر می‌تواند آدرس و جزئیات دسترسی به طلاپرداز را مشاهده کند.',d:3700,run(){mode('app');setBal(1.3);setGoal(1.3);show(sBr,'cut');set(sBr._map,{transform:MAPZ});finger(0);
    {const [px,py]=toSw(sBr,167,478);tapAt(px,py,350,null,swoopGo)}}},
 
  {c:6,f:'پایان',d:4600,run(){mode('close');finger(0);$('#tag').innerHTML='یک اتصال، <span>سه سرویس</span>';$('#sub').textContent='خرید، فروش و تحویل فیزیکی برای کاربران دیجی‌کالا';
@@ -272,8 +273,7 @@ const S_APP=[
 /* ---------- Talapardaz kiosk ---------- */
 const KS=.515137, KOY=547+44;              // screen scale and top inside the kiosk image
 const kio=$('#kio'), kw=$('#kw'), kfg=$('#kfg');
-function kHead(g){const k=KL.k3;let h=k._hd;if(!h){h=document.createElement('div');h.style.cssText='position:absolute;left:792px;top:68px;width:122px;height:52px;background:#242426;display:flex;align-items:center;justify-content:flex-end;gap:10px;direction:rtl;font-size:40px;white-space:nowrap';k.appendChild(h);k._hd=h}
-  h.innerHTML=`<b style="color:#E7C569;font-weight:800;direction:ltr;unicode-bidi:isolate">${fa(g.toFixed(1))}</b><span style="color:#fff;font-weight:500">گرم</span>`;h.style.flexDirection='row'}
+function kHead(g){} /* the kiosk header no longer shows a name or balance */
 const KL={};['k1','k1e','k2','k3','k4','k5','k6','k7','k8','k9','k10','kn','kd','k7b'].forEach(k=>{const d=document.createElement('div');d.className='kl';const im=document.createElement('img');im.src=IMG[k];im.alt='';d.appendChild(im);kw.appendChild(d);KL[k]=d});
 $('#kimg').src=IMG.kiosk;$('#kcardImg').src=IMG.card;
 const KV={full:{cx:720,cy:1700,h:3300},head:{cx:720,cy:1150,h:2100},type:{cx:720,cy:1460,h:2400},base:{cx:720,cy:3050,h:2500},card:{cx:1019,cy:3440,h:900}};
@@ -330,31 +330,31 @@ const S_K=[
    A($('#tDK'),[{transform:'translateX(-140px) rotate(6deg)',opacity:0},{transform:'none',opacity:1}],{duration:1000,fill:'none'});
    A($('#xm'),[{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'none'}],{duration:500,delay:750,fill:'backwards'});
    ['#tag','#sub'].forEach((x,i)=>A($(x),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:1000+i*220,fill:'backwards'}));}},
- {c:1,f:'کارت بانکی',t:'کارت بانکی، <em>در شیار</em>',p:'کاربر کارت بانکی‌اش را وارد طلاپرداز می‌کند تا هویتش تأیید شود.',d:4500,run(){kprep('full','k1');later(()=>kcam('head',1800),400);
+ {c:1,f:'کارت بانکی',t:'خرید طلای فیزیکی <em>با کارت بانکی</em>',p:'کاربر کارت بانکی خود را وارد کرده تا فرایند خرید و یا تحویل طلاکارت آغاز شود.',d:4500,run(){kprep('full','k1');later(()=>kcam('head',1800),400);
    later(()=>{kshow('k1e','cut');const c=document.createElement('div');c.className='kpr';c.style.cssText='position:absolute;left:726px;top:803px;width:574px;height:470px;overflow:hidden;border-radius:0';
      const im=document.createElement('div');im.style.cssText=`position:absolute;left:0;top:0;width:574px;height:470px;background:url(${IMG.k1}) -726px -803px/2048px 1536px no-repeat`;c.appendChild(im);KL.k1e.appendChild(c);
      A(im,[{transform:'none'},{transform:'translateY(-470px)'}],{duration:1300,easing:'cubic-bezier(.6,0,.35,1)',fill:'forwards'}).onfinish=()=>c.remove()},2300);}},
- {c:1,f:'رمز کارت',t:'چهار رقم، <em>روی دستگاه</em>',p:'رمز کارت با صفحه‌کلید فیزیکی خود طلاپرداز وارد می‌شود.',d:5100,run(){kprep('head','k1e');later(()=>kcam('type',1800),380);
+ {c:1,f:'رمز کارت',t:'خرید طلای فیزیکی <em>با کارت بانکی</em>',p:'کاربر کارت بانکی خود را وارد کرده تا فرایند خرید و یا تحویل طلاکارت آغاز شود.',d:5100,run(){kprep('head','k1e');later(()=>kcam('type',1800),380);
    later(()=>kshow('k2'),150);later(()=>{const f=kfield('k2',852,138);ktype('k2',f,'4821',true,0,520)},2200);}},
- {c:1,f:'انتخاب خدمت',t:'خرید <em>طلاکارت</em>',p:'از منوی طلاپرداز، کاربر خرید طلاکارت را انتخاب می‌کند.',d:4100,run(){kprep('type','k2');later(()=>kcam('head',1800),380);
+ {c:1,f:'انتخاب خدمت',t:'انتخاب خدمت <em>خرید طلاکارت</em>',p:'از منوی طلاپرداز، کاربر خرید طلاکارت را انتخاب می‌کند.',d:4100,run(){kprep('type','k2');later(()=>kcam('head',1800),380);
    later(()=>kshow('k3'),150);kbtn('k3',1324,728,724,190,2300);}},
- {c:2,f:'شماره همراه',t:'شماره همراه، <em>رقم به رقم</em>',p:'شماره‌ی همراه وارد می‌شود تا کد تأیید برایش پیامک شود.',d:5900,run(){kprep('head','k3');later(()=>kcam('type',1800),380);
+ {c:2,f:'شماره همراه',t:'احراز از طریق <em>شماره همراه</em>',p:'شماره همراه وارد می‌شود تا کد یک‌بارمصرف به همان شماره ارسال شود.',d:5900,run(){kprep('head','k3');later(()=>kcam('type',1800),380);
    later(()=>kshow('k4'),150);later(()=>{const f=kfield('k4',848,140);ktype('k4',f,'09123456789',false,0,300)},2200);}},
- {c:2,f:'کد تأیید',t:'کد پیامک، <em>تأیید شد</em>',p:'کد یک‌بارمصرف روی همان صفحه‌کلید وارد می‌شود.',d:3800,run(){kprep('type','k4');
+ {c:2,f:'کد تأیید',t:'احراز از طریق <em>شماره همراه</em>',p:'شماره همراه وارد می‌شود تا کد یک‌بارمصرف به همان شماره ارسال شود.',d:3800,run(){kprep('type','k4');
    later(()=>kshow('k5'),150);later(()=>{const f=kfield('k5',860,140);f.style.letterSpacing='.35em';ktype('k5',f,'48291',false,0,380)},700);}},
- {c:3,f:'انتخاب طلاکارت',t:'طلاکارت <em>۲ گرمی</em>',p:'کاربر وزن کارت را انتخاب می‌کند؛ قیمت هر کارت کنارش است.',d:4100,run(){kprep('type','k5');later(()=>kcam('head',1800),380);
+ {c:3,f:'انتخاب طلاکارت',t:'انتخاب وزن <em>طلاکارت</em>',p:'کاربر وزن کارت مورد نظر خود را از بین گزینه‌های موجود انتخاب می‌کند.',d:4100,run(){kprep('type','k5');later(()=>kcam('head',1800),380);
    later(()=>kshow('k6'),150);kbtn('k6',1106,895,942,190,2300);}},
- {c:3,f:'انتخاب پلتفرم',t:'دیجی‌کالا، <em>اولِ فهرست</em>',p:'پلتفرمی که کاربر در آن حساب طلا دارد؛ دیجی‌کالا اولین گزینه است.',d:3600,run(){kprep('head','k6');
+ {c:3,f:'انتخاب پلتفرم',t:'دیجی‌کالا، <em>اولین پلتفرم</em>',p:'انتخاب پلتفرم مورد نظر کاربر با توجه به وزن طلاکارت انتخاب‌شده و قیمت اعلام‌شده.',d:3600,run(){kprep('head','k6');
    later(()=>kshow('k7'),150);kbtn('k7',1106,686,942,192,1400);}},
- {c:3,f:'تأیید و پرداخت',t:'یک نگاه، <em>یک تأیید</em>',p:'وزن، کارمزد و هزینه‌ی نهایی پیش از پرداخت روی صفحه است.',d:3600,run(){kprep('head','k7');
+ {c:3,f:'تأیید و پرداخت',t:'جزئیات <em>سفارش کاربر</em>',p:'نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر.',d:3600,run(){kprep('head','k7');
    later(()=>kshow('k8'),150);kbtn('k8',1244,1296,804,190,1600);}},
- {c:3,f:'در حال بررسی',t:'لطفاً <em>منتظر بمانید…</em>',p:'طلاپرداز درخواست را با حساب دیجی‌کالای کاربر بررسی می‌کند.',d:2800,run(){kprep('head','k8');later(()=>kshow('k9'),150);
+ {c:3,f:'در حال بررسی',t:'پردازش و <em>تحویل کارت</em>',p:'طلاپرداز کارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد.',d:2800,run(){kprep('head','k8');later(()=>kshow('k9'),150);
    later(()=>{const c=document.createElement('div');c.style.cssText=`position:absolute;left:820px;top:360px;width:360px;height:500px;background:url(${IMG.k9}) -820px -360px/2048px 1536px no-repeat`;KL.k9.appendChild(c);
      A(c,[{transform:'translateY(0) rotate(0)'},{transform:'translateY(-18px) rotate(-1.5deg)'},{transform:'translateY(0) rotate(0)'}],{duration:1600,iterations:2,easing:'ease-in-out',fill:'none'})},300);}},
- {c:4,f:'دریافت طلاکارت',t:'کارت طلا، <em>از دستگاه</em>',p:'طلاکارت ۲ گرمی از شیار طلاپرداز بیرون می‌آید.',d:4500,run(){kprep('head','k9');later(()=>kshow('k10'),150);
+ {c:4,f:'دریافت طلاکارت',t:'پردازش و <em>تحویل کارت</em>',p:'طلاپرداز کارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد.',d:4500,run(){kprep('head','k9');later(()=>kshow('k10'),150);
    later(()=>kcam('base',1700),1100);
    later(()=>{const c=$('#kcard');A(c,[{transform:'translateY(-332px)'},{transform:'translateY(6px)',offset:.85},{transform:'none'}],{duration:1500,easing:'cubic-bezier(.25,.8,.3,1)',fill:'forwards'})},2700);}},
- {c:4,f:'کارت در دست',t:'طلای واقعی، <em>در دست</em>',p:'کارت پلمب‌شده با قابلیت اصالت‌سنجی؛ همان طلایی که در دیجی‌کالا خریده شد.',d:4600,run(){mode('app');kshow('k10','cut');kfg.style.opacity=0;
+ {c:4,f:'کارت در دست',t:'طلاکارت، <em>جریان طلا</em>',p:'با دریافت طلاکارت، کاربر در جریان واقعی طلاکارت قرار خواهد گرفت.',d:4600,run(){mode('app');kshow('k10','cut');kfg.style.opacity=0;
    const c=$('#kcard');c.getAnimations().forEach(a=>a.cancel());c.style.transform='none';kcam('base',0);
    kcam('card',1500);
    later(()=>{$('#kcard .sh').animate([{backgroundPosition:'120% 0'},{backgroundPosition:'-20% 0'}],{duration:1400,easing:'ease-in-out'})},1450);}},
@@ -372,23 +372,23 @@ const S_D=[
    ['#tag','#sub'].forEach((x,i)=>A($(x),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:1000+i*220,fill:'backwards'}));}},
  {...S_K[1],c:1},
  {...S_K[2],c:1},
- {c:2,f:'تحویل طلاکارت',t:'تحویل <em>طلاکارت</em>',p:'از منوی طلاپرداز، کاربر تحویل طلاکارت را انتخاب می‌کند.',d:4300,run(){kprep('type','k2');later(()=>kcam('head',1800),380);
+ {c:2,f:'تحویل طلاکارت',t:'تبدیل طلای دیجیتال <em>به فیزیکی</em>',p:'کاربران دیجی‌کالا می‌توانند موجودی طلای آنلاین خود را به صورت فیزیکی تحویل بگیرند.',d:4300,run(){kprep('type','k2');later(()=>kcam('head',1800),380);
    later(()=>kshow('k3'),150);kbtn('k3',1324,952,724,192,2300);}},
- {c:2,f:'انتخاب پلتفرم',t:'طلا در <em>دیجی‌کالا</em>',p:'پلتفرمی که طلای کاربر در آن نگه‌داری می‌شود؛ دیجی‌کالا اول فهرست است.',d:3600,run(){kprep('head','k3');
+ {c:2,f:'انتخاب پلتفرم',t:'انتخاب پلتفرم <em>دیجی‌کالا</em>',p:'کاربران با توجه به دارایی خود، پلتفرم مورد نظر را انتخاب خواهند کرد.',d:3600,run(){kprep('head','k3');
    later(()=>kshow('k7'),150);kbtn('k7',1106,686,942,192,1400);}},
- {c:2,f:'انتخاب طلاکارت',t:'از موجودی، <em>۲ گرم</em>',p:'کاربر وزن کارتی را که می‌خواهد از موجودی‌اش تحویل بگیرد انتخاب می‌کند.',d:3400,run(){kprep('head','k7');
+ {c:2,f:'انتخاب طلاکارت',t:'انتخاب وزن <em>طلاکارت</em>',p:'با توجه به دارایی آنلاین کاربر، ایشان گزینه مورد نظر خود را از بین کارت‌های موجود انتخاب خواهد کرد.',d:3400,run(){kprep('head','k7');
    later(()=>kshow('k6'),150);kbtn('k6',1106,895,942,190,1400);}},
- {c:3,f:'کد ملی',t:'کد ملی، <em>برای اطمینان</em>',p:'کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.',d:6300,run(){kprep('head','k6');later(()=>kcam('type',1800),380);
+ {c:3,f:'کد ملی',t:'احراز از طریق <em>کد ملی</em>',p:'به جهت عدم ذخیره‌سازی اطلاعات کاربران دیجی‌کالا، کد ملی تحویل‌گیرنده به همراه وزن انتخاب‌شده به پلتفرم دیجی‌کالا ارسال خواهد شد.',d:6300,run(){kprep('head','k6');later(()=>kcam('type',1800),380);
    later(()=>kshow('kn'),150);later(()=>{const f=kfield('kn',915,144);ktype('kn',f,'0018273645',false,0,300)},2200);}},
- {c:3,f:'تأیید تحویل',t:'یک نگاه، <em>یک تأیید</em>',p:'وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.',d:4500,run(){kprep('type','kn');later(()=>kcam('head',1800),380);
+ {c:3,f:'تأیید تحویل',t:'جزئیات <em>سفارش کاربر</em>',p:'نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر.',d:4500,run(){kprep('type','kn');later(()=>kcam('head',1800),380);
    later(()=>kshow('kd'),150);kbtn('kd',1244,1296,804,190,2400);}},
- {c:3,f:'کد پیامک',t:'کد پیامک، <em>تأیید شد</em>',p:'کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.',d:5100,run(){kprep('head','kd');later(()=>kcam('type',1800),380);
+ {c:3,f:'کد پیامک',t:'ارسال کد از طریق <em>دیجی‌کالا</em>',p:'پس از احراز موفقیت‌آمیز کاربر و بررسی دارایی او، دیجی‌کالا کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد.',d:5100,run(){kprep('head','kd');later(()=>kcam('type',1800),380);
    later(()=>kshow('k5'),150);later(()=>{const f=kfield('k5',860,140);f.style.letterSpacing='.35em';ktype('k5',f,'48291',false,0,380)},2200);}},
- {c:4,f:'در حال بررسی',t:'لطفاً <em>منتظر بمانید…</em>',p:'طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.',d:3900,run(){kprep('type','k5');later(()=>kcam('head',1800),380);later(()=>kshow('k9'),150);
+ {c:4,f:'در حال بررسی',t:'پردازش و <em>تحویل کارت</em>',p:'طلاپرداز کارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد.',d:3900,run(){kprep('type','k5');later(()=>kcam('head',1800),380);later(()=>kshow('k9'),150);
    later(()=>{const c=document.createElement('div');c.style.cssText=`position:absolute;left:820px;top:360px;width:360px;height:500px;background:url(${IMG.k9}) -820px -360px/2048px 1536px no-repeat`;KL.k9.appendChild(c);
      A(c,[{transform:'translateY(0) rotate(0)'},{transform:'translateY(-18px) rotate(-1.5deg)'},{transform:'translateY(0) rotate(0)'}],{duration:1600,iterations:2,easing:'ease-in-out',fill:'none'})},300);}},
- {...S_K[10],c:4,t:'طلاکارت، <em>از دستگاه</em>',p:'طلاکارت ۲ گرمی از شیار طلاپرداز تحویل داده می‌شود.'},
- {...S_K[11],c:4,p:'کارت پلمب‌شده با قابلیت اصالت‌سنجی؛ همان طلایی که در دیجی‌کالا داشت.'},
+ {...S_K[10],c:4},
+ {...S_K[11],c:4},
  {c:5,f:'پایان',d:4200,run(){mode('close');$('#tag').innerHTML='طلای دیجی‌کالا، <span>به شکل طلاکارت</span>';$('#sub').textContent='تحویل فیزیکی در شبکه‌ی طلاپردازهای طلاکارت';
    ['#tag','#sub'].forEach((x,i)=>A($(x),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:400+i*220,fill:'backwards'}));}},
 ];
@@ -489,14 +489,14 @@ function swoopGo(){const m=document.createElement('div');m.style.cssText='positi
   later(()=>show(sHome,'back'),1700)}
 function appK(){kHead(1.3);setDuo('k');setBal(1.3);setGoal(1.3);show(sHome,'cut');finger(0);const ci=$('#kcardImg');ci.src=IMG.card1;ci.style.borderRadius='13px'}
 const S_APPK=[
- {c:5,f:'تحویل طلاکارت',t:'تحویل <em>طلاکارت</em>',p:'کاربر با ۱.۳ گرم موجودی به طلاپرداز رسیده؛ اپ کنار دستگاه، تحویل را از منو انتخاب می‌کند.',d:2900,run(){appK();kprep('head','k3');
+ {c:5,f:'تحویل طلاکارت',t:'تبدیل طلای دیجیتال <em>به فیزیکی</em>',p:'کاربر با ۱.۳ گرم موجودی به طلاپرداز رسیده و از منوی دستگاه، تحویل طلاکارت را انتخاب می‌کند.',d:2900,run(){appK();kprep('head','k3');
    kbtn('k3',1324,952,724,192,700);}},
- {c:5,f:'انتخاب پلتفرم',t:'این بار از <em>خود طلاکارت</em>',p:'موجودی این کاربر در اپ طلاکارت است؛ دیجی‌کالا همچنان اول فهرست است و طلاکارت هم یکی از پلتفرم‌هاست.',d:3600,run(){appK();kprep('head','k3');later(()=>kshow('k7b'),150);kbtn('k7b',0,686,942,192,1400);}},
- {c:5,f:'انتخاب طلاکارت',t:'طلاکارت <em>۱ گرمی</em>',p:'همان کارتی که در مسیر طلایی پر شده بود، روی دستگاه انتخاب می‌شود.',d:3400,run(){appK();kprep('head','k7b');later(()=>kshow('k6'),150);kbtn('k6',0,615,940,190,1400);}},
+ {c:5,f:'انتخاب پلتفرم',t:'انتخاب پلتفرم <em>طلاکارت</em>',p:'با توجه به اینکه موجودی طلای کاربر در شبکه طلاکارت است، پلتفرم انتخاب‌شده نیز طلاکارت خواهد بود.',d:3600,run(){appK();kprep('head','k3');later(()=>kshow('k7b'),150);kbtn('k7b',0,686,942,192,1400);}},
+ {c:5,f:'انتخاب طلاکارت',t:'انتخاب وزن <em>طلاکارت</em>',p:'کاربر با توجه به موجودی طلای دیجیتال خود، کارت مورد نظر خود را انتخاب می‌کند.',d:3400,run(){appK();kprep('head','k7b');later(()=>kshow('k6'),150);kbtn('k6',0,615,940,190,1400);}},
  {...S_D[6],c:5,run(){appK();S_D[6].run()}},
- {...S_D[8],c:5,run(){appK();S_D[8].run();kcam('type',0);kcur=null;kshow('kn','cut');kfillStatic('kn')}},
+ {...S_D[8],c:5,t:'ارسال کد از طریق <em>طلاکارت</em>',p:'پس از احراز موفقیت‌آمیز کاربر و بررسی دارایی او، طلاکارت کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد.',run(){appK();S_D[8].run();kcam('type',0);kcur=null;kshow('kn','cut');kfillStatic('kn')}},
  {...S_D[9],c:5,run(){appK();S_D[9].run()}},
- {c:5,f:'دریافت و بازگشت',t:'کارت در دست، <em>موجودی به‌روز</em>',p:'طلاکارت ۱ گرمی بیرون می‌آید و همان ۱ گرم از موجودی اپ جدا می‌شود و در کارت می‌نشیند.',d:7600,run(){appK();kprep('head','k9');
+ {c:5,f:'دریافت و بازگشت',t:'کسر موجودی طلا <em>در اپ</em>',p:'پس از تحویل کارت، ۱ گرم از موجودی طلای کاربر در اپ طلاکارت کسر خواهد شد.',d:7600,run(){appK();kprep('head','k9');
    later(()=>kshow('k10'),150);later(()=>kcam('base',1500),500);
    later(()=>A($('#kcard'),[{transform:'translateY(-332px)'},{transform:'translateY(6px)',offset:.85},{transform:'none'}],{duration:1400,easing:'cubic-bezier(.25,.8,.3,1)',fill:'forwards'}),1700);
    later(()=>{setDuo('p');kcam({cx:740,cy:2700,h:2900},1000)},2900);
@@ -506,11 +506,11 @@ const S_APPK=[
 S_APP.splice(S_APP.findIndex(x=>x.c===6),0,...S_APPK);
 const CH_KM=[{n:'۰۰',t:'معرفی'},{n:'۰۱',t:'ورود'},{n:'۰۲',t:'تأیید شماره'},{n:'۰۳',t:'خرید'},{n:'۰۴',t:'دریافت کارت'},{n:'۰۵',t:'تحویل از موجودی'},{n:'۰۶',t:'جمع‌بندی'}];
 const S_KM=[...S_K.slice(0,12),
- {c:5,f:'تحویل طلاکارت',t:'این بار، <em>تحویل از موجودی</em>',p:'کاربری که در دیجی‌کالا طلا دارد، از همین منو تحویل طلاکارت را انتخاب می‌کند.',d:5000,run(){kprep('card','k10');const c=$('#kcard');c.style.transform='none';
+ {c:5,f:'تحویل طلاکارت',t:'تبدیل طلای دیجیتال <em>به فیزیکی</em>',p:'کاربران دیجی‌کالا می‌توانند موجودی طلای آنلاین خود را به صورت فیزیکی تحویل بگیرند.',d:5000,run(){kprep('card','k10');const c=$('#kcard');c.style.transform='none';
    later(()=>A(c,[{transform:'none',opacity:1},{transform:'translateY(60px)',opacity:0}],{duration:700,easing:EIN}),250);
    later(()=>kcam('head',1700),800);later(()=>kshow('k3'),1700);kbtn('k3',1324,952,724,192,3200);}},
  ...S_D.slice(4,11).map(st=>({...st,c:5})),
- {c:5,f:'موجودی دیجی‌کالا',t:'در دیجی‌کالا هم، <em>کسر شد</em>',p:'۲ گرم از دارایی دیجی‌کالا جدا می‌شود و در کارت می‌نشیند؛ طلا گم نمی‌شود، از حساب به دست می‌رسد.',d:6000,run(){kprep('base','k10');$('#kcard').style.transform='none';setDk(2.5);
+ {c:5,f:'موجودی دیجی‌کالا',t:'کسر موجودی طلا <em>در دیجی‌کالا</em>',p:'پس از تحویل کارت، دارایی کاربر در دیجی‌کالا کسر خواهد شد.',d:6000,run(){kprep('base','k10');$('#kcard').style.transform='none';setDk(2.5);
    later(()=>{setDuo('dk');kcam({cx:980,cy:3330,h:1600},1100);A(dkb,[{opacity:0,transform:'translateX(-30px) scale(.94)'},{opacity:1,transform:'none'}],{duration:900,delay:350,easing:ZOUT,fill:'both'})},150);
    grainFlow($('#dkG'),$('#kcard'),1500,9,1150,130);
    later(()=>A($('#kcard'),[{filter:'drop-shadow(0 18px 22px #00000055)'},{filter:'drop-shadow(0 18px 22px #00000055) drop-shadow(0 0 26px #E7C569cc)',offset:.55},{filter:'drop-shadow(0 18px 22px #00000055)'}],{duration:2400,easing:'ease-in-out'}),1900);
@@ -547,7 +547,7 @@ function openMenu(){clearT();clearTimeout(adv);playing=false;setPlayIcon(false);
   document.querySelectorAll('.pick').forEach((e,i)=>A(e,[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'none'}],{duration:700,delay:150+i*120,fill:'backwards'}))}
 function startApp(k='app'){useDeck(typeof k==='string'?k:'app');document.body.classList.remove('menu');playing=true;setPlayIcon(true);lastCap='';$('#capT').innerHTML='';go(0)}
 $('#pkApp').onclick=()=>startApp('app');$('#bMenu').onclick=openMenu;
-$('#pkAtm').onclick=()=>startApp('kiosk');$('#pkTcImg').src=IMG.card;
+$('#pkAtm').onclick=()=>startApp('kiosk');$('#pkGcImg').src=IMG.card;$('#pkTcImg').src=IMG.logo3d;
 $('#bPlay').onclick=()=>setPlay(!playing);document.querySelectorAll('button').forEach(b=>b.addEventListener('mousedown',e=>e.preventDefault()));
 addEventListener('keyup',e=>{if(e.code==='Space'&&e.target.tagName==='BUTTON')e.preventDefault()});$('#cNext').onclick=()=>go(idx+1);$('#bPrev').onclick=()=>go(idx-1);
 addEventListener('keydown',e=>{if(document.body.classList.contains('menu')){if(e.key==='Enter'&&document.activeElement===document.body)startApp();return}

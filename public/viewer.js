@@ -170,12 +170,12 @@ setInterval(async()=>{
   const id=scene().id,before=JSON.stringify(scene());project=next;contentETag=etag;
   if(!project.decks.some(d=>d.id===deckId))deckId=project.activeDeck;
   index=Math.max(0,deck().scenes.findIndex(s=>s.id===id));renderDecks();renderFlow();
-  if(JSON.stringify(scene())!==before)choose(index);else updateProgress();if(homePicker?.visible)setPlaying(false);
+  if(JSON.stringify(scene())!==before)choose(index);else updateProgress();if(homePicker?.visible){homePicker.refresh();setPlaying(false);}
  }catch{}finally{refreshing=false}
 },5000);
 
 function setupHome(){
- homePicker=mountHomePicker(project,id=>{
+ homePicker=mountHomePicker(()=>project,id=>{
   const url=new URL(location.href);url.searchParams.set('deck',id);if(url.hash==='#home')url.hash='';window.history.pushState(null,'',url);enterDeck(id);
  });
  function enterDeck(id){homePicker.hide();deckId=id;index=0;renderDecks();choose(0);resizeStage();requestAnimationFrame(()=>{$('#stage').tabIndex=-1;$('#stage').focus({preventScroll:true})})}

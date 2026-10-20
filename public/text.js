@@ -38,6 +38,7 @@ export function renderRuns(el,runs,highlight='',accent=''){
 export function renderTitle(el,scene){formatElement(el,scene.titleFormat);renderRichContent(el,scene.titleRuns||[{text:scene.title}],scene.titleFormat,scene.highlight,scene.accent)}
 export function renderDescription(root,container,scene,mode,legacy=false){
  root.querySelectorAll(':scope > .placed-text').forEach(el=>el.remove());container.replaceChildren();
+ if(scene.table){renderSceneTable(container,scene.table);return}
  const computed=getComputedStyle(container),blocks=textBlocks(scene),explicit=Array.isArray(scene.textBlocks);
  for(const block of blocks){
   const el=container.ownerDocument.createElement(explicit?'div':'span');el.className='scene-text-box rich-text-block'+(explicit?'':' original-flow');el.dataset.textBlock=block.id;
@@ -61,4 +62,10 @@ export function renderRichContent(el,runs,format={},highlight='',accent=''){
   list.append(item);offset+=lineText.length+1;
  }
  el.replaceChildren(list);
+}
+
+export function renderSceneTable(container,model){
+ const table=container.ownerDocument.createElement('table');table.className='ownership-table';
+ const head=table.createTHead().insertRow();for(const label of model.columns){const cell=container.ownerDocument.createElement('th');cell.scope='col';cell.textContent=label;head.append(cell)}
+ const body=table.createTBody();for(const row of model.rows){const tr=body.insertRow();row.forEach((value,i)=>{const cell=container.ownerDocument.createElement(i===0?'th':'td');if(i===0)cell.scope='row';cell.textContent=value;tr.append(cell)})}container.append(table);
 }
