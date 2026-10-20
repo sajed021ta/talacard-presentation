@@ -9,3 +9,6 @@ content.backup.json
 .env.*
 .private/
 .site-build/
+
+# Restored lossless video; its original bytes are tracked in video-archive/.
+/public/media/upload-2522b8c6-60f8-475e-a530-063d2a74ddeb.mp4

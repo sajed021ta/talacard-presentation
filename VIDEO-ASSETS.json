@@ -1,0 +1,317 @@
+{
+  "count": 37,
+  "totalBytes": 909275930,
+  "files": [
+    {
+      "path": "public/media/access-door.mp4",
+      "bytes": 27243719,
+      "sha256": "59e1ce1df5f7bc14ea9bc9dd4253d3c8d27404b4e429ff464aaa35cd1403e2c1",
+      "gitBlobSha": "5e56bc9e3b7c1aea0cb0d5d85d22369d7b9a7816",
+      "name": "از آنلاین به فیزیکی",
+      "originalName": "The door in front of the man is closed at the beginning, then slowly opens inward with a smooth and.mp4"
+    },
+    {
+      "path": "public/media/atm.mp4",
+      "bytes": 1994473,
+      "sha256": "8a183dd14bc4201ace48dfbbc380b92bb0a829608c94d81e287f852097ef859f",
+      "gitBlobSha": "9391b7db660d0b53944c7967752c34a760ea6451",
+      "name": "طلاپرداز",
+      "originalName": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the (1).mp4"
+    },
+    {
+      "path": "public/media/closing.mp4",
+      "bytes": 22538399,
+      "sha256": "4aee7a56af90b7c40521daee975314c8f9521f841242babe01f0674e8695a18a",
+      "gitBlobSha": "548d5357e1251f67011ad6b331a864e3229f4cfb",
+      "name": "شبکهٔ مشترک",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an.mp4"
+    },
+    {
+      "path": "public/media/digital-platform.mp4",
+      "bytes": 8479021,
+      "sha256": "3dd7154afd7d88380c95a27c9cf003a50349d019993493929b397ac640f7a97e",
+      "gitBlobSha": "71d97f96ce13c88abb6205c414236c6aecffa42d",
+      "name": "بستر دیجیتال",
+      "originalName": "Start with a single browser window. Then the window smoothly flips and unfolds into multiple layered.mp4"
+    },
+    {
+      "path": "public/media/infrastructure.mp4",
+      "bytes": 20762837,
+      "sha256": "309c605e66935f83fd83666c4099d7cb560d16c60f207fd6f47fecc9898b0ee5",
+      "gitBlobSha": "001c9f37c43ae1214d14d313ad7d5f7c861f9da9",
+      "name": "زیرساخت طلایی",
+      "originalName": "animation.mp4"
+    },
+    {
+      "path": "public/media/intro.mp4",
+      "bytes": 23014395,
+      "sha256": "2a3d39266b0bd0046adf4ab05b1dd580d517dda82346333110310292e14e3249",
+      "gitBlobSha": "2f45257a9478fab2973bdec518c77e5a1eb6086d",
+      "name": "معرفی طلاکارت",
+      "originalName": "Create a premium cinematic 3D product animation using the provided image as the exact starting frame.mp4"
+    },
+    {
+      "path": "public/media/partnership.mp4",
+      "bytes": 22946810,
+      "sha256": "c215f32c1ad6469a3f7ea6c16b99e50f1eb79938b5979e933718925f63f67ffa",
+      "gitBlobSha": "a55f9a257847ccef931848d206c6466f775e394b",
+      "name": "شبکهٔ همکاری",
+      "originalName": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4"
+    },
+    {
+      "path": "public/media/physical-access.mp4",
+      "bytes": 19135177,
+      "sha256": "3477897c64512eb103c39ead2e9546e273750a2122ccba6e8b19ca9e8f4427da",
+      "gitBlobSha": "09b0876a9c1b11da4cbe7845ed86750e32e924db",
+      "name": "دسترسی فیزیکی",
+      "originalName": "Keep the transparent blocks in a smooth loop motion at the bottom, with very subtle movement. The da.mp4"
+    },
+    {
+      "path": "public/media/three-paths.mp4",
+      "bytes": 19640337,
+      "sha256": "70679f005cf8cf8abd2489a2ccb324387b27345850685ff6cc33d586c3c40e03",
+      "gitBlobSha": "2d2e439ccb95563e596e5379b24bd09b22f23c94",
+      "name": "سه مسیر همکاری",
+      "originalName": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4"
+    },
+    {
+      "path": "public/media/upload-188de512-e239-4fb6-bc7c-c1b9ec400dd2.mp4",
+      "bytes": 21808081,
+      "sha256": "69c80648ce31c91f1481a741a627888f36c04d35e48176d84b997813d2bbc4f1",
+      "gitBlobSha": "324e0ae19f48a24bb3060dbd4d0b0c4908559a12",
+      "name": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th.mp4",
+      "originalName": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th.mp4"
+    },
+    {
+      "path": "public/media/upload-20e6881c-eade-4418-8a2c-46f21d970273.mp4",
+      "bytes": 19135177,
+      "sha256": "3477897c64512eb103c39ead2e9546e273750a2122ccba6e8b19ca9e8f4427da",
+      "gitBlobSha": "09b0876a9c1b11da4cbe7845ed86750e32e924db",
+      "name": "Keep the transparent blocks in a smooth loop motion at the bottom, with very subtle movement. The da.mp4",
+      "originalName": "Keep the transparent blocks in a smooth loop motion at the bottom, with very subtle movement. The da.mp4"
+    },
+    {
+      "path": "public/media/upload-224cd648-f2b0-409c-909b-0b24fcb8db97.mp4",
+      "bytes": 28459705,
+      "sha256": "2b15c82db7c24b2211a99ce4e938bc0b7768dc4d7111b320d305b0f203d75747",
+      "gitBlobSha": "571b5675fdc34a80ef2be15153edb39436ddec0f",
+      "name": "animation copy 5.mp4",
+      "originalName": "animation copy 5.mp4"
+    },
+    {
+      "path": "public/media/upload-2522b8c6-60f8-475e-a530-063d2a74ddeb.mp4",
+      "bytes": 55632794,
+      "sha256": "76e2770e330c6fcfa0e0421f50ecc2d2d041516b55f5c0635f0b61cc1f7a23c0",
+      "gitBlobSha": "6d9314967babeeddd16fe3cc71a36ccd4166149e",
+      "name": "enter.mp4",
+      "originalName": "enter.mp4",
+      "storage": "split",
+      "parts": [
+        {
+          "path": "video-archive/upload-2522b8c6-60f8-475e-a530-063d2a74ddeb.mp4.part1",
+          "bytes": 28000000,
+          "sha256": "6b36be772982a1a5548152e4701d201bedeef628462d9b45ef0c2b5fb30bfc21",
+          "gitBlobSha": "f002d0df6d253b3b4488848cd74e1414b1785ddf"
+        },
+        {
+          "path": "video-archive/upload-2522b8c6-60f8-475e-a530-063d2a74ddeb.mp4.part2",
+          "bytes": 27632794,
+          "sha256": "bf111fbe2c935e710110b4fb8b07060ae129c19c2c16129d1e01fb04abba8000",
+          "gitBlobSha": "20a6170ba94fc2326c7736956e38284a447b9dd4"
+        }
+      ]
+    },
+    {
+      "path": "public/media/upload-34e7c9a0-4b8e-4eee-9083-1dce6d4ac8b3.mp4",
+      "bytes": 22988249,
+      "sha256": "939280be249e1e0b2f49f2900f2ca1052e227b7f43863d8a631e298d50a2efb7",
+      "gitBlobSha": "da54ca15091150f057956c78d5bf6917b6a73d20",
+      "name": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4",
+      "originalName": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4"
+    },
+    {
+      "path": "public/media/upload-35cfa6bb-340c-411d-9bca-9fe1e9f3f8e7.mp4",
+      "bytes": 20762837,
+      "sha256": "309c605e66935f83fd83666c4099d7cb560d16c60f207fd6f47fecc9898b0ee5",
+      "gitBlobSha": "001c9f37c43ae1214d14d313ad7d5f7c861f9da9",
+      "name": "animation.mp4",
+      "originalName": "animation.mp4"
+    },
+    {
+      "path": "public/media/upload-46af1845-2ec5-45c0-9bf2-ce2c03f5fae9.mp4",
+      "bytes": 18728017,
+      "sha256": "f6f95ef77405b7f52a85a6a9aa6d5aa44aee9c17a35a5aac489f01260a5b93fb",
+      "gitBlobSha": "48b60ddc7b7ac70d0925a000eb3cbacff84624bb",
+      "name": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4",
+      "originalName": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4"
+    },
+    {
+      "path": "public/media/upload-4c163ada-07fe-4339-9cfc-b9a21437b584.mp4",
+      "bytes": 37228024,
+      "sha256": "682f5d7439c7a66e2ddac4b0fade1d5b6917ae69009eb2103251dc1ecaf527bf",
+      "gitBlobSha": "4ab5acdc6bcde6e5324e88352f61c90fe879b458",
+      "name": "Keep the camera completely static and preserve the composition and perspective. The gold coin contin.mp4",
+      "originalName": "Keep the camera completely static and preserve the composition and perspective. The gold coin contin.mp4"
+    },
+    {
+      "path": "public/media/upload-4d1bd5c5-a724-4bdf-9abb-c862d1fe21a1.mp4",
+      "bytes": 17346669,
+      "sha256": "e45493471d10e45d2f84908481ecb5cc421d1594eeee3f3ac73aa05049353de2",
+      "gitBlobSha": "df1db216d0708e82c3f972506d59a1fee1c11ae8",
+      "name": "animation copy 6.mp4",
+      "originalName": "animation copy 6.mp4"
+    },
+    {
+      "path": "public/media/upload-5744b29b-51f0-4fcb-aba7-89bbae8292c9.mp4",
+      "bytes": 19750252,
+      "sha256": "f868abcb6c7e4cfb022615b15ebeb639357a34828899ee264d07757dd3f15b8e",
+      "gitBlobSha": "9408a157c8df2e0e4e3af0b894992a6274ef283f",
+      "name": "Keep all glass blocks and rods completely stationary. The golden glass rods begin with a faint glow,.mp4",
+      "originalName": "Keep all glass blocks and rods completely stationary. The golden glass rods begin with a faint glow,.mp4"
+    },
+    {
+      "path": "public/media/upload-64038350-2a26-4ff2-9303-d4d529845ef0.mp4",
+      "bytes": 22946810,
+      "sha256": "c215f32c1ad6469a3f7ea6c16b99e50f1eb79938b5979e933718925f63f67ffa",
+      "gitBlobSha": "a55f9a257847ccef931848d206c6466f775e394b",
+      "name": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4",
+      "originalName": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4"
+    },
+    {
+      "path": "public/media/upload-72883e25-b53d-4817-8ed2-33920f4c3f98.mp4",
+      "bytes": 37520419,
+      "sha256": "a5e7e81f7087f502c213b5a6cf6b488b621d31d31381e446a77c65b349b93dda",
+      "gitBlobSha": "06f366e05dabfb1d09c1d9b3ccb3ceb5a03b2908",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_1.mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_1.mp4"
+    },
+    {
+      "path": "public/media/upload-744489d5-1f98-45bb-88b4-b48f6d89539d.mp4",
+      "bytes": 37959630,
+      "sha256": "f724293836404a230b46687185558165a8922051ed799148e1568796386f69d4",
+      "gitBlobSha": "d125247f482ae46834523884b6e20924d5a24624",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_3.mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_3.mp4"
+    },
+    {
+      "path": "public/media/upload-842a038c-a5d9-4bb2-893a-ca4f2eda40f0.mp4",
+      "bytes": 22946810,
+      "sha256": "c215f32c1ad6469a3f7ea6c16b99e50f1eb79938b5979e933718925f63f67ffa",
+      "gitBlobSha": "a55f9a257847ccef931848d206c6466f775e394b",
+      "name": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4",
+      "originalName": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4"
+    },
+    {
+      "path": "public/media/upload-87465b51-8a0c-4220-8c57-227f30ea8639.mp4",
+      "bytes": 18728017,
+      "sha256": "f6f95ef77405b7f52a85a6a9aa6d5aa44aee9c17a35a5aac489f01260a5b93fb",
+      "gitBlobSha": "48b60ddc7b7ac70d0925a000eb3cbacff84624bb",
+      "name": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4",
+      "originalName": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4"
+    },
+    {
+      "path": "public/media/upload-91261372-754f-40d0-aabf-98274c001198.mp4",
+      "bytes": 26651297,
+      "sha256": "43c3b14fd8a0a179b081b8389746a3045125ac4c231aa0ffc9ada0a4bf9fa737",
+      "gitBlobSha": "3336ffa6a03157313a199dcb375be1de22046aee",
+      "name": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4",
+      "originalName": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4"
+    },
+    {
+      "path": "public/media/upload-9d75fde9-c67b-4f25-89d4-e3e47f23131b.mp4",
+      "bytes": 26651297,
+      "sha256": "43c3b14fd8a0a179b081b8389746a3045125ac4c231aa0ffc9ada0a4bf9fa737",
+      "gitBlobSha": "3336ffa6a03157313a199dcb375be1de22046aee",
+      "name": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4",
+      "originalName": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4"
+    },
+    {
+      "path": "public/media/upload-afe7b7f9-289f-4e43-8f64-a9341ce17413.mp4",
+      "bytes": 26670970,
+      "sha256": "c5f3a8cd2bcc1eda453af7dbc39a406f79cb11b5adf6ff5a2ffc50d6297c0d65",
+      "gitBlobSha": "6d39dce4629c5cc330e08e2e54a5a46ded622b94",
+      "name": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4",
+      "originalName": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4"
+    },
+    {
+      "path": "public/media/upload-c180d2df-5862-477d-b2ab-ddeb3f84252b.mp4",
+      "bytes": 26651297,
+      "sha256": "43c3b14fd8a0a179b081b8389746a3045125ac4c231aa0ffc9ada0a4bf9fa737",
+      "gitBlobSha": "3336ffa6a03157313a199dcb375be1de22046aee",
+      "name": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4",
+      "originalName": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4"
+    },
+    {
+      "path": "public/media/upload-c9a5b6fb-ab94-400f-a8fa-f961cd0492eb.mp4",
+      "bytes": 22988249,
+      "sha256": "939280be249e1e0b2f49f2900f2ca1052e227b7f43863d8a631e298d50a2efb7",
+      "gitBlobSha": "da54ca15091150f057956c78d5bf6917b6a73d20",
+      "name": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4",
+      "originalName": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4"
+    },
+    {
+      "path": "public/media/upload-cb8e2950-928b-4632-b1e4-62d4b5108846.mp4",
+      "bytes": 29020838,
+      "sha256": "7d0b0f6eca57d1b9fea7a65b889104ca121da4ffcbd0569496c0f53e487d41ce",
+      "gitBlobSha": "4b23336fbe3d8a99c115e75d9c3a0f678853f348",
+      "name": "animation copy 4.mp4",
+      "originalName": "animation copy 4.mp4"
+    },
+    {
+      "path": "public/media/upload-d53391c4-f7c5-4a8a-a439-6779f033e8b3.mp4",
+      "bytes": 28680294,
+      "sha256": "c47379e2165d62e195dd6841963acf2452f738114063ac1356992c8463826ad0",
+      "gitBlobSha": "c32f9cd705364e14bcc60b93582110ecb75c7f04",
+      "name": "Keep the gold bars and main container fixed. Only the small glass elements around the gold bars move.mp4",
+      "originalName": "Keep the gold bars and main container fixed. Only the small glass elements around the gold bars move.mp4"
+    },
+    {
+      "path": "public/media/upload-e075e555-ea11-4e7a-92e8-c04630be2da2.mp4",
+      "bytes": 25920206,
+      "sha256": "0007a228409fd2776892c03fc389a248038cce8ed02d99ce996ec27c400977a2",
+      "gitBlobSha": "2d01dff0367bfd06c2418dcaa6a4393c60d36534",
+      "name": "Animate the two glass hands performing a gentle, realistic handshake. The hands slowly move toward e.mp4",
+      "originalName": "Animate the two glass hands performing a gentle, realistic handshake. The hands slowly move toward e.mp4"
+    },
+    {
+      "path": "public/media/upload-e985cc3a-2c7f-4bc1-8c78-070cd50936d9.mp4",
+      "bytes": 26670970,
+      "sha256": "c5f3a8cd2bcc1eda453af7dbc39a406f79cb11b5adf6ff5a2ffc50d6297c0d65",
+      "gitBlobSha": "6d39dce4629c5cc330e08e2e54a5a46ded622b94",
+      "name": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4",
+      "originalName": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4"
+    },
+    {
+      "path": "public/media/upload-eeab40b5-44f2-4b68-814a-484341965278.mp4",
+      "bytes": 37980251,
+      "sha256": "08330b5b84d7e69d93ba498013575f8afb802535a7e2804608a6362533dca86d",
+      "gitBlobSha": "da871c661f4fee76a503324fa903eef09f470152",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_2.mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_2.mp4"
+    },
+    {
+      "path": "public/media/upload-f0cd292e-6011-4129-9310-63ce04ae43ff.mp4",
+      "bytes": 22681203,
+      "sha256": "0b789f41dc333fbd8e71b0d9c4ebfe07ecc633f76467527b797688929442811a",
+      "gitBlobSha": "35af07f5e6383ee709cc3d1bacdf0566df862539",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1).mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1).mp4"
+    },
+    {
+      "path": "public/media/upload-fc08a2ed-e852-46a1-aa66-17ba974dc932.mp4",
+      "bytes": 21372062,
+      "sha256": "1ea76e0756ed0676e0f2fad661cf2373eb1debced204aba1b2964a37b887bcc3",
+      "gitBlobSha": "f79f439d25ee67a0ff931c3d644c9b0b983ba5aa",
+      "name": "Keep the camera completely static and preserve the golden door structure exactly as it is. Transpare.mp4",
+      "originalName": "Keep the camera completely static and preserve the golden door structure exactly as it is. Transpare.mp4"
+    },
+    {
+      "path": "public/media/upload-fcf9a5e0-3530-4342-bf7a-7da72a842cf2.mp4",
+      "bytes": 19640337,
+      "sha256": "70679f005cf8cf8abd2489a2ccb324387b27345850685ff6cc33d586c3c40e03",
+      "gitBlobSha": "2d2e439ccb95563e596e5379b24bd09b22f23c94",
+      "name": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4",
+      "originalName": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4"
+    }
+  ]
+}

@@ -8,7 +8,7 @@ export function homeSections(project){return HOME_SECTIONS.map(item=>({...item,.
 export function mountHomePicker(project,onSelect){
  const section=document.createElement('section');section.className='home-menu';section.hidden=true;section.setAttribute('aria-labelledby','home-title');
  const content=document.createElement('div');content.className='home-content';const heading=document.createElement('header');heading.className='home-heading';
- const partnership=document.createElement('p');partnership.textContent='طلاکارت × دیجی‌کالا';const title=document.createElement('h1');title.id='home-title';title.tabIndex=-1;title.append('کدام را ',Object.assign(document.createElement('span'),{textContent:'ببینیم؟'}));heading.append(partnership,title);
+ const partnership=document.createElement('p');partnership.textContent='طلاکارت × دیجی‌کالا';const title=document.createElement('h1');title.id='home-title';title.tabIndex=-1;title.append('طلاکارت ',Object.assign(document.createElement('span'),{textContent:'جریان طلا'}));heading.append(partnership,title);
  const links=document.createElement('nav');links.className='home-cards';links.setAttribute('aria-label','انتخاب بخش ارائه');
  function refresh(){links.replaceChildren();for(const item of homeSections(typeof project==='function'?project():project)){
   const link=document.createElement('a');link.className='home-card '+item.kind;link.href='?deck='+encodeURIComponent(item.target||item.id);link.dataset.deck=item.id;

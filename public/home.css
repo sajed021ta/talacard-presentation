@@ -2,5 +2,4 @@
 @media(max-width:760px){.home-menu{padding:24px 16px}.home-content{gap:28px}.home-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.home-card{padding:12px 10px 16px;gap:8px;border-radius:18px}.home-card-visual{height:clamp(125px,23vh,185px);border-radius:12px}.home-card strong{font-size:17px}.home-card-description{font-size:11px}.home-heading h1{font-size:34px}.home-card.app img{margin-top:18px}#home-button{font-size:11px;padding:6px}}
 @media(prefers-reduced-motion:reduce){.home-card{transition:none}.home-card:hover{transform:none}}
 
-/* Owner-supplied transparent ecosystem image; retain the white presentation surface. */
-.home-menu::before{content:'';position:absolute;inset:0;z-index:-1;background:url('/reference/assets/home-ecosystem.png') center/contain no-repeat;opacity:.38;pointer-events:none}.home-card{background:#fffffff2}.home-heading{background:#ffffffdf;padding:10px 24px;border-radius:16px}
+.home-heading{text-align:center}

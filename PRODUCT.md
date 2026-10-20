@@ -60,3 +60,6 @@ The original archive under `original/`, supplied media under `public/media`, and
 
 ## Partnership content update — 2026-10-20
 The chooser uses the owner-supplied transparent ecosystem image. The studio content inspector exposes the gold-card chooser title, description, image library selection and target deck; all persist through normal autosave. The cooperation chapter includes a native four-column responsibility matrix from the supplied screenshot, with twelve rows and explicit undecided entries. Each header and cell is editable. New reference copy replaces only untouched source copy, preserving owner changes. Partner names use Digikala.
+
+## Homepage revision
+The owner removed the ecosystem background and set the chooser heading to «طلاکارت جریان طلا». Retain the four product cards and editable gold-card settings.
