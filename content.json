@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "activeDeck": "proposal",
+  "activeDeck": "deliv",
   "decks": [
     {
       "id": "app",
@@ -11,9 +11,9 @@
           "id": "app-1",
           "chapter": "معرفی",
           "label": "طلاکارت × دیجی‌کالا",
-          "title": "طلای دیجیتال، در دست",
+          "title": "از جریان طلا تا دیجی‌کالا",
           "highlight": "در دست",
-          "description": "خرید، فروش و تحویل فیزیکی، همه در یک اپ",
+          "description": "",
           "duration": 4.2,
           "layout": "legacy",
           "legacyScene": 0,
@@ -28,16 +28,33 @@
           "accent": "#B88A2A",
           "fontSize": 42,
           "loop": true,
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 24.175884513618453,
+                "y": 63.12989125230088,
+                "w": 52.4724946813774,
+                "h": 22.60582964394157
+              }
+            }
+          },
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "textBlocks": [],
+          "titleRuns": [
+            {
+              "text": "از جریان طلا تا دیجی‌کالا"
+            }
+          ],
+          "titleFormat": {}
         },
         {
           "id": "app-2",
           "chapter": "خانه",
           "label": "خانه",
-          "title": "همه‌ی طلای تو، روی یک نمایشگر",
-          "highlight": "یک نمایشگر",
-          "description": "موجودی طلا و نقد داخل همان دستگاهی دیده می‌شود که کاربر در ATM طلاکارت هم می‌بیند.",
+          "title": "صفحه اصلی طلاکارت",
+          "highlight": "طلاکارت",
+          "description": "موجودی طلا، موجودی نقدی کاربر و قیمت لحظه‌ای طلا در صفحه اصلی اپ به کاربر نمایش داده می‌شود",
           "duration": 3.6,
           "layout": "legacy",
           "legacyScene": 1,
@@ -53,15 +70,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "صفحه اصلی طلاکارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "موجودی طلا، موجودی نقدی کاربر و قیمت لحظه‌ای طلا در صفحه اصلی اپ به کاربر نمایش داده می‌شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 55.15442756931485,
+                  "y": 49.438196018705206,
+                  "w": 41.074036506931485,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-3",
           "chapter": "خرید",
           "label": "وارد کردن مقدار",
-          "title": "نیم گرم طلا؟ چهار لمس",
-          "highlight": "چهار لمس",
-          "description": "عدد با صفحه‌کلید خود اپ وارد می‌شود و هر رقم همان لحظه روی نمایشگر می‌نشیند.",
+          "title": "خرید طلا به میزان مورد نیاز کاربر",
+          "highlight": "مقدار مورد نظر",
+          "description": "کاربر مقدار طلای مورد نظر خود را به گرم یا تومان وارد می‌کند",
           "duration": 5.7,
           "layout": "legacy",
           "legacyScene": 2,
@@ -76,16 +121,54 @@
           "accent": "#B88A2A",
           "fontSize": 42,
           "loop": true,
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 26.70253538218029,
+                "y": 19.01597723101274,
+                "w": 66.625525051704,
+                "h": 37.40103553740985
+              }
+            }
+          },
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "خرید طلا به میزان مورد نیاز کاربر",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربر مقدار طلای مورد نظر خود را به گرم یا تومان وارد می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 58.23678269128233,
+                  "y": 40.510072229325,
+                  "w": 35.09372500666489,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-4",
           "chapter": "خرید",
           "label": "پلتفرم‌ها بالا می‌آیند",
-          "title": "دیجی‌کالا، اولِ صف",
-          "highlight": "اولِ صف",
-          "description": "کیبورد کنار می‌رود و قیمت پلتفرم‌ها بالا می‌آید. دیجی‌کالا اول فهرست است و خرید داخل طلاکارت انجام می‌شود.",
+          "title": "انتخاب پلتفرم دیجی‌کالا",
+          "highlight": "دیجی‌کالا",
+          "description": "معادل قیمت طلای مورد نیاز کاربر با توجه به قیمت لحظه‌ای پلتفرم‌ها فهرست می‌شود",
           "duration": 5,
           "layout": "legacy",
           "legacyScene": 3,
@@ -101,15 +184,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب پلتفرم دیجی‌کالا",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "معادل قیمت طلای مورد نیاز کاربر با توجه به قیمت لحظه‌ای پلتفرم‌ها فهرست می‌شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 50.89314724406826,
+                  "y": 49.5392498527554,
+                  "w": 45.24395577845908,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-5",
           "chapter": "خرید",
           "label": "رسید خرید",
-          "title": "رسید، تازه از دستگاه",
-          "highlight": "تازه از دستگاه",
-          "description": "برگه‌ی رسید از شیار بیرون می‌آید: قیمت لحظه‌ای، کارمزد و مبلغ پرداختی.",
+          "title": "جزئیات سفارش خرید",
+          "highlight": "سفارش خرید",
+          "description": "قیمت لحظه‌ای، کارمزد و مبلغ پرداختی پیش از تکمیل خرید به کاربر نمایش داده می‌شود",
           "duration": 5.2,
           "layout": "legacy",
           "legacyScene": 4,
@@ -125,15 +236,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "جزئیات سفارش خرید",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "قیمت لحظه‌ای، کارمزد و مبلغ پرداختی پیش از تکمیل خرید به کاربر نمایش داده می‌شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 47.62776801186351,
+                  "y": 49.760884831783386,
+                  "w": 48.448642861903494,
+                  "h": 8.581608558153965
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-6",
           "chapter": "خرید",
           "label": "خرید موفق",
-          "title": "چراغ سبز!",
-          "highlight": "چراغ سبز!",
-          "description": "خرید ثبت شد و طلا در حساب کاربر نشست.",
+          "title": "خرید موفق",
+          "highlight": "موفق",
+          "description": "خرید ثبت می‌شود و طلای خریداری‌شده به موجودی کاربر اضافه خواهد شد",
           "duration": 3.8,
           "layout": "legacy",
           "legacyScene": 5,
@@ -149,15 +288,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "خرید موفق",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "خرید ثبت می‌شود و طلای خریداری‌شده به موجودی کاربر اضافه خواهد شد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 52.364067498667026,
+                  "y": 50.49501737038585,
+                  "w": 43.80564141229006,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-7",
           "chapter": "فروش",
           "label": "فروش",
-          "title": "حالا برعکس",
-          "highlight": "برعکس",
-          "description": "از زبانه‌ی فروش، همان صفحه‌کلید و همان چهار لمس. این بار پلتفرم‌های فروش بالا می‌آیند.",
+          "title": "فروش طلا به مقدار مورد نظر",
+          "highlight": "طلای مورد نظر",
+          "description": "کاربر از زبانه فروش، مقدار طلای مورد نظر یا معادل ریالی آن را برای فروش وارد می‌کند",
           "duration": 7.5,
           "layout": "legacy",
           "legacyScene": 6,
@@ -165,7 +332,7 @@
           "poster": "",
           "fit": "contain",
           "position": 50,
-          "transition": "fade",
+          "transition": "reveal",
           "intensity": 0.5,
           "background": "#FFFFFF",
           "textColor": "#222225",
@@ -173,15 +340,53 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "فروش طلا به مقدار مورد نظر",
+              "color": "#222225"
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 36.666899243535056,
+                "y": 36.93167646416376,
+                "w": 57.580999233537725,
+                "h": 24.744397045824275
+              }
+            }
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربر از زبانه فروش، مقدار طلای مورد نظر یا معادل ریالی آن را برای فروش وارد می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 47.03864386163689,
+                  "y": 49.347110486421045,
+                  "w": 47.23559134230871,
+                  "h": 8.60113586908154
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-8",
           "chapter": "فروش",
           "label": "پلتفرم‌های فروش",
-          "title": "باز هم دیجی‌کالا اول",
-          "highlight": "دیجی‌کالا اول",
-          "description": "قیمت خرید هر پلتفرم کنار هم است. کاربر روی بهترین گزینه فروش را تمام می‌کند.",
+          "title": "انتخاب پلتفرم دیجی‌کالا",
+          "highlight": "دیجی‌کالا",
+          "description": "معادل قیمت لحظه‌ای طلا، نرخ فروش هر پلتفرم برای کاربر فهرست می‌شود",
           "duration": 5,
           "layout": "legacy",
           "legacyScene": 7,
@@ -197,15 +402,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب پلتفرم دیجی‌کالا",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "معادل قیمت لحظه‌ای طلا، نرخ فروش هر پلتفرم برای کاربر فهرست می‌شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 46.8787490002666,
+                  "y": 50.2329575734575,
+                  "w": 49.17377241069048,
+                  "h": 8.602600417401108
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-9",
           "chapter": "فروش",
           "label": "رسید فروش",
-          "title": "مبلغ دریافتی، بدون حدس",
-          "highlight": "بدون حدس",
-          "description": "رسید فروش با مبلغ دریافتی چاپ می‌شود و کاربر آن را تأیید می‌کند.",
+          "title": "جزئیات سفارش فروش",
+          "highlight": "سفارش فروش",
+          "description": "قیمت لحظه‌ای، کارمزد و مبلغ دریافتی پیش از تکمیل فروش به کاربر نمایش داده می‌شود",
           "duration": 5,
           "layout": "legacy",
           "legacyScene": 8,
@@ -221,15 +454,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "جزئیات سفارش فروش",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "قیمت لحظه‌ای، کارمزد و مبلغ دریافتی پیش از تکمیل فروش به کاربر نمایش داده می‌شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 49.05041988802985,
+                  "y": 49.924914243575,
+                  "w": 47.25746051053052,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-10",
           "chapter": "فروش",
           "label": "فروش موفق",
-          "title": "فروش انجام شد",
-          "highlight": "انجام شد",
-          "description": "نتیجه روی نمایشگر تیره‌ی دستگاه می‌آید.",
+          "title": "فروش موفق",
+          "highlight": "موفق",
+          "description": "فروش ثبت می‌شود و مبلغ آن به موجودی نقدی کاربر اضافه خواهد شد",
           "duration": 3.6,
           "layout": "legacy",
           "legacyScene": 9,
@@ -245,15 +506,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "فروش موفق",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "فروش ثبت می‌شود و مبلغ آن به موجودی نقدی کاربر اضافه خواهد شد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 56.752543071847505,
+                  "y": 50.548245106510954,
+                  "w": 39.26640395894428,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-11",
           "chapter": "تحویل فیزیکی",
           "label": "کارت هدف",
-          "title": "هر گرم، یک قدم تا کارت",
-          "highlight": "یک قدم تا کارت",
-          "description": "نوار «کارت هدف» در خانه با موجودی طلا پر می‌شود؛ ۱.۳ گرم یعنی بیش از نیمه‌ی راه تا کارت ۲ گرمی.",
+          "title": "طلاکارت هدف",
+          "highlight": "هدف",
+          "description": "نوار کارت هدف با موجودی طلای کاربر پر می‌شود و فاصله تا دریافت طلاکارت بعدی را نشان می‌دهد",
           "duration": 5.8,
           "layout": "legacy",
           "legacyScene": 10,
@@ -269,15 +558,43 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "طلاکارت هدف",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "نوار کارت هدف با موجودی طلای کاربر پر می‌شود و فاصله تا دریافت طلاکارت بعدی را نشان می‌دهد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 52.34885280591842,
+                  "y": 49.76137301455657,
+                  "w": 43.678164989336175,
+                  "h": 10.136958873535292
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-11",
           "chapter": "تحویل فیزیکی",
           "label": "مسیر طلایی",
-          "title": "یک بازی کوچک: مسیر طلایی",
-          "highlight": "مسیر طلایی",
-          "description": "با ۱.۳ گرم، کارت ۲ گرمی تا همین‌جا پر شده؛ ۰.۷ گرم تا تحویلش مانده.",
+          "title": "مسیر طلایی",
+          "highlight": "طلایی",
+          "description": "ترغیب کاربر برای خرید طلای بیشتر و دریافت طلاکارت بعدی",
           "duration": 4,
           "layout": "legacy",
           "legacyScene": 11,
@@ -293,15 +610,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "مسیر طلایی",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "ترغیب کاربر برای خرید طلای بیشتر و دریافت طلاکارت بعدی"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 61.074890445881096,
+                  "y": 50.33053132037697,
+                  "w": 35.10676319648094,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-12",
           "chapter": "تحویل فیزیکی",
           "label": "انتخاب کارت پرشده",
-          "title": "کارتی که پر شده، آماده‌ی تحویل",
-          "highlight": "آماده‌ی تحویل",
-          "description": "کاربر کارت ۱ گرمی را که موجودی‌اش کامل است انتخاب می‌کند؛ تحویلش همین حالا باز است.",
+          "title": "انتخاب طلاکارت آماده",
+          "highlight": "طلاکارت آماده",
+          "description": "همچنین کاربر می‌تواند کارت‌هایی را که با موجودی او همخوانی دارد دریافت کند",
           "duration": 5,
           "layout": "legacy",
           "legacyScene": 12,
@@ -317,7 +662,35 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب طلاکارت آماده",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "همچنین کاربر می‌تواند کارت‌هایی را که با موجودی او همخوانی دارد دریافت کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 54.77888188149828,
+                  "y": 50.17821829514189,
+                  "w": 41.433117835243934,
+                  "h": 8.203084033646777
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-12",
@@ -325,7 +698,7 @@
           "label": "نزدیک‌ترین طلاپرداز",
           "title": "نزدیک‌ترین طلاپرداز",
           "highlight": "طلاپرداز",
-          "description": "نقشه باز می‌شود و روی نزدیک‌ترین طلاپرداز فعال زوم می‌کند.",
+          "description": "نقشه باز می‌شود و با توجه به موقعیت فعلی کاربر، نزدیک‌ترین طلاپرداز به او نمایش داده می‌شود",
           "duration": 5.2,
           "layout": "legacy",
           "legacyScene": 13,
@@ -341,7 +714,35 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "نزدیک‌ترین طلاپرداز",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "نقشه باز می‌شود و با توجه به موقعیت فعلی کاربر، نزدیک‌ترین طلاپرداز به او نمایش داده می‌شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 55.114865202612634,
+                  "y": 49.08426350814291,
+                  "w": 41.196889162889896,
+                  "h": 8.50886932494875
+                }
+              }
+            }
+          ]
         },
         {
           "id": "app-13",
@@ -349,7 +750,7 @@
           "label": "جزئیات شعبه",
           "title": "همه‌چیز پیش از رفتن",
           "highlight": "پیش از رفتن",
-          "description": "آدرس، تلفن، ساعت کاری و وزن‌های موجود کارت در یک نگاه.",
+          "description": "آدرس، تلفن، ساعت کاری و وزن‌های موجود کارت در یک نگاه",
           "duration": 4.6,
           "layout": "legacy",
           "legacyScene": 12,
@@ -365,15 +766,53 @@
           "fontSize": 42,
           "loop": true,
           "legacyDeck": "previous",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "همه‌چیز پیش از رفتن",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "آدرس، تلفن، ساعت کاری و وزن‌های موجود کارت در یک نگاه"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 59.416624316848846,
+                  "y": 48.813180275206115,
+                  "w": 36.69110112303386,
+                  "h": 8
+                }
+              }
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0.0012600806451612903,
+                "y": 0,
+                "w": 49.29078287456679,
+                "h": 100
+              }
+            }
+          }
         },
         {
           "id": "ref-app-14",
           "chapter": "تحویل فیزیکی",
           "label": "طلاپرداز روی نقشه",
-          "title": "از نقشه، تا خود طلاپرداز",
-          "highlight": "تا خود طلاپرداز",
-          "description": "با لمس طلاپرداز روی نقشه، دوربین عقب می‌کشد تا اپ و دستگاه با هم دیده شوند و مسیر تا طلاپرداز کشیده می‌شود.",
+          "title": "دریافت طلاکارت از طلاپرداز",
+          "highlight": "از طلاپرداز",
+          "description": "با انتخاب نزدیک‌ترین طلاپرداز، کاربر می‌تواند آدرس و جزئیات دسترسی به طلاپرداز را مشاهده کند",
           "duration": 3.7,
           "layout": "legacy",
           "legacyScene": 14,
@@ -389,15 +828,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "دریافت طلاکارت از طلاپرداز",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "با انتخاب نزدیک‌ترین طلاپرداز، کاربر می‌تواند آدرس و جزئیات دسترسی به طلاپرداز را مشاهده کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 57.832151009730744,
+                  "y": 49.129680236758,
+                  "w": 38.18970149626766,
+                  "h": 9.678067066737286
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-15",
           "chapter": "تحویل در طلاپرداز",
           "label": "تحویل طلاکارت",
-          "title": "تحویل طلاکارت",
-          "highlight": "طلاکارت",
-          "description": "کاربر با ۱.۳ گرم موجودی به طلاپرداز رسیده؛ اپ کنار دستگاه، تحویل را از منو انتخاب می‌کند.",
+          "title": "تبدیل طلای دیجیتال به فیزیکی",
+          "highlight": "به فیزیکی",
+          "description": "کاربر با ۱.۳ گرم موجودی به طلاپرداز رسیده و از منوی دستگاه، تحویل طلاکارت را انتخاب می‌کند",
           "duration": 2.9,
           "layout": "legacy",
           "legacyScene": 15,
@@ -413,15 +880,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "تبدیل طلای دیجیتال به فیزیکی",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربر با ۱.۳ گرم موجودی به طلاپرداز رسیده و از منوی دستگاه، تحویل طلاکارت را انتخاب می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 54.56932318048521,
+                  "y": 49.38547219606178,
+                  "w": 41.62653500733138,
+                  "h": 9.83997065848046
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-16",
           "chapter": "تحویل در طلاپرداز",
           "label": "انتخاب پلتفرم",
-          "title": "این بار از خود طلاکارت",
-          "highlight": "خود طلاکارت",
-          "description": "موجودی این کاربر در اپ طلاکارت است؛ دیجی‌کالا همچنان اول فهرست است و طلاکارت هم یکی از پلتفرم‌هاست.",
+          "title": "انتخاب پلتفرم طلاکارت",
+          "highlight": "طلاکارت",
+          "description": "با توجه به اینکه موجودی طلای کاربر در شبکه طلاکارت است، پلتفرم انتخاب‌شده نیز طلاکارت خواهد بود",
           "duration": 3.6,
           "layout": "legacy",
           "legacyScene": 16,
@@ -437,15 +932,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب پلتفرم طلاکارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "با توجه به اینکه موجودی طلای کاربر در شبکه طلاکارت است، پلتفرم انتخاب‌شده نیز طلاکارت خواهد بود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 56.45835068981606,
+                  "y": 49.17361668634505,
+                  "w": 39.72427144428153,
+                  "h": 9.469124839812237
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-17",
           "chapter": "تحویل در طلاپرداز",
           "label": "انتخاب طلاکارت",
-          "title": "طلاکارت ۱ گرمی",
-          "highlight": "۱ گرمی",
-          "description": "همان کارتی که در مسیر طلایی پر شده بود، روی دستگاه انتخاب می‌شود.",
+          "title": "انتخاب وزن طلاکارت",
+          "highlight": "طلاکارت",
+          "description": "کاربر با توجه به موجودی طلای دیجیتال خود، کارت مورد نظر خود را انتخاب می‌کند",
           "duration": 3.4,
           "layout": "legacy",
           "legacyScene": 17,
@@ -461,15 +984,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب وزن طلاکارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربر با توجه به موجودی طلای دیجیتال خود، کارت مورد نظر خود را انتخاب می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 55.854209710743795,
+                  "y": 50.41018365083372,
+                  "w": 40.273531225006664,
+                  "h": 9.398826520472968
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-18",
           "chapter": "تحویل در طلاپرداز",
           "label": "کد ملی",
-          "title": "کد ملی، برای اطمینان",
-          "highlight": "برای اطمینان",
-          "description": "کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.",
+          "title": "احراز هویت از طریق کد ملی",
+          "highlight": "کد ملی",
+          "description": "به جهت عدم ذخیره‌سازی اطلاعات کاربران دیجی‌کالا، کد ملی تحویل‌گیرنده به همراه وزن انتخاب‌شده به پلتفرم دیجی‌کالا ارسال خواهد شد",
           "duration": 6.3,
           "layout": "legacy",
           "legacyScene": 18,
@@ -485,7 +1036,35 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "احراز هویت از طریق کد ملی",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "به جهت عدم ذخیره‌سازی اطلاعات کاربران دیجی‌کالا، کد ملی تحویل‌گیرنده به همراه وزن انتخاب‌شده به پلتفرم دیجی‌کالا ارسال خواهد شد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 55.25953495734471,
+                  "y": 47.272648448837195,
+                  "w": 40.868528808984266,
+                  "h": 12.588329837970726
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-19",
@@ -493,7 +1072,7 @@
           "label": "تأیید تحویل",
           "title": "یک نگاه، یک تأیید",
           "highlight": "یک تأیید",
-          "description": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.",
+          "description": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است",
           "duration": 3.8,
           "layout": "legacy",
           "legacyScene": 19,
@@ -509,15 +1088,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "snapshot19",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "یک نگاه، یک تأیید",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 55.51231130031992,
+                  "y": 48.06237090074934,
+                  "w": 40.703562383364435,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-20",
           "chapter": "تحویل در طلاپرداز",
           "label": "کد پیامک",
-          "title": "کد پیامک، تأیید شد",
-          "highlight": "تأیید شد",
-          "description": "کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.",
+          "title": "ارسال کد از طریق طلاکارت",
+          "highlight": "طلاکارت",
+          "description": "پس از احراز موفقیت‌آمیز کاربر و بررسی دارایی او، طلاکارت کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد",
           "duration": 5.1,
           "layout": "legacy",
           "legacyScene": 19,
@@ -533,15 +1140,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "ارسال کد از طریق طلاکارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "پس از احراز موفقیت‌آمیز کاربر و بررسی دارایی او، طلاکارت کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 55.18657524660092,
+                  "y": 48.576553340886996,
+                  "w": 40.81106496600906,
+                  "h": 10.45019912496717
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-21",
           "chapter": "تحویل در طلاپرداز",
           "label": "در حال بررسی",
-          "title": "لطفاً منتظر بمانید…",
-          "highlight": "منتظر بمانید…",
-          "description": "طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.",
+          "title": "پردازش و تحویل کارت",
+          "highlight": "تحویل کارت",
+          "description": "طلاپرداز، طلاکارت انتخاب‌شده توسط کاربر را تحویل خواهد داد",
           "duration": 3.9,
           "layout": "legacy",
           "legacyScene": 20,
@@ -557,15 +1192,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "پردازش و تحویل کارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "طلاپرداز، طلاکارت انتخاب‌شده توسط کاربر را تحویل خواهد داد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 58.65829528792323,
+                  "y": 50.65418068515407,
+                  "w": 37.7625758131165,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-app-22",
           "chapter": "تحویل در طلاپرداز",
           "label": "دریافت و بازگشت",
-          "title": "کارت در دست، موجودی به‌روز",
-          "highlight": "موجودی به‌روز",
-          "description": "طلاکارت ۱ گرمی بیرون می‌آید و همان ۱ گرم از موجودی اپ جدا می‌شود و در کارت می‌نشیند.",
+          "title": "کسر موجودی طلا در طلاکارت",
+          "highlight": "در اپ",
+          "description": "پس از تحویل کارت، ۱ گرم از موجودی طلای کاربر در اپ طلاکارت کسر خواهد شد",
           "duration": 7.6,
           "layout": "legacy",
           "legacyScene": 21,
@@ -581,31 +1244,35 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "app",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "app-14",
-          "chapter": "جمع‌بندی",
-          "label": "پایان",
-          "title": "یک اتصال، سه سرویس",
-          "highlight": "سه سرویس",
-          "description": "خرید، فروش و تحویل فیزیکی برای کاربران دیجی‌کالا",
-          "duration": 4.6,
-          "layout": "legacy",
-          "legacyScene": 22,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.5,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#B88A2A",
-          "fontSize": 42,
-          "loop": true,
-          "legacyDeck": "app",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "کسر موجودی طلا در طلاکارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "پس از تحویل کارت، ۱ گرم از موجودی طلای کاربر در اپ طلاکارت کسر خواهد شد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 56.10115427552653,
+                  "y": 51.126741609601375,
+                  "w": 40.30131548253799,
+                  "h": 8
+                }
+              }
+            }
+          ]
         }
       ],
       "referenceVersion": "2026-10-20"
@@ -617,15 +1284,15 @@
       "scenes": [
         {
           "id": "proposal-1",
-          "chapter": "معرفی",
+          "chapter": "جایگاه",
           "label": "طلاکارت",
-          "title": "طلاکارت",
+          "title": "طلاکارت، زیرساخت یکپارچه اتصال خدمات دیجیتال و فیزیکی طلا",
           "highlight": "طلاکارت",
-          "description": "شبکهٔ مشترک فروش و دریافت فیزیکی برای پلتفرم‌های آنلاین طلا",
+          "description": "طلاکارت با ایجاد زیرساختی مشترک برای خدمات فیزیکی طلا، امکان اتصال پلتفرم‌های آنلاین به شبکه طلاکارت و ارائه یکپارچه خدمات خرید، فروش و تحویل فیزیکی را فراهم می‌کند؛ بدون آنکه هر پلتفرم نیازمند ایجاد شبکه فیزیکی مستقل باشد",
           "duration": 10.1,
           "layout": "split",
           "legacyScene": 0,
-          "media": "/media/upload-f0cd292e-6011-4129-9310-63ce04ae43ff.mp4",
+          "media": "/media/upload-72883e25-b53d-4817-8ed2-33920f4c3f98.mp4",
           "poster": "",
           "fit": "contain",
           "position": 62,
@@ -641,72 +1308,220 @@
               "media": {
                 "x": 0.0012618924942484663,
                 "y": 0,
-                "w": 65.61693062811541,
+                "w": 65.23109857290069,
                 "h": 100
               },
               "copy": {
-                "x": 36.40714215449053,
-                "y": 16.268719187614625,
-                "w": 59.64059557557082,
-                "h": 66.520338903251
+                "x": 42.44947692861212,
+                "y": 55.2952720074432,
+                "w": 54.27611985243033,
+                "h": 42.61012303798212
               }
             }
           },
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "proposal-2",
-          "chapter": "فرصت",
-          "label": "خدمت پلتفرم به اپلیکیشن محدود نمی‌ماند",
-          "title": "خدمت پلتفرم به اپلیکیشن محدود نمی‌ماند",
-          "highlight": "به اپلیکیشن",
-          "description": "طلاکارت، خدمات دیجیتال پلتفرم را تا خرید و دریافت فیزیکی طلا امتداد می‌دهد.",
-          "duration": 10.1,
-          "layout": "split",
-          "legacyScene": 0,
-          "media": "/media/physical-access.mp4",
-          "poster": "/media/physical-access.jpg",
-          "fit": "cover",
-          "position": 28,
-          "transition": "fade",
-          "intensity": 0.35,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 41,
-          "loop": true,
+          "titleFormat": {
+            "align": "right",
+            "fontSize": 37
+          },
+          "titleRuns": [
+            {
+              "text": "طلاکارت، زیرساخت یکپارچه اتصال خدمات دیجیتال و فیزیکی طلا",
+              "fontSize": 37
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "طلاکارت با ایجاد زیرساختی مشترک برای خدمات فیزیکی طلا، امکان اتصال پلتفرم‌های آنلاین به شبکه طلاکارت و ارائه یکپارچه خدمات خرید، فروش و تحویل فیزیکی را فراهم می‌کند؛ بدون آنکه هر پلتفرم نیازمند ایجاد شبکه فیزیکی مستقل باشد"
+                }
+              ],
+              "format": {
+                "align": "justify"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 45.25379722117985,
+                  "y": 72.35687878288542,
+                  "w": 51.449456911051556,
+                  "h": 20.129148731589723
+                }
+              }
+            }
+          ],
           "presentationStyle": "reference"
         },
         {
           "id": "proposal-3",
-          "chapter": "مسئله",
+          "chapter": "چشم‌انداز",
           "label": "خرید آنلاین مقیاس گرفته؛ دسترسی فیزیکی",
-          "title": "خرید آنلاین مقیاس گرفته؛ دسترسی فیزیکی هنوز شبکه‌ای نشده است",
+          "title": "چشم‌انداز اکوسیستمی\n",
           "highlight": "دسترسی فیزیکی",
-          "description": "معامله ساده‌تر شده، اما دریافت فیزیکی هنوز به نقاط محدود و فرایندهای جداگانه وابسته است. طلای آنلاین باید به‌سادگی قابل دریافت باشد.",
+          "description": "ایجاد زیرساختی مشترک برای اتصال پلتفرم‌های آنلاین طلا به شبکه خدمات فیزیکی، با هدف تقویت اعتماد کاربران، افزایش دسترسی به طلای فیزیکی، گسترش بازار و تسهیل تبدیل دارایی‌های دیجیتال طلا به طلای فیزیکی",
           "duration": 10.1,
           "layout": "split",
           "legacyScene": 0,
-          "media": "/media/access-door.mp4",
-          "poster": "/media/access-door.jpg",
+          "media": "/media/upload-4c163ada-07fe-4339-9cfc-b9a21437b584.mp4",
+          "poster": "",
           "fit": "cover",
           "position": 63,
-          "transition": "fade",
+          "transition": "reveal",
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
+          "accent": "#e7c569",
+          "fontSize": 42,
           "loop": true,
-          "presentationStyle": "reference"
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 46.94860537190081,
+                "y": 0,
+                "w": 53.05139462809919,
+                "h": 100
+              },
+              "copy": {
+                "x": 2.005100723140496,
+                "y": 21.628441081943883,
+                "w": 45.9234813612427,
+                "h": 42.451039950137115
+              }
+            }
+          },
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "چشم‌انداز اکوسیستمی\n"
+            }
+          ],
+          "titleFormat": {
+            "align": "right"
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "ایجاد زیرساختی مشترک برای اتصال پلتفرم‌های آنلاین طلا به شبکه خدمات فیزیکی، با هدف تقویت اعتماد کاربران، افزایش دسترسی به طلای فیزیکی، گسترش بازار و تسهیل تبدیل دارایی‌های دیجیتال طلا به طلای فیزیکی",
+                  "fontSize": 20
+                }
+              ],
+              "format": {
+                "align": "justify",
+                "fontSize": 20
+              },
+              "placement": {
+                "desktop": {
+                  "x": 7.362797004132231,
+                  "y": 38.09600632928965,
+                  "w": 39.69813323217976,
+                  "h": 24.901066709870847
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "proposal-2",
+          "chapter": "هدف همکاری",
+          "label": "خدمت پلتفرم به اپلیکیشن محدود نمی‌ماند",
+          "title": "توسعه خدمات و بازار از طریق اتصال زیرساخت‌های دیجیتال و فیزیکی طلا\n",
+          "highlight": "به اپلیکیشن",
+          "description": "طراحی مدل همکاری میان دیجی‌کالا و طلاکارت با هدف ایجاد فرآیندی یکپارچه، ساده و مقیاس‌پذیر برای ارائه خدمات به کاربران، برای ارائه سه خدمت اصلی:\n\nPhysical Delivery | Buy | Sell",
+          "duration": 10.1,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-d53391c4-f7c5-4a8a-a439-6779f033e8b3.mp4",
+          "poster": "",
+          "fit": "contain",
+          "position": 37,
+          "transition": "fade",
+          "intensity": 0.35,
+          "background": "#FFFFFF",
+          "textColor": "#222225",
+          "accent": "#e7c569",
+          "fontSize": 33,
+          "loop": true,
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0,
+                "y": 0,
+                "w": 44.286221590909086,
+                "h": 100
+              },
+              "copy": {
+                "x": 53.375803975039794,
+                "y": 16.058009953021017,
+                "w": 42.10811906215029,
+                "h": 65.937532727662
+              }
+            }
+          },
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "توسعه خدمات و بازار از طریق اتصال زیرساخت‌های دیجیتال و فیزیکی طلا\n"
+            }
+          ],
+          "titleFormat": {
+            "align": "center"
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "طراحی مدل همکاری میان دیجی‌کالا و طلاکارت با هدف ایجاد فرآیندی یکپارچه، ساده و مقیاس‌پذیر برای ارائه خدمات به کاربران، برای ارائه سه خدمت اصلی:\n"
+                }
+              ],
+              "format": {
+                "align": "justify"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 51.61773429429236,
+                  "y": 48.1891012585657,
+                  "w": 45.22370141399794,
+                  "h": 18.30087375562974
+                }
+              }
+            },
+            {
+              "id": "text-335b5507-e9ad-4d76-bcda-a01295cce57a",
+              "runs": [
+                {
+                  "text": "Physical Delivery | Buy | Sell",
+                  "bold": true,
+                  "fontSize": 31,
+                  "color": "#e6c569"
+                }
+              ],
+              "format": {
+                "bold": true,
+                "fontSize": 31,
+                "align": "center",
+                "color": "#e6c569"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 52.30032928719009,
+                  "y": 68.19405326257123,
+                  "w": 41.78813839746901,
+                  "h": 10.141657825981758
+                }
+              }
+            }
+          ]
         },
         {
           "id": "proposal-4",
-          "chapter": "راهکار",
+          "chapter": "محصول و نقطه تعامل",
           "label": "طلاکارت؛ لایهٔ فیزیکی خدمات آنلاین طلا",
-          "title": "طلاکارت؛ لایهٔ فیزیکی خدمات آنلاین طلاست",
+          "title": "محصولات و نقاط تعامل طلاکارت",
           "highlight": "لایهٔ فیزیکی",
-          "description": "یک شبکهٔ مشترک برای معاملهٔ دیجیتال، خرید فیزیکی و دریافت طلا؛ از نرخ پلتفرم تا طلای در دست کاربر.",
+          "description": "سه جزء مکمل، یک زیرساخت یکپارچه\n\nGold Card | کارت طلا\n\nمحصول فیزیکی استانداردشده، حاوی پلاک طلا با وزن و عیار مشخص\n\nTalacard App | اپلیکیشن طلاکارت\n\nبستر دیجیتال خریدوفروش، مدیریت دارایی و ثبت درخواست خدمات طلا\n\nTalapardaz | طلاپرداز\n\nشبکه فیزیکی ارائه خدمات خرید، فروش و تحویل طلا\n",
           "duration": 10.1,
           "layout": "split",
           "legacyScene": 0,
@@ -718,141 +1533,1487 @@
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
+          "accent": "#e6c469",
+          "fontSize": 45,
           "loop": true,
-          "presentationStyle": "reference"
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 45.8501897706576,
+                "y": 0,
+                "w": 54.1498102293424,
+                "h": 100
+              },
+              "copy": {
+                "x": 38.427492252066116,
+                "y": 6.265007631806442,
+                "w": 58.90683003728082,
+                "h": 81.51611598467066
+              }
+            }
+          },
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "محصولات و نقاط تعامل طلاکارت"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "سه جزء مکمل، یک زیرساخت یکپارچه\n",
+                  "bold": false,
+                  "fontSize": 20
+                }
+              ],
+              "format": {
+                "fontSize": 20,
+                "bold": false
+              },
+              "placement": {
+                "desktop": {
+                  "x": 5.292217160059404,
+                  "y": 13.170339784363575,
+                  "w": 37.79573298682851,
+                  "h": 12.791380278819487
+                }
+              }
+            },
+            {
+              "id": "text-4dec10e2-0244-411b-ad06-70010c1a9248",
+              "runs": [
+                {
+                  "text": "Gold Card | کارت طلا\n",
+                  "bold": true,
+                  "fontSize": 23
+                }
+              ],
+              "format": {
+                "bold": true,
+                "fontSize": 23
+              },
+              "placement": {
+                "desktop": {
+                  "x": 17.69241711324896,
+                  "y": 31.695060597212287,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-48939376-33de-4b04-9b14-15849ccd9cff",
+              "runs": [
+                {
+                  "text": "محصول فیزیکی استانداردشده، حاوی پلاک طلا با وزن و عیار مشخص\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 1.610601756198347,
+                  "y": 39.033488880569436,
+                  "w": 47.34050151730372,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-e6dbd7cf-4fd6-40b5-a240-6ea7cadf2cc6",
+              "runs": [
+                {
+                  "text": "Talacard App | اپلیکیشن طلاکارت\n",
+                  "bold": true,
+                  "fontSize": 20
+                }
+              ],
+              "format": {
+                "fontSize": 20,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 17.781730210485534,
+                  "y": 50.99653359719612,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-154f69d4-2743-4141-9299-0e114b52fa23",
+              "runs": [
+                {
+                  "text": "بستر دیجیتال خریدوفروش، مدیریت دارایی و ثبت درخواست خدمات طلا\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 0.3677040289256198,
+                  "y": 57.09552302834418,
+                  "w": 48.57726546358471,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-e64bd3da-37ff-40a1-ae00-e4ff53207f58",
+              "runs": [
+                {
+                  "text": "Talapardaz | طلاپرداز",
+                  "bold": true,
+                  "fontSize": 20
+                },
+                {
+                  "text": "\n",
+                  "bold": false,
+                  "fontSize": 20
+                }
+              ],
+              "format": {
+                "bold": false,
+                "fontSize": 20
+              },
+              "placement": {
+                "desktop": {
+                  "x": 17.74307124870868,
+                  "y": 69.54001893538931,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-6039310e-5f69-4862-8d28-7d43ab271e1b",
+              "runs": [
+                {
+                  "text": "شبکه فیزیکی ارائه خدمات خرید، فروش و تحویل طلا\n",
+                  "fontSize": 20
+                }
+              ],
+              "format": {
+                "fontSize": 20
+              },
+              "placement": {
+                "desktop": {
+                  "x": 13.49139252970042,
+                  "y": 76.10905209856044,
+                  "w": 35.4102974883781,
+                  "h": 8.654164916073753
+                }
+              }
+            }
+          ]
         },
         {
           "id": "proposal-5",
-          "chapter": "همکاری",
+          "chapter": "فرصت و ارزش",
           "label": "پلتفرم، قیمت را ارائه می‌کند؛ طلاکارت،",
-          "title": "پلتفرم، قیمت را ارائه می‌کند؛ طلاکارت، دسترسی را گسترش می‌دهد",
+          "title": "فرصت و ارزش",
           "highlight": "دسترسی",
-          "description": "همکاری بر پایهٔ تکمیل نقش‌هاست، نه جابه‌جایی آن‌ها. پلتفرم همکار: قیمت و خدمات طلای دیجیتال. طلاکارت: زیرساخت مشترک فروش و دریافت. طلاپرداز: نقطهٔ دسترسی فیزیکی کاربر.",
+          "description": "تسهیل خدمات موجود، توسعه ظرفیت‌های جدید\n\n۱. تسهیل و بهینه‌سازی خدمات\n\nساده‌سازی فرآیند تحویل فیزیکی طلا\nافزایش نقاط دسترسی به خدمات فیزیکی\nبهبود تجربه کاربر در دریافت خدمات\n\nهمکاری",
           "duration": 10.1,
           "layout": "split",
           "legacyScene": 0,
-          "media": "/media/partnership.mp4",
-          "poster": "/media/partnership.jpg",
+          "media": "/media/upload-34e7c9a0-4b8e-4eee-9083-1dce6d4ac8b3.mp4",
+          "poster": "",
           "fit": "contain",
           "position": 50,
           "transition": "fade",
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "proposal-6",
-          "chapter": "همکاری",
-          "label": "حضور فیزیکی، بدون ساخت شبکه‌ای مستقل",
-          "title": "حضور فیزیکی، بدون ساخت شبکه‌ای مستقل",
-          "highlight": "حضور فیزیکی",
-          "description": "فروش و دریافت فیزیکی در امتداد خدمات فعلی پلتفرم قرار می‌گیرد: اعتماد به دارایی، دسترسی فیزیکی، کانال فروش جدید و توزیع دیجیتال مکمل.",
-          "duration": 10.1,
-          "layout": "split",
-          "legacyScene": 0,
-          "media": "/media/infrastructure.mp4",
-          "poster": "/media/infrastructure.jpg",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "proposal-7",
-          "chapter": "مسیرها",
-          "label": "همکاری با طلاکارت سه مسیر روشن دارد",
-          "title": "همکاری با طلاکارت سه مسیر روشن دارد",
-          "highlight": "سه مسیر",
-          "description": "موجودی در پلتفرم ← دریافت از طلاپرداز\nخرید از طلاپرداز ← با قیمت پلتفرم\nمعامله در طلاکارت ← با نرخ پلتفرم",
-          "duration": 10.1,
-          "layout": "split",
-          "legacyScene": 0,
-          "media": "/media/three-paths.mp4",
-          "poster": "/media/three-paths.jpg",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
+          "accent": "#e6c469",
           "fontSize": 40,
           "loop": true,
           "placement": {
             "desktop": {
               "media": {
-                "x": 0.0012618924942484663,
-                "y": 0,
-                "w": 48.141853940998836,
-                "h": 76.16248993225962
+                "x": 0,
+                "y": 6.7378986355596595,
+                "w": 48.64311674331086,
+                "h": 93.26210136444034
               },
               "copy": {
-                "x": 54.58342666369298,
-                "y": 7.002309790030157,
-                "w": 43.77576280296049,
-                "h": 39.253432573779264
+                "x": 49.459150754855585,
+                "y": 12.315606123481826,
+                "w": 42.64230266124777,
+                "h": 75.62146891944764
               }
             }
           },
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "فرصت و ارزش",
+              "color": "#222225"
+            }
+          ],
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "تسهیل خدمات موجود، توسعه ظرفیت‌های جدید\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 58.81193302879648,
+                  "y": 27.45620771688816,
+                  "w": 32.489003583419425,
+                  "h": 8.609252100940331
+                }
+              }
+            },
+            {
+              "id": "text-1a130328-6266-4d9b-a7db-4c5d5fd32897",
+              "runs": [
+                {
+                  "text": "۱. تسهیل و بهینه‌سازی خدمات\n",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "bold": true,
+                "fontSize": 22
+              },
+              "placement": {
+                "desktop": {
+                  "x": 60.386165902634296,
+                  "y": 41.56244727244656,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-b32beeaf-0c4f-46bf-854b-56cfaa65e5b5",
+              "runs": [
+                {
+                  "text": "ساده‌سازی فرآیند تحویل فیزیکی طلا\nافزایش نقاط دسترسی به خدمات فیزیکی\nبهبود تجربه کاربر در دریافت خدمات"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 44.34826559271694,
+                  "y": 49.64977462737161,
+                  "w": 47.32145451317149,
+                  "h": 25.7791284167836
+                }
+              }
+            },
+            {
+              "id": "text-5af53fcf-d478-49c3-ab70-c2525586a682",
+              "runs": [
+                {
+                  "text": "\nهمکاری",
+                  "bold": true,
+                  "fontSize": 44,
+                  "color": "#e6c569"
+                }
+              ],
+              "format": {
+                "color": "#e6c569",
+                "bold": true,
+                "fontSize": 44,
+                "align": "justify"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 32.807677718233485,
+                  "y": 14.92637898666071,
+                  "w": 38.76547569085744,
+                  "h": 20.111814602828225
+                }
+              }
+            }
+          ]
         },
         {
-          "id": "proposal-8",
-          "chapter": "دریافت",
-          "label": "موجودی در پلتفرم؛ دریافت از نزدیک‌ترین",
-          "title": "موجودی در پلتفرم؛ دریافت از نزدیک‌ترین طلاپرداز",
-          "highlight": "نزدیک‌ترین طلاپرداز",
-          "description": "دریافت طلای فیزیکی، بدون رزرو یا هماهنگی قبلی؛ کارمزد شفاف و متناسب، دریافت در اوزان مختلف و بدون وابستگی به نقاط تحویل اختصاصی.",
+          "id": "page-08078993-4b42-4d5d-b6a4-12dc9c672a5d",
+          "chapter": "فرصت و ارزش",
+          "label": "توسعه خدمات و بازار",
+          "title": "۲. توسعه خدمات و بازار",
+          "highlight": "",
+          "description": "ایجاد کانال مکمل خرید و فروش طلا\nدسترسی به مشتریان جدید، به‌ویژه خریداران طلای فیزیکی\nکاهش نیاز به سرمایه‌گذاری در شبکه فیزیکی مستقل\nایجاد فرصت‌های درآمدی از تراکنش‌های مشترک",
+          "duration": 8,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-35cfa6bb-340c-411d-9bca-9fe1e9f3f8e7.mp4",
+          "poster": "",
+          "fit": "contain",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "۲. توسعه خدمات و بازار",
+              "fontSize": 22
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "ایجاد کانال مکمل خرید و فروش طلا\nدسترسی به مشتریان جدید، به‌ویژه خریداران طلای فیزیکی\nکاهش نیاز به سرمایه‌گذاری در شبکه فیزیکی مستقل\nایجاد فرصت‌های درآمدی از تراکنش‌های مشترک"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 53.98874330126549,
+                  "y": 46.867460817992956,
+                  "w": 38.47659276536673,
+                  "h": 24.114913342981048
+                }
+              }
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 50.652596482083936,
+                "y": 34.42328048272537,
+                "w": 41.99470798672438,
+                "h": 42.1150835819596
+              }
+            }
+          }
+        },
+        {
+          "id": "page-5537a7b4-1c0a-4a9f-a620-bc9de3a82ae5",
+          "chapter": "همکاری",
+          "label": "معماری همکاری",
+          "title": "معماری همکاری",
+          "highlight": "",
+          "description": "طلاکارت، زیرساخت مکمل طلای دیجی کالا\n\nدیجی‌کالا | تأمین و معاملات طلا\n\nقیمت‌گذاری و ارائه نرخ معاملات\nتأمین طلای مورد معامله\nاجرای معاملات خرید و فروش\nکسب درآمد از معاملات طلا\nطلاکارت | زیرساخت خدمات و توسعه بازار\n\nتسهیل فرآیندهای خرید، فروش و تحویل فیزیکی\nتوسعه کانال‌های ارائه خدمات\nایجاد فرصت جذب کاربران جدید، به‌ویژه خریداران طلای فیزیکی\nمدیریت و هماهنگی عملیات خدمات فیزیکی",
+          "duration": 8,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-91261372-754f-40d0-aabf-98274c001198.mp4",
+          "poster": "",
+          "fit": "contain",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "معماری همکاری"
+            }
+          ],
+          "titleFormat": {
+            "fontSize": 44,
+            "lineHeight": 1
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "طلاکارت، زیرساخت مکمل طلای دیجی کالا\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 44.33481768143078,
+                  "y": 21.31939174867375,
+                  "w": 45.662801443052686,
+                  "h": 28.90300998242237
+                }
+              }
+            },
+            {
+              "id": "text-3c6ebd8f-c421-4783-bf1a-b8b44fc2d3fe",
+              "runs": [
+                {
+                  "text": "دیجی‌کالا | تأمین و معاملات طلا\n",
+                  "bold": true,
+                  "fontSize": 26,
+                  "color": "#b43838"
+                }
+              ],
+              "format": {
+                "bold": true,
+                "fontSize": 26,
+                "color": "#b43838"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 57.51259039256198,
+                  "y": 34.69736939661524,
+                  "w": 33.125302653667354,
+                  "h": 19.716874739318026
+                }
+              }
+            },
+            {
+              "id": "text-f06dcb9d-bdc4-4b6e-96cf-84aa4d1107b5",
+              "runs": [
+                {
+                  "text": "قیمت‌گذاری و ارائه نرخ معاملات\nتأمین طلای مورد معامله\nاجرای معاملات خرید و فروش\nکسب درآمد از معاملات طلا"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 58.03503115315083,
+                  "y": 41.99555692653551,
+                  "w": 32.85477062887397,
+                  "h": 27.149945643899347
+                }
+              }
+            },
+            {
+              "id": "text-c3bb0fa3-6dcc-4984-a04f-8d47fe268e52",
+              "runs": [
+                {
+                  "text": "طلاکارت | زیرساخت خدمات و توسعه بازار",
+                  "fontSize": 26,
+                  "color": "#e6c469"
+                },
+                {
+                  "text": "\n",
+                  "color": "#e6c469"
+                }
+              ],
+              "format": {
+                "color": "#e6c469"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 53.60097333419421,
+                  "y": 65.41801717854158,
+                  "w": 37.152936951188025,
+                  "h": 8.353932510562291
+                }
+              }
+            },
+            {
+              "id": "text-4786b6ba-6f5f-42ad-afec-ec7e2be01347",
+              "runs": [
+                {
+                  "text": "تسهیل فرآیندهای خرید، فروش و تحویل فیزیکی\nتوسعه کانال‌های ارائه خدمات\nایجاد فرصت جذب کاربران جدید، به‌ویژه خریداران طلای فیزیکی\nمدیریت و هماهنگی عملیات خدمات فیزیکی"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 49.67955029700413,
+                  "y": 71.41224563770554,
+                  "w": 41.00688839746901,
+                  "h": 25.392487660417622
+                }
+              }
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 41.870313424232705,
+                "y": 10.826947070977667,
+                "w": 48.86002306936901,
+                "h": 89.17305292902233
+              },
+              "media": {
+                "x": 5.726368801652892,
+                "y": 11.01828519088404,
+                "w": 33.9685966554752,
+                "h": 86.6335556700751
+              }
+            }
+          },
+          "mediaItems": []
+        },
+        {
+          "id": "page-e4a22e80-9ca9-43a5-b7c7-32b264daea30",
+          "chapter": "همکاری",
+          "label": "منطق همکاری",
+          "title": "منطق همکاری\n",
+          "highlight": "",
+          "description": "توضیح این صفحه را بنویسید.دیجی کالا بر قیمت‌گذاری، تأمین و اقتصاد معاملات متمرکز است؛ طلاکارت با فراهم‌سازی زیرساخت فیزیکی، ارائه خدمات را تسهیل کرده و ظرفیت توسعه بازار و افزایش حجم تراکنش‌ها را ایجاد می‌کند",
+          "duration": 8,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-224cd648-f2b0-409c-909b-0b24fcb8db97.mp4",
+          "poster": "",
+          "fit": "contain",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "presentationStyle": "reference",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "titleRuns": [
+            {
+              "text": "منطق همکاری\n"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "توضیح این صفحه را بنویسید.دیجی کالا بر قیمت‌گذاری، تأمین و اقتصاد معاملات متمرکز است؛ طلاکارت با فراهم‌سازی زیرساخت فیزیکی، ارائه خدمات را تسهیل کرده و ظرفیت توسعه بازار و افزایش حجم تراکنش‌ها را ایجاد می‌کند"
+                }
+              ],
+              "format": {
+                "align": "justify"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 55.983200703770656,
+                  "y": 46.13302034715288,
+                  "w": 37.31791346526343,
+                  "h": 23.85879648911154
+                }
+              }
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 52.22090743249717,
+                "y": 35.267112034039016,
+                "w": 41.99470798672438,
+                "h": 37.250380386406704
+              },
+              "media": {
+                "x": 4.385623143724173,
+                "y": 9.501501314584674,
+                "w": 41.400156572830575,
+                "h": 81.63993408312105
+              }
+            }
+          }
+        },
+        {
+          "id": "page-acc36a37-a5f5-4b42-b3df-7c1385a5e355",
+          "chapter": "لایه یکپارچه",
+          "label": "لایه یکپارچه‌سازی",
+          "title": "لایه یکپارچه‌سازی و هماهنگ‌سازی\n",
+          "highlight": "",
+          "description": "هسته اتصال پلتفرم‌ها و هماهنگی فرآیندهای تراکنشی، مدیریت سفارش، موجودی، تسویه و تحویل فیزیکی",
+          "duration": 8,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-842a038c-a5d9-4bb2-893a-ca4f2eda40f0.mp4",
+          "poster": "",
+          "fit": "contain",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "لایه یکپارچه‌سازی و هماهنگ‌سازی\n"
+            }
+          ],
+          "titleFormat": {},
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 31.169125407703778,
+                "y": 33.61836243793398,
+                "w": 65.36538205697231,
+                "h": 28.441919355138904
+              },
+              "media": {
+                "x": 0,
+                "y": 0,
+                "w": 68.08436370092974,
+                "h": 100
+              }
+            }
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "هسته اتصال پلتفرم‌ها و هماهنگی فرآیندهای تراکنشی، مدیریت سفارش، موجودی، تسویه و تحویل فیزیکی"
+                }
+              ],
+              "format": {
+                "align": "justify"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 56.259069521565074,
+                  "y": 46.1086112084934,
+                  "w": 40.30704214553202,
+                  "h": 16.648646009822848
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "page-58dd66fc-022d-4493-ae65-2ef0632e658d",
+          "chapter": "لایه یکپارچه",
+          "label": "استقلال کانال‌های خدماتی",
+          "title": "استقلال کانال‌های خدماتی\n",
+          "highlight": "",
+          "description": "اجزای طلاکارت به یکدیگر متصل‌اند، اما خرید مستقیم از طلاپرداز الزاماً به ثبت‌نام قبلی در اپلیکیشن وابسته نیست",
+          "duration": 8,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-744489d5-1f98-45bb-88b4-b48f6d89539d.mp4",
+          "poster": "",
+          "fit": "cover",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "استقلال کانال‌های خدماتی\n"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "اجزای طلاکارت به یکدیگر متصل‌اند، اما خرید مستقیم از طلاپرداز الزاماً به ثبت‌نام قبلی در اپلیکیشن وابسته نیست",
+                  "fontSize": 18
+                }
+              ],
+              "format": {
+                "align": "justify",
+                "fontSize": 18
+              },
+              "placement": {
+                "desktop": {
+                  "x": 57.642862619447314,
+                  "y": 81.64901885941588,
+                  "w": 40.31543574057335,
+                  "h": 16.203911503447333
+                }
+              }
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0.0012610569473140497,
+                "y": 0,
+                "w": 99.99873894305269,
+                "h": 100
+              },
+              "copy": {
+                "x": 1.750866110183118,
+                "y": 7.315196664184125,
+                "w": 41.99470798672438,
+                "h": 27.52096255351716
+              }
+            }
+          }
+        },
+        {
+          "id": "proposal-7",
+          "chapter": "دامنه خدمات",
+          "label": "همکاری با طلاکارت سه مسیر روشن دارد",
+          "title": "دامنه خدمات همکاری",
+          "highlight": "سه مسیر",
+          "description": " تحویل فیزیکی طلا\n\nامکان دریافت فیزیکی دارایی طلای کاربران دیجی‌کالا از طریق شبکه طلاپرداز\n\nثبت درخواست ← تأیید و تخصیص دارایی ← تحویل فیزیکی\n\n",
           "duration": 10.1,
           "layout": "split",
           "legacyScene": 0,
-          "media": "/media/atm.mp4",
-          "poster": "/media/atm.jpg",
+          "media": "/media/upload-46af1845-2ec5-45c0-9bf2-ce2c03f5fae9.mp4",
+          "poster": "",
+          "fit": "contain",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0,
+                "y": 0,
+                "w": 58.858525941962185,
+                "h": 100
+              },
+              "copy": {
+                "x": 36.338470346829425,
+                "y": 33.351670212722766,
+                "w": 57.83247498032668,
+                "h": 45.95621476287266
+              }
+            }
+          },
+          "presentationStyle": "reference",
+          "mediaEffect": {
+            "type": "none",
+            "duration": 5,
+            "delay": 0,
+            "amount": 20,
+            "repeat": false,
+            "easing": "ease-out"
+          },
+          "titleRuns": [
+            {
+              "text": "دامنه خدمات همکاری"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": " تحویل فیزیکی طلا\n",
+                  "bold": true,
+                  "fontSize": 26
+                }
+              ],
+              "format": {
+                "bold": true,
+                "fontSize": 26
+              },
+              "placement": {
+                "desktop": {
+                  "x": 61.53133171649018,
+                  "y": 56.38356947649415,
+                  "w": 32.27011940696023,
+                  "h": 10.318379989876309
+                }
+              }
+            },
+            {
+              "id": "description-2",
+              "runs": [
+                {
+                  "text": "امکان دریافت فیزیکی دارایی طلای کاربران دیجی‌کالا از طریق شبکه طلاپرداز\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 45.93340913126292,
+                  "y": 63.761018056355184,
+                  "w": 47.62204509136105,
+                  "h": 11.027221376547272
+                }
+              }
+            },
+            {
+              "id": "description-1",
+              "runs": [
+                {
+                  "text": "ثبت درخواست ← تأیید و تخصیص دارایی ← تحویل فیزیکی\n\n",
+                  "bold": true
+                }
+              ],
+              "format": {
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 49.85634039256198,
+                  "y": 74.19314829375544,
+                  "w": 43.97627901439825,
+                  "h": 8.150848476915515
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "page-433e7314-89dd-4ec6-8e1d-088804aca04f",
+          "chapter": "دامنه خدمات",
+          "label": "خرید طلا",
+          "title": "خرید",
+          "highlight": "",
+          "description": "امکان خرید طلا از طریق اپلیکیشن و طلاپرداز، با قیمت‌گذاری و اجرای معامله توسط دیجی‌کالا\n\nدرخواست خرید ← دریافت نرخ ← اجرای معامله ← ثبت دارایی یا تحویل فیزیکی\n\nطلا",
+          "duration": 8,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-20e6881c-eade-4418-8a2c-46f21d970273.mp4",
+          "poster": "",
+          "fit": "cover",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "presentationStyle": "reference",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "titleRuns": [
+            {
+              "text": "خرید"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "امکان خرید طلا از طریق اپلیکیشن و طلاپرداز، با قیمت‌گذاری و اجرای معامله توسط دیجی‌کالا\n"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 37.24195748321281,
+                  "y": 27.24683833003657,
+                  "w": 58.65054800490702,
+                  "h": 13.548963664251078
+                }
+              }
+            },
+            {
+              "id": "text-075754b1-04a5-43a2-a5bc-b9cdc5ad66af",
+              "runs": [
+                {
+                  "text": "درخواست خرید ← دریافت نرخ ← اجرای معامله ← ثبت دارایی یا تحویل فیزیکی\n",
+                  "bold": true
+                }
+              ],
+              "format": {
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 42.025983826188025,
+                  "y": 35.3395356954667,
+                  "w": 53.90332434788223,
+                  "h": 9.480170168310165
+                }
+              }
+            },
+            {
+              "id": "text-07ef20b3-1a57-478e-9fdc-37f7dad2aefd",
+              "runs": [
+                {
+                  "text": "طلا",
+                  "bold": true,
+                  "fontSize": 44,
+                  "color": "#e7c469"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 57.04892497417355,
+                  "y": 18.55436266060832,
+                  "w": 31.56022000903926,
+                  "h": 18.50081145130331
+                }
+              }
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0.0012610569473140497,
+                "y": 0,
+                "w": 75.23635233729338,
+                "h": 100
+              },
+              "copy": {
+                "x": 53.82440691596824,
+                "y": 15.971073881334835,
+                "w": 42.92801118920372,
+                "h": 45.55022361871366
+              }
+            }
+          }
+        },
+        {
+          "id": "page-afc09264-9c7d-4864-8792-0a1213d1c166",
+          "chapter": "دامنه خدمات",
+          "label": "فروش و بازخرید طلا",
+          "title": "فروش و بازخرید",
+          "highlight": "",
+          "description": "امکان فروش دارایی طلای دیجیتال یا بازخرید طلای فیزیکی با استفاده از زیرساخت طلاکارت، در دو مسیر:\n\nفروش دارایی طلای دیجیتال از طریق اپلیکیشن یا طلاپرداز\n\nبازخرید طلای فیزیکی پس از دریافت و تأیید اصالت آن\nدرخواست فروش ← اعتبارسنجی دارایی یا طلای فیزیکی ← دریافت نرخ ← اجرای معامله\nطلا",
+          "duration": 8,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-4d1bd5c5-a724-4bdf-9abb-c862d1fe21a1.mp4",
+          "poster": "",
+          "fit": "contain",
+          "position": 50,
+          "transition": "fade",
+          "intensity": 0.45,
+          "background": "#FFFFFF",
+          "presentationStyle": "reference",
+          "textColor": "#222225",
+          "accent": "#e6c469",
+          "fontSize": 40,
+          "loop": true,
+          "titleRuns": [
+            {
+              "text": "فروش و بازخرید"
+            }
+          ],
+          "titleFormat": {
+            "align": "justify"
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "امکان فروش دارایی طلای دیجیتال یا بازخرید طلای فیزیکی با استفاده از زیرساخت طلاکارت، در دو مسیر:\n"
+                }
+              ],
+              "format": {
+                "align": "justify"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 53.69178961131198,
+                  "y": 20.62955135087802,
+                  "w": 41.574101723915284,
+                  "h": 17.31180782929225
+                }
+              }
+            },
+            {
+              "id": "text-042bb872-d106-4952-88cd-9d51f8c4f53d",
+              "runs": [
+                {
+                  "text": "فروش دارایی طلای دیجیتال از طریق اپلیکیشن یا طلاپرداز\n",
+                  "bold": true
+                }
+              ],
+              "format": {
+                "align": "justify",
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 46.76634228919163,
+                  "y": 35.395943689337564,
+                  "w": 48.45039809045713,
+                  "h": 11.088732405969132
+                }
+              }
+            },
+            {
+              "id": "text-ca3a5302-59be-4f20-b3e0-a67271e98c6a",
+              "runs": [
+                {
+                  "text": "بازخرید طلای فیزیکی پس از دریافت و تأیید اصالت آن",
+                  "bold": true
+                }
+              ],
+              "format": {
+                "align": "justify",
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 48.19874156605114,
+                  "y": 42.861532143326805,
+                  "w": 47.0070225739282,
+                  "h": 19.092000789635634
+                }
+              }
+            },
+            {
+              "id": "text-8634c829-9d4d-4609-b7db-b8732db9ea6a",
+              "runs": [
+                {
+                  "text": "درخواست فروش ← اعتبارسنجی دارایی یا طلای فیزیکی ← دریافت نرخ ← اجرای معامله",
+                  "bold": true
+                }
+              ],
+              "format": {
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 37.70245512654958,
+                  "y": 52.81142933508592,
+                  "w": 57.55195554622934,
+                  "h": 11.076039653866209
+                }
+              }
+            },
+            {
+              "id": "text-97605030-a9fc-49b5-b700-e076d68138ab",
+              "runs": [
+                {
+                  "text": "طلا",
+                  "bold": true,
+                  "fontSize": 43,
+                  "color": "#e7c569"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 41.974250225981415,
+                  "y": 12.165598614293211,
+                  "w": 31.146684126420453,
+                  "h": 8
+                }
+              }
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 45.10443015976989,
+                "y": 10.264796979794287,
+                "w": 50.509687325567356,
+                "h": 71.2045334640482
+              },
+              "media": {
+                "x": 0,
+                "y": 40.0812702271667,
+                "w": 44.015084258780995,
+                "h": 59.9187297728333
+              }
+            }
+          }
+        },
+        {
+          "id": "proposal-8",
+          "chapter": "موضوعات کلیدی",
+          "label": "موجودی در پلتفرم؛ دریافت از نزدیک‌ترین",
+          "title": "\n",
+          "highlight": "نزدیک‌ترین طلاپرداز",
+          "description": "الزامات عملیاتی پیش از توسعه تجاری همکاری\n\n\nبرای اجرای پایدار و مقیاس‌پذیر خدمات، موضوعات زیر باید در طراحی نهایی مدل همکاری تعیین تکلیف شوند:\nتعیین مسئول هر مرحله از فرآیندهای تراکنشی و عملیاتی\nمسئولیت‌ها: \nموجودی:\nمالکیت، تأمین، تخصیص و مدیریت موجودی فیزیکی\nقیمت‌گذاری:\nاعتبار نرخ (Price Lock) و مسئولیت ریسک تغییر قیمت.\nاحراز هویت:\nتعیین مسئولیت احراز هویت در هر مسیر خدمت\nتسویه:\nساختار حساب‌ها، جریان وجوه و چرخه تسویه\nتطبیق:\nشناسایی و رفع مغایرت‌های تراکنشی، مالی و موجودی\nپشتیبانی:\nتعیین مسئولیت پاسخگویی و فرآیند ارجاع و پیگیری\nمدیریت خطا:\nتعیین تکلیف تراکنش‌های معلق، ناموفق، زمان‌گذشته و نیمه‌تمام",
+          "duration": 10.1,
+          "layout": "split",
+          "legacyScene": 0,
+          "media": "/media/upload-e075e555-ea11-4e7a-92e8-c04630be2da2.mp4",
+          "poster": "",
           "fit": "contain",
           "position": 50,
           "transition": "reveal",
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
+          "accent": "#e6c469",
           "fontSize": 40,
           "loop": true,
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "proposal-9",
-          "chapter": "خرید",
-          "label": "خرید از طلاپرداز؛ با قیمت پلتفرم",
-          "title": "خرید از طلاپرداز؛ با قیمت پلتفرم",
-          "highlight": "با قیمت پلتفرم",
-          "description": "خرید مستقیم به عضویت یا موجودی قبلی در پلتفرم وابسته نیست. انتخاب طلا از میان اوزان قابل دریافت، قیمت خرید ارائه‌شده از سوی پلتفرم همکار، دریافت طلا در همان نقطهٔ خرید.",
-          "duration": 9,
-          "layout": "split",
-          "legacyScene": 0,
-          "media": "/media/proposal-9.jpg",
-          "poster": "/media/proposal-9.jpg",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.3,
-          "background": "#FFFFFF",
-          "textColor": "#231f20",
-          "accent": "#e7c569",
-          "fontSize": 36,
-          "loop": true,
-          "presentationStyle": "reference"
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0,
+                "y": 0,
+                "w": 39.55475464702734,
+                "h": 59.176374434203744
+              },
+              "copy": {
+                "x": 29.117540547229975,
+                "y": 0,
+                "w": 63.605719574201856,
+                "h": 10.647108161761878
+              }
+            }
+          },
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "\n"
+            }
+          ],
+          "titleFormat": {},
+          "textBlocks": [
+            {
+              "id": "text-94672ae8-66ad-4373-94d0-e96af3138700",
+              "runs": [
+                {
+                  "text": "الزامات عملیاتی پیش از توسعه تجاری همکاری\n\n",
+                  "bold": true,
+                  "fontSize": 44
+                }
+              ],
+              "format": {
+                "fontSize": 44,
+                "bold": true,
+                "lineHeight": 1.6,
+                "align": "justify"
+              },
+              "placement": {
+                "desktop": {
+                  "x": 57.34580804493802,
+                  "y": 10.287002652358026,
+                  "w": 34.00566164127067,
+                  "h": 41.605315822217264
+                }
+              }
+            },
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "برای اجرای پایدار و مقیاس‌پذیر خدمات، موضوعات زیر باید در طراحی نهایی مدل همکاری تعیین تکلیف شوند:"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 51.07434989992251,
+                  "y": 29.163527803992178,
+                  "w": 40.525558093362605,
+                  "h": 12.930024186405268
+                }
+              }
+            },
+            {
+              "id": "text-f9a69171-71b8-4227-a65c-4f9e6b3caf79",
+              "runs": [
+                {
+                  "text": "تعیین مسئول هر مرحله از فرآیندهای تراکنشی و عملیاتی"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 44.45633312887396,
+                  "y": 41.62756627767652,
+                  "w": 37.572616703254134,
+                  "h": 8.048330094545747
+                }
+              }
+            },
+            {
+              "id": "text-bac6fd5f-eb41-47a9-97c8-98e12f42b171",
+              "runs": [
+                {
+                  "text": "مسئولیت‌ها: ",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 60.823197798295446,
+                  "y": 41.69547707814067,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-5354387d-cd11-4a0b-ab13-137d88296c24",
+              "runs": [
+                {
+                  "text": "موجودی:",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "fontSize": 22,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 60.998636040805785,
+                  "y": 48.003454503348784,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-81557312-7358-42ec-b753-1020ea333fff",
+              "runs": [
+                {
+                  "text": "مالکیت، تأمین، تخصیص و مدیریت موجودی فیزیکی"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 47.64119802427686,
+                  "y": 48.22341898194974,
+                  "w": 37.22363684788223,
+                  "h": 8.151336659688704
+                }
+              }
+            },
+            {
+              "id": "text-8cbed475-1bac-4a52-bc6c-651680ef00b1",
+              "runs": [
+                {
+                  "text": "قیمت‌گذاری:",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "fontSize": 22,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 61.22397178460744,
+                  "y": 54.15615929525936,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-9001cabd-0173-434a-96cc-a76a7c6e58df",
+              "runs": [
+                {
+                  "text": "اعتبار نرخ (Price Lock) و مسئولیت ریسک تغییر قیمت."
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 37.87234471849173,
+                  "y": 54.22506171698152,
+                  "w": 44.59482744705579,
+                  "h": 10.345230042401726
+                }
+              }
+            },
+            {
+              "id": "text-12b96b73-7a41-4c3f-a495-e16f0fcae328",
+              "runs": [
+                {
+                  "text": "احراز هویت:",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "fontSize": 22,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 61.34697023502066,
+                  "y": 60.468240506904564,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-2f77acfc-8b84-48d2-9275-d5c2a3622be2",
+              "runs": [
+                {
+                  "text": "تعیین مسئولیت احراز هویت در هر مسیر خدمت"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 46.44059110278926,
+                  "y": 60.33356308435097,
+                  "w": 36.644801620609506,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-76754186-64a1-45db-8918-287938cb4f96",
+              "runs": [
+                {
+                  "text": "تسویه:",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "fontSize": 22,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 61.44672488378099,
+                  "y": 66.65855825591822,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-904498c8-1750-4059-b786-e14a754ca089",
+              "runs": [
+                {
+                  "text": "ساختار حساب‌ها، جریان وجوه و چرخه تسویه"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 51.46060659865702,
+                  "y": 66.80653865904124,
+                  "w": 35.37575461647727,
+                  "h": 8.001464548319568
+                }
+              }
+            },
+            {
+              "id": "text-df2c1a38-e587-4eff-9ff3-b2f3e37eef60",
+              "runs": [
+                {
+                  "text": "تطبیق:",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "fontSize": 22,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 61.721130875516536,
+                  "y": 72.6072179043473,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-5879b178-4b7c-48fc-aabd-2545c1ef4ea4",
+              "runs": [
+                {
+                  "text": "شناسایی و رفع مغایرت‌های تراکنشی، مالی و موجودی"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 51.56520370609505,
+                  "y": 72.762528676924,
+                  "w": 35.625948314824385,
+                  "h": 8.303649684923787
+                }
+              }
+            },
+            {
+              "id": "text-f6476e30-ab72-4946-8689-fbc22eb72cce",
+              "runs": [
+                {
+                  "text": "پشتیبانی:",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "fontSize": 22,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 61.77181527634298,
+                  "y": 78.50975953642164,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-f23f4574-ff1a-4568-a204-c0750b55499b",
+              "runs": [
+                {
+                  "text": "تعیین مسئولیت پاسخگویی و فرآیند ارجاع و پیگیری"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 48.04215360278925,
+                  "y": 78.72608552779117,
+                  "w": 37.01637961647727,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-6d4fca72-6deb-41f0-93ed-23d8f80fb37d",
+              "runs": [
+                {
+                  "text": "مدیریت خطا:",
+                  "bold": true,
+                  "fontSize": 22
+                }
+              ],
+              "format": {
+                "fontSize": 22,
+                "bold": true
+              },
+              "placement": {
+                "desktop": {
+                  "x": 62.08948056559918,
+                  "y": 85.25437068511266,
+                  "w": 31.14667403796488,
+                  "h": 8
+                }
+              }
+            },
+            {
+              "id": "text-e5db9785-2e8c-4ce5-bacf-ae0a69adfac2",
+              "runs": [
+                {
+                  "text": "تعیین تکلیف تراکنش‌های معلق، ناموفق، زمان‌گذشته و نیمه‌تمام"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 42.08980339617769,
+                  "y": 85.1405438539162,
+                  "w": 41.19606711647727,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "proposal-10",
@@ -864,64 +3025,102 @@
           "duration": 9,
           "layout": "split",
           "legacyScene": 0,
-          "media": "/media/proposal-10.jpg",
-          "poster": "/media/proposal-10.jpg",
+          "media": "/media/upload-5744b29b-51f0-4fcb-aba7-89bbae8292c9.mp4",
+          "poster": "",
           "fit": "contain",
           "position": 50,
           "transition": "fade",
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
+          "accent": "#e6c569",
           "fontSize": 40,
           "loop": true,
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 33.63776645777416,
+                "y": 0,
+                "w": 66.36223354222584,
+                "h": 100
+              },
+              "copy": {
+                "x": 2.908292461238995,
+                "y": 29.372126772326336,
+                "w": 53.53180191338994,
+                "h": 35.36277752061163
+              }
+            }
+          },
           "presentationStyle": "reference"
         },
         {
           "id": "proposal-11",
           "chapter": "زیرساخت",
-          "label": "طلاکارت، زیرساخت مکمل پلتفرم‌های آنلای",
+          "label": "طلاکارت، زیرساخت مکمل پلتفرم‌ها",
           "title": "طلاکارت، زیرساخت مکمل پلتفرم‌های آنلاین طلاست",
           "highlight": "زیرساخت مکمل",
-          "description": "یک شبکهٔ مشترک برای کامل‌کردن زنجیرهٔ خدمات دیجیتال و فیزیکی.",
+          "description": "یک شبکهٔ مشترک برای کامل‌کردن زنجیرهٔ خدمات دیجیتال و فیزیکی",
           "duration": 9,
           "layout": "split",
           "legacyScene": 0,
-          "media": "/media/proposal-11.jpg",
-          "poster": "/media/proposal-11.jpg",
+          "media": "/media/upload-fc08a2ed-e852-46a1-aa66-17ba974dc932.mp4",
+          "poster": "",
           "fit": "contain",
           "position": 50,
           "transition": "fade",
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#E7C569",
+          "accent": "#e6c469",
           "fontSize": 40,
           "loop": true,
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "proposal-12",
-          "chapter": "جمع‌بندی",
-          "label": "خدمات دیجیتال پلتفرم با شبکهٔ فیزیکی ط",
-          "title": "خدمات دیجیتال پلتفرم با شبکهٔ فیزیکی طلاکارت کامل می‌شود",
-          "highlight": "کامل می‌شود",
-          "description": "پلتفرم قیمت و خدمات دیجیتال خود را حفظ می‌کند. طلاکارت فروش و دریافت فیزیکی را به این خدمات اضافه می‌کند و طلاپرداز هوشمند، طلای آن را در دسترس کاربر قرار می‌دهد.",
-          "duration": 10.1,
-          "layout": "split",
-          "legacyScene": 0,
-          "media": "/media/closing.mp4",
-          "poster": "/media/closing.jpg",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "presentationStyle": "reference"
+          "placement": {
+            "desktop": {
+              "media": {
+                "x": 0,
+                "y": 14.97891202976939,
+                "w": 100,
+                "h": 85.02108797023061
+              },
+              "copy": {
+                "x": 11.688668243954613,
+                "y": 18.369484813046107,
+                "w": 72.15574746553717,
+                "h": 28.64261178001098
+              }
+            }
+          },
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#ffffff"
+          },
+          "titleRuns": [
+            {
+              "text": "طلاکارت، زیرساخت مکمل پلتفرم‌های آنلاین طلاست",
+              "color": "#ffffff"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "یک شبکهٔ مشترک برای کامل‌کردن زنجیرهٔ خدمات دیجیتال و فیزیکی",
+                  "color": "#ffffff"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 23.903743018788745,
+                  "y": 31.385255232632826,
+                  "w": 44.57610831772985,
+                  "h": 8
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -935,9 +3134,9 @@
           "id": "ref-kiosk-0",
           "chapter": "معرفی",
           "label": "طلاپرداز",
-          "title": "از حساب دیجی‌کالا، تا کارت طلا",
+          "title": "از حساب دیجی‌کالا، تا طلاکارت",
           "highlight": "تا کارت طلا",
-          "description": "خرید و تحویل طلاکارت در طلاپرداز، در چند لمس",
+          "description": "خرید و تحویل طلاکارت از طلاپرداز",
           "duration": 3.8,
           "layout": "legacy",
           "legacyScene": 0,
@@ -949,19 +3148,46 @@
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
+          "accent": "#e7c569",
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 18.419553845570675,
+                "y": 64.24553443996099,
+                "w": 63.117285522724686,
+                "h": 26.03974717724826
+              }
+            }
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "خرید و تحویل طلاکارت از طلاپرداز"
+                }
+              ],
+              "format": {}
+            }
+          ],
+          "titleRuns": [
+            {
+              "text": "از حساب دیجی‌کالا، تا طلاکارت"
+            }
+          ],
+          "titleFormat": {}
         },
         {
           "id": "ref-kiosk-1",
           "chapter": "ورود",
           "label": "کارت بانکی",
-          "title": "کارت بانکی، در شیار",
-          "highlight": "در شیار",
-          "description": "کاربر کارت بانکی‌اش را وارد طلاپرداز می‌کند تا هویتش تأیید شود.",
+          "title": "خرید طلای فیزیکی با کارت بانکی",
+          "highlight": "با کارت بانکی",
+          "description": "کاربر کارت بانکی خود را وارد کرده تا فرایند خرید و یا تحویل طلاکارت آغاز شود.",
           "duration": 4.5,
           "layout": "legacy",
           "legacyScene": 1,
@@ -973,19 +3199,27 @@
           "intensity": 0.45,
           "background": "#FFFFFF",
           "textColor": "#222225",
-          "accent": "#A87816",
+          "accent": "#e7c569",
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "mediaEffect": {
+            "type": "none",
+            "duration": 5,
+            "delay": 0,
+            "amount": 20,
+            "repeat": false,
+            "easing": "ease-out"
+          }
         },
         {
           "id": "ref-kiosk-2",
           "chapter": "ورود",
           "label": "رمز کارت",
-          "title": "چهار رقم، روی دستگاه",
-          "highlight": "روی دستگاه",
-          "description": "رمز کارت با صفحه‌کلید فیزیکی خود طلاپرداز وارد می‌شود.",
+          "title": "خرید طلای فیزیکی با کارت بانکی",
+          "highlight": "با کارت بانکی",
+          "description": "برای آغاز فرایند خرید یا دریافت طلاکارت کاربر کارت بانکی خود را وارد می‌کند",
           "duration": 5.1,
           "layout": "legacy",
           "legacyScene": 2,
@@ -1001,15 +3235,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "خرید طلای فیزیکی با کارت بانکی",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "برای آغاز فرایند خرید یا دریافت طلاکارت کاربر کارت بانکی خود را وارد می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 53.976502099440154,
+                  "y": 51.50363452435102,
+                  "w": 41.77707819581445,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-3",
           "chapter": "ورود",
           "label": "انتخاب خدمت",
-          "title": "خرید طلاکارت",
-          "highlight": "طلاکارت",
-          "description": "از منوی طلاپرداز، کاربر خرید طلاکارت را انتخاب می‌کند.",
+          "title": "انتخاب خدمت خرید طلاکارت",
+          "highlight": "خرید طلاکارت",
+          "description": "از منوی طلاپرداز، کاربر گزینه خرید طلاکارت را انتخاب می‌کند",
           "duration": 4.1,
           "layout": "legacy",
           "legacyScene": 3,
@@ -1025,15 +3287,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "از منوی طلاپرداز، کاربر گزینه خرید طلاکارت را انتخاب می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 65.14530500199947,
+                  "y": 52.06895017570431,
+                  "w": 30.147918888296456,
+                  "h": 8
+                }
+              }
+            }
+          ],
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب خدمت خرید طلاکارت",
+              "color": "#222225"
+            }
+          ]
         },
         {
           "id": "ref-kiosk-4",
           "chapter": "تأیید شماره",
           "label": "شماره همراه",
-          "title": "شماره همراه، رقم به رقم",
-          "highlight": "رقم به رقم",
-          "description": "شماره‌ی همراه وارد می‌شود تا کد تأیید برایش پیامک شود.",
+          "title": "احراز از طریق شماره همراه",
+          "highlight": "شماره همراه",
+          "description": "شماره همراه وارد می‌شود تا با دریافت کد یک‌بارمصرف احراز هویت کاربر انجام شود",
           "duration": 5.9,
           "layout": "legacy",
           "legacyScene": 4,
@@ -1049,15 +3339,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "احراز از طریق شماره همراه",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "شماره همراه وارد می‌شود تا با دریافت کد یک‌بارمصرف احراز هویت کاربر انجام شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 52.41959435817116,
+                  "y": 51.1853235423841,
+                  "w": 43.58514812716609,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-5",
           "chapter": "تأیید شماره",
           "label": "کد تأیید",
-          "title": "کد پیامک، تأیید شد",
-          "highlight": "تأیید شد",
-          "description": "کد یک‌بارمصرف روی همان صفحه‌کلید وارد می‌شود.",
+          "title": "احراز از طریق شماره همراه",
+          "highlight": "شماره همراه",
+          "description": "شماره همراه وارد می‌شود تا با دریافت کد یک‌بارمصرف احراز هویت کاربر انجام شود",
           "duration": 3.8,
           "layout": "legacy",
           "legacyScene": 5,
@@ -1073,15 +3391,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "شماره همراه وارد می‌شود تا با دریافت کد یک‌بارمصرف احراز هویت کاربر انجام شود"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 54.10251016395629,
+                  "y": 50.67907800658672,
+                  "w": 41.76525843108504,
+                  "h": 8
+                }
+              }
+            }
+          ],
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "احراز از طریق شماره همراه",
+              "color": "#222225"
+            }
+          ]
         },
         {
           "id": "ref-kiosk-6",
           "chapter": "خرید",
           "label": "انتخاب طلاکارت",
-          "title": "طلاکارت ۲ گرمی",
-          "highlight": "۲ گرمی",
-          "description": "کاربر وزن کارت را انتخاب می‌کند؛ قیمت هر کارت کنارش است.",
+          "title": "انتخاب وزن طلاکارت",
+          "highlight": "طلاکارت",
+          "description": "کاربر وزن کارت مورد نظر خود را از بین گزینه‌های موجود انتخاب می‌کند",
           "duration": 4.1,
           "layout": "legacy",
           "legacyScene": 6,
@@ -1097,15 +3443,53 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب وزن طلاکارت",
+              "color": "#222225"
+            }
+          ],
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 55.42464717741935,
+                "y": 42.39138719512195,
+                "w": 40.69889696081045,
+                "h": 17.28565601975945
+              }
+            }
+          },
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربر وزن کارت مورد نظر خود را از بین گزینه‌های موجود انتخاب می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 56.2101252166089,
+                  "y": 51.974998725427156,
+                  "w": 39.88742585310584,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-7",
           "chapter": "خرید",
           "label": "انتخاب پلتفرم",
-          "title": "دیجی‌کالا، اولِ فهرست",
-          "highlight": "اولِ فهرست",
-          "description": "پلتفرمی که کاربر در آن حساب طلا دارد؛ دیجی‌کالا اولین گزینه است.",
+          "title": "دیجی‌کالا، اولین پلتفرم",
+          "highlight": "اولین پلتفرم",
+          "description": " با توجه به وزن طلاکارت انتخاب‌شده  و قیمت اعلام‌شده کاربر دیجی‌کالا را انتخاب می‌کند",
           "duration": 3.6,
           "layout": "legacy",
           "legacyScene": 7,
@@ -1121,15 +3505,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "دیجی‌کالا، اولین پلتفرم",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": " با توجه به وزن طلاکارت انتخاب‌شده  و قیمت اعلام‌شده کاربر دیجی‌کالا را انتخاب می‌کند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 57.80962576646229,
+                  "y": 50.75386432315903,
+                  "w": 38.49438066515596,
+                  "h": 8.839857245171142
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-8",
           "chapter": "خرید",
           "label": "تأیید و پرداخت",
-          "title": "یک نگاه، یک تأیید",
-          "highlight": "یک تأیید",
-          "description": "وزن، کارمزد و هزینه‌ی نهایی پیش از پرداخت روی صفحه است.",
+          "title": "جزئیات سفارش کاربر",
+          "highlight": "سفارش کاربر",
+          "description": "نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر",
           "duration": 3.6,
           "layout": "legacy",
           "legacyScene": 8,
@@ -1145,15 +3557,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "جزئیات سفارش کاربر",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 57.85583219474807,
+                  "y": 51.92786535425258,
+                  "w": 38.33679768728339,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-9",
           "chapter": "خرید",
           "label": "در حال بررسی",
-          "title": "لطفاً منتظر بمانید…",
-          "highlight": "منتظر بمانید…",
-          "description": "طلاپرداز درخواست را با حساب دیجی‌کالای کاربر بررسی می‌کند.",
+          "title": "پردازش و تحویل کارت",
+          "highlight": "تحویل کارت",
+          "description": "کاربر به واسطه طلاپرداز، طلاکارت انتخابی خود را در لحظه تحویل می‌گیرد",
           "duration": 2.8,
           "layout": "legacy",
           "legacyScene": 9,
@@ -1169,15 +3609,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "پردازش و تحویل کارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربر به واسطه طلاپرداز، طلاکارت انتخابی خود را در لحظه تحویل می‌گیرد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 58.96502599306852,
+                  "y": 51.07452186671756,
+                  "w": 37.37868859970674,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-10",
           "chapter": "دریافت کارت",
           "label": "دریافت طلاکارت",
-          "title": "کارت طلا، از دستگاه",
-          "highlight": "از دستگاه",
-          "description": "طلاکارت ۲ گرمی از شیار طلاپرداز بیرون می‌آید.",
+          "title": "پردازش و تحویل کارت",
+          "highlight": "تحویل کارت",
+          "description": "کاربر به واسطه طلاپرداز، طلاکارت انتخابی خود را در لحظه تحویل می‌گیرد",
           "duration": 4.5,
           "layout": "legacy",
           "legacyScene": 10,
@@ -1193,15 +3661,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "پردازش و تحویل کارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربر به واسطه طلاپرداز، طلاکارت انتخابی خود را در لحظه تحویل می‌گیرد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 56.51280491868835,
+                  "y": 50.92855521753394,
+                  "w": 39.673045521194354,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-11",
           "chapter": "دریافت کارت",
           "label": "کارت در دست",
-          "title": "طلای واقعی، در دست",
-          "highlight": "در دست",
-          "description": "کارت پلمب‌شده با قابلیت اصالت‌سنجی؛ همان طلایی که در دیجی‌کالا خریده شد.",
+          "title": "طلاکارت، جریان طلا",
+          "highlight": "جریان طلا",
+          "description": "با دریافت طلاکارت، کاربر در جریان واقعی طلاکارت قرار خواهد گرفت",
           "duration": 4.6,
           "layout": "legacy",
           "legacyScene": 11,
@@ -1217,15 +3713,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "طلاکارت، جریان طلا",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "با دریافت طلاکارت، کاربر در جریان واقعی طلاکارت قرار خواهد گرفت"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 57.39024801719542,
+                  "y": 50.102549965297534,
+                  "w": 38.66356471607572,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-12",
           "chapter": "تحویل از موجودی",
           "label": "تحویل طلاکارت",
-          "title": "این بار، تحویل از موجودی",
-          "highlight": "تحویل از موجودی",
-          "description": "کاربری که در دیجی‌کالا طلا دارد، از همین منو تحویل طلاکارت را انتخاب می‌کند.",
+          "title": "تبدیل طلای دیجیتال به فیزیکی",
+          "highlight": "به فیزیکی",
+          "description": "کاربران دیجی‌کالا می‌توانند موجودی طلای آنلاین خود را به صورت فیزیکی از طلاپرداز تحویل بگیرند",
           "duration": 5,
           "layout": "legacy",
           "legacyScene": 12,
@@ -1241,15 +3765,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "تبدیل طلای دیجیتال به فیزیکی",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربران دیجی‌کالا می‌توانند موجودی طلای آنلاین خود را به صورت فیزیکی از طلاپرداز تحویل بگیرند"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 50.10958536057051,
+                  "y": 50.63914137145953,
+                  "w": 46.183444831378296,
+                  "h": 8.093425784964598
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-13",
           "chapter": "تحویل از موجودی",
           "label": "انتخاب پلتفرم",
-          "title": "طلا در دیجی‌کالا",
+          "title": "انتخاب پلتفرم دیجی‌کالا",
           "highlight": "دیجی‌کالا",
-          "description": "پلتفرمی که طلای کاربر در آن نگه‌داری می‌شود؛ دیجی‌کالا اول فهرست است.",
+          "description": "کاربران با توجه به دارایی خود، پلتفرم مورد نظر را انتخاب خواهند کرد",
           "duration": 3.6,
           "layout": "legacy",
           "legacyScene": 13,
@@ -1265,15 +3817,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب پلتفرم دیجی‌کالا",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "کاربران با توجه به دارایی خود، پلتفرم مورد نظر را انتخاب خواهند کرد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 60.462928635697146,
+                  "y": 50.89242969231793,
+                  "w": 35.93557343041856,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-14",
           "chapter": "تحویل از موجودی",
           "label": "انتخاب طلاکارت",
-          "title": "از موجودی، ۲ گرم",
-          "highlight": "۲ گرم",
-          "description": "کاربر وزن کارتی را که می‌خواهد از موجودی‌اش تحویل بگیرد انتخاب می‌کند.",
+          "title": "انتخاب وزن طلاکارت",
+          "highlight": "طلاکارت",
+          "description": "با توجه به میزان دارایی آنلاین کاربر، گزینه مورد نظر خود را از بین کارت‌های موجود انتخاب خواهد کرد",
           "duration": 3.4,
           "layout": "legacy",
           "legacyScene": 14,
@@ -1289,15 +3869,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "انتخاب وزن طلاکارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "با توجه به میزان دارایی آنلاین کاربر، گزینه مورد نظر خود را از بین کارت‌های موجود انتخاب خواهد کرد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 54.54103905625166,
+                  "y": 49.61835119272057,
+                  "w": 41.61543380098641,
+                  "h": 8.758330722048516
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-15",
           "chapter": "تحویل از موجودی",
           "label": "کد ملی",
-          "title": "کد ملی، برای اطمینان",
-          "highlight": "برای اطمینان",
-          "description": "کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.",
+          "title": "احراز از طریق کد ملی",
+          "highlight": "کد ملی",
+          "description": "به جهت عدم ذخیره‌سازی اطلاعات کاربران دیجی‌کالا، کد ملی تحویل‌گیرنده به همراه وزن انتخاب‌شده به پلتفرم دیجی‌کالا ارسال خواهد شد",
           "duration": 6.3,
           "layout": "legacy",
           "legacyScene": 15,
@@ -1313,15 +3921,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "احراز از طریق کد ملی",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "به جهت عدم ذخیره‌سازی اطلاعات کاربران دیجی‌کالا، کد ملی تحویل‌گیرنده به همراه وزن انتخاب‌شده به پلتفرم دیجی‌کالا ارسال خواهد شد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 54.32404483804319,
+                  "y": 47.53091294970182,
+                  "w": 41.765924920021334,
+                  "h": 12.96049820009672
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-16",
           "chapter": "تحویل از موجودی",
           "label": "تأیید تحویل",
-          "title": "یک نگاه، یک تأیید",
-          "highlight": "یک تأیید",
-          "description": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.",
+          "title": "جزئیات سفارش کاربر",
+          "highlight": "سفارش کاربر",
+          "description": "نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر",
           "duration": 4.5,
           "layout": "legacy",
           "legacyScene": 16,
@@ -1337,15 +3973,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "جزئیات سفارش کاربر",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 62.633724756731546,
+                  "y": 50.60879550109491,
+                  "w": 33.47884314182885,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-17",
           "chapter": "تحویل از موجودی",
           "label": "کد پیامک",
-          "title": "کد پیامک، تأیید شد",
-          "highlight": "تأیید شد",
-          "description": "کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.",
+          "title": "ارسال کد از طریق دیجی‌کالا",
+          "highlight": "دیجی‌کالا",
+          "description": "پس از احراز هویت موفقیت‌آمیز کاربر و بررسی دارایی او، دیجی‌کالا کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد",
           "duration": 5.1,
           "layout": "legacy",
           "legacyScene": 17,
@@ -1361,15 +4025,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "ارسال کد از طریق دیجی‌کالا",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "پس از احراز هویت موفقیت‌آمیز کاربر و بررسی دارایی او، دیجی‌کالا کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 56.22851614569448,
+                  "y": 49.27955234812714,
+                  "w": 39.88760288922954,
+                  "h": 9.733719902880875
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-18",
           "chapter": "تحویل از موجودی",
           "label": "در حال بررسی",
-          "title": "لطفاً منتظر بمانید…",
-          "highlight": "منتظر بمانید…",
-          "description": "طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.",
+          "title": "پردازش و تحویل کارت",
+          "highlight": "تحویل کارت",
+          "description": "طلاپرداز، طلاکارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد",
           "duration": 3.9,
           "layout": "legacy",
           "legacyScene": 18,
@@ -1385,15 +4077,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "پردازش و تحویل کارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "طلاپرداز، طلاکارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 55.047476922820586,
+                  "y": 50.51848168805488,
+                  "w": 41.18453828978939,
+                  "h": 8.91973634468877
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-19",
           "chapter": "تحویل از موجودی",
           "label": "دریافت طلاکارت",
-          "title": "طلاکارت، از دستگاه",
-          "highlight": "از دستگاه",
-          "description": "طلاکارت ۲ گرمی از شیار طلاپرداز تحویل داده می‌شود.",
+          "title": "پردازش و تحویل کارت",
+          "highlight": "تحویل کارت",
+          "description": "طلاپرداز، طلاکارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد",
           "duration": 4.5,
           "layout": "legacy",
           "legacyScene": 19,
@@ -1409,15 +4129,43 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "پردازش و تحویل کارت",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "طلاپرداز، طلاکارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 59.30722640629166,
+                  "y": 50.698621131361755,
+                  "w": 36.45442465342575,
+                  "h": 8
+                }
+              }
+            }
+          ]
         },
         {
           "id": "ref-kiosk-20",
           "chapter": "تحویل از موجودی",
           "label": "موجودی دیجی‌کالا",
-          "title": "در دیجی‌کالا هم، کسر شد",
-          "highlight": "کسر شد",
-          "description": "۲ گرم از دارایی دیجی‌کالا جدا می‌شود و در کارت می‌نشیند؛ طلا گم نمی‌شود، از حساب به دست می‌رسد.",
+          "title": "کسر موجودی طلا در دیجی‌کالا",
+          "highlight": "در دیجی‌کالا",
+          "description": "پس از تحویل کارت، دارایی کاربر از حساب دیجی‌کالا کسر خواهد شد",
           "duration": 6,
           "layout": "legacy",
           "legacyScene": 20,
@@ -1433,31 +4181,35 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
-        },
-        {
-          "id": "ref-kiosk-21",
-          "chapter": "جمع‌بندی",
-          "label": "پایان",
-          "title": "خرید یا تحویل، یک طلاپرداز",
-          "highlight": "یک طلاپرداز",
-          "description": "خرید، تحویل و اصالت‌سنجی در شبکه‌ی طلاپردازهای طلاکارت",
-          "duration": 4.2,
-          "layout": "legacy",
-          "legacyScene": 21,
-          "media": "",
-          "poster": "",
-          "fit": "contain",
-          "position": 50,
-          "transition": "fade",
-          "intensity": 0.45,
-          "background": "#FFFFFF",
-          "textColor": "#222225",
-          "accent": "#A87816",
-          "fontSize": 40,
-          "loop": true,
-          "legacyDeck": "kiosk",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleFormat": {
+            "color": "#222225"
+          },
+          "titleRuns": [
+            {
+              "text": "کسر موجودی طلا در دیجی‌کالا",
+              "color": "#222225"
+            }
+          ],
+          "textBlocks": [
+            {
+              "id": "description-0",
+              "runs": [
+                {
+                  "text": "پس از تحویل کارت، دارایی کاربر از حساب دیجی‌کالا کسر خواهد شد"
+                }
+              ],
+              "format": {},
+              "placement": {
+                "desktop": {
+                  "x": 59.66578704012262,
+                  "y": 50.90072879946215,
+                  "w": 36.185610920421226,
+                  "h": 8
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -1495,9 +4247,9 @@
           "id": "ref-deliv-1",
           "chapter": "ورود",
           "label": "کارت بانکی",
-          "title": "کارت بانکی، در شیار",
-          "highlight": "در شیار",
-          "description": "کاربر کارت بانکی‌اش را وارد طلاپرداز می‌کند تا هویتش تأیید شود.",
+          "title": "مشخصات فنی و امنیتی طلاکارت\n",
+          "highlight": "با کارت بانکی",
+          "description": "کاربر کارت بانکی خود را وارد کرده تا فرایند خرید و یا تحویل طلاکارت آغاز شود.",
           "duration": 4.5,
           "layout": "legacy",
           "legacyScene": 1,
@@ -1513,15 +4265,31 @@
           "fontSize": 40,
           "loop": true,
           "legacyDeck": "deliv",
-          "presentationStyle": "reference"
+          "presentationStyle": "reference",
+          "titleRuns": [
+            {
+              "text": "مشخصات فنی و امنیتی طلاکارت\n"
+            }
+          ],
+          "titleFormat": {},
+          "placement": {
+            "desktop": {
+              "copy": {
+                "x": 32.36873292122101,
+                "y": 20.61112817382616,
+                "w": 63.677009047587305,
+                "h": 18.23855798392935
+              }
+            }
+          }
         },
         {
           "id": "ref-deliv-2",
           "chapter": "ورود",
           "label": "رمز کارت",
-          "title": "چهار رقم، روی دستگاه",
-          "highlight": "روی دستگاه",
-          "description": "رمز کارت با صفحه‌کلید فیزیکی خود طلاپرداز وارد می‌شود.",
+          "title": "خرید طلای فیزیکی با کارت بانکی",
+          "highlight": "با کارت بانکی",
+          "description": "کاربر کارت بانکی خود را وارد کرده تا فرایند خرید و یا تحویل طلاکارت آغاز شود.",
           "duration": 5.1,
           "layout": "legacy",
           "legacyScene": 2,
@@ -1543,9 +4311,9 @@
           "id": "ref-deliv-3",
           "chapter": "انتخاب",
           "label": "تحویل طلاکارت",
-          "title": "تحویل طلاکارت",
-          "highlight": "طلاکارت",
-          "description": "از منوی طلاپرداز، کاربر تحویل طلاکارت را انتخاب می‌کند.",
+          "title": "تبدیل طلای دیجیتال به فیزیکی",
+          "highlight": "به فیزیکی",
+          "description": "کاربران دیجی‌کالا می‌توانند موجودی طلای آنلاین خود را به صورت فیزیکی تحویل بگیرند.",
           "duration": 4.3,
           "layout": "legacy",
           "legacyScene": 3,
@@ -1567,9 +4335,9 @@
           "id": "ref-deliv-4",
           "chapter": "انتخاب",
           "label": "انتخاب پلتفرم",
-          "title": "طلا در دیجی‌کالا",
+          "title": "انتخاب پلتفرم دیجی‌کالا",
           "highlight": "دیجی‌کالا",
-          "description": "پلتفرمی که طلای کاربر در آن نگه‌داری می‌شود؛ دیجی‌کالا اول فهرست است.",
+          "description": "کاربران با توجه به دارایی خود، پلتفرم مورد نظر را انتخاب خواهند کرد.",
           "duration": 3.6,
           "layout": "legacy",
           "legacyScene": 4,
@@ -1591,9 +4359,9 @@
           "id": "ref-deliv-5",
           "chapter": "انتخاب",
           "label": "انتخاب طلاکارت",
-          "title": "از موجودی، ۲ گرم",
-          "highlight": "۲ گرم",
-          "description": "کاربر وزن کارتی را که می‌خواهد از موجودی‌اش تحویل بگیرد انتخاب می‌کند.",
+          "title": "انتخاب وزن طلاکارت",
+          "highlight": "طلاکارت",
+          "description": "با توجه به دارایی آنلاین کاربر، ایشان گزینه مورد نظر خود را از بین کارت‌های موجود انتخاب خواهد کرد.",
           "duration": 3.4,
           "layout": "legacy",
           "legacyScene": 5,
@@ -1615,9 +4383,9 @@
           "id": "ref-deliv-6",
           "chapter": "احراز هویت",
           "label": "کد ملی",
-          "title": "کد ملی، برای اطمینان",
-          "highlight": "برای اطمینان",
-          "description": "کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.",
+          "title": "احراز از طریق کد ملی",
+          "highlight": "کد ملی",
+          "description": "به جهت عدم ذخیره‌سازی اطلاعات کاربران دیجی‌کالا، کد ملی تحویل‌گیرنده به همراه وزن انتخاب‌شده به پلتفرم دیجی‌کالا ارسال خواهد شد.",
           "duration": 6.3,
           "layout": "legacy",
           "legacyScene": 6,
@@ -1639,9 +4407,9 @@
           "id": "ref-deliv-7",
           "chapter": "احراز هویت",
           "label": "تأیید تحویل",
-          "title": "یک نگاه، یک تأیید",
-          "highlight": "یک تأیید",
-          "description": "وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.",
+          "title": "جزئیات سفارش کاربر",
+          "highlight": "سفارش کاربر",
+          "description": "نمایش جزئیات وزن، پلتفرم انتخاب‌شده و مبلغ نهایی به کاربر.",
           "duration": 4.5,
           "layout": "legacy",
           "legacyScene": 7,
@@ -1663,9 +4431,9 @@
           "id": "ref-deliv-8",
           "chapter": "احراز هویت",
           "label": "کد پیامک",
-          "title": "کد پیامک، تأیید شد",
-          "highlight": "تأیید شد",
-          "description": "کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.",
+          "title": "ارسال کد از طریق دیجی‌کالا",
+          "highlight": "دیجی‌کالا",
+          "description": "پس از احراز موفقیت‌آمیز کاربر و بررسی دارایی او، دیجی‌کالا کد یک‌بارمصرف را به تحویل‌گیرنده ارسال خواهد کرد.",
           "duration": 5.1,
           "layout": "legacy",
           "legacyScene": 8,
@@ -1687,9 +4455,9 @@
           "id": "ref-deliv-9",
           "chapter": "تحویل",
           "label": "در حال بررسی",
-          "title": "لطفاً منتظر بمانید…",
-          "highlight": "منتظر بمانید…",
-          "description": "طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.",
+          "title": "پردازش و تحویل کارت",
+          "highlight": "تحویل کارت",
+          "description": "طلاپرداز کارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد.",
           "duration": 3.9,
           "layout": "legacy",
           "legacyScene": 9,
@@ -1711,9 +4479,9 @@
           "id": "ref-deliv-10",
           "chapter": "تحویل",
           "label": "دریافت طلاکارت",
-          "title": "طلاکارت، از دستگاه",
-          "highlight": "از دستگاه",
-          "description": "طلاکارت ۲ گرمی از شیار طلاپرداز تحویل داده می‌شود.",
+          "title": "پردازش و تحویل کارت",
+          "highlight": "تحویل کارت",
+          "description": "طلاپرداز کارت انتخاب‌شده توسط کاربر را به ایشان تحویل خواهد داد.",
           "duration": 4.5,
           "layout": "legacy",
           "legacyScene": 10,
@@ -1735,9 +4503,9 @@
           "id": "ref-deliv-11",
           "chapter": "تحویل",
           "label": "کارت در دست",
-          "title": "طلای واقعی، در دست",
-          "highlight": "در دست",
-          "description": "کارت پلمب‌شده با قابلیت اصالت‌سنجی؛ همان طلایی که در دیجی‌کالا داشت.",
+          "title": "طلاکارت، جریان طلا",
+          "highlight": "جریان طلا",
+          "description": "با دریافت طلاکارت، کاربر در جریان واقعی طلاکارت قرار خواهد گرفت.",
           "duration": 4.6,
           "layout": "legacy",
           "legacyScene": 11,
@@ -1886,7 +4654,231 @@
       "type": "video",
       "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1).mp4",
       "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1).mp4"
+    },
+    {
+      "id": "upload-188de512-e239-4fb6-bc7c-c1b9ec400dd2",
+      "src": "/media/upload-188de512-e239-4fb6-bc7c-c1b9ec400dd2.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th.mp4",
+      "originalName": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th.mp4"
+    },
+    {
+      "id": "upload-5744b29b-51f0-4fcb-aba7-89bbae8292c9",
+      "src": "/media/upload-5744b29b-51f0-4fcb-aba7-89bbae8292c9.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep all glass blocks and rods completely stationary. The golden glass rods begin with a faint glow,.mp4",
+      "originalName": "Keep all glass blocks and rods completely stationary. The golden glass rods begin with a faint glow,.mp4"
+    },
+    {
+      "id": "upload-fc08a2ed-e852-46a1-aa66-17ba974dc932",
+      "src": "/media/upload-fc08a2ed-e852-46a1-aa66-17ba974dc932.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the camera completely static and preserve the golden door structure exactly as it is. Transpare.mp4",
+      "originalName": "Keep the camera completely static and preserve the golden door structure exactly as it is. Transpare.mp4"
+    },
+    {
+      "id": "upload-e985cc3a-2c7f-4bc1-8c78-070cd50936d9",
+      "src": "/media/upload-e985cc3a-2c7f-4bc1-8c78-070cd50936d9.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4",
+      "originalName": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4"
+    },
+    {
+      "id": "upload-c9a5b6fb-ab94-400f-a8fa-f961cd0492eb",
+      "src": "/media/upload-c9a5b6fb-ab94-400f-a8fa-f961cd0492eb.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4",
+      "originalName": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4"
+    },
+    {
+      "id": "upload-87465b51-8a0c-4220-8c57-227f30ea8639",
+      "src": "/media/upload-87465b51-8a0c-4220-8c57-227f30ea8639.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4",
+      "originalName": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4"
+    },
+    {
+      "id": "upload-2522b8c6-60f8-475e-a530-063d2a74ddeb",
+      "src": "/media/upload-2522b8c6-60f8-475e-a530-063d2a74ddeb.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "enter.mp4",
+      "originalName": "enter.mp4"
+    },
+    {
+      "id": "upload-72883e25-b53d-4817-8ed2-33920f4c3f98",
+      "src": "/media/upload-72883e25-b53d-4817-8ed2-33920f4c3f98.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_1.mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_1.mp4"
+    },
+    {
+      "id": "upload-d53391c4-f7c5-4a8a-a439-6779f033e8b3",
+      "src": "/media/upload-d53391c4-f7c5-4a8a-a439-6779f033e8b3.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the gold bars and main container fixed. Only the small glass elements around the gold bars move.mp4",
+      "originalName": "Keep the gold bars and main container fixed. Only the small glass elements around the gold bars move.mp4"
+    },
+    {
+      "id": "upload-64038350-2a26-4ff2-9303-d4d529845ef0",
+      "src": "/media/upload-64038350-2a26-4ff2-9303-d4d529845ef0.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4",
+      "originalName": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4"
+    },
+    {
+      "id": "upload-842a038c-a5d9-4bb2-893a-ca4f2eda40f0",
+      "src": "/media/upload-842a038c-a5d9-4bb2-893a-ca4f2eda40f0.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4",
+      "originalName": "Keep all glass cards completely stationary. The blocks themselves gradually change from transparent.mp4"
+    },
+    {
+      "id": "upload-fcf9a5e0-3530-4342-bf7a-7da72a842cf2",
+      "src": "/media/upload-fcf9a5e0-3530-4342-bf7a-7da72a842cf2.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4",
+      "originalName": "Keep all three transparent objects completely stationary. A soft light pulse travels from left to ri.mp4"
+    },
+    {
+      "id": "upload-cb8e2950-928b-4632-b1e4-62d4b5108846",
+      "src": "/media/upload-cb8e2950-928b-4632-b1e4-62d4b5108846.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "animation copy 4.mp4",
+      "originalName": "animation copy 4.mp4"
+    },
+    {
+      "id": "upload-eeab40b5-44f2-4b68-814a-484341965278",
+      "src": "/media/upload-eeab40b5-44f2-4b68-814a-484341965278.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_2.mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_2.mp4"
+    },
+    {
+      "id": "upload-744489d5-1f98-45bb-88b4-b48f6d89539d",
+      "src": "/media/upload-744489d5-1f98-45bb-88b4-b48f6d89539d.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_3.mp4",
+      "originalName": "Transform the right reference image to match the left reference image. Keep the exact same camera an (1)_3.mp4"
+    },
+    {
+      "id": "upload-afe7b7f9-289f-4e43-8f64-a9341ce17413",
+      "src": "/media/upload-afe7b7f9-289f-4e43-8f64-a9341ce17413.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4",
+      "originalName": "Keep all glass squares completely stationary. Starting from the existing golden square, nearby trans.mp4"
+    },
+    {
+      "id": "upload-4c163ada-07fe-4339-9cfc-b9a21437b584",
+      "src": "/media/upload-4c163ada-07fe-4339-9cfc-b9a21437b584.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the camera completely static and preserve the composition and perspective. The gold coin contin.mp4",
+      "originalName": "Keep the camera completely static and preserve the composition and perspective. The gold coin contin.mp4"
+    },
+    {
+      "id": "upload-34e7c9a0-4b8e-4eee-9083-1dce6d4ac8b3",
+      "src": "/media/upload-34e7c9a0-4b8e-4eee-9083-1dce6d4ac8b3.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4",
+      "originalName": "Keep the camera completely static and preserve the device body exactly as it is. The gold bar on the.mp4"
+    },
+    {
+      "id": "upload-35cfa6bb-340c-411d-9bca-9fe1e9f3f8e7",
+      "src": "/media/upload-35cfa6bb-340c-411d-9bca-9fe1e9f3f8e7.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "animation.mp4",
+      "originalName": "animation.mp4"
+    },
+    {
+      "id": "upload-c180d2df-5862-477d-b2ab-ddeb3f84252b",
+      "src": "/media/upload-c180d2df-5862-477d-b2ab-ddeb3f84252b.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4",
+      "originalName": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4"
+    },
+    {
+      "id": "upload-9d75fde9-c67b-4f25-89d4-e3e47f23131b",
+      "src": "/media/upload-9d75fde9-c67b-4f25-89d4-e3e47f23131b.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4",
+      "originalName": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4"
+    },
+    {
+      "id": "upload-91261372-754f-40d0-aabf-98274c001198",
+      "src": "/media/upload-91261372-754f-40d0-aabf-98274c001198.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4",
+      "originalName": "Keep the camera completely static and preserve all parts exactly as they are. The keyboard switch co.mp4"
+    },
+    {
+      "id": "upload-224cd648-f2b0-409c-909b-0b24fcb8db97",
+      "src": "/media/upload-224cd648-f2b0-409c-909b-0b24fcb8db97.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "animation copy 5.mp4",
+      "originalName": "animation copy 5.mp4"
+    },
+    {
+      "id": "upload-46af1845-2ec5-45c0-9bf2-ce2c03f5fae9",
+      "src": "/media/upload-46af1845-2ec5-45c0-9bf2-ce2c03f5fae9.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4",
+      "originalName": "Keep the mobile phone completely fixed and unchanged. Do not rotate, tilt, move, zoom, or reframe th copy.mp4"
+    },
+    {
+      "id": "upload-20e6881c-eade-4418-8a2c-46f21d970273",
+      "src": "/media/upload-20e6881c-eade-4418-8a2c-46f21d970273.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Keep the transparent blocks in a smooth loop motion at the bottom, with very subtle movement. The da.mp4",
+      "originalName": "Keep the transparent blocks in a smooth loop motion at the bottom, with very subtle movement. The da.mp4"
+    },
+    {
+      "id": "upload-4d1bd5c5-a724-4bdf-9abb-c862d1fe21a1",
+      "src": "/media/upload-4d1bd5c5-a724-4bdf-9abb-c862d1fe21a1.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "animation copy 6.mp4",
+      "originalName": "animation copy 6.mp4"
+    },
+    {
+      "id": "upload-e075e555-ea11-4e7a-92e8-c04630be2da2",
+      "src": "/media/upload-e075e555-ea11-4e7a-92e8-c04630be2da2.mp4",
+      "poster": "",
+      "type": "video",
+      "name": "Animate the two glass hands performing a gentle, realistic handshake. The hands slowly move toward e.mp4",
+      "originalName": "Animate the two glass hands performing a gentle, realistic handshake. The hands slowly move toward e.mp4"
     }
   ],
-  "backgroundVersion": "2026-10-20"
+  "backgroundVersion": "2026-10-20",
+  "homeCards": {
+    "deliv": {
+      "name": "کارت طلا",
+      "description": "",
+      "image": "/reference/assets/a2cc2bf20f679f82.webp",
+      "target": "deliv"
+    }
+  }
 }
