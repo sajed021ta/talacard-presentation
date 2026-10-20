@@ -41,7 +41,7 @@ export function validateProject(project) {
 export const clone = value => JSON.parse(JSON.stringify(value));
 export const chapters = deck => [...new Set(deck.scenes.map(s => s.chapter))];
 export function blankScene() {
-  return { id: `page-${crypto.randomUUID()}`, chapter: 'بخش جدید', label: 'صفحهٔ جدید', title: 'عنوان صفحه', highlight: '', description: 'توضیح این صفحه را بنویسید.', duration: 8, layout: 'split', legacyScene: 0, media: '', poster: '', fit: 'contain', position: 50, transition: 'fade', intensity: .45, background: '#FFFFFF', textColor: '#222225', accent: '#A87816', fontSize: 40, loop: true };
+  return { id: `page-${crypto.randomUUID()}`, chapter: 'بخش جدید', label: 'صفحهٔ جدید', title: 'عنوان صفحه', highlight: '', description: 'توضیح این صفحه را بنویسید.', duration: 8, layout: 'split', legacyScene: 0, media: '', poster: '', fit: 'contain', position: 50, transition: 'fade', intensity: .45, background: '#FFFFFF', presentationStyle:'reference', textColor: '#222225', accent: '#A87816', fontSize: 40, loop: true };
 }
 
 export function timeLabel(seconds) {
