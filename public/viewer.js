@@ -182,6 +182,7 @@ function setupHome(){
  function showHome(){setPlaying(false);homePicker.show();document.title='طلاکارت · انتخاب بخش ارائه'}
  $('#home-button').onclick=()=>{const url=new URL(location.href);url.searchParams.delete('deck');url.hash='home';window.history.pushState(null,'',url);showHome()};
  $('.brand').onclick=event=>{event.preventDefault();$('#home-button').click()};
- addEventListener('popstate',()=>{const requested=new URL(location.href).searchParams.get('deck');if(project.decks.some(d=>d.id===requested))enterDeck(requested);else showHome()});
+ function routeFromLocation(){const requested=new URL(location.href).searchParams.get('deck');if(project.decks.some(d=>d.id===requested))enterDeck(requested);else if(location.hash==='#edit')enterDeck(project.activeDeck);else showHome()}
+ addEventListener('popstate',routeFromLocation);addEventListener('hashchange',routeFromLocation);
  const requested=new URL(location.href).searchParams.get('deck');if(!project.decks.some(d=>d.id===requested)&&location.hash!=='#edit')showHome();
 }
