@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { Readable } from 'node:stream';
+import {sceneMediaPaths} from '../public/model.js';
 const digest=data=>crypto.createHash('sha256').update(data).digest('hex');
 const TYPES={'.mp4':'video/mp4','.webm':'video/webm','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.gif':'image/gif'};
 export function createCloudSync(root,{fetchImpl=fetch,delay=1200,retryDelay=15000}={}) {
@@ -27,7 +28,7 @@ export function createCloudSync(root,{fetchImpl=fetch,delay=1200,retryDelay=1500
    if(remote.revision===revision){cache={...cache,revision,etag:remote.etag,publishedAt:remote.updatedAt};persist();state={...state,status:'published',revision,publishedAt:remote.updatedAt,asset:null};return}
    if(cache.etag&&remote.etag!==cache.etag&&remote.revision!==cache.revision) {const e=new Error('نسخهٔ آنلاین از دستگاه دیگری تغییر کرده؛ همگام‌سازی برای حفظ آن متوقف شد.');e.status=409;throw e}
    if(!remote.revision)cache.assets={};
-   const paths=[...new Set(project.decks.flatMap(d=>d.scenes.flatMap(s=>[s.media,s.poster])).filter(Boolean))];
+   const paths=[...new Set(project.decks.flatMap(d=>d.scenes.flatMap(s=>sceneMediaPaths(s))).filter(Boolean))];
    for(const src of paths){
     const name=src.slice('/media/'.length),override=conf.optimizedMediaPath&&path.join(conf.optimizedMediaPath,name);
     const filename=override&&fs.existsSync(override)?override:path.join(root,'public',src);

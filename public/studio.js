@@ -1,10 +1,11 @@
+import {renderMediaItems,mediaItemBox,controlMediaItems,seekMediaItems} from './multimedia.js';
 import {paintBackdrop} from './backdrop.js';
 import {richEditorMarkup,mountRichEditor} from './rich-editor.js';
 import {renderTitle,renderDescription,textBlocks,ensureTextBlocks,syncDescription} from './text.js';
 import {applyMediaEffect,controlMediaEffect,seekMediaEffect,DEFAULT_EFFECT} from './effects.js';
 import {renderNavigation} from './navigation.js';
 import {applyPlacement, readPlacement, adjustBox, placementMode} from './placement.js';
-import { clone, validateProject, chapters, blankScene, timeLabel } from './model.js';
+import { clone, validateProject, chapters, blankScene, renameChapter, timeLabel } from './model.js';
 
 const $ = s => document.querySelector(s);
 const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
@@ -18,7 +19,7 @@ let project, savedJSON = '', revision = '', backend = true, deckId, index = 0, t
 let playing = false, elapsed = 0, previousFrame = 0, frame, iframeReady = false, sceneSignature = '', stageAnimations = [], saving = false, toastTimer, draftTimer;
 let autoSaveTimer, autoSaveBlocked=false, localSaveError=false, syncState={status:'pending'}, syncPoll;
 const history = [], future = [];
-let legacyRequest = 0, richCleanup=null, activeTextBlockId=null;
+let legacyRequest = 0, richCleanup=null, activeTextBlockId=null,activeMediaItemId=null,mediaInsertMode='replace';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const deck = () => project.decks.find(d => d.id === deckId);
 const scene = () => deck().scenes[index];
@@ -102,7 +103,7 @@ function renderStage(restart = false) {
   const signature = `${s.id}|${s.layout}|${s.media}|${s.poster}|${s.legacyDeck||"previous"}`;
   canvas.style.setProperty('--scene-bg', s.background); canvas.style.setProperty('--scene-ink', s.textColor); canvas.style.setProperty('--scene-accent', s.accent); canvas.style.setProperty('--scene-size', s.fontSize + 'px'); canvas.style.setProperty('--media-fit', s.fit); canvas.style.setProperty('--media-position', s.position + '%');
   if (s.layout === 'legacy') {
-    const renderer=s.legacyDeck&&s.legacyDeck!=='previous'?'/legacy/index.html#render':'/legacy-previous/index.html#render';
+    const renderer=s.legacyDeck==='snapshot19'?'/legacy-2026-10-19/index.html#render':s.legacyDeck&&s.legacyDeck!=='previous'?'/legacy/index.html#render':'/legacy-previous/index.html#render';
     if (!frame || !frame.isConnected || frame.getAttribute('src')!==renderer) {
       iframeReady = false; canvas.replaceChildren(); frame = document.createElement('iframe'); frame.title = 'نمایش فلو اصلی اپ طلاکارت'; frame.src = renderer; canvas.append(frame);loadLegacy();
     } else loadLegacy();
@@ -149,7 +150,7 @@ function resizeStage() {
   const scale = fullscreen ? Math.min(stage.clientWidth / w, stage.clientHeight / h) : stage.clientWidth / w;
   canvas.style.transform = `scale(${scale})`;
   canvas.style.setProperty('--handle-factor', String(1/scale));
-  applyPlacement(canvas,scene());paintBackdrop(canvas,scene(),elapsed,reduce);
+  applyPlacement(canvas,scene());paintBackdrop(canvas,scene(),elapsed,reduce);renderMediaItems(canvas,scene(),{playing,reduce});
   const content=canvas.querySelector('.scene-content');if(content)renderDescription(content,content.querySelector('.scene-description'),scene(),placementMode(canvas));
   renderHandles();
 }
@@ -165,7 +166,7 @@ window.addEventListener('message', e => {
 function playVideo(v) { v.play().catch(error => { if (error.name !== 'AbortError' && v.isConnected && playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
 function setPlaying(value) {
   if(value && !playing && elapsed===0){if(frame){playing=true;loadLegacy()}else stageAnimations.forEach(a=>a.currentTime=0)}
-  controlMediaEffect($('#scene-canvas'),value);
+  controlMediaEffect($('#scene-canvas'),value);controlMediaItems($('#scene-canvas'),value);
   playing = value; previousFrame = performance.now(); $('#play').innerHTML = icon(value ? 'pause' : 'play'); $('#play').setAttribute('aria-label', value ? 'توقف' : 'پخش');
   $('#scene-canvas').querySelectorAll('video').forEach(v => value ? playVideo(v) : v.pause());
 }
@@ -178,9 +179,9 @@ function advanceLegacyTo(seconds) { let remaining = seconds * 1000; while (remai
 function seek(seconds) {
   const wasPlaying = playing; setPlaying(false); elapsed = Math.max(0, Math.min(scene().duration, seconds));
   if (frame) { loadLegacy(); advanceLegacyTo(elapsed); }
-  seekMediaEffect($('#scene-canvas'),elapsed);
+  seekMediaEffect($('#scene-canvas'),elapsed);seekMediaItems($('#scene-canvas'),elapsed);
   for (const a of stageAnimations) a.currentTime = elapsed * 1000;
-  const v = $('#scene-canvas video'); if (v) { const t = Number.isFinite(v.duration) && v.duration > 0 ? (v.loop ? elapsed % v.duration : Math.min(elapsed, v.duration)) : elapsed; try { v.currentTime = t; } catch {} }
+  for(const v of $('#scene-canvas').querySelectorAll('video')) { const t = Number.isFinite(v.duration) && v.duration > 0 ? (v.loop ? elapsed % v.duration : Math.min(elapsed, v.duration)) : elapsed; try { v.currentTime = t; } catch {} }
   updateProgress(); setPlaying(wasPlaying);
 }
 function updateProgress() {
@@ -206,10 +207,10 @@ function renderInspector() {
   const s = scene(), form = $('#scene-form'); $('#editing-number').textContent = `صفحهٔ ${fa(index + 1)}`;
   document.querySelectorAll('.editor-tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
   if (tab === 'content') {
-    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + field('بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در منوی سمت راست زیر یک بخش قرار می‌گیرند.') + richEditorMarkup(s) + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.flatMap(d=>d.scenes).filter(x=>x.layout==='legacy'&&(x.legacyDeck||'previous')===(s.legacyDeck||'previous')).filter((x,i,list)=>list.findIndex(y=>y.legacyScene===x.legacyScene)===i).map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
+    form.innerHTML = field('نام در فهرست صفحه‌ها', 'label', s.label, 'text', 'maxlength="200"') + `<div class="chapter-rename"><label class="field"><span>نام بخش برای همهٔ زیرصفحه‌ها</span><input id="chapter-name" maxlength="100" value="${escapeText(s.chapter)}"></label><button type="button" class="button" id="rename-chapter">تغییر نام بخش</button></div>` + field('انتقال این صفحه به بخش', 'chapter', s.chapter, 'text', 'maxlength="100"', 'صفحه‌های هم‌نام در منوی سمت راست زیر یک بخش قرار می‌گیرند.') + richEditorMarkup(s) + field('عبارت طلایی در عنوان', 'highlight', s.highlight, 'text', 'maxlength="1000"', 'همین عبارت را دقیقاً از عنوان وارد کن.') + select('قالب صفحه', 'layout', [['legacy','فلو اصلی اپ'],['split','متن و رسانه کنار هم'],['full','رسانهٔ تمام‌صفحه با متن'],['title','تیتر معرفی']], s.layout) + (s.layout === 'legacy' ? select('صحنهٔ اصلی اپ', 'legacyScene', project.decks.flatMap(d=>d.scenes).filter(x=>x.layout==='legacy'&&(x.legacyDeck||'previous')===(s.legacyDeck||'previous')).filter((x,i,list)=>list.findIndex(y=>y.legacyScene===x.legacyScene)===i).map(x => [String(x.legacyScene), `${fa(x.legacyScene + 1)} · ${x.label}`]) || Array.from({length:14}, (_, i) => [String(i), `صحنهٔ ${fa(i+1)}`]), String(s.legacyScene)) + '<p class="hint">متن کنار نمایشگر قابل ویرایش است. نوشته‌های داخل تصاویر اصلی اپ بخشی از تصویرند؛ برای تغییرشان تصویر را جایگزین کن.</p>' : '');
   } else if (tab === 'media') {
     const selected = project.library.find(m => m.src === s.media);
-    form.innerHTML = (s.layout === 'legacy' ? '<p class="hint">انتخاب عکس یا ویدیو، این صفحه را به قالب «متن و رسانه کنار هم» تغییر می‌دهد. برای برگشت، قالب «فلو اصلی اپ» را انتخاب کن.</p><hr class="editor-divider">' : '') + '<div class="media-preview" id="current-media"></div><button type="button" class="button upload-button" id="upload-media">' + icon('upload') + 'انتخاب عکس یا ویدیو از دستگاه</button><p class="hint">PNG، JPG، WebP، GIF، MP4 یا WebM · حداکثر ۹۵ مگابایت</p><hr class="editor-divider">' + select('نمایش رسانه', 'fit', [['contain','نمایش کامل · بدون برش'],['cover','پر کردن قاب · با برش']], s.fit) + field('جای رسانه در قاب', 'position', s.position, 'range', 'min="0" max="100" step="1"') + `<label class="field checkbox"><input type="checkbox" data-key="loop" ${s.loop ? 'checked' : ''}><span>لوپ ویدیو تا رفتن به صفحهٔ بعد</span></label>` + '<button type="button" id="choose-poster" class="text-button">انتخاب تصویر کاور ویدیو</button><button type="button" id="remove-media" class="text-button danger">حذف رسانه از این صفحه</button><hr class="editor-divider"><h3 class="field-title">کتابخانهٔ رسانه</h3><div class="media-choices" id="media-library"></div>';
+    form.innerHTML = (s.layout === 'legacy' ? '<p class="hint">انتخاب عکس یا ویدیو، این صفحه را به قالب «متن و رسانه کنار هم» تغییر می‌دهد. برای برگشت، قالب «فلو اصلی اپ» را انتخاب کن.</p><hr class="editor-divider">' : '') + '<div class="media-preview" id="current-media"></div><button type="button" class="button upload-button" id="upload-media">' + icon('upload') + 'انتخاب عکس یا ویدیو از دستگاه</button><p class="hint">PNG، JPG، WebP، GIF، MP4 یا WebM · حداکثر ۹۵ مگابایت</p><hr class="editor-divider">' + select('نمایش رسانهٔ اصلی', 'fit', [['contain','نمایش کامل · بدون برش'],['cover','پر کردن قاب · با برش']], s.fit) + field('جای رسانهٔ اصلی در قاب', 'position', s.position, 'range', 'min="0" max="100" step="1"') + `<label class="field checkbox"><input type="checkbox" data-key="loop" ${s.loop ? 'checked' : ''}><span>لوپ ویدیوی اصلی تا رفتن به صفحهٔ بعد</span></label>` + '<button type="button" id="choose-poster" class="text-button">انتخاب تصویر کاور ویدیو</button><button type="button" id="remove-media" class="text-button danger">حذف رسانهٔ اصلی از این صفحه</button><hr class="editor-divider"><h3 class="field-title">کتابخانهٔ رسانه</h3><div class="media-choices" id="media-library"></div>';
     const preview = $('#current-media');
     if (s.poster || s.media) { const isVideo = !s.poster && /\.(mp4|webm)$/i.test(s.media); const el = document.createElement(isVideo ? 'video' : 'img'); el.src = s.poster || s.media; if (isVideo) { el.muted = true; el.preload = 'metadata'; } else el.alt = ''; preview.append(el); const name = document.createElement('span'); name.className = 'media-name'; name.textContent = selected?.name || 'رسانهٔ فعلی'; preview.append(name); }
     else preview.innerHTML = icon(s.layout === 'legacy' ? 'phone' : 'picture');
@@ -219,10 +220,12 @@ function renderInspector() {
   } else {
     form.innerHTML = select('پس‌زمینه و نمایش رسانه','presentationStyle',[['reference','همراه با مرجع · خطوط طلایی متحرک'],['plain','ساده · رنگ انتخابی']],s.presentationStyle||'plain')+field('مدت انیمیشن صفحه (ثانیه)', 'duration', s.duration, 'number', 'min="1" max="180" step="0.1"') + select('ورود به صفحه', 'transition', [['fade','محو آرام'],['reveal','آشکار شدن سینمایی'],['slide','حرکت افقی'],['none','بدون افکت']], s.transition) + field('شدت حرکت', 'intensity', s.intensity, 'range', 'min="0" max="1" step="0.05"', 'حرکت کم برای خواندن متن و نمایش محصول مناسب‌تر است.') + '<hr class="editor-divider">' + field('اندازهٔ عنوان', 'fontSize', s.fontSize, 'range', 'min="20" max="64" step="1"') + '<div class="field-row">' + field('رنگ متن', 'textColor', s.textColor, 'color') + field('رنگ تأکید', 'accent', s.accent, 'color') + '</div>' + field('رنگ زمینه', 'background', s.background, 'color') + (s.layout === 'legacy' ? '<p class="hint">انیمیشن داخلی فلو اپ همان نسخهٔ اصلی است؛ تنظیم افکت ورود برای قالب‌های رسانه‌ای اعمال می‌شود.</p>' : '') + '<p class="hint">در حالت کاهش حرکت سیستم، افکت‌های تزئینی حذف می‌شوند. ویدیوها خودکار و بی‌صدا شروع می‌شوند. تغییر صفحه فقط با انتخاب شماست.</p>';
   }
+  if(tab==='content')$('#rename-chapter').onclick=()=>{const value=$('#chapter-name').value;try{const copy=clone(deck());renameChapter(copy,s.chapter,value);if(value.trim()===s.chapter)return;checkpoint();renameChapter(deck(),s.chapter,value);renderStage();renderFlow();renderList();renderInspector();changed();toast('نام بخش و همهٔ زیرصفحه‌هایش تغییر کرد.')}catch(error){toast(error.message,true)}};
   if(tab==='content')richCleanup=mountRichEditor(form,s,{checkpoint,onEdit:()=>{refreshText();renderList();renderFlow();changed()},onSelectBlock:id=>{activeTextBlockId=id;renderHandles()},onStructure:id=>{activeTextBlockId=id;renderInspector();requestAnimationFrame(()=>$('#scene-form [data-word-id="'+id+'"]')?.focus())}});
-  if(tab==='media')mountMediaEffects(form,s);
+  if(tab==='media')mountExtraInspector(form,s);
+  if(tab==='motion'){const button=document.createElement('button');button.type='button';button.className='button';button.textContent='اعمال این پس‌زمینه به همهٔ صفحه‌ها';button.onclick=()=>{checkpoint();for(const d of project.decks)for(const page of d.scenes){page.background=s.background;page.presentationStyle=s.presentationStyle||'reference'}renderStage();changed();toast('پس‌زمینهٔ همهٔ صفحه‌ها یکسان شد.')};form.append(button)}
   form.insertAdjacentHTML('beforeend', '<hr class="editor-divider"><p class="hint">در پیش‌نمایش، دستگیرهٔ متن یا رسانه را بکش. برای اندازه، گوشهٔ قاب را بکش. کلیدهای جهت روی دستگیره جابه‌جا می‌کنند؛ Shift + جهت اندازه را عوض می‌کند. چیدمان موبایل و دسکتاپ مستقل است.</p><button type="button" id="reset-placement" class="text-button">بازنشانی چیدمان این صفحه</button>');
-  $('#reset-placement').onclick=()=>{checkpoint();delete scene().placement;for(const b of scene().textBlocks||[])delete b.placement;legacyBoxes={};renderStage();changed();};
+  $('#reset-placement').onclick=()=>{checkpoint();delete scene().placement;for(const b of [...(scene().textBlocks||[]),...(scene().mediaItems||[])])delete b.placement;legacyBoxes={};renderStage();changed();};
   form.querySelectorAll('[data-key]').forEach(input => {
     let hasCheckpoint = false;
     input.addEventListener('focus', () => { hasCheckpoint = false; });
@@ -241,6 +244,7 @@ function renderInspector() {
 $('#scene-form').addEventListener('submit', e => e.preventDefault());
 $('#scene-form').addEventListener('click', e => {
   const b = e.target.closest('[data-media]'); if (!b) return; const m = project.library.find(x => x.id === b.dataset.media); if (!m) return;
+  if($('#media-insert-mode')?.value==='add'||activeMediaItemId){checkpoint();if($('#media-insert-mode')?.value==='add'){if(!addMediaItem(scene(),m))return}else if(activeMediaItemId){const item=scene().mediaItems?.find(x=>x.id===activeMediaItemId);if(item)Object.assign(item,{media:m.src,poster:m.poster,name:m.name})}renderStage();renderInspector();changed();return}
   checkpoint(); Object.assign(scene(), { media:m.src, poster:m.poster }); if (['legacy','title'].includes(scene().layout)) scene().layout = 'split'; setPlaying(true); elapsed = 0; renderStage(true); renderInspector(); renderList(); changed();
 });
 $('.editor-tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (b) { tab = b.dataset.tab; renderInspector(); } });
@@ -287,21 +291,22 @@ $('#json-file').onchange = async () => {
   catch (e) { toast(e instanceof SyntaxError ? 'فایل JSON قابل خواندن نیست.' : e.message, true); }
 };
 let uploadTarget;
-function uploadDialog(poster) {
+function uploadDialog(poster,append=false) {
   if (!backend) return toast('برای افزودن فایل، نسخهٔ محلی را با node server.mjs اجرا کن.', true);
-  uploadTarget = { deckId, sceneId:scene().id, poster }; $('#media-file').accept = poster ? 'image/png,image/jpeg,image/webp,image/gif' : 'image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm'; $('#media-file').value = ''; $('#media-file').click();
+  uploadTarget = { deckId, sceneId:scene().id, poster, append, itemId:activeMediaItemId }; $('#media-file').accept = poster ? 'image/png,image/jpeg,image/webp,image/gif' : 'image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm'; $('#media-file').multiple=!poster;$('#media-file').value = ''; $('#media-file').click();
 }
 $('#media-file').onchange = async () => {
-  const file = $('#media-file').files[0]; if (!file || !uploadTarget) return; const target = { ...uploadTarget };
-  try {
+  const files=[...$('#media-file').files];if(!files.length||!uploadTarget)return;const target={...uploadTarget};
+  if((target.append?files.length:Math.max(0,files.length-1))+(scene().mediaItems?.length||0)>12)return toast('هر صفحه حداکثر ۱۲ رسانهٔ اضافه دارد.',true);
+  for(const [fileIndex,file] of files.entries()){try {
     if (file.size > 95 * 1024 * 1024) throw new Error('حجم رسانه باید کمتر از ۹۵ مگابایت باشد.');
     toast('در حال کپی رسانه به پوشهٔ پروژه…');
     const r = await fetch('/api/media', { method:'POST', headers:{ 'Content-Type':file.type, 'X-TalaCard-Studio':'1' }, body:file }); const value = await r.json(); if (!r.ok) throw new Error(value.error || 'رسانه ذخیره نشد.');
     const targetScene = project.decks.find(d => d.id === target.deckId)?.scenes.find(s => s.id === target.sceneId);
     checkpoint(); project.library.push({ ...value, name:file.name.slice(0,200), originalName:file.name.slice(0,500) });
-    if (targetScene) { if (target.poster) targetScene.poster = value.src; else { targetScene.media = value.src; targetScene.poster = value.poster; if (['legacy','title'].includes(targetScene.layout)) targetScene.layout = 'split'; } }
+    if (targetScene) { if(target.itemId){const item=targetScene.mediaItems?.find(m=>m.id===target.itemId);if(item){if(target.poster)item.poster=value.src;else Object.assign(item,{media:value.src,poster:value.poster,name:file.name.slice(0,200)})}target.itemId=null}else if(target.append||fileIndex>0){addMediaItem(targetScene,{...value,name:file.name.slice(0,200)})}else if (target.poster) targetScene.poster = value.src; else { targetScene.media = value.src; targetScene.poster = value.poster; if (['legacy','title'].includes(targetScene.layout)) targetScene.layout = 'split'; } }
     setPlaying(true); renderStage(true); renderInspector(); renderList(); changed(); toast('رسانه اضافه شد؛ برای ثبت انتخاب، پروژه را ذخیره کن.');
-  } catch (e) { toast(e.message || 'افزودن فایل انجام نشد.', true); }
+  } catch (e) { toast(e.message || 'افزودن فایل انجام نشد.', true);break; }}
 };
 
 function closeMenu() { $('#project-menu').hidden = true; $('#more').setAttribute('aria-expanded','false'); }
@@ -349,13 +354,15 @@ $('#loop-video').onchange=()=>{checkpoint(); scene().loop=$('#loop-video').check
 let legacyBoxes = {}, activeGesture;
 function currentBox(kind) {
   const canvas=canvasElement();
+  if(kind.startsWith('extra:')){const i=(scene().mediaItems||[]).findIndex(m=>m.id===kind.slice(6));return i<0?null:mediaItemBox(canvas,scene().mediaItems[i],i)}
   if(kind.startsWith('text:')){const id=kind.slice(5),block=textBlocks(scene()).find(b=>b.id===id),el=canvas.querySelector('[data-text-block="'+id+'"]');return block?.placement?.[placementMode(canvas)] || (frame?legacyBoxes[kind]:el?readPlacement(canvas,el):null)}
   const el=canvas.querySelector('.scene-'+kind);
   return scene().placement?.[placementMode(canvas)]?.[kind] || (frame ? legacyBoxes[kind] : el ? readPlacement(canvas,el) : null);
 }
 function writeBox(kind,box) {
   const canvas=canvasElement(),mode=placementMode(canvas);
-  if(kind.startsWith('text:')){
+  if(kind.startsWith('extra:')){const item=scene().mediaItems?.find(m=>m.id===kind.slice(6));if(!item)return;item.placement||={};item.placement[mode]=box;renderMediaItems(canvas,scene(),{playing,reduce});
+  }else if(kind.startsWith('text:')){
    const block=ensureTextBlocks(scene()).find(b=>b.id===kind.slice(5));if(!block)return;block.placement||={};block.placement[mode]=box;syncDescription(scene());
    if(frame)sendLegacy('text',{scene:scene()});else {const content=canvas.querySelector('.scene-content');renderDescription(content,content.querySelector('.scene-description'),scene(),mode)}
   }else{
@@ -372,10 +379,10 @@ function renderHandles() {
   const canvas=canvasElement(); if(!project || activeGesture)return;
   canvas.querySelectorAll('.placement-handle').forEach(el=>el.remove());
   if(!document.body.classList.contains('editing'))return;
-  for(const kind of ['copy','media',...(activeTextBlockId?['text:'+activeTextBlockId]:[])]) {
+  for(const kind of ['copy','media',...(scene().mediaItems||[]).map(m=>'extra:'+m.id),...(activeTextBlockId?['text:'+activeTextBlockId]:[])]) {
     const raw=currentBox(kind); if(!raw)continue; const box=adjustBox(raw,0,0);
     const handle=document.createElement('div');handle.className='placement-handle';handle.dataset.kind=kind;
-    const label=kind==='copy'?'عنوان و متن':kind==='media'?'رسانه':'باکس متن';
+    const label=kind==='copy'?'عنوان و متن':kind==='media'?'رسانه':kind.startsWith('extra:')?'رسانهٔ '+fa(scene().mediaItems.findIndex(m=>m.id===kind.slice(6))+2):'باکس متن';
     const move=document.createElement('button');move.type='button';move.className='move-handle';move.textContent='جابه‌جایی '+label;move.setAttribute('aria-label','جابه‌جایی '+label);move.dataset.action='move';
     const size=document.createElement('button');size.type='button';size.className='resize-handle';size.setAttribute('aria-label','تغییر اندازهٔ '+label);size.dataset.action='resize';
     handle.append(move,size);canvas.append(handle);positionHandle(kind,box);
@@ -420,8 +427,30 @@ function mountMediaEffects(form,s){
  area.querySelectorAll('[data-effect]').forEach(el=>el.addEventListener('input',()=>{
   const key=el.dataset.effect;const value=el.type==='checkbox'?el.checked:el.type==='number'?Number(el.value):el.value;
   if(el.type==='number'&&(!el.value||!Number.isFinite(value)||value<Number(el.min)||value>Number(el.max)))return;
-  checkpoint();s.mediaEffect={...DEFAULT_EFFECT,...s.mediaEffect,[key]:value};applyMediaEffect(canvasElement(),s,{playing:true,restart:true,reduce});setPlaying(true);changed();
+  checkpoint();s.mediaEffect={...DEFAULT_EFFECT,...s.mediaEffect,[key]:value};applyMediaEffect(activeMediaItemId?canvasElement().querySelector('[data-media-item="'+activeMediaItemId+'"]'):canvasElement(),s,{playing:true,restart:true,reduce});setPlaying(true);changed();
  }));
- area.querySelector('#replay-effect').onclick=()=>{applyMediaEffect(canvasElement(),s,{playing:true,restart:true,reduce});setPlaying(true)};
+ area.querySelector('#replay-effect').onclick=()=>{applyMediaEffect(activeMediaItemId?canvasElement().querySelector('[data-media-item="'+activeMediaItemId+'"]'):canvasElement(),s,{playing:true,restart:true,reduce});setPlaying(true)};
 }
 canvasElement().addEventListener('click',e=>{const block=e.target.closest('[data-text-block]');if(block){activeTextBlockId=block.dataset.textBlock;renderHandles()}});
+
+function addMediaItem(s,media){
+ s.mediaItems||=[];if(s.mediaItems.length>=12){toast('هر صفحه حداکثر ۱۲ رسانهٔ اضافه دارد.',true);return false}
+ s.mediaItems.push({id:'media-'+crypto.randomUUID(),name:media.name||'رسانهٔ اضافه',media:media.src,poster:media.poster||'',fit:'contain',loop:true});return true;
+}
+function mountExtraInspector(form,s){
+ if(!s.mediaItems?.some(m=>m.id===activeMediaItemId))activeMediaItemId=null;
+ const section=document.createElement('section');section.className='extra-inspector';
+ section.innerHTML='<h3 class="field-title">چند رسانه در این صفحه</h3><p class="hint">رسانه‌های اضافه مستقل‌اند؛ قاب هرکدام را در پیش‌نمایش جابه‌جا یا کوچک و بزرگ کن.</p><button type="button" class="button upload-button" id="append-media">افزودن عکس یا ویدیو به این صفحه</button><label class="field"><span>انتخاب رسانه برای ویرایش افکت و جایگزینی</span><select id="media-target"><option value="">رسانهٔ اصلی</option></select></label><div id="extra-media-settings"></div><label class="field"><span>انتخاب از کتابخانه</span><select id="media-insert-mode"><option value="replace">جایگزینی رسانهٔ انتخاب‌شده</option><option value="add">افزودن به‌عنوان رسانهٔ جدید</option></select></label>';
+ const first=form.firstChild;form.insertBefore(section,first);const target=section.querySelector('#media-target');
+ for(const [i,item] of (s.mediaItems||[]).entries())target.append(new Option((i+2)+' · '+item.name,item.id));target.value=activeMediaItemId||'';
+ target.onchange=()=>{activeMediaItemId=target.value||null;renderInspector();renderHandles()};
+ const insertMode=section.querySelector('#media-insert-mode');insertMode.value=mediaInsertMode;insertMode.onchange=()=>mediaInsertMode=insertMode.value;
+ section.querySelector('#append-media').onclick=()=>{activeMediaItemId=null;uploadDialog(false,true)};
+ const item=s.mediaItems?.find(m=>m.id===activeMediaItemId);
+ if(item){const area=section.querySelector('#extra-media-settings');area.innerHTML='<label class="field"><span>نام رسانه</span><input id="extra-name" maxlength="200"></label><label class="field"><span>نمایش رسانه</span><select id="extra-fit"><option value="contain">نمایش کامل</option><option value="cover">پر کردن قاب</option></select></label><label class="field checkbox"><input id="extra-loop" type="checkbox"><span>لوپ این ویدیو</span></label><button type="button" class="text-button danger" id="delete-extra">حذف این رسانهٔ اضافه</button>';
+  area.querySelector('#extra-name').value=item.name;area.querySelector('#extra-fit').value=item.fit;area.querySelector('#extra-loop').checked=item.loop;
+  for(const [selector,key] of [['#extra-name','name'],['#extra-fit','fit'],['#extra-loop','loop']])area.querySelector(selector).onchange=e=>{checkpoint();item[key]=e.target.type==='checkbox'?e.target.checked:e.target.value;renderMediaItems(canvasElement(),s,{playing,reduce});changed()};
+  area.querySelector('#delete-extra').onclick=()=>{checkpoint();s.mediaItems=s.mediaItems.filter(m=>m.id!==item.id);activeMediaItemId=null;renderStage();renderInspector();changed()};
+ }
+ mountMediaEffects(form,item||s);
+}

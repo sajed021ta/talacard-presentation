@@ -15,8 +15,8 @@ The TalaCard owner edits individual presentation pages and presents the result t
 Make the existing Claude artifact independently runnable and maintainable in the owner's GitHub repository, with editable text, images, videos, timing and page order.
 
 ## Capabilities and Constraints
-- Follow the pinned 2026-10-19 Claude reference across four decks: app (24 reference steps plus the preserved historical branch-detail page, 25 total), proposal (12 pages), kiosk (22 steps), and delivery from balance (13 steps). The chapter menu is on the right and current chapter pages are across the top; page changes remain manual.
-- Preserve the original archive and its twenty extracted images/fonts unchanged. Keep the refreshed reference separately, with 44 exact image/font assets recorded by hash and source provenance.
+- Follow the pinned 2026-10-19 Claude reference across four decks: app (23 current reference steps plus two preserved historical pages, 25 total), proposal (12 pages), kiosk (22 steps), and delivery from balance (13 steps). The chapter menu is on the right and current chapter pages are across the top; page changes remain manual.
+- Preserve the original archive and its twenty extracted images/fonts unchanged. Keep the refreshed reference separately, with 46 exact image/font assets recorded by hash and source provenance.
 - Include the nine explicitly provided videos; do not substitute neighboring versions.
 - The twelve-page proposal deck follows the supplied PDF; claims come only from the PDF.
 - Refresh source-owned app text through a three-way merge against the original app baseline. Preserve owner-edited text, rich formatting, media, desktop/mobile placements, custom pages and proposal content. Repeated migration must not duplicate pages or replace subsequent edits. Render the retained historical branch-detail page through `legacy-previous`.
@@ -34,7 +34,7 @@ Make the existing Claude artifact independently runnable and maintainable in the
 Persian, RTL, YekanX from the supplied artifact, gold/charcoal/light surfaces, original phone frames and supplied product motion. Preserve the incumbent rather than create a replacement identity.
 
 ## Evidence on Hand
-The original archive under `original/`, supplied media under `public/media`, and `references/proposal.pdf`. The refreshed authority is [the pinned Claude artifact](https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r), captured as `references/artifact-2026-10-19.json`; its step catalog is `public/reference/catalog.json`, assets are under `public/reference/assets`, and renderer is under `public/legacy`. `scripts/merge-reference.mjs` uses `references/original-app-content.json` as the merge baseline. Illustration frames remain preserved images rather than fully editable vector app screens.
+The original archive under `original/`, supplied media under `public/media`, and `references/proposal.pdf`. The refreshed authority is [the pinned Claude artifact](https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r), captured as `references/artifact-2026-10-20.json`; its step catalog is `public/reference/catalog.json`, assets are under `public/reference/assets`, and renderer is under `public/legacy`. `scripts/merge-reference.mjs` uses `references/original-app-content.json` as the merge baseline. Illustration frames remain preserved images rather than fully editable vector app screens.
 
 ## Product Principles
 - Content editing does not require changing rendering code.
@@ -44,3 +44,11 @@ The original archive under `original/`, supplied media under `public/media`, and
 - The current page preview is the authority for an edit.
 - Save status and recovery are visible.
 - Presentation controls recede while editing controls stay outside the artifact.
+
+## Editing additions — 2026-10-20
+- Preserve selected character ranges while using the native color picker or six document-color swatches. Show whether formatting targets selected characters or the entire box.
+- Add up to twelve extra image/video layers per page alongside the primary media or original reference iframe. Each layer has its own name, fit, loop, timed effect and independent desktop/mobile move/resize geometry. Batch file selection appends subsequent files.
+- Rename a whole chapter and all its sibling pages together; keep per-page chapter reassignment separate, rejecting empty or colliding names.
+- Unify current backgrounds to the reference white/gold geometry once, including historical renderers; provide an explicit apply-to-all action for subsequent background edits.
+- Refresh against the 2026-10-20 source catalog with source-aware index remapping, preserving owner copy/rich runs, custom pages and media. Keep the removed confirmation page using its 2026-10-19 renderer snapshot.
+- Include every extra media/poster path in local disk checks, cloud upload ordering and server publication validation.

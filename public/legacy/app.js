@@ -16,7 +16,7 @@ if(location.hash.startsWith('#render')){(function(){
 })()}
 
 
-const IMG0={"home": "/reference/assets/9c1ba16210ef9ec8.webp", "buyempty": "/reference/assets/600cf6f2566ccd18.webp", "buyfill": "/reference/assets/918d09479af6a486.webp", "receipt": "/reference/assets/10b88f1441cc5343.webp", "recempty": "/reference/assets/d51ef3855118db3e.webp", "done": "/reference/assets/10ca06f8e829c018.webp", "sellfill": "/reference/assets/2371ec077b450f85.webp", "sellrec": "/reference/assets/dc9496941e47aa18.webp", "sellempty": "/reference/assets/9984096dce2af5d5.webp", "sellok": "/reference/assets/596add2043122234.webp", "cardready": "/reference/assets/c87c2d7b92113163.webp", "branches": "/reference/assets/fc114780bf036b60.webp", "detail": "/reference/assets/16cc62463128367d.webp", "platempty": "/reference/assets/5a53d3add7b746a3.webp", "sellplatempty": "/reference/assets/74d73479d707a888.webp", "atm": "/reference/assets/932b58fc924a03a1.webp", "homecrop": "/reference/assets/6decfa0cfaf12b02.webp", "cardnotyet": "/reference/assets/5cdc69e75b32df1a.webp", "k1": "/reference/assets/3ca50d7226ba51f8.webp", "k1e": "/reference/assets/82f6f4ff714ac6c5.webp", "k2": "/reference/assets/4f53d5c33ff56779.webp", "k3": "/reference/assets/0f71ce014de45f33.webp", "k4": "/reference/assets/fdd92d871a98f704.webp", "k5": "/reference/assets/8c3f5d4ea4a3af3f.webp", "k6": "/reference/assets/c456b129844328f3.webp", "k7": "/reference/assets/91912a46f93c47c4.webp", "k8": "/reference/assets/8482c5cf3a6159ef.webp", "k9": "/reference/assets/0b3f80c183d1fe79.webp", "k10": "/reference/assets/0d7112d0b9334fb8.webp", "kiosk": "/reference/assets/2e49a4d17ce39722.webp", "card": "/reference/assets/a2cc2bf20f679f82.webp", "kn": "/reference/assets/4f58e403d73b99c6.webp", "kd": "/reference/assets/e273507c8f44ca4f.webp", "brnotch": "/reference/assets/1f39260758ad8c79.webp", "brmap": "/reference/assets/38218e391a1234bd.webp", "dklogo": "/reference/assets/826a489ae54f8a91.webp", "goalbg": "/reference/assets/796ed2d40b37d3d6.webp", "notclean": "/reference/assets/b0debb2a40f5e484.webp", "bubble": "/reference/assets/3843cd030153db68.webp"};
+const IMG0={"home": "/reference/assets/2ef5001aa0950fc7.webp", "buyempty": "/reference/assets/600cf6f2566ccd18.webp", "buyfill": "/reference/assets/5393470de9297251.webp", "receipt": "/reference/assets/8ed79b27e645ceee.webp", "recempty": "/reference/assets/d0520a090533dd02.webp", "done": "/reference/assets/73c212aec25b39a2.webp", "sellfill": "/reference/assets/24c65242408b3355.webp", "sellrec": "/reference/assets/c8bafbd1dbcb09b2.webp", "sellempty": "/reference/assets/46465ea4e8d445a8.webp", "sellok": "/reference/assets/007c2eba98e96aaf.webp", "cardready": "/reference/assets/c87c2d7b92113163.webp", "branches": "/reference/assets/fc114780bf036b60.webp", "detail": "/reference/assets/16cc62463128367d.webp", "platempty": "/reference/assets/aa0a1fa486d57a12.webp", "sellplatempty": "/reference/assets/8e9b47de3f7594e0.webp", "atm": "/reference/assets/932b58fc924a03a1.webp", "homecrop": "/reference/assets/8fd8ff7f04043f06.webp", "cardnotyet": "/reference/assets/5cdc69e75b32df1a.webp", "k1": "/reference/assets/3ca50d7226ba51f8.webp", "k1e": "/reference/assets/82f6f4ff714ac6c5.webp", "k2": "/reference/assets/4f53d5c33ff56779.webp", "k3": "/reference/assets/0f71ce014de45f33.webp", "k4": "/reference/assets/fdd92d871a98f704.webp", "k5": "/reference/assets/8c3f5d4ea4a3af3f.webp", "k6": "/reference/assets/a1f5244f548ce3de.webp", "k7": "/reference/assets/91912a46f93c47c4.webp", "k8": "/reference/assets/79149c0df3825103.webp", "k9": "/reference/assets/0b3f80c183d1fe79.webp", "k10": "/reference/assets/0d7112d0b9334fb8.webp", "kiosk": "/reference/assets/2e49a4d17ce39722.webp", "card": "/reference/assets/a2cc2bf20f679f82.webp", "kn": "/reference/assets/4f58e403d73b99c6.webp", "kd": "/reference/assets/979c760042f7e525.webp", "brnotch": "/reference/assets/1f39260758ad8c79.webp", "brmap": "/reference/assets/38218e391a1234bd.webp", "dklogo": "/reference/assets/826a489ae54f8a91.webp", "goalbg": "/reference/assets/eec9ff1302a36947.webp", "notclean": "/reference/assets/b0debb2a40f5e484.webp", "bubble": "/reference/assets/3843cd030153db68.webp", "card1": "/reference/assets/85a6134e0e0ef4a5.webp", "k7b": "/reference/assets/2bc090b4adeb9772.webp"};
 (()=>{
 document.getElementById('pkAppImg').src=IMG0.homecrop;document.getElementById('pkAtmImg').src=IMG0.atm;
 const IMG={},DECODED=[];
@@ -57,6 +57,29 @@ function notBuild(){const o=sNot._ov;o.innerHTML='';
 function notSet(e,t){const x=GX0+(GX1-GX0)*t,g=1.3+.7*t;e.bar.style.left=x+'px';e.bar.style.width=(200-x)+'px';e.knob.style.left=(x-6.5)+'px';e.bub.style.left=(150+x-GX0)+'px';
   e.num.innerHTML=`<b style="font-size:17px;font-weight:800;color:#2A2E32;direction:ltr;unicode-bidi:isolate">${fa(g.toFixed(1))}</b><span style="font-size:11px;color:#8A8F99">گرم</span>`}
 function notCard(e,t){const T=58.5*(1-t);e.card.style.clipPath=`inset(${T.toFixed(2)}px 0 0 0)`;e.line.style.top=(339.5-58.5*t)+'px';e.line.style.opacity=t>=1?0:1}
+/* the path stays at 1.3 g: 2 g is selected but not full; the user picks the 1 g card, which is full */
+/* the 2 g card before it fills: the whole card in its inactive (light) look, no line yet */
+function notEmpty(){const o=sNot._ov;o.innerHTML='';
+  const lt=box(o,'left:132px;top:339.5px;width:111px;height:110px;background:rgba(255,255,255,.565);border-radius:0 0 6px 6px');
+  const hide=L(o,'cardnotyet',127,335,121,3,127,338.4);const ln=box(o,'left:129px;top:449px;width:117px;height:1.5px;background:#E7C569;box-shadow:0 0 8px #E7C569;opacity:0');
+  return {lt,hide,ln}}
+function notPickBuild(){const o=sNot._ov;o.innerHTML='';
+  const off=box(o,'left:128.5px;top:172px;width:28.5px;height:37.5px;border-radius:6px;box-sizing:border-box;border:4.5px solid #D2D3D4;box-shadow:0 0 0 .5px #B9BBBE;opacity:0'); // 2 g frame back to "not reached"; its card stays
+  const sel=box(o,'left:218px;top:172px;width:28px;height:37.5px;border-radius:6px;box-sizing:border-box;border:1px solid #3B8A5E;box-shadow:inset 0 0 0 3.5px rgba(80,130,85,.78);opacity:0');
+  const cov=box(o,'left:124px;top:276px;width:128px;height:216px;background:#F8F7F5;opacity:0');
+  const c1=document.createElement('img');c1.src=IMG.card1;c1.alt='';c1.style.cssText='position:absolute;left:132.5px;top:282.5px;width:110px;height:168px;border-radius:7px;box-shadow:0 14px 26px -14px #0000004d;opacity:0';o.appendChild(c1);
+  const cap=box(o,'left:124px;top:464px;width:128px;height:24px;display:flex;align-items:center;justify-content:center;gap:4px;direction:rtl;white-space:nowrap;font-size:15px;color:#6B7180;opacity:0');
+  cap.innerHTML='<span>طلاکارت</span><b style="color:#2A2E32;font-weight:800">'+fa('1.0')+'</b><span>گرمی</span>';
+  const low=L(o,'cardready',0,490,375,481);low.style.opacity=0;
+  return {off,sel,cov,c1,cap,low}}
+function notPick(at){const e=notPickBuild();
+  later(()=>{A(e.off,[{opacity:0},{opacity:1}],{duration:350,fill:'forwards'});
+    A(e.sel,[{opacity:0,transform:'scale(1.3)'},{opacity:1,transform:'none'}],{duration:520,easing:'cubic-bezier(.2,1.4,.4,1)',fill:'forwards'});
+    A(e.cov,[{opacity:0},{opacity:1}],{duration:380,delay:150,fill:'forwards'});
+    A(e.c1,[{opacity:0,transform:'translateY(18px) scale(.94)'},{opacity:1,transform:'none'}],{duration:760,delay:330,easing:ZOUT,fill:'forwards'});
+    A(e.cap,[{opacity:0},{opacity:1}],{duration:400,delay:520,fill:'forwards'});
+    A(e.low,[{opacity:0},{opacity:1}],{duration:700,delay:700,fill:'forwards'})},at);return e}
+function notPicked(){const e=notPickBuild();[e.off,e.sel,e.cov,e.c1,e.cap,e.low].forEach(x=>x.style.opacity=1);return e}
 function notDone(){const e=notBuild();notSet(e,1);notCard(e,1);e.ring.style.opacity=1;e.knob.style.opacity=0;e.low.style.opacity=1;return e}
 function notFill(at){const e=notBuild();notSet(e,0);notCard(e,0);const n=48,ez=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
   for(let i=1;i<=n;i++)later(()=>notSet(e,ez(i/n)),at+i*1700/n);
@@ -78,10 +101,15 @@ sBr._map=document.createElement('img');sBr._map.src=IMG.brmap;sBr._map.alt='';sB
 const MAPZ='translate(-8px,-52px) scale(1.9)';
 /* home balance, so delivery can be taken out of it */
 const balC=[box(sHome,'left:136px;top:130px;width:67px;height:28px;background:#fff'),box(sHome,'left:138px;top:166px;width:96px;height:22px;background:#fff')];
+/* one account through the whole story: 1.00 g and 12.5m toman cash -> buy 0.50 g -> sell 0.20 g -> deliver a 1 g card */
+const LIVE=18002232,CASH0=12500000,CASH_B=3498884,CASH_S=7096884;let CASH=CASH_S;
+const cashC=box(sHome,'left:73px;top:217px;width:79px;height:18px;background:#fff'),cashT=box(sHome,'right:226px;top:217px;height:18px;gap:3px','bal');
+function acct(g,c){CASH=c;setBal(g);setGoal(g)}
 const balG=box(sHome,'right:176px;top:129px;height:30px','bal'),balT=box(sHome,'right:145px;top:166px;height:22px;gap:3px','bal');
-function setBal(g){const on=g!=null;[...balC,balG,balT].forEach(e=>e.style.display=on?'flex':'none');if(!on)return;
+function setBal(g){const on=g!=null;[...balC,balG,balT,cashC,cashT].forEach(e=>e.style.display=on?'flex':'none');if(!on)return;
+  cashT.innerHTML=`<b style="font-size:10.5px;font-weight:700;color:#2A2E32">${fa(CASH.toLocaleString('en-US'))}</b><span style="font-size:10px;font-weight:500">تومان</span>`;
   balG.innerHTML=`<b style="font-size:22px;font-weight:900">${fa(g.toFixed(2))}</b><span style="font-size:13px;font-weight:500">گرم</span>`;
-  balT.innerHTML=`<b style="font-size:14px;font-weight:600;color:#707A85">${fa(Math.round(g*19456803).toLocaleString('en-US'))}</b><span style="font-size:13px;font-weight:500">تومان</span>`}
+  balT.innerHTML=`<b style="font-size:14px;font-weight:600;color:#707A85">${fa(Math.round(g*LIVE).toLocaleString('en-US'))}</b><span style="font-size:13px;font-weight:500">تومان</span>`}
 function countBal(a,b,at,dur){const n=28;for(let i=0;i<=n;i++)later(()=>{const t=i/n,e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;setBal(a+(b-a)*e);if(typeof goalOn!=='undefined'&&goalOn)setGoal(a+(b-a)*e)},at+i*dur/n)}
 setBal(null);window.__setBal=setBal;
 [[sRec,'receipt'],[sSrec,'sellrec']].forEach(([s,k])=>{s._pc=box(s._sheet,`left:44px;top:${577-s._sheet.offsetTop||0}px;width:287px;height:164px;overflow:hidden`);s._paper=L(s._pc,k,52,577,271,160,8,0);});
@@ -139,7 +167,7 @@ function fGlide(x,y,dur){const f=FG(),x0=parseFloat(f.style.left),y0=parseFloat(
   if(!reduce)f.animate([{left:x0+'px',top:y0+'px'},{left:x+'px',top:y+'px'}],{duration:dur,easing:EIO})}
 function fPress(x,y,el){const f=FG();if(!reduce)f.animate([{transform:'scale(1)'},{transform:'scale(.82)',offset:.4},{transform:'scale(1)'}],{duration:300,easing:'ease-out',composite:'replace'});
   const r=box(sw,`left:${x}px;top:${y}px`,'ripple');A(r,[{transform:'scale(.6)',opacity:.9},{transform:'scale(3.2)',opacity:0}],{duration:640,easing:'ease-out'}).onfinish=()=>r.remove();
-  if(el)A(el,[{transform:'scale(1)',filter:'brightness(1)'},{transform:'scale(.95)',filter:'brightness(.9)',offset:.4},{transform:'scale(1)',filter:'brightness(1)'}],{duration:380,easing:'ease-out',fill:'none'})}
+  if(el)A(el,[{transform:'scale(1)'},{transform:'scale(.95)',offset:.4},{transform:'scale(1)'}],{duration:380,easing:'ease-out',fill:'none'})}
 function tapAt(x,y,at,el,after){later(()=>{fIn(x,y);
   later(()=>{fPress(x,y,el);after&&later(after,200)},reduce?0:420);later(fOut,reduce?0:820)},at)}
 /* several taps in a row: appear once, glide to each target, fade at the end */
@@ -165,12 +193,13 @@ function trade(mode,stage){ // instant state
   const kpUp=stage==='kp';set(sT._kp,{transform:kpUp?'none':'translateY(400px)'});
   [sT._pB,sT._pS].forEach(p=>{const on=!kpUp&&p===(mode==='buy'?sT._pB:sT._pS);set(p,{transform:on?'none':'translateY(520px)',opacity:on?1:0});p._rows.forEach(r=>set(r,{}))});
   set(sT._nav,{opacity:kpUp?0:1});set(sT._glow,{opacity:0});
-  if(kpUp)setAmt('',true);else setAmt('1.00',false)}
+  if(kpUp)setAmt('',true);else setAmt(mode==='buy'?'0.50':'0.20',false)}
 function keypadDown(mode,at){later(()=>{const p=mode==='buy'?sT._pB:sT._pS;
   A(sT._kp,[{transform:'none'},{transform:'translateY(400px)'}],{duration:480,easing:EIN});
   set(p,{transform:'translateY(520px)',opacity:1});
   A(p,[{transform:'translateY(520px)'},{transform:'translateY(-10px)',offset:.82},{transform:'none'}],{duration:900,delay:220});
-  p._rows.forEach((r,i)=>A(r,[{transform:'translateY(28px)',opacity:0},{transform:'none',opacity:1}],{duration:620,delay:560+i*90}));
+  p._rows.forEach((r,i)=>A(r,[{transform:'translateY(28px)'},{transform:'none'}],{duration:620,delay:560+i*90,fill:'backwards'}));
+  later(()=>[p,...p._rows].forEach(e=>e.getAnimations().forEach(a=>a.finish())),1800);
   A(sT._nav,[{opacity:0},{opacity:1}],{duration:400,delay:600})},at)}
 function glowRow(at){later(()=>{const g=sT._glow;g.style.cssText='left:22px;top:446px;width:331px;height:72px';
   A(g,[{opacity:0,transform:'scale(1.04)'},{opacity:1,transform:'none',offset:.25},{opacity:1,offset:.75},{opacity:0}],{duration:2200,easing:'ease-in-out'})},at)}
@@ -193,27 +222,27 @@ const S_APP=[
    A($('#tDK'),[{transform:'translateX(-140px) rotate(6deg)',opacity:0},{transform:'none',opacity:1}],{duration:1000,fill:'none'});
    A($('#xm'),[{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'none'}],{duration:500,delay:750,fill:'backwards'});
    ['#tag','#sub'].forEach((s,i)=>A($(s),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:1100+i*220,fill:'backwards'}));}},
- {c:1,f:'خانه',t:'همه‌ی طلای تو، روی <em>یک نمایشگر</em>',p:'موجودی طلا و نقد داخل همان دستگاهی دیده می‌شود که کاربر در ATM طلاکارت هم می‌بیند.',d:3600,run(){mode('app');finger(0);show(sHome,'cut');set(sHome._img,{});
+ {c:1,f:'خانه',t:'همه‌ی طلای تو، روی <em>یک نمایشگر</em>',p:'موجودی طلا و نقد داخل همان دستگاهی دیده می‌شود که کاربر در ATM طلاکارت هم می‌بیند.',d:3600,run(){mode('app');acct(1,CASH0);finger(0);show(sHome,'cut');set(sHome._img,{});
    A(sHome,[{opacity:0,transform:'scale(1.03)'},{opacity:1,transform:'none'}],{duration:900,fill:'backwards',delay:300});}},
 
- {c:2,f:'وارد کردن مقدار',t:'یک گرم طلا؟ <em>چهار لمس</em>',p:'عدد با صفحه‌کلید خود اپ وارد می‌شود و هر رقم همان لحظه روی نمایشگر می‌نشیند.',d:5700,run(){mode('app');show(sHome,'cut');
+ {c:2,f:'وارد کردن مقدار',t:'نیم گرم طلا؟ <em>چهار لمس</em>',p:'عدد با صفحه‌کلید خود اپ وارد می‌شود و هر رقم همان لحظه روی نمایشگر می‌نشیند.',d:5700,run(){mode('app');acct(1,CASH0);show(sHome,'cut');
    trade('buy','kp');set(sT._kp,{transform:'translateY(400px)'});
    pressRegion(sHome,'home',190,294,113,37,12,300,()=>{show(sT,'push');A(sT._kp,[{transform:'translateY(400px)'},{transform:'translateY(-6px)',offset:.8},{transform:'none'}],{duration:760,delay:260})});
-   typeSeq(['1','.','0','0'],'buy',2000,700);}},
- {c:2,f:'پلتفرم‌ها بالا می‌آیند',t:'دیجی‌کالا، <em>اولِ صف</em>',p:'کیبورد کنار می‌رود و قیمت پلتفرم‌ها بالا می‌آید. دیجی‌کالا اول فهرست است و خرید داخل طلاکارت انجام می‌شود.',d:5000,run(){mode('app');show(sT,'cut');trade('buy','kp');setAmt('1.00',false);keypadDown('buy',120);
+   typeSeq(['0','.','5','0'],'buy',2000,700);}},
+ {c:2,f:'پلتفرم‌ها بالا می‌آیند',t:'دیجی‌کالا، <em>اولِ صف</em>',p:'کیبورد کنار می‌رود و قیمت پلتفرم‌ها بالا می‌آید. دیجی‌کالا اول فهرست است و خرید داخل طلاکارت انجام می‌شود.',d:5000,run(){mode('app');show(sT,'cut');trade('buy','kp');setAmt('0.50',false);keypadDown('buy',120);
    later(()=>tapAt(187,765,0,sT._pB._btn),3700);}},
  {c:2,f:'رسید خرید',t:'رسید، <em>تازه از دستگاه</em>',p:'برگه‌ی رسید از شیار بیرون می‌آید: قیمت لحظه‌ای، کارمزد و مبلغ پرداختی.',d:5200,run(){mode('app');show(sT,'cut');trade('buy','plat');finger(0);
    show(sRec,'sheet');printPaper(sRec,800);pressRegion(sRec,'receipt',16,756,343,48,14,3900);}},
  {c:2,f:'خرید موفق',t:'<em>چراغ سبز!</em>',p:'خرید ثبت شد و طلا در حساب کاربر نشست.',d:3800,run(){mode('app');finger(0);show(sDone,'fade',500);popPanel(sDone,150);}},
 
- {c:3,f:'فروش',t:'حالا <em>برعکس</em>',p:'از زبانه‌ی فروش، همان صفحه‌کلید و همان چهار لمس. این بار پلتفرم‌های فروش بالا می‌آیند.',d:7500,run(){mode('app');show(sDone,'cut');set(sDone._panel,{});set(sDone._btn,{});
+ {c:3,f:'فروش',t:'حالا <em>برعکس</em>',p:'از زبانه‌ی فروش، همان صفحه‌کلید و همان چهار لمس. این بار پلتفرم‌های فروش بالا می‌آیند.',d:7500,run(){mode('app');acct(1.5,CASH_B);show(sDone,'cut');set(sDone._panel,{});set(sDone._btn,{});
    pressRegion(sDone,'done',16,760,343,40,12,300,()=>{show(sHome,'back')});
    later(()=>{trade('buy','kp');set(sT._kp,{transform:'translateY(400px)'})},1100);
    pressRegion(sHome,'home',190,294,113,37,12,1500,()=>{show(sT,'push');A(sT._kp,[{transform:'translateY(400px)'},{transform:'translateY(-6px)',offset:.8},{transform:'none'}],{duration:760,delay:260})});
    later(()=>tapAt(110,114,0,null,()=>{A(sT._topS,[{opacity:0},{opacity:1}],{duration:380});A(sT._topB,[{opacity:1},{opacity:0}],{duration:380});
      sT._kt.style.visibility='visible';A(sT._kt,[{opacity:0},{opacity:1}],{duration:380})}),3000);
-   typeSeq(['1','.','0','0'],'sell',4100,620);}},
- {c:3,f:'پلتفرم‌های فروش',t:'باز هم <em>دیجی‌کالا اول</em>',p:'قیمت خرید هر پلتفرم کنار هم است. کاربر روی بهترین گزینه فروش را تمام می‌کند.',d:5000,run(){mode('app');show(sT,'cut');trade('sell','kp');setAmt('1.00',false);keypadDown('sell',120);
+   typeSeq(['0','.','2','0'],'sell',4100,620);}},
+ {c:3,f:'پلتفرم‌های فروش',t:'باز هم <em>دیجی‌کالا اول</em>',p:'قیمت خرید هر پلتفرم کنار هم است. کاربر روی بهترین گزینه فروش را تمام می‌کند.',d:5000,run(){mode('app');show(sT,'cut');trade('sell','kp');setAmt('0.20',false);keypadDown('sell',120);
    later(()=>tapAt(187,765,0,sT._pS._btn),3700);}},
  {c:3,f:'رسید فروش',t:'مبلغ دریافتی، <em>بدون حدس</em>',p:'رسید فروش با مبلغ دریافتی چاپ می‌شود و کاربر آن را تأیید می‌کند.',d:5000,run(){mode('app');show(sT,'cut');trade('sell','plat');finger(0);
    show(sSrec,'sheet');printPaper(sSrec,800);pressRegion(sSrec,'sellrec',16,756,343,48,14,3800);}},
@@ -222,17 +251,19 @@ const S_APP=[
  {c:4,f:'کارت هدف',t:'هر گرم، <em>یک قدم تا کارت</em>',p:'نوار «کارت هدف» در خانه با موجودی طلا پر می‌شود؛ ۱.۳ گرم یعنی بیش از نیمه‌ی راه تا کارت ۲ گرمی.',d:5800,run(){mode('app');setBal(1.3);setGoal(0);show(sSok,'cut');set(sSok._panel,{});set(sSok._btn,{});
    pressRegion(sSok,'sellok',326,26,30,30,15,300,()=>show(sHome,'back'));
    animGoal(0,1.3,1500,1500);
-   pressRegion(sHome,'home',16,342,343,148,16,3700,()=>show(sNot,'push'));}},
- {c:4,f:'مسیر طلایی',t:'یک بازی کوچک: <em>مسیر طلایی</em>',p:'هر خرید، کاربر را روی مسیر جلو می‌برد. تا کارت ۲ گرمی فقط ۰.۷ گرم مانده است.',d:3400,run(){mode('app');sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);}},
- {c:4,f:'هدف کامل شد',t:'هدف کامل شد، <em>کارت آماده است</em>',p:'با خرید ۰.۷ گرم باقیمانده، نوار تا ۲ گرم پر می‌شود، کارت کامل می‌شود و تحویل فیزیکی باز می‌شود.',d:6400,run(){mode('app');sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);
-   later(()=>{const c=L(sNot._sc,'cardnotyet',48,566,280,36);c.style.borderRadius='14px';c.style.zIndex=5;tapAt(188,584,0,c,()=>later(()=>c.remove(),700))},300);
-   notFill(1000);
-   later(()=>A(sNot._sc,[{transform:'none'},{transform:'translateY(-106px)'}],{duration:1300,easing:EIO}),5000);}},
- {c:4,f:'نزدیک‌ترین طلاپرداز',t:'نزدیک‌ترین <em>طلاپرداز</em>',p:'نقشه باز می‌شود و روی نزدیک‌ترین طلاپرداز فعال زوم می‌کند.',d:5200,run(){mode('app');setBal(2);notDone();set(sNot._sc,{transform:'translateY(-106px)'});show(sNot,'cut');set(sBr._map,{});
+   pressGoal(3700,()=>{set(sNot._sc,{});notEmpty();show(sNot,'push')});}},
+ {c:4,f:'مسیر طلایی',t:'یک بازی کوچک: <em>مسیر طلایی</em>',p:'با ۱.۳ گرم، کارت ۲ گرمی تا همین‌جا پر شده؛ ۰.۷ گرم تا تحویلش مانده.',d:4000,run(){mode('app');setBal(1.3);sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);
+   const {lt,hide,ln}=notEmpty();later(()=>{ln.style.opacity=1},450);
+   const n=40,ez=t=>1-Math.pow(1-t,3);for(let i=1;i<=n;i++)later(()=>{const h=110*(1-ez(i/n));lt.style.height=h+'px';ln.style.top=(339.5+h-.5)+'px';if(i===n){lt.remove();hide.remove();ln.remove()}},500+i*1700/n);}},
+ {c:4,f:'انتخاب کارت پرشده',t:'کارتی که پر شده، <em>آماده‌ی تحویل</em>',p:'کاربر کارت ۱ گرمی را که موجودی‌اش کامل است انتخاب می‌کند؛ تحویلش همین حالا باز است.',d:5000,run(){mode('app');setBal(1.3);sNot._ov.innerHTML='';set(sNot._sc,{});show(sNot,'cut');finger(0);
+   later(()=>{const c=L(sNot._sc,'cardnotyet',109,172,28,37.5);c.style.borderRadius='6px';c.style.zIndex=5;tapAt(232,190.5,0,c,()=>later(()=>c.remove(),600))},400);
+   notPick(1100);
+   later(()=>A(sNot._sc,[{transform:'none'},{transform:'translateY(-106px)'}],{duration:1300,easing:EIO}),3400);}},
+ {c:4,f:'نزدیک‌ترین طلاپرداز',t:'نزدیک‌ترین <em>طلاپرداز</em>',p:'نقشه باز می‌شود و روی نزدیک‌ترین طلاپرداز فعال زوم می‌کند.',d:5200,run(){mode('app');setBal(1.3);notPicked();set(sNot._sc,{transform:'translateY(-106px)'});show(sNot,'cut');set(sBr._map,{});
    later(()=>{const c=L(sNot._sc,'cardready',48,834,280,36);c.style.borderRadius='14px';c.style.zIndex=5;tapAt(187,746,0,c,()=>{show(sBr,'push');later(()=>c.remove(),800)})},300);
    later(()=>A(sBr._map,[{transform:'none'},{transform:MAPZ}],{duration:1900,easing:EIO}),2300);}},
- {c:4,f:'مسیریابی',t:'از نقشه، <em>تا خود طلاپرداز</em>',p:'با لمس مسیریاب، کیوسک از همان نقطه‌ی نقشه بیرون می‌آید و کنار اپ می‌نشیند.',d:4600,run(){mode('app');setBal(2);setGoal(2);show(sBr,'cut');set(sBr._map,{transform:MAPZ});finger(0);
-   pressRegion(sBr,'branches',123,291,38,38,10,500,()=>{later(emergeKiosk,200);later(()=>show(sHome,'back'),1700)});}},
+ {c:4,f:'طلاپرداز روی نقشه',t:'از نقشه، <em>تا خود طلاپرداز</em>',p:'با لمس طلاپرداز روی نقشه، دوربین عقب می‌کشد تا اپ و دستگاه با هم دیده شوند و مسیر تا طلاپرداز کشیده می‌شود.',d:3700,run(){mode('app');setBal(1.3);setGoal(1.3);show(sBr,'cut');set(sBr._map,{transform:MAPZ});finger(0);
+   {const [px,py]=toSw(sBr,167,478);tapAt(px,py,350,null,swoopGo)}}},
 
  {c:6,f:'پایان',d:4600,run(){mode('close');finger(0);$('#tag').innerHTML='یک اتصال، <span>سه سرویس</span>';$('#sub').textContent='خرید، فروش و تحویل فیزیکی برای کاربران دیجی‌کالا';
    ['#tag','#sub'].forEach((s,i)=>A($(s),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:400+i*220,fill:'backwards'}));}},
@@ -241,9 +272,11 @@ const S_APP=[
 /* ---------- Talapardaz kiosk ---------- */
 const KS=.515137, KOY=547+44;              // screen scale and top inside the kiosk image
 const kio=$('#kio'), kw=$('#kw'), kfg=$('#kfg');
-const KL={};['k1','k1e','k2','k3','k4','k5','k6','k7','k8','k9','k10','kn','kd'].forEach(k=>{const d=document.createElement('div');d.className='kl';const im=document.createElement('img');im.src=IMG[k];im.alt='';d.appendChild(im);kw.appendChild(d);KL[k]=d});
+function kHead(g){const k=KL.k3;let h=k._hd;if(!h){h=document.createElement('div');h.style.cssText='position:absolute;left:792px;top:68px;width:122px;height:52px;background:#242426;display:flex;align-items:center;justify-content:flex-end;gap:10px;direction:rtl;font-size:40px;white-space:nowrap';k.appendChild(h);k._hd=h}
+  h.innerHTML=`<b style="color:#E7C569;font-weight:800;direction:ltr;unicode-bidi:isolate">${fa(g.toFixed(1))}</b><span style="color:#fff;font-weight:500">گرم</span>`;h.style.flexDirection='row'}
+const KL={};['k1','k1e','k2','k3','k4','k5','k6','k7','k8','k9','k10','kn','kd','k7b'].forEach(k=>{const d=document.createElement('div');d.className='kl';const im=document.createElement('img');im.src=IMG[k];im.alt='';d.appendChild(im);kw.appendChild(d);KL[k]=d});
 $('#kimg').src=IMG.kiosk;$('#kcardImg').src=IMG.card;
-const KV={head:{cx:720,cy:1280,h:2650},type:{cx:720,cy:1500,h:2600},base:{cx:720,cy:3050,h:2500},card:{cx:1019,cy:3440,h:900}};
+const KV={full:{cx:720,cy:1700,h:3300},head:{cx:720,cy:1150,h:2100},type:{cx:720,cy:1460,h:2400},base:{cx:720,cy:3050,h:2500},card:{cx:1019,cy:3440,h:900}};
 let kNow=null;
 const VW=580,VH=750,kfitEl=$('#kfit');
 function fitK(){const w=kv.clientWidth,h=kv.clientHeight;if(!w||!h)return;const s=Math.min(w/VW,h/VH);kfitEl.style.transform=`translate(${((w-VW*s)/2).toFixed(1)}px,${((h-VH*s)/2).toFixed(1)}px) scale(${s.toFixed(4)})`}
@@ -269,7 +302,6 @@ function kfPress(x,y){if(!reduce)kfg.animate([{transform:'scale(1)'},{transform:
 function kbtn(k,x,y,w,h,at,after){later(()=>{const c=document.createElement('div');c.className='kpr';
   c.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px;background-image:url(${IMG[k]});background-position:${-x}px ${-y}px`;KL[k].appendChild(c);
   const [px,py]=s2k(x+w*.62,y+h/2),[bx,by]=s2k(x+w/2,y+h/2),back=kNow||'head';
-  kcam({cx:718+(bx-718)*.55,cy:986+(by-986)*.55,h:1350},620);later(()=>kcam(back,600),1100);
   later(()=>kfIn(px,py),300);
   later(()=>{kfPress(px,py);A(c,[{transform:'scale(1)',filter:'brightness(1)'},{transform:'scale(.965)',filter:'brightness(1.35)',offset:.35},{transform:'scale(1)',filter:'brightness(1.12)'}],{duration:420,easing:'ease-out'});
     after&&later(after,260)},720);later(kfOut,1200)},at)}
@@ -298,20 +330,20 @@ const S_K=[
    A($('#tDK'),[{transform:'translateX(-140px) rotate(6deg)',opacity:0},{transform:'none',opacity:1}],{duration:1000,fill:'none'});
    A($('#xm'),[{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'none'}],{duration:500,delay:750,fill:'backwards'});
    ['#tag','#sub'].forEach((x,i)=>A($(x),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:1000+i*220,fill:'backwards'}));}},
- {c:1,f:'کارت بانکی',t:'کارت بانکی، <em>در شیار</em>',p:'کاربر کارت بانکی‌اش را وارد طلاپرداز می‌کند تا هویتش تأیید شود.',d:3600,run(){kprep('head','k1');
-   later(()=>{kshow('k1e','cut');const c=document.createElement('div');c.style.cssText='position:absolute;left:726px;top:803px;width:574px;height:470px;overflow:hidden';
+ {c:1,f:'کارت بانکی',t:'کارت بانکی، <em>در شیار</em>',p:'کاربر کارت بانکی‌اش را وارد طلاپرداز می‌کند تا هویتش تأیید شود.',d:4500,run(){kprep('full','k1');later(()=>kcam('head',1800),400);
+   later(()=>{kshow('k1e','cut');const c=document.createElement('div');c.className='kpr';c.style.cssText='position:absolute;left:726px;top:803px;width:574px;height:470px;overflow:hidden;border-radius:0';
      const im=document.createElement('div');im.style.cssText=`position:absolute;left:0;top:0;width:574px;height:470px;background:url(${IMG.k1}) -726px -803px/2048px 1536px no-repeat`;c.appendChild(im);KL.k1e.appendChild(c);
-     A(im,[{transform:'none'},{transform:'translateY(-470px)'}],{duration:1300,easing:'cubic-bezier(.6,0,.35,1)'})},1300);}},
- {c:1,f:'رمز کارت',t:'چهار رقم، <em>روی دستگاه</em>',p:'رمز کارت با صفحه‌کلید فیزیکی خود طلاپرداز وارد می‌شود.',d:4400,run(){kprep('head','k1e');later(()=>kcam('type',1200),380);
-   later(()=>kshow('k2'),150);later(()=>{const f=kfield('k2',852,138);ktype('k2',f,'4821',true,0,520)},1500);}},
- {c:1,f:'انتخاب خدمت',t:'خرید <em>طلاکارت</em>',p:'از منوی طلاپرداز، کاربر خرید طلاکارت را انتخاب می‌کند.',d:3400,run(){kprep('type','k2');later(()=>kcam('head',1200),380);
-   later(()=>kshow('k3'),150);kbtn('k3',1324,728,724,190,1600);}},
- {c:2,f:'شماره همراه',t:'شماره همراه، <em>رقم به رقم</em>',p:'شماره‌ی همراه وارد می‌شود تا کد تأیید برایش پیامک شود.',d:5200,run(){kprep('head','k3');later(()=>kcam('type',1200),380);
-   later(()=>kshow('k4'),150);later(()=>{const f=kfield('k4',848,140);ktype('k4',f,'09123456789',false,0,300)},1500);}},
+     A(im,[{transform:'none'},{transform:'translateY(-470px)'}],{duration:1300,easing:'cubic-bezier(.6,0,.35,1)',fill:'forwards'}).onfinish=()=>c.remove()},2300);}},
+ {c:1,f:'رمز کارت',t:'چهار رقم، <em>روی دستگاه</em>',p:'رمز کارت با صفحه‌کلید فیزیکی خود طلاپرداز وارد می‌شود.',d:5100,run(){kprep('head','k1e');later(()=>kcam('type',1800),380);
+   later(()=>kshow('k2'),150);later(()=>{const f=kfield('k2',852,138);ktype('k2',f,'4821',true,0,520)},2200);}},
+ {c:1,f:'انتخاب خدمت',t:'خرید <em>طلاکارت</em>',p:'از منوی طلاپرداز، کاربر خرید طلاکارت را انتخاب می‌کند.',d:4100,run(){kprep('type','k2');later(()=>kcam('head',1800),380);
+   later(()=>kshow('k3'),150);kbtn('k3',1324,728,724,190,2300);}},
+ {c:2,f:'شماره همراه',t:'شماره همراه، <em>رقم به رقم</em>',p:'شماره‌ی همراه وارد می‌شود تا کد تأیید برایش پیامک شود.',d:5900,run(){kprep('head','k3');later(()=>kcam('type',1800),380);
+   later(()=>kshow('k4'),150);later(()=>{const f=kfield('k4',848,140);ktype('k4',f,'09123456789',false,0,300)},2200);}},
  {c:2,f:'کد تأیید',t:'کد پیامک، <em>تأیید شد</em>',p:'کد یک‌بارمصرف روی همان صفحه‌کلید وارد می‌شود.',d:3800,run(){kprep('type','k4');
    later(()=>kshow('k5'),150);later(()=>{const f=kfield('k5',860,140);f.style.letterSpacing='.35em';ktype('k5',f,'48291',false,0,380)},700);}},
- {c:3,f:'انتخاب طلاکارت',t:'طلاکارت <em>۲ گرمی</em>',p:'کاربر وزن کارت را انتخاب می‌کند؛ قیمت هر کارت کنارش است.',d:3400,run(){kprep('type','k5');later(()=>kcam('head',1200),380);
-   later(()=>kshow('k6'),150);kbtn('k6',1106,895,942,190,1600);}},
+ {c:3,f:'انتخاب طلاکارت',t:'طلاکارت <em>۲ گرمی</em>',p:'کاربر وزن کارت را انتخاب می‌کند؛ قیمت هر کارت کنارش است.',d:4100,run(){kprep('type','k5');later(()=>kcam('head',1800),380);
+   later(()=>kshow('k6'),150);kbtn('k6',1106,895,942,190,2300);}},
  {c:3,f:'انتخاب پلتفرم',t:'دیجی‌کالا، <em>اولِ فهرست</em>',p:'پلتفرمی که کاربر در آن حساب طلا دارد؛ دیجی‌کالا اولین گزینه است.',d:3600,run(){kprep('head','k6');
    later(()=>kshow('k7'),150);kbtn('k7',1106,686,942,192,1400);}},
  {c:3,f:'تأیید و پرداخت',t:'یک نگاه، <em>یک تأیید</em>',p:'وزن، کارمزد و هزینه‌ی نهایی پیش از پرداخت روی صفحه است.',d:3600,run(){kprep('head','k7');
@@ -319,13 +351,13 @@ const S_K=[
  {c:3,f:'در حال بررسی',t:'لطفاً <em>منتظر بمانید…</em>',p:'طلاپرداز درخواست را با حساب دیجی‌کالای کاربر بررسی می‌کند.',d:2800,run(){kprep('head','k8');later(()=>kshow('k9'),150);
    later(()=>{const c=document.createElement('div');c.style.cssText=`position:absolute;left:820px;top:360px;width:360px;height:500px;background:url(${IMG.k9}) -820px -360px/2048px 1536px no-repeat`;KL.k9.appendChild(c);
      A(c,[{transform:'translateY(0) rotate(0)'},{transform:'translateY(-18px) rotate(-1.5deg)'},{transform:'translateY(0) rotate(0)'}],{duration:1600,iterations:2,easing:'ease-in-out',fill:'none'})},300);}},
- {c:4,f:'دریافت طلاکارت',t:'کارت طلا، <em>از دستگاه</em>',p:'طلاکارت ۲ گرمی از شیار طلاپرداز بیرون می‌آید.',d:5600,run(){kprep('head','k9');later(()=>kshow('k10'),150);
+ {c:4,f:'دریافت طلاکارت',t:'کارت طلا، <em>از دستگاه</em>',p:'طلاکارت ۲ گرمی از شیار طلاپرداز بیرون می‌آید.',d:4500,run(){kprep('head','k9');later(()=>kshow('k10'),150);
    later(()=>kcam('base',1700),1100);
-   later(()=>{const c=$('#kcard');A(c,[{transform:'translateY(-332px)'},{transform:'translateY(6px)',offset:.85},{transform:'none'}],{duration:1500,easing:'cubic-bezier(.25,.8,.3,1)'})},2700);}},
+   later(()=>{const c=$('#kcard');A(c,[{transform:'translateY(-332px)'},{transform:'translateY(6px)',offset:.85},{transform:'none'}],{duration:1500,easing:'cubic-bezier(.25,.8,.3,1)',fill:'forwards'})},2700);}},
  {c:4,f:'کارت در دست',t:'طلای واقعی، <em>در دست</em>',p:'کارت پلمب‌شده با قابلیت اصالت‌سنجی؛ همان طلایی که در دیجی‌کالا خریده شد.',d:4600,run(){mode('app');kshow('k10','cut');kfg.style.opacity=0;
    const c=$('#kcard');c.getAnimations().forEach(a=>a.cancel());c.style.transform='none';kcam('base',0);
-   later(()=>kcam('card',1600),150);
-   later(()=>{$('#kcard .sh').animate([{backgroundPosition:'120% 0'},{backgroundPosition:'-20% 0'}],{duration:1400,easing:'ease-in-out'})},1700);}},
+   kcam('card',1500);
+   later(()=>{$('#kcard .sh').animate([{backgroundPosition:'120% 0'},{backgroundPosition:'-20% 0'}],{duration:1400,easing:'ease-in-out'})},1450);}},
  {c:5,f:'پایان',d:4200,run(){mode('close');$('#tag').innerHTML='حساب دیجی‌کالا، <span>کارت طلای واقعی</span>';$('#sub').textContent='خرید، تحویل و اصالت‌سنجی در شبکه‌ی طلاپردازهای طلاکارت';
    ['#tag','#sub'].forEach((x,i)=>A($(x),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:400+i*220,fill:'backwards'}));}},
 ];
@@ -340,19 +372,19 @@ const S_D=[
    ['#tag','#sub'].forEach((x,i)=>A($(x),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:1000+i*220,fill:'backwards'}));}},
  {...S_K[1],c:1},
  {...S_K[2],c:1},
- {c:2,f:'تحویل طلاکارت',t:'تحویل <em>طلاکارت</em>',p:'از منوی طلاپرداز، کاربر تحویل طلاکارت را انتخاب می‌کند.',d:3600,run(){kprep('type','k2');later(()=>kcam('head',1200),380);
-   later(()=>kshow('k3'),150);kbtn('k3',1324,952,724,192,1600);}},
+ {c:2,f:'تحویل طلاکارت',t:'تحویل <em>طلاکارت</em>',p:'از منوی طلاپرداز، کاربر تحویل طلاکارت را انتخاب می‌کند.',d:4300,run(){kprep('type','k2');later(()=>kcam('head',1800),380);
+   later(()=>kshow('k3'),150);kbtn('k3',1324,952,724,192,2300);}},
  {c:2,f:'انتخاب پلتفرم',t:'طلا در <em>دیجی‌کالا</em>',p:'پلتفرمی که طلای کاربر در آن نگه‌داری می‌شود؛ دیجی‌کالا اول فهرست است.',d:3600,run(){kprep('head','k3');
    later(()=>kshow('k7'),150);kbtn('k7',1106,686,942,192,1400);}},
  {c:2,f:'انتخاب طلاکارت',t:'از موجودی، <em>۲ گرم</em>',p:'کاربر وزن کارتی را که می‌خواهد از موجودی‌اش تحویل بگیرد انتخاب می‌کند.',d:3400,run(){kprep('head','k7');
    later(()=>kshow('k6'),150);kbtn('k6',1106,895,942,190,1400);}},
- {c:3,f:'کد ملی',t:'کد ملی، <em>برای اطمینان</em>',p:'کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.',d:5600,run(){kprep('head','k6');later(()=>kcam('type',1200),380);
-   later(()=>kshow('kn'),150);later(()=>{const f=kfield('kn',915,144);ktype('kn',f,'0018273645',false,0,300)},1500);}},
- {c:3,f:'تأیید تحویل',t:'یک نگاه، <em>یک تأیید</em>',p:'وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.',d:3800,run(){kprep('type','kn');later(()=>kcam('head',1200),380);
-   later(()=>kshow('kd'),150);kbtn('kd',1244,1296,804,190,1700);}},
- {c:3,f:'کد پیامک',t:'کد پیامک، <em>تأیید شد</em>',p:'کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.',d:4400,run(){kprep('head','kd');later(()=>kcam('type',1200),380);
-   later(()=>kshow('k5'),150);later(()=>{const f=kfield('k5',860,140);f.style.letterSpacing='.35em';ktype('k5',f,'73914',false,0,380)},1500);}},
- {c:4,f:'در حال بررسی',t:'لطفاً <em>منتظر بمانید…</em>',p:'طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.',d:3200,run(){kprep('type','k5');later(()=>kcam('head',1200),380);later(()=>kshow('k9'),150);
+ {c:3,f:'کد ملی',t:'کد ملی، <em>برای اطمینان</em>',p:'کد ملی صاحب حساب روی صفحه‌کلید دستگاه وارد می‌شود.',d:6300,run(){kprep('head','k6');later(()=>kcam('type',1800),380);
+   later(()=>kshow('kn'),150);later(()=>{const f=kfield('kn',915,144);ktype('kn',f,'0018273645',false,0,300)},2200);}},
+ {c:3,f:'تأیید تحویل',t:'یک نگاه، <em>یک تأیید</em>',p:'وزن، کارمزد و هزینه‌ی نهایی تحویل پیش از تأیید روی صفحه است.',d:4500,run(){kprep('type','kn');later(()=>kcam('head',1800),380);
+   later(()=>kshow('kd'),150);kbtn('kd',1244,1296,804,190,2400);}},
+ {c:3,f:'کد پیامک',t:'کد پیامک، <em>تأیید شد</em>',p:'کد یک‌بارمصرف به شماره‌ی ثبت‌شده در حساب ارسال و وارد می‌شود.',d:5100,run(){kprep('head','kd');later(()=>kcam('type',1800),380);
+   later(()=>kshow('k5'),150);later(()=>{const f=kfield('k5',860,140);f.style.letterSpacing='.35em';ktype('k5',f,'48291',false,0,380)},2200);}},
+ {c:4,f:'در حال بررسی',t:'لطفاً <em>منتظر بمانید…</em>',p:'طلاپرداز موجودی کاربر را از دیجی‌کالا کسر و کارت را آماده می‌کند.',d:3900,run(){kprep('type','k5');later(()=>kcam('head',1800),380);later(()=>kshow('k9'),150);
    later(()=>{const c=document.createElement('div');c.style.cssText=`position:absolute;left:820px;top:360px;width:360px;height:500px;background:url(${IMG.k9}) -820px -360px/2048px 1536px no-repeat`;KL.k9.appendChild(c);
      A(c,[{transform:'translateY(0) rotate(0)'},{transform:'translateY(-18px) rotate(-1.5deg)'},{transform:'translateY(0) rotate(0)'}],{duration:1600,iterations:2,easing:'ease-in-out',fill:'none'})},300);}},
  {...S_K[10],c:4,t:'طلاکارت، <em>از دستگاه</em>',p:'طلاکارت ۲ گرمی از شیار طلاپرداز تحویل داده می‌شود.'},
@@ -365,23 +397,31 @@ const S_D=[
 const phH=$('#ph');
 /* app + kiosk side by side: the focused device is larger, the other stays in view */
 const devEl=$('.dev'),flowSvg=$('#flow');
-function setDw(){devEl.style.setProperty('--dw',devEl.clientWidth+'px')}setDw();new ResizeObserver(setDw).observe(devEl);
+function setDw(){const W=devEl.clientWidth,pw=phH.offsetWidth||367,st=devEl.style;st.setProperty('--dw',W+'px');
+  st.setProperty('--phk',(W-24-pw*.3-W/2).toFixed(1)+'px');st.setProperty('--kvk',(pw*.6+52).toFixed(1)+'px');
+  st.setProperty('--php',(W-24-pw*.4-W/2).toFixed(1)+'px');st.setProperty('--kvp',(pw*.8+52).toFixed(1)+'px')}
+setDw();new ResizeObserver(setDw).observe(devEl);new ResizeObserver(setDw).observe(phH);
 function setDuo(m){devEl.classList.remove('duo-k','duo-p','duo-dk');if(m)devEl.classList.add('duo-'+m);if(m)document.body.classList.add('kvis');fitK()}
 function rel(el){const d=devEl.getBoundingClientRect(),r=el.getBoundingClientRect();return [r.left+r.width/2-d.left,r.top+r.height/2-d.top]}
 /* a gold thread from one device to the other, with a dot travelling along it */
-function flowDot(fromEl,toEl,at,dur=1000){later(()=>{const [ax,ay]=rel(fromEl),[bx,by]=rel(toEl),mx=(ax+bx)/2,my=Math.min(ay,by)-90;
+function flowDot(fromEl,toEl,at,dur=1000){later(()=>{const [ax,ay]=Array.isArray(fromEl)?fromEl:rel(fromEl),[bx,by]=Array.isArray(toEl)?toEl:rel(toEl),mx=(ax+bx)/2,my=Math.min(ay,by)-90;
   const d=`M${ax.toFixed(1)} ${ay.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`;
   const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke','#D9B358');p.setAttribute('stroke-width','1.5');p.setAttribute('stroke-linecap','round');p.setAttribute('pathLength','1');p.setAttribute('stroke-dasharray','1 1');flowSvg.appendChild(p);
   A(p,[{strokeDashoffset:1,opacity:.9},{strokeDashoffset:0,opacity:.9,offset:.55},{strokeDashoffset:0,opacity:.9,offset:.8},{strokeDashoffset:0,opacity:0}],{duration:dur*2.1,easing:'ease-in-out',fill:'both'});
   const o=document.createElement('div');o.className='fdot';o.style.offsetPath=`path('${d}')`;devEl.appendChild(o);
   A(o,[{offsetDistance:'0%',opacity:0},{offsetDistance:'8%',opacity:1,offset:.1},{offsetDistance:'100%',opacity:1,offset:.92},{offsetDistance:'100%',opacity:0}],{duration:dur,delay:dur*.35,easing:EIO,fill:'both'}).onfinish=()=>o.remove()},at)}
 /* home: the goal bar ("کارت هدف") follows the balance */
-const goalC=document.createElement('div');goalC.className='goal';goalC.style.cssText+=`left:56px;top:384px;width:240px;height:32px;background:url(${IMG.goalbg}) 0 0/100% 100%`;sHome.appendChild(goalC);
+const goalC=document.createElement('div');goalC.className='goal';goalC.style.cssText+=`left:18px;top:382px;width:334px;height:64px;background:url(${IMG.goalbg}) 0 0/100% 100%`;sHome.appendChild(goalC);
+const goalI=document.createElement('img');goalI.className='goal';goalI.alt='';goalI.src=IMG.card;goalI.style.cssText+='left:306px;top:386px;width:37px;height:55px;border-radius:4px;box-shadow:0 4px 10px -4px #0005';sHome.appendChild(goalI);
 const goalT=document.createElement('div');goalT.className='goal';goalT.style.cssText+='right:85px;top:388px;height:24px;align-items:center;gap:4px;direction:rtl;white-space:nowrap;font-size:15px;font-weight:500;color:#2A2E32';sHome.appendChild(goalT);
-const goalB=document.createElement('div');goalB.className='goal';goalB.style.cssText+='left:31px;top:427px;width:259px;height:9px;border-radius:5px;background:#fff;overflow:hidden';sHome.appendChild(goalB);
+const goalB=document.createElement('div');goalB.className='goal';goalB.style.cssText+='left:31px;top:428px;width:259px;height:8px;border-radius:4px;background:#fff;overflow:hidden';sHome.appendChild(goalB);
 const goalF=document.createElement('i');goalF.style.cssText='position:absolute;right:0;top:0;bottom:0;border-radius:5px;background:#E7C569';goalB.appendChild(goalF);
 let goalOn=false;
-function setGoal(g){goalOn=g!=null;[goalC,goalT,goalB].forEach(e=>e.style.display=goalOn?'flex':'none');if(!goalOn)return;
+/* press the goal widget: the lifted copy carries the live goal text and bar, so the numbers never jump back to the frame's */
+function pressGoal(at,after){later(()=>{const c=L(sHome,'home',16,342,343,148);c.style.borderRadius='16px';c.style.zIndex=5;
+  [goalC,goalI,goalT,goalB].forEach(e=>{const k=e.cloneNode(true);k.style.left=(parseFloat(e.style.left)-16)+'px';if(e.style.right)k.style.right=(parseFloat(e.style.right)-16)+'px';k.style.top=(parseFloat(e.style.top)-342)+'px';c.appendChild(k)});
+  tapAt(16+343/2,342+148/2,0,c,()=>{after&&after();later(()=>c.remove(),700)})},at)}
+function setGoal(g){goalOn=g!=null;[goalC,goalI,goalT,goalB].forEach(e=>e.style.display=goalOn?(e===goalI?'block':'flex'):'none');if(!goalOn)return;
   const r=Math.max(0,2-g);goalT.innerHTML=r<.05?`<span>طلاکارت</span><b style="font-weight:800">${fa(2)}</b><span>گرمی آماده‌ی دریافت است</span>`:`<b style="font-weight:800;direction:ltr;unicode-bidi:isolate">${fa(r.toFixed(1))}</b><span>گرم تا تبدیل به طلای فیزیکی</span><b style="font-weight:800">${fa(2)}</b><span>گرمی</span>`;goalF.style.width=(Math.min(1,g/2)*100).toFixed(2)+'%'}
 function animGoal(a,b,at,dur){const n=30;for(let i=0;i<=n;i++)later(()=>{const t=i/n,e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;setGoal(a+(b-a)*e)},at+i*dur/n)}
 setGoal(null);
@@ -390,7 +430,7 @@ function kOn(){document.body.classList.add('kvis','kon')}
 const dkb=$('#dkb');$('#dkbLogo').src=IMG.dklogo;
 function setDk(g){$('#dkG').textContent=fa(Math.round(g*1000).toLocaleString('en-US'));$('#dkR').textContent=fa(Math.round(g*194568030).toLocaleString('en-US'))+' ریال'}
 let wasDk=false;
-function resetDeck(){wasDk=dkb.getAnimations().length>0;[dkb,$('#dkD')].forEach(e=>{e.getAnimations().forEach(a=>a.cancel())});document.body.classList.remove('kon','kvis');setDuo(null);flowSvg.innerHTML='';setGoal(null);[phH,kv].forEach(e=>e.getAnimations().forEach(a=>{if(!(a instanceof CSSTransition))a.cancel()}));setBal(null)}
+function resetDeck(){CASH=CASH_S;kHead(2.5);scn.getAnimations().forEach(a=>a.cancel());scn.style.transform='';{const ci=$('#kcardImg');ci.src=IMG.card;ci.style.borderRadius=''}wasDk=dkb.getAnimations().length>0;[dkb,$('#dkD')].forEach(e=>{e.getAnimations().forEach(a=>a.cancel())});document.body.classList.remove('kon','kvis');setDuo(null);flowSvg.innerHTML='';setGoal(null);[phH,kv].forEach(e=>e.getAnimations().forEach(a=>{if(!(a instanceof CSSTransition))a.cancel()}));setBal(null)}
 const ZIN='cubic-bezier(.55,0,.8,.2)',ZOUT='cubic-bezier(.16,1,.3,1)';
 function toKiosk(at,scr){later(()=>{document.body.classList.add('kvis');kcam('head',0);kcur=null;kshow(scr,'cut');kcardReset();kfg.style.opacity=0;document.body.classList.add('kon');
   A(phH,[{opacity:1,transform:'none',filter:'blur(0px)'},{opacity:0,transform:'scale(1.45)',filter:'blur(14px)'}],{duration:850,easing:ZIN,fill:'none'});
@@ -399,20 +439,69 @@ function toPhone(at){later(()=>{A(kv,[{opacity:1,transform:'none',filter:'blur(0
   document.body.classList.remove('kon');
   A(phH,[{opacity:0,transform:'scale(1.45)',filter:'blur(14px)'},{opacity:1,transform:'none',filter:'blur(0px)'}],{duration:1400,delay:420,easing:ZOUT,fill:'backwards'});
   later(()=>document.body.classList.remove('kvis'),900)},at)}
-function emergeKiosk(){const m=document.createElement('div');m.style.cssText='position:absolute;left:167px;top:146px;width:2px;height:2px';sBr._mc.appendChild(m);const [px,py]=rel(m);m.remove();
-  setDuo('k');kcam('head',0);kcur=null;kshow('k3','cut');kcardReset();kfg.style.opacity=0;
-  const d=devEl.getBoundingClientRect(),k=kv.getBoundingClientRect(),em=$('#kemg');em.style.transformOrigin=`${(px-(k.left-d.left)).toFixed(1)}px ${(py-(k.top-d.top)).toFixed(1)}px`;
-  A(em,[{opacity:0,transform:'scale(.04)',filter:'blur(3px)'},{opacity:1,transform:'scale(.25)',filter:'blur(1px)',offset:.18},{opacity:1,transform:'none',filter:'blur(0px)'}],{duration:1500,easing:ZOUT,fill:'backwards'})}
-function appK(){setDuo('k');setBal(2);setGoal(2);show(sHome,'cut');finger(0)}
+/* a route like the map's: from the pin, a few street-like turns, ending where the kiosk stands */
+function routeLine(pts,dur,r=12){let d=`M${pts[0][0]} ${pts[0][1]}`;
+  for(let i=1;i<pts.length-1;i++){const [px,py]=pts[i-1],[cx,cy]=pts[i],[nx,ny]=pts[i+1];
+    const l1=Math.hypot(cx-px,cy-py),l2=Math.hypot(nx-cx,ny-cy),r1=Math.min(r,l1/2),r2=Math.min(r,l2/2);
+    d+=` L${(cx-(cx-px)/l1*r1).toFixed(1)} ${(cy-(cy-py)/l1*r1).toFixed(1)} Q${cx} ${cy} ${(cx+(nx-cx)/l2*r2).toFixed(1)} ${(cy+(ny-cy)/l2*r2).toFixed(1)}`}
+  const e=pts[pts.length-1];d+=` L${e[0]} ${e[1]}`;
+  const mk=(w,c,o)=>{const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',d);p.setAttribute('fill','none');p.setAttribute('stroke',c);p.setAttribute('stroke-width',w);p.setAttribute('stroke-linecap','round');p.setAttribute('stroke-linejoin','round');p.setAttribute('pathLength','1');p.setAttribute('stroke-dasharray','1 1');p.style.opacity=o;flowSvg.appendChild(p);
+    A(p,[{strokeDashoffset:1},{strokeDashoffset:0}],{duration:dur,easing:'cubic-bezier(.45,0,.25,1)',fill:'both'});return p};
+  const a=mk(7,'#B98A2E',.35),b=mk(3.5,'#E7C569',1);
+  const end=document.createElement('div');end.style.cssText=`position:absolute;left:${e[0]}px;top:${e[1]}px;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#E7C569;box-shadow:0 0 0 4px #E7C56955;z-index:8;pointer-events:none`;end.className='fdot';devEl.appendChild(end);
+  A(end,[{transform:'scale(0)'},{transform:'scale(1)'}],{duration:300,delay:dur-80,easing:'cubic-bezier(.2,1.6,.4,1)',fill:'both'});
+  return [a,b,end]}
+function grainFlow(fromEl,toEl,at,n,dur,stag){later(()=>{const [ax,ay]=rel(fromEl),[bx,by]=rel(toEl);
+  for(let i=0;i<n;i++){const j=((i*37)%11)/10-.5,k=((i*53)%7)/6-.5,sx=ax+j*40,sy=ay+k*14,ex=bx+j*18,ey=by+k*30,mx=(sx+ex)/2+j*30,my=Math.min(sy,ey)-70-((i*29)%5)*12;
+    const g=document.createElement('div');g.className='fdot';const sz=4+((i*31)%3);g.style.cssText+=`width:${sz}px;height:${sz}px;margin:${-sz/2}px 0 0 ${-sz/2}px;box-shadow:0 0 ${sz*1.2}px ${sz*.3}px #E7C56977;background:radial-gradient(circle,#FFF6D8 0 25%,#E7C569 60%,#C9A23E 100%)`;
+    g.style.offsetPath=`path('M${sx.toFixed(1)} ${sy.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}')`;devEl.appendChild(g);
+    A(g,[{offsetDistance:'0%',opacity:0,transform:'scale(.4)'},{offsetDistance:'12%',opacity:1,transform:'scale(1)',offset:.12},{offsetDistance:'92%',opacity:1,transform:'scale(.9)',offset:.88},{offsetDistance:'100%',opacity:0,transform:'scale(.3)'}],{duration:dur,delay:i*stag,easing:'cubic-bezier(.45,0,.25,1)',fill:'both'}).onfinish=()=>g.remove()}},at)}
+function emergeKiosk(){const m=document.createElement('div');m.style.cssText='position:absolute;left:167px;top:146px;width:2px;height:2px';sBr._mc.appendChild(m);
+  const em=$('#kemg');setDuo('k');kcam('full',0);kcur=null;kshow('k3','cut');kcardReset();kfg.style.opacity=0;
+  const hold=A(em,[{opacity:0},{opacity:0}],{duration:100000,fill:'both'});
+  for(let r=0;r<2;r++){const p=document.createElement('div');p.style.cssText='position:absolute;left:167px;top:146px;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid #E7C569;pointer-events:none';sBr._mc.appendChild(p);
+    A(p,[{transform:'scale(.3)',opacity:.9},{transform:'scale(1.6)',opacity:0}],{duration:900,delay:r*380,easing:'ease-out',fill:'both'}).onfinish=()=>p.remove()}
+  later(()=>{const [px,py]=rel(m);m.remove();const d=devEl.getBoundingClientRect(),k=kv.getBoundingClientRect();
+    const pr=phH.getBoundingClientRect(),xe=pr.left-d.left-22,kx=k.left-d.left+k.width*.5,ky=k.top-d.top+k.height*.88;
+    const parts=routeLine([[px,py],[xe,py],[xe,ky],[kx,ky]],1300);
+    later(()=>{hold.cancel();A(em,[{opacity:0,transform:'translateY(38%)'},{opacity:1,transform:'none'}],{duration:1400,easing:ZOUT,fill:'backwards'})},900);
+    later(()=>parts.forEach(p=>A(p,[{opacity:getComputedStyle(p).opacity},{opacity:0}],{duration:700,fill:'forwards'})),1150)},950)}
+/* swoop: one camera over the whole scene. App and kiosk stand side by side (duo layout);
+   "close on the phone" is the scene at 2x on the phone, "wide" shows both, then the camera settles on the target. */
+const scn=$('#scn'),GLOW=[{filter:'drop-shadow(0 18px 22px #00000055)'},{filter:'drop-shadow(0 18px 22px #00000055) drop-shadow(0 0 26px #E7C569cc)',offset:.55},{filter:'drop-shadow(0 18px 22px #00000055)'}];
+function scnT(s,cx,cy,tx,ty){const [hx,hy]=phC(null);tx=tx??hx;ty=ty??hy;return `translate(${(tx-s*cx).toFixed(1)}px,${(ty-s*cy).toFixed(1)}px) scale(${s})`}
+function phC(m){const W=devEl.clientWidth,pw=phH.offsetWidth||367;return [phH.offsetLeft+pw/2+(m==='k'?W-24-pw*.3-W/2:m==='p'?W-24-pw*.4-W/2:0),phH.offsetTop+phH.offsetHeight/2]}
+const wideT=()=>{const W=devEl.clientWidth,H=devEl.clientHeight;return scnT(.9,W/2,H/2,W/2,H/2)};
+function snapDuo(m,tf){devEl.classList.add('notr');setDuo(m);scn.style.transform=tf||'';void devEl.offsetWidth;devEl.classList.remove('notr')}
+function swoopGo(){const m=document.createElement('div');m.style.cssText='position:absolute;left:167px;top:146px;width:2px;height:2px';sBr._mc.appendChild(m);
+  for(let r=0;r<2;r++){const p=document.createElement('div');p.style.cssText='position:absolute;left:167px;top:146px;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px solid #E7C569;pointer-events:none';sBr._mc.appendChild(p);
+    A(p,[{transform:'scale(.3)',opacity:.9},{transform:'scale(1.6)',opacity:0}],{duration:900,delay:r*380,easing:'ease-out',fill:'both'}).onfinish=()=>p.remove()}
+  const em=$('#kemg'),[cx,cy]=phC('k'),close=scnT(1/.6,cx,cy);
+  const hold=A(em,[{opacity:0},{opacity:0}],{duration:100000,fill:'both'});
+  snapDuo('k',close);kcam('head',0);kcur=null;kshow('k3','cut');kcardReset();kfg.style.opacity=0;
+  /* route in the settled layout: measure now under the close-up camera and map back to scene space */
+  const Mi=new DOMMatrix(close).inverse(),d=devEl.getBoundingClientRect(),loc=(x,y)=>{const p=Mi.transformPoint(new DOMPoint(x-d.left,y-d.top));return [p.x,p.y]};
+  const mr=m.getBoundingClientRect(),k=$('#kimg').getBoundingClientRect(),pr=phH.getBoundingClientRect();
+  const P=loc(mr.left+1,mr.top+1),K1=loc(k.left+k.width*.9,k.top+k.height*(1800/4138)),PL=loc(pr.left,pr.top);m.remove();
+  const xg=(K1[0]+PL[0])/2,route=[P,[xg,P[1]],[xg,K1[1]],K1];
+  A(scn,[{transform:close},{transform:'none'}],{duration:1500,easing:ZOUT,fill:'forwards'});hold.cancel();A(em,[{opacity:0},{opacity:1}],{duration:700,delay:150,fill:'backwards'});
+  later(()=>{const parts=routeLine(route,950,30);later(()=>parts.forEach(p=>A(p,[{opacity:getComputedStyle(p).opacity},{opacity:0}],{duration:500,fill:'forwards'})),1350)},550);
+  later(()=>show(sHome,'back'),1700)}
+function appK(){kHead(1.3);setDuo('k');setBal(1.3);setGoal(1.3);show(sHome,'cut');finger(0);const ci=$('#kcardImg');ci.src=IMG.card1;ci.style.borderRadius='13px'}
 const S_APPK=[
- {c:5,f:'تحویل طلاکارت',t:'تحویل <em>طلاکارت</em>',p:'کاربر با ۲ گرم موجودی به طلاپرداز رسیده؛ اپ کنار دستگاه، تحویل را از منو انتخاب می‌کند.',d:3000,run(){appK();kprep('head','k3');
-   kbtn('k3',1324,952,724,192,500);}},
- ...S_D.slice(4,10).map(st=>({...st,c:5,run(){appK();st.run()}})),
- {c:5,f:'دریافت و بازگشت',t:'کارت در دست، <em>موجودی به‌روز</em>',p:'طلاکارت ۲ گرمی از طلاپرداز بیرون می‌آید و همان لحظه از موجودی اپ کم می‌شود.',d:7400,run(){appK();kprep('head','k9');
-   later(()=>kshow('k10'),150);later(()=>kcam('base',1500),700);
-   later(()=>A($('#kcard'),[{transform:'translateY(-332px)'},{transform:'translateY(6px)',offset:.85},{transform:'none'}],{duration:1400,easing:'cubic-bezier(.25,.8,.3,1)'}),1900);
-   later(()=>kcam({cx:1019,cy:3400,h:1250},1800),2300);
-   later(()=>setDuo('p'),3300);flowDot($('#kcard'),balG,4300,1000);countBal(2,0,5100,1500);}},
+ {c:5,f:'تحویل طلاکارت',t:'تحویل <em>طلاکارت</em>',p:'کاربر با ۱.۳ گرم موجودی به طلاپرداز رسیده؛ اپ کنار دستگاه، تحویل را از منو انتخاب می‌کند.',d:2900,run(){appK();kprep('head','k3');
+   kbtn('k3',1324,952,724,192,700);}},
+ {c:5,f:'انتخاب پلتفرم',t:'این بار از <em>خود طلاکارت</em>',p:'موجودی این کاربر در اپ طلاکارت است؛ دیجی‌کالا همچنان اول فهرست است و طلاکارت هم یکی از پلتفرم‌هاست.',d:3600,run(){appK();kprep('head','k3');later(()=>kshow('k7b'),150);kbtn('k7b',0,686,942,192,1400);}},
+ {c:5,f:'انتخاب طلاکارت',t:'طلاکارت <em>۱ گرمی</em>',p:'همان کارتی که در مسیر طلایی پر شده بود، روی دستگاه انتخاب می‌شود.',d:3400,run(){appK();kprep('head','k7b');later(()=>kshow('k6'),150);kbtn('k6',0,615,940,190,1400);}},
+ {...S_D[6],c:5,run(){appK();S_D[6].run()}},
+ {...S_D[8],c:5,run(){appK();S_D[8].run();kcam('type',0);kcur=null;kshow('kn','cut');kfillStatic('kn')}},
+ {...S_D[9],c:5,run(){appK();S_D[9].run()}},
+ {c:5,f:'دریافت و بازگشت',t:'کارت در دست، <em>موجودی به‌روز</em>',p:'طلاکارت ۱ گرمی بیرون می‌آید و همان ۱ گرم از موجودی اپ جدا می‌شود و در کارت می‌نشیند.',d:7600,run(){appK();kprep('head','k9');
+   later(()=>kshow('k10'),150);later(()=>kcam('base',1500),500);
+   later(()=>A($('#kcard'),[{transform:'translateY(-332px)'},{transform:'translateY(6px)',offset:.85},{transform:'none'}],{duration:1400,easing:'cubic-bezier(.25,.8,.3,1)',fill:'forwards'}),1700);
+   later(()=>{setDuo('p');kcam({cx:740,cy:2700,h:2900},1000)},2900);
+   grainFlow(balG,$('#kcard'),4000,9,1150,130);countBal(1.3,.3,4050,1900);
+   later(()=>A($('#kcard'),GLOW,{duration:2400,easing:'ease-in-out'}),4400);}},
 ];
 S_APP.splice(S_APP.findIndex(x=>x.c===6),0,...S_APPK);
 const CH_KM=[{n:'۰۰',t:'معرفی'},{n:'۰۱',t:'ورود'},{n:'۰۲',t:'تأیید شماره'},{n:'۰۳',t:'خرید'},{n:'۰۴',t:'دریافت کارت'},{n:'۰۵',t:'تحویل از موجودی'},{n:'۰۶',t:'جمع‌بندی'}];
@@ -421,11 +510,12 @@ const S_KM=[...S_K.slice(0,12),
    later(()=>A(c,[{transform:'none',opacity:1},{transform:'translateY(60px)',opacity:0}],{duration:700,easing:EIN}),250);
    later(()=>kcam('head',1700),800);later(()=>kshow('k3'),1700);kbtn('k3',1324,952,724,192,3200);}},
  ...S_D.slice(4,11).map(st=>({...st,c:5})),
- {c:5,f:'موجودی دیجی‌کالا',t:'در دیجی‌کالا هم، <em>کسر شد</em>',p:'۲ گرم تحویل‌شده همان لحظه از دارایی طلای کاربر در دیجی‌کالا کم می‌شود.',d:5600,run(){kprep('base','k10');$('#kcard').style.transform='none';setDk(2.5);
-   later(()=>{setDuo('dk');A(dkb,[{opacity:0,transform:'translateX(-30px) scale(.94)'},{opacity:1,transform:'none'}],{duration:900,delay:350,easing:ZOUT,fill:'both'})},150);
-   flowDot($('#kcard'),$('#dkG'),1400,1000);
-   later(()=>A($('#dkD'),[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:500,easing:ZOUT,fill:'both'}),2300);
-   const n=28;for(let i=0;i<=n;i++)later(()=>{const t=i/n,e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;setDk(2.5-2*e)},2500+i*1500/n);}},
+ {c:5,f:'موجودی دیجی‌کالا',t:'در دیجی‌کالا هم، <em>کسر شد</em>',p:'۲ گرم از دارایی دیجی‌کالا جدا می‌شود و در کارت می‌نشیند؛ طلا گم نمی‌شود، از حساب به دست می‌رسد.',d:6000,run(){kprep('base','k10');$('#kcard').style.transform='none';setDk(2.5);
+   later(()=>{setDuo('dk');kcam({cx:980,cy:3330,h:1600},1100);A(dkb,[{opacity:0,transform:'translateX(-30px) scale(.94)'},{opacity:1,transform:'none'}],{duration:900,delay:350,easing:ZOUT,fill:'both'})},150);
+   grainFlow($('#dkG'),$('#kcard'),1500,9,1150,130);
+   later(()=>A($('#kcard'),[{filter:'drop-shadow(0 18px 22px #00000055)'},{filter:'drop-shadow(0 18px 22px #00000055) drop-shadow(0 0 26px #E7C569cc)',offset:.55},{filter:'drop-shadow(0 18px 22px #00000055)'}],{duration:2400,easing:'ease-in-out'}),1900);
+   const n=30;for(let i=0;i<=n;i++)later(()=>{const t=i/n,e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;setDk(2.5-2*e)},1550+i*1900/n);
+   later(()=>A($('#dkD'),[{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:500,easing:ZOUT,fill:'both'}),3600);}},
  {...S_K[12],c:6,run(){if(wasDk){setDk(.5);setDuo('dk');A(kv,[{opacity:1},{opacity:0}],{duration:500,fill:'forwards'});A(dkb,[{opacity:1},{opacity:0,transform:'scale(.96)'}],{duration:450,fill:'forwards'});A($('#dkD'),[{opacity:1},{opacity:1}],{duration:450,fill:'forwards'})}mode('close');$('#tag').innerHTML='خرید یا تحویل، <span>یک طلاپرداز</span>';$('#sub').textContent='خرید، تحویل و اصالت‌سنجی در شبکه‌ی طلاپردازهای طلاکارت';
    ['#tag','#sub'].forEach((x,i)=>A($(x),[{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:400+i*220,fill:'backwards'}));}},
 ];
@@ -439,7 +529,7 @@ function buildUI(){prog.innerHTML=CH.map((c,i)=>{const d=S.filter(s=>s.c===i).re
   document.querySelectorAll('.fbtn').forEach(b=>b.onclick=()=>{go(+b.dataset.j);$('#stage').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})});
   total=S.reduce((a,s)=>a+s.d,0);window.__total=total}
 const DECKS={app:[CH_APP,S_APP],kiosk:[CH_KM,S_KM],deliv:[CH_D,S_D]};
-function useDeck(k){[CH,S]=DECKS[k];window.__S=S;document.body.dataset.deck=k;idx=0;buildUI()}
+function useDeck(k){[CH,S]=DECKS[k];window.__S=S;window.__go=go;document.body.dataset.deck=k;idx=0;buildUI()}
 let idx=0,playing=true,t0=0,elapsed=0,adv=null,lastCap='';
 function setCap(s){const c=CH[s.c];$('#capN').textContent=c.n;$('#capC').textContent=c.t;if(location.hash==="#render")return;
   if(s.t&&s.t!==lastCap){lastCap=s.t;const tx=$('#capTxt');
@@ -457,7 +547,7 @@ function openMenu(){clearT();clearTimeout(adv);playing=false;setPlayIcon(false);
   document.querySelectorAll('.pick').forEach((e,i)=>A(e,[{opacity:0,transform:'translateY(20px)'},{opacity:1,transform:'none'}],{duration:700,delay:150+i*120,fill:'backwards'}))}
 function startApp(k='app'){useDeck(typeof k==='string'?k:'app');document.body.classList.remove('menu');playing=true;setPlayIcon(true);lastCap='';$('#capT').innerHTML='';go(0)}
 $('#pkApp').onclick=()=>startApp('app');$('#bMenu').onclick=openMenu;
-$('#pkAtm').onclick=()=>startApp('kiosk');
+$('#pkAtm').onclick=()=>startApp('kiosk');$('#pkTcImg').src=IMG.card;
 $('#bPlay').onclick=()=>setPlay(!playing);document.querySelectorAll('button').forEach(b=>b.addEventListener('mousedown',e=>e.preventDefault()));
 addEventListener('keyup',e=>{if(e.code==='Space'&&e.target.tagName==='BUTTON')e.preventDefault()});$('#cNext').onclick=()=>go(idx+1);$('#bPrev').onclick=()=>go(idx-1);
 addEventListener('keydown',e=>{if(document.body.classList.contains('menu')){if(e.key==='Enter'&&document.activeElement===document.body)startApp();return}
@@ -495,9 +585,10 @@ function drawBg(){const W=cv.width,H=cv.height;cx.clearRect(0,0,W,H);cx.lineWidt
   for(let k=0;k<34;k++){cx.strokeStyle=`rgba(231,197,105,${.16+.16*Math.sin(k/34*Math.PI)})`;cx.beginPath();
     for(let x=0;x<=W;x+=8){const t=x/W;const y=H*(.55+.3*Math.sin(t*Math.PI*1.5+.6+ph))+(k-17)*H*.011;x?cx.lineTo(x,y):cx.moveTo(x,y)}cx.stroke()}
   if(!reduce&&(playing||location.hash==="#render")){ph+=.0032}setTimeout(()=>requestAnimationFrame(drawBg),33)}
-function fit(){const d=$('.dev').getBoundingClientRect();const s=Math.max(.42,Math.min(1,(d.height-28)/886,(d.width-24)/430));
+const MOB=matchMedia('(max-width:640px)');
+function fit(){const d=$('.dev').getBoundingClientRect();const s=Math.max(MOB.matches?.2:.42,Math.min(1,(d.height-28)/886,(d.width-24)/430));
   $('#phone').style.transform=`scale(${s})`;$('#ph').style.width=395*s+'px';$('#ph').style.height=886*s+'px';bg()}
-addEventListener('resize',fit);
+addEventListener('resize',fit);if(MOB.matches)new ResizeObserver(()=>fit()).observe($('.dev'));
 useDeck('app');
 const start=()=>{fit();drawBg();$('#pkAppImg').src=IMG.homecrop;$('#pkAtmImg').src=IMG.atm;if(location.hash==='#render'){document.body.classList.remove('menu');playing=false;window.__ready=true;parent.postMessage({type:'talacard-ready'},location.origin)}else if(location.hash==='#kiosk'||location.hash==='#render-kiosk')startApp('kiosk');else if(location.hash==='#deliv'||location.hash==='#render-deliv')startApp('deliv');else if(location.hash==='#app'||location.hash==='#render')startApp('app');else openMenu();addEventListener('resize',()=>{if(kNow)kcam(kNow,0)});requestAnimationFrame(tick);window.__ready=true};
 Promise.all([...DECODED,document.fonts?document.fonts.ready:0]).then(start);

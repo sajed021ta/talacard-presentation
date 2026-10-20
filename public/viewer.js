@@ -1,3 +1,4 @@
+import {renderMediaItems,mediaItemBox,controlMediaItems,seekMediaItems} from './multimedia.js';
 import {paintBackdrop} from './backdrop.js';
 import {renderTitle,renderDescription,textBlocks,ensureTextBlocks,syncDescription} from './text.js';
 import {applyMediaEffect,controlMediaEffect,seekMediaEffect,DEFAULT_EFFECT} from './effects.js';
@@ -42,7 +43,7 @@ function renderStage(restart = false) {
   const signature = `${s.id}|${s.layout}|${s.media}|${s.poster}|${s.legacyDeck||"previous"}`;
   canvas.style.setProperty('--scene-bg', s.background); canvas.style.setProperty('--scene-ink', s.textColor); canvas.style.setProperty('--scene-accent', s.accent); canvas.style.setProperty('--scene-size', s.fontSize + 'px'); canvas.style.setProperty('--media-fit', s.fit); canvas.style.setProperty('--media-position', s.position + '%');
   if (s.layout === 'legacy') {
-    const renderer=s.legacyDeck&&s.legacyDeck!=='previous'?'/legacy/index.html#render':'/legacy-previous/index.html#render';
+    const renderer=s.legacyDeck==='snapshot19'?'/legacy-2026-10-19/index.html#render':s.legacyDeck&&s.legacyDeck!=='previous'?'/legacy/index.html#render':'/legacy-previous/index.html#render';
     if (!frame || !frame.isConnected || frame.getAttribute('src')!==renderer) {
       iframeReady = false; canvas.replaceChildren(); frame = document.createElement('iframe'); frame.title = 'نمایش فلو اصلی اپ طلاکارت'; frame.src = renderer; canvas.append(frame);loadLegacy();
     } else loadLegacy();
@@ -92,7 +93,7 @@ function resizeStage() {
   canvas.style.translate = 'none'; canvas.style.transformOrigin = '0 0';
   canvas.style.transform = `scale(${scale})`;
   canvas.style.setProperty('--handle-factor', String(1/scale));
-  applyPlacement(canvas,scene());paintBackdrop(canvas,scene(),elapsed,reduce);
+  applyPlacement(canvas,scene());paintBackdrop(canvas,scene(),elapsed,reduce);renderMediaItems(canvas,scene(),{playing,reduce});
   const content=canvas.querySelector('.scene-content');if(content)renderDescription(content,content.querySelector('.scene-description'),scene(),placementMode(canvas));
 }
 new ResizeObserver(resizeStage).observe($('#stage'));
@@ -106,7 +107,7 @@ window.addEventListener('message', e => {
 function playVideo(v) { v.play().catch(error => { if (error.name !== 'AbortError' && v.isConnected && playing) { setPlaying(false); toast('مرورگر پخش خودکار را متوقف کرد؛ دوباره دکمهٔ پخش را بزن.'); } }); }
 function setPlaying(value) {
   if(value && !playing && elapsed===0){if(frame){playing=true;loadLegacy()}else stageAnimations.forEach(a=>a.currentTime=0)}
-  controlMediaEffect($('#scene-canvas'),value);
+  controlMediaEffect($('#scene-canvas'),value);controlMediaItems($('#scene-canvas'),value);
   playing = value; previousFrame = performance.now(); $('#play').innerHTML = icon(value ? 'pause' : 'play'); $('#play').setAttribute('aria-label', value ? 'توقف' : 'پخش');
   $('#scene-canvas').querySelectorAll('video').forEach(v => value ? playVideo(v) : v.pause());
 }
@@ -119,9 +120,9 @@ function advanceLegacyTo(seconds) { let remaining = seconds * 1000; while (remai
 function seek(seconds) {
   const wasPlaying = playing; setPlaying(false); elapsed = Math.max(0, Math.min(scene().duration, seconds));
   if (frame) { loadLegacy(); advanceLegacyTo(elapsed); }
-  seekMediaEffect($('#scene-canvas'),elapsed);
+  seekMediaEffect($('#scene-canvas'),elapsed);seekMediaItems($('#scene-canvas'),elapsed);
   for (const a of stageAnimations) a.currentTime = elapsed * 1000;
-  const v = $('#scene-canvas video'); if (v) { const t = Number.isFinite(v.duration) && v.duration > 0 ? (v.loop ? elapsed % v.duration : Math.min(elapsed, v.duration)) : elapsed; try { v.currentTime = t; } catch {} }
+  for(const v of $('#scene-canvas').querySelectorAll('video')) { const t = Number.isFinite(v.duration) && v.duration > 0 ? (v.loop ? elapsed % v.duration : Math.min(elapsed, v.duration)) : elapsed; try { v.currentTime = t; } catch {} }
   updateProgress(); setPlaying(wasPlaying);
 }
 function updateProgress() {

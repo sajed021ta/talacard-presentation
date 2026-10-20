@@ -12,7 +12,7 @@ const fixture = JSON.parse(fs.readFileSync(new URL('../content.json', import.met
 test('both supplied decks retain all original scenes and the nine selected movies', () => {
   validateProject(fixture);
   assert.ok(fixture.decks[0].scenes.length>=14);
-  assert.equal(fixture.decks[1].scenes.length, 12);
+  assert.ok(fixture.decks[1].scenes.length >= 12);
   const supplied = JSON.parse(fs.readFileSync(new URL('../ASSETS.json', import.meta.url))).filter(m => m.path.endsWith('.mp4')).map(m => '/' + m.path.replace(/^public\//,''));
   assert.equal(supplied.length, 9);
   const available = new Set(fixture.library.filter(m => m.type === 'video').map(m => m.src));

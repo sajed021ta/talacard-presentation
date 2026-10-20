@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {validateProject,clone,validateRichScene} from '../public/model.js';
+import {validateProject,clone,validateRichScene,sceneMediaPaths,renameChapter} from '../public/model.js';
 import {splitSentences,textBlocks,ensureTextBlocks,syncDescription,sliceRuns,runsText} from '../public/text.js';
 import {effectFrames,applyMediaEffect,controlMediaEffect} from '../public/effects.js';
 const baseline=JSON.parse(fs.readFileSync(new URL('../content.json',import.meta.url)));
@@ -39,4 +39,14 @@ test('effect playback uses seconds, survives text changes and resumes without re
  applyMediaEffect(canvas,scene);assert.equal(options.duration,20000);assert.equal(options.delay,2000);assert.equal(options.iterations,Infinity);
  controlMediaEffect(canvas,false);assert.equal(animation.playState,'paused');controlMediaEffect(canvas,true);assert.equal(calls,1);
  animation.playState='finished';applyMediaEffect(canvas,{...scene,title:'edited'});assert.equal(calls,1);
+});
+
+test('multiple scene media retain individual playback, effects and device placement, while rejecting unsafe assets',()=>{
+ const p=clone(baseline),s=p.decks[0].scenes[0];s.mediaItems=[{id:'second',name:'ویدیوی دوم',media:'/media/second.mp4',poster:'',fit:'contain',loop:true,placement:{desktop:{x:10,y:60,w:30,h:30},compact:{x:5,y:65,w:40,h:25}},mediaEffect:{type:'zoom-out',duration:7,delay:0,amount:20,repeat:false,easing:'ease-out'}}];
+ validateProject(JSON.parse(JSON.stringify(p)));assert.ok(sceneMediaPaths(s).includes('/media/second.mp4'));
+ for(const mutate of [m=>m.media='https://tracker.test/a.mp4',m=>m.placement.compact.w=200,m=>m.mediaEffect.duration=-1,m=>m.loop='yes']){const bad=clone(p);mutate(bad.decks[0].scenes[0].mediaItems[0]);assert.throws(()=>validateProject(bad))}
+ s.mediaItems.push(clone(s.mediaItems[0]));assert.throws(()=>validateProject(p));
+});
+test('renaming a chapter updates all siblings while preventing accidental merge or empty names',()=>{
+ const d={scenes:[{chapter:'همکاری'},{chapter:'همکاری'},{chapter:'معرفی'}]};renameChapter(d,'همکاری','همکاران');assert.deepEqual(d.scenes.map(s=>s.chapter),['همکاران','همکاران','معرفی']);assert.throws(()=>renameChapter(d,'همکاران','معرفی'));assert.throws(()=>renameChapter(d,'همکاران',' '));
 });

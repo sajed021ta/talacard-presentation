@@ -43,5 +43,5 @@ html=html.replace('<div class="btile tc" id="tTC">طلاکارت</div>','<div cl
 html='<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="reference.css"><link rel="stylesheet" href="/text.css"></head><body>'+html+'<script type="module" src="app.js"></script></body></html>';
 fs.writeFileSync(path.join(root,'public/legacy/index.html'),html);
 fs.writeFileSync(path.join(root,'public/reference/catalog.json'),JSON.stringify(metadata,null,2)+'\n');
-fs.writeFileSync(path.join(root,'references/artifact-2026-10-19.json'),JSON.stringify({url:'https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r',sha256:sha(input),assets,scenes:Object.fromEntries(Object.entries(metadata).map(([k,v])=>[k,v.length]))},null,2)+'\n');
+fs.writeFileSync(path.join(root,'references/artifact-2026-10-20.json'),JSON.stringify({url:'https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r',sha256:sha(input),assets,scenes:Object.fromEntries(Object.entries(metadata).map(([k,v])=>[k,v.length]))},null,2)+'\n');
 console.log('Imported reference:',Object.fromEntries(Object.entries(metadata).map(([k,v])=>[k,v.length])),assets.length,'assets');

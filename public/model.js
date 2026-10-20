@@ -23,9 +23,10 @@ export function validateProject(project) {
       if (!id(s.id) || sceneIds.has(s.id) || !text(s.chapter, 100) || !text(s.label, 200) || !text(s.title, 1000) || !text(s.highlight, 1000) || !text(s.description, 8000)) throw new Error('متن یا شناسهٔ یکی از صفحه‌ها معتبر نیست.');
       sceneIds.add(s.id);
       if (!LAYOUTS.includes(s.layout) || !TRANSITIONS.includes(s.transition) || !number(s.duration, 1, 180) || !number(s.fontSize, 20, 64) || !number(s.intensity, 0, 1) || !number(s.position, 0, 100) || !Number.isInteger(s.legacyScene) || s.legacyScene < 0 || s.legacyScene > 199 || !['contain', 'cover'].includes(s.fit) || typeof s.loop !== 'boolean') throw new Error('تنظیمات یکی از صفحه‌ها معتبر نیست.');
-      if(s.legacyDeck!==undefined&&!['app','kiosk','deliv','previous'].includes(s.legacyDeck))throw new Error('مسیر نمایش معتبر نیست.');
+      if(s.legacyDeck!==undefined&&!['app','kiosk','deliv','previous','snapshot19'].includes(s.legacyDeck))throw new Error('مسیر نمایش معتبر نیست.');
       if(s.presentationStyle!==undefined&&!['reference','plain'].includes(s.presentationStyle))throw new Error('سبک پس‌زمینه معتبر نیست.');
       validateRichScene(s);
+      validateMediaItems(s);
       if (s.placement !== undefined) validatePlacement(s.placement);
       if (!mediaPath(s.media) || !mediaPath(s.poster) || !color(s.background) || !color(s.textColor) || !color(s.accent)) throw new Error('مسیر رسانه یا رنگ یکی از صفحه‌ها معتبر نیست.');
     }
@@ -90,4 +91,21 @@ export function validateRichScene(s){
  if(s.mediaEffect!==undefined){const f=s.mediaEffect;
   if(!f||!MEDIA_EFFECTS.includes(f.type)||!Number.isFinite(f.duration)||f.duration<.2||f.duration>120||!Number.isFinite(f.delay)||f.delay<0||f.delay>60||!Number.isFinite(f.amount)||f.amount<1||f.amount>60||typeof f.repeat!=='boolean'||!['linear','ease-out','ease-in-out'].includes(f.easing))throw new Error('تنظیمات افکت رسانه معتبر نیست.');
  }
+}
+
+export function sceneMediaPaths(scene){return [scene.media,scene.poster,...(scene.mediaItems||[]).flatMap(m=>[m.media,m.poster])].filter(Boolean)}
+export function validateMediaItems(scene){
+ if(scene.mediaItems===undefined)return;
+ if(!Array.isArray(scene.mediaItems)||scene.mediaItems.length>12)throw Error('هر صفحه حداکثر ۱۲ رسانهٔ اضافه دارد.');
+ const ids=new Set();for(const item of scene.mediaItems){
+  if(!item||!/^[a-zA-Z0-9_-]{1,80}$/.test(item.id)||ids.has(item.id)||typeof item.name!=='string'||item.name.length>200||!mediaPath(item.media,false)||!mediaPath(item.poster)||!['contain','cover'].includes(item.fit)||typeof item.loop!=='boolean')throw Error('رسانهٔ اضافه معتبر نیست.');
+  ids.add(item.id);validateRichScene({mediaEffect:item.mediaEffect});
+  if(item.placement!==undefined)for(const [mode,box] of Object.entries(item.placement))validatePlacement({[mode]:{media:box}});
+ }
+}
+export function renameChapter(deck,oldName,newName){
+ const name=newName.trim();if(!name||name.length>100)throw Error('نام بخش باید بین ۱ تا ۱۰۰ حرف باشد.');
+ if(name!==oldName&&deck.scenes.some(s=>s.chapter===name))throw Error('این نام برای بخش دیگری استفاده شده است.');
+ for(const scene of deck.scenes)if(scene.chapter===oldName)scene.chapter=name;
+ return name;
 }

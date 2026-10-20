@@ -4,7 +4,7 @@ const origin='http://127.0.0.1:4177';
 const response=await fetch(origin+'/api/project');if(!response.ok)throw Error('Local editor unavailable');
 const current=await response.json(),project=mergeReference(current.project);
 fs.mkdirSync(new URL('../.private/',import.meta.url),{recursive:true,mode:0o700});
-const backup=new URL('../.private/before-reference-2026-10-19.json',import.meta.url);
+const backup=new URL('../.private/before-reference-2026-10-20.json',import.meta.url);
 if(!fs.existsSync(backup))fs.writeFileSync(backup,JSON.stringify(current.project,null,2)+'\n',{mode:0o600});
 const saved=await fetch(origin+'/api/project',{method:'PUT',headers:{'Content-Type':'application/json','X-Talacard-Studio':'1',Origin:origin},body:JSON.stringify({project,revision:current.revision})});
 if(!saved.ok)throw Error('Reference merge was not saved: '+saved.status+' '+(await saved.json()).error);
