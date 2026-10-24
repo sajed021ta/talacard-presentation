@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import {reconcileProjects} from '../public/reconcile.js';
+import {validateProject} from '../public/model.js';
+import {mergeReference} from './merge-reference.mjs';
+const base=JSON.parse(fs.readFileSync(process.argv[2]||'.private/before-reference-2026-10-20.json'));
+const local=JSON.parse(fs.readFileSync(process.argv[3]||'/Users/brand/Downloads/talacard-project (1).json'));
+const origin='http://127.0.0.1:4177',response=await fetch(origin+'/api/project'),current=await response.json();
+const result=reconcileProjects(base,local,current.project);
+if(result.conflicts.length)throw Error('Unresolved conflicts: '+result.conflicts.join(', '));
+const project=validateProject(mergeReference(result.project));
+fs.writeFileSync('.private/recovered-chrome-draft-'+Date.now()+'.json',JSON.stringify(local,null,2)+'\n',{mode:0o600});
+fs.writeFileSync('.private/before-draft-recovery-'+Date.now()+'.json',JSON.stringify(current.project,null,2)+'\n',{mode:0o600});
+const saved=await fetch(origin+'/api/project',{method:'PUT',headers:{'Content-Type':'application/json','X-TalaCard-Studio':'1'},body:JSON.stringify({project,revision:current.revision})});if(!saved.ok)throw Error(await saved.text());console.log('Recovered draft; saved pages:',project.decks.map(d=>({id:d.id,pages:d.scenes.length})));

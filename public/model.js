@@ -1,3 +1,6 @@
+import {validateEditorProject} from './editor-model.js';
+import {safeTextLink} from './text.js';
+
 export const LAYOUTS = ['legacy', 'split', 'full', 'title'];
 export const TRANSITIONS = ['fade', 'reveal', 'slide', 'none'];
 export const MAX_SCENES = 200;
@@ -22,7 +25,7 @@ export function validateProject(project) {
     for (const s of d.scenes) {
       if (!id(s.id) || sceneIds.has(s.id) || !text(s.chapter, 100) || !text(s.label, 200) || !text(s.title, 1000) || !text(s.highlight, 1000) || !text(s.description, 8000)) throw new Error('متن یا شناسهٔ یکی از صفحه‌ها معتبر نیست.');
       sceneIds.add(s.id);
-      if (!LAYOUTS.includes(s.layout) || !TRANSITIONS.includes(s.transition) || !number(s.duration, 1, 180) || !number(s.fontSize, 20, 64) || !number(s.intensity, 0, 1) || !number(s.position, 0, 100) || !Number.isInteger(s.legacyScene) || s.legacyScene < 0 || s.legacyScene > 199 || !['contain', 'cover'].includes(s.fit) || typeof s.loop !== 'boolean') throw new Error('تنظیمات یکی از صفحه‌ها معتبر نیست.');
+      if (!LAYOUTS.includes(s.layout) || !TRANSITIONS.includes(s.transition) || !number(s.duration, 1, 180) || !number(s.fontSize, 20, 64) || !number(s.intensity, 0, 1) || !number(s.position, 0, 100) || !Number.isInteger(s.legacyScene) || s.legacyScene < 0 || s.legacyScene > 199 || !['contain', 'cover', 'fill'].includes(s.fit) || typeof s.loop !== 'boolean') throw new Error('تنظیمات یکی از صفحه‌ها معتبر نیست.');
       if(s.legacyDeck!==undefined&&!['app','kiosk','deliv','previous','snapshot19'].includes(s.legacyDeck))throw new Error('مسیر نمایش معتبر نیست.');
       if(s.presentationStyle!==undefined&&!['reference','plain'].includes(s.presentationStyle))throw new Error('سبک پس‌زمینه معتبر نیست.');
       if(s.table!==undefined){const t=s.table;if(!t||!Array.isArray(t.columns)||t.columns.length!==4||!t.columns.every(v=>text(v,200))||!Array.isArray(t.rows)||t.rows.length>30||!t.rows.every(row=>Array.isArray(row)&&row.length===4&&row.every(v=>text(v,500))))throw Error('جدول معتبر نیست.');}
@@ -37,6 +40,7 @@ export function validateProject(project) {
     if (!id(m.id) || !text(m.name, 200) || !['image', 'video'].includes(m.type) || !mediaPath(m.src, false) || !mediaPath(m.poster) || !text(m.originalName, 500)) throw new Error('یکی از رسانه‌ها معتبر نیست.');
   }
   if(project.homeCards!==undefined){for(const [key,card] of Object.entries(project.homeCards)){if(!['kiosk','app','deliv','proposal'].includes(key)||!card||!text(card.name,200)||!text(card.description,1000)||!deckIds.has(card.target)||!(mediaPath(card.image,false)||/^\/reference\/assets\/[a-zA-Z0-9_.-]+$/.test(card.image)))throw Error('تنظیمات کارت صفحهٔ اول معتبر نیست.');}}
+  validateEditorProject(project);
   return project;
 }
 
@@ -65,13 +69,16 @@ export const MEDIA_EFFECTS=['none','zoom-in','zoom-out','zoom-in-out','pan-left'
 export function validateTextFormat(value={}){
  if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('قالب متن معتبر نیست.');
  for(const [k,v] of Object.entries(value)){
-  if(['bold','italic','underline'].includes(k)&&typeof v==='boolean')continue;
-  if(k==='list'&&['none','bullet'].includes(v))continue;
-  if(k==='color'&&typeof v==='string'&&/^#[0-9a-fA-F]{6}$/.test(v))continue;
+  if(['bold','italic','underline','strike'].includes(k)&&typeof v==='boolean')continue;
+  if(k==='list'&&['none','bullet','ordered'].includes(v))continue;
+  if(['color','highlight'].includes(k)&&typeof v==='string'&&/^#[0-9a-fA-F]{6}$/.test(v))continue;
+  if(k==='href'&&safeTextLink(v))continue;
   if(k==='fontFamily'&&['YekanX','Tahoma','Arial'].includes(v))continue;
   if(k==='fontSize'&&Number.isFinite(v)&&v>=12&&v<=96)continue;
   if(k==='lineHeight'&&Number.isFinite(v)&&v>=1&&v<=3)continue;
+  if(k==='paragraphSpacing'&&Number.isFinite(v)&&v>=0&&v<=4)continue;
   if(k==='align'&&['right','center','left','justify'].includes(v))continue;
+  if(k==='direction'&&['auto','rtl','ltr'].includes(v))continue;
   if(k==='text'&&typeof v==='string')continue;
   throw new Error('یکی از تنظیمات متن معتبر نیست.');
  }
@@ -97,11 +104,17 @@ export function validateRichScene(s){
 }
 
 export function sceneMediaPaths(scene){return [scene.media,scene.poster,...(scene.mediaItems||[]).flatMap(m=>[m.media,m.poster])].filter(Boolean)}
+export function projectMediaPaths(project){
+ return [...new Set([
+  ...(project.decks||[]).flatMap(deck=>(deck.scenes||[]).flatMap(sceneMediaPaths)),
+  ...Object.values(project.homeCards||{}).map(card=>card?.image).filter(src=>typeof src==='string'&&src.startsWith('/media/'))
+ ].filter(Boolean))];
+}
 export function validateMediaItems(scene){
  if(scene.mediaItems===undefined)return;
  if(!Array.isArray(scene.mediaItems)||scene.mediaItems.length>12)throw Error('هر صفحه حداکثر ۱۲ رسانهٔ اضافه دارد.');
  const ids=new Set();for(const item of scene.mediaItems){
-  if(!item||!/^[a-zA-Z0-9_-]{1,80}$/.test(item.id)||ids.has(item.id)||typeof item.name!=='string'||item.name.length>200||!mediaPath(item.media,false)||!mediaPath(item.poster)||!['contain','cover'].includes(item.fit)||typeof item.loop!=='boolean')throw Error('رسانهٔ اضافه معتبر نیست.');
+  if(!item||!/^[a-zA-Z0-9_-]{1,80}$/.test(item.id)||ids.has(item.id)||typeof item.name!=='string'||item.name.length>200||!mediaPath(item.media,false)||!mediaPath(item.poster)||!['contain','cover','fill'].includes(item.fit)||typeof item.loop!=='boolean')throw Error('رسانهٔ اضافه معتبر نیست.');
   ids.add(item.id);validateRichScene({mediaEffect:item.mediaEffect});
   if(item.placement!==undefined)for(const [mode,box] of Object.entries(item.placement))validatePlacement({[mode]:{media:box}});
  }

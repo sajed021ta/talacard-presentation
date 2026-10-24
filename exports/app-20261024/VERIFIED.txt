@@ -1,0 +1,1 @@
+7 MP4 files: H264, 1920x1080, 24fps. All files decoded locally and public HTTP HEAD size/type matched. All public URLs return valid MP4 header via HTTP Range 206. Full duration 114.458333 seconds.

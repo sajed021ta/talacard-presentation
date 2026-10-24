@@ -38,7 +38,7 @@
         <button id="prev" class="icon-button" aria-label="صفحهٔ قبل"></button>
         <button id="play" class="icon-button play-button" aria-label="پخش"></button>
         <button id="next" class="icon-button" aria-label="صفحهٔ بعد"></button>
-        <span id="page-location" class="page-location"></span><label class="loop-control"><input id="loop-video" type="checkbox"> تکرار ویدیو</label>
+        <span id="page-location" class="page-location"></span><label class="autoplay-control"><input id="autoplay" type="checkbox"> پخش خودکار</label><label class="loop-control"><input id="loop-video" type="checkbox"> تکرار ویدیو</label>
       </div>
       
       
@@ -47,9 +47,14 @@
     <aside id="inspector" class="inspector" aria-label="ویرایش صفحه">
       <div class="inspector-heading"><div><span id="editing-number"></span><h2>ویرایش صفحه</h2></div><span class="live-badge"><i></i>پیش‌نمایش زنده</span></div>
       <div class="editor-tabs" role="tablist" aria-label="تنظیمات صفحه">
-        <button role="tab" data-tab="content" aria-selected="true">محتوا</button><button role="tab" data-tab="media" aria-selected="false">رسانه</button><button role="tab" data-tab="motion" aria-selected="false">حرکت و ظاهر</button>
+        <button role="tab" data-tab="content" aria-selected="true">محتوا</button><button role="tab" data-tab="format" aria-selected="false">قالب متن</button><button role="tab" data-tab="media" aria-selected="false">رسانه</button>
+        <button role="tab" data-tab="geometry" aria-selected="false">ابعاد</button><button role="tab" data-tab="appearance" aria-selected="false">ظاهر</button><button role="tab" data-tab="motion" aria-selected="false">حرکت</button>
+        <button role="tab" data-tab="layers" aria-selected="false">لایه‌ها</button><button role="tab" data-tab="grid" aria-selected="false">گرید</button><button role="tab" data-tab="page" aria-selected="false">صفحه</button>
       </div>
+      <div class="inspector-body">
+      <section id="element-panel" class="element-panel" aria-label="تنظیمات المان انتخاب‌شده"></section>
       <form id="scene-form" autocomplete="off"></form>
+      </div>
       <div class="scene-actions"><button id="move-up" class="icon-button" aria-label="انتقال صفحه به قبل"></button><button id="move-down" class="icon-button" aria-label="انتقال صفحه به بعد"></button><button id="duplicate" class="button">ساخت کپی</button><button id="delete" class="icon-button danger" aria-label="حذف صفحه"></button></div>
     </aside>
   </main>

@@ -12,9 +12,11 @@ function collect(dir,relative=''){
  }
 }
 collect(path.join(root,'site-assets'));
-const model=fs.readFileSync(path.join(root,'worker/model.js'),'utf8').replace(/^export /gm,'');
+// Use the same current validators as the viewer and local editor.
+const moduleSource=name=>fs.readFileSync(path.join(root,'site-assets',name),'utf8').replace(/^import .*;\n/gm,'').replace(/^export /gm,'');
+const editor=moduleSource('editor-model.js'),text=moduleSource('text.js'),model=moduleSource('model.js');
 const worker=fs.readFileSync(path.join(root,'worker/source.js'),'utf8').replace(/^import .*model.js';\n/m,'');
-const source=`const ASSET_MAP=${JSON.stringify(assets)};\n${model}\n${worker}\nexport default createWorker(ASSET_MAP);\n`;
+const source=`const ASSET_MAP=${JSON.stringify(assets)};\nconst {validateEditorProject}=(()=>{\n${editor}\nreturn {validateEditorProject};})();\nconst {safeTextLink}=(()=>{\n${text}\nreturn {safeTextLink};})();\n${model}\n${worker}\nexport default createWorker(ASSET_MAP);\n`;
 fs.rmSync(path.join(root,'dist'),{recursive:true,force:true});
 fs.mkdirSync(path.join(root,'dist/server'),{recursive:true});fs.mkdirSync(path.join(root,'dist/.openai'),{recursive:true});
 fs.writeFileSync(path.join(root,'dist/server/index.js'),source);fs.copyFileSync(path.join(root,'.openai/hosting.json'),path.join(root,'dist/.openai/hosting.json'));

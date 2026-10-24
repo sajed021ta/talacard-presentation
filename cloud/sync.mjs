@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { Readable } from 'node:stream';
-import {sceneMediaPaths} from '../public/model.js';
+import {projectMediaPaths} from '../public/model.js';
 const digest=data=>crypto.createHash('sha256').update(data).digest('hex');
 const TYPES={'.mp4':'video/mp4','.webm':'video/webm','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.gif':'image/gif'};
 export function createCloudSync(root,{fetchImpl=fetch,delay=1200,retryDelay=15000}={}) {
@@ -25,10 +25,9 @@ export function createCloudSync(root,{fetchImpl=fetch,delay=1200,retryDelay=1500
    };
    const text=fs.readFileSync(path.join(root,'content.json'),'utf8'),revision=digest(text),project=JSON.parse(text);
    const remoteResponse=await call('/api/sync/status');if(!remoteResponse.ok)throw new Error('نسخهٔ آنلاین هنوز برای همگام‌سازی آماده نیست.');const remote=await remoteResponse.json();
-   if(remote.revision===revision){cache={...cache,revision,etag:remote.etag,publishedAt:remote.updatedAt};persist();state={...state,status:'published',revision,publishedAt:remote.updatedAt,asset:null};return}
    if(cache.etag&&remote.etag!==cache.etag&&remote.revision!==cache.revision) {const e=new Error('نسخهٔ آنلاین از دستگاه دیگری تغییر کرده؛ همگام‌سازی برای حفظ آن متوقف شد.');e.status=409;throw e}
    if(!remote.revision)cache.assets={};
-   const paths=[...new Set(project.decks.flatMap(d=>d.scenes.flatMap(s=>sceneMediaPaths(s))).filter(Boolean))];
+   const paths=projectMediaPaths(project);
    for(const src of paths){
     const name=src.slice('/media/'.length),override=conf.optimizedMediaPath&&path.join(conf.optimizedMediaPath,name);
     const filename=override&&fs.existsSync(override)?override:path.join(root,'public',src);
@@ -40,6 +39,9 @@ export function createCloudSync(root,{fetchImpl=fetch,delay=1200,retryDelay=1500
     }
     cache.assets||={};cache.assets[src]=sha;persist();
    }
+   // A prior publication can have the same project revision while missing an
+   // asset (for example, a Home card video). Always reconcile media first.
+   if(remote.revision===revision){cache={...cache,revision,etag:remote.etag,publishedAt:remote.updatedAt};persist();state={...state,status:'published',revision,publishedAt:remote.updatedAt,asset:null};return}
    const result=await call('/api/sync/project',{method:'PUT',headers:{'Content-Type':'application/json',...(remote.etag?{'If-Match':remote.etag}:{})},body:text});
    const published=await result.json();cache={...cache,revision,etag:published.etag,publishedAt:published.updatedAt};persist();
    state={...state,status:'published',revision,publishedAt:published.updatedAt,asset:null,error:null};

@@ -1,4 +1,4 @@
-import {validateProject,sceneMediaPaths} from '../public/model.js';
+import {validateProject,projectMediaPaths} from '../public/model.js';
 
 const json=(data,status=200,extra={})=>new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store',...extra}});
 const hash=async bytes=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
@@ -14,7 +14,7 @@ async function publish(request,env,assets){
  if(Number(request.headers.get('Content-Length'))>2*1024*1024)return json({error:'Project too large'},413);
  const text=await request.text();if(new TextEncoder().encode(text).length>2*1024*1024)return json({error:'Project too large'},413);
  let project;try{project=validateProject(JSON.parse(text))}catch{return json({error:'Invalid project'},400)}
- const paths=[...new Set(project.decks.flatMap(d=>d.scenes.flatMap(s=>sceneMediaPaths(s))).filter(Boolean))];
+ const paths=projectMediaPaths(project);
  for(const p of paths){if(!assets[p]&&!await env.BUCKET.head(p.slice(1)))return json({error:'Missing media',path:p},409)}
  const digest=await hash(new TextEncoder().encode(text));const conditions=new Headers();
  const expected=request.headers.get('If-Match');

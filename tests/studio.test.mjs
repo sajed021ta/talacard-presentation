@@ -6,10 +6,11 @@ import path from 'node:path';
 import { once } from 'node:events';
 import { createApp } from '../server.mjs';
 import { validateProject, clone, mediaPath } from '../public/model.js';
+import {syncProjectEditor} from '../public/editor-model.js';
 
 const fixture = JSON.parse(fs.readFileSync(new URL('../content.json', import.meta.url)));
 
-test('both supplied decks retain all original scenes and the nine selected movies', () => {
+test('all current decks retain editable scenes and the nine selected movies', () => {
   validateProject(fixture);
   assert.ok(fixture.decks[0].scenes.length>=14);
   assert.ok(fixture.decks[1].scenes.length >= 12);
@@ -17,8 +18,7 @@ test('both supplied decks retain all original scenes and the nine selected movie
   assert.equal(supplied.length, 9);
   const available = new Set(fixture.library.filter(m => m.type === 'video').map(m => m.src));
   assert.ok(supplied.every(src => available.has(src)), 'supplied films remain available alongside owner uploads');
-  const originalIds=new Set(fixture.decks[0].scenes.map(s=>s.id));
-  assert.ok(Array.from({length:14},(_,i)=>'app-'+(i+1)).every(id=>originalIds.has(id)),'original pages survive reference additions');
+  assert.equal(fixture.decks.length,4);for(const deck of fixture.decks){assert.ok(deck.scenes.length);assert.equal(new Set(deck.scenes.map(scene=>scene.id)).size,deck.scenes.length)}
 });
 
 test('content is plain text and media stays portable; malformed imports are rejected', () => {
@@ -37,7 +37,7 @@ test('local server: persistence, conflict protection, uploads, video seeking, an
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'talacard-test-'));
   fs.mkdirSync(path.join(root, 'public/media'), { recursive:true });
   fs.mkdirSync(path.join(root, 'original/assets'), { recursive:true });
-  const initial = clone(fixture); for (const d of initial.decks) for (const s of d.scenes) { s.media = ''; s.poster = ''; s.mediaItems=[]; }
+  const initial = clone(fixture); for (const d of initial.decks) for (const s of d.scenes) { s.media = ''; s.poster = ''; s.mediaItems=[]; } initial.homeCards={};
   fs.writeFileSync(path.join(root, 'content.json'), JSON.stringify(initial));
   fs.writeFileSync(path.join(root, 'public/index.html'), '<!doctype html><title>Studio</title>');
   fs.writeFileSync(path.join(root, 'secret.txt'), 'DO NOT SERVE');
@@ -83,4 +83,34 @@ test('scene geometry accepts portable device layouts and rejects off-canvas or i
   assert.deepEqual(adjustBox({x:5,y:10,w:40,h:50},90,-90,true),{x:5,y:10,w:95,h:8});
   const serialized=clone(fixture);serialized.decks[0].scenes[0].placement={desktop:{copy:{x:5,y:10,w:40,h:50}}};
   validateProject(JSON.parse(JSON.stringify(serialized)));
+});
+
+test('text movement snaps to an 8px grid and smart guides, while Shift disables both',async()=>{
+  const {snapTextMove}=await import('../public/placement.js'),viewport={width:800,height:600};
+  const grid=snapTextMove({x:13.1,y:16.1,w:20,h:20},[],viewport);
+  assert.equal(grid.box.x,13);assert.equal(grid.box.y,16);assert.deepEqual(grid.guides,[]);
+  const guided=snapTextMove({x:10.1,y:20,w:20,h:20},[{x:30.5,y:60,w:15,h:15}],viewport);
+  assert.equal(guided.box.x,10.5);assert.deepEqual(guided.guides,[{axis:'x',position:30.5}]);
+  const free=snapTextMove({x:13.1,y:16.1,w:20,h:20},[{x:30.5,y:60,w:15,h:15}],viewport,{},true);
+  assert.deepEqual(free,{box:{x:13.1,y:16.1,w:20,h:20},guides:[]});
+});
+
+test('media movement stays free and aspect-preserving resize is opt-in',async()=>{
+  const {adjustBox,resizeBox}=await import('../public/placement.js');
+  const start={x:10,y:10,w:32,h:18},free=adjustBox(start,1.237,2.643);
+  assert.deepEqual(free,{x:11.237,y:12.643,w:32,h:18});
+  const unconstrained=resizeBox(start,8,2,false);assert.deepEqual(unconstrained,{x:10,y:10,w:40,h:20});
+  const constrained=resizeBox(start,8,2,true);assert.equal(constrained.w/constrained.h,start.w/start.h);assert.equal(constrained.w,40);assert.equal(constrained.h,22.5);
+});
+
+test('precise media geometry and future grid settings survive save and refresh',()=>{
+  const project=clone(fixture),scene=project.decks[0].scenes[0];
+  scene.media='/media/exact.mp4';scene.placement={desktop:{media:{x:11.237,y:12.643,w:37.891,h:42.135}}};
+  project.editor.settings={placement:{grid:{enabled:true,visible:true,size:16},guides:{enabled:true,threshold:5},media:{snap:false,preserveAspectModifier:'alt'}}};syncProjectEditor(project);
+  const restored=validateProject(JSON.parse(JSON.stringify(project)));
+  assert.deepEqual(restored.decks[0].scenes[0].placement.desktop.media,scene.placement.desktop.media);
+  assert.deepEqual(restored.editor.settings.placement,project.editor.settings.placement);
+  const invalid=clone(restored);invalid.editor.settings.placement.grid.size=0;assert.throws(()=>validateProject(invalid));
+  const invalidVisibility=clone(restored);invalidVisibility.editor.settings.placement.grid.visible='yes';assert.throws(()=>validateProject(invalidVisibility));
+  const autoplay=clone(restored);autoplay.editor.settings.playback={autoplay:true};validateProject(autoplay);autoplay.editor.settings.playback.autoplay='yes';assert.throws(()=>validateProject(autoplay));
 });

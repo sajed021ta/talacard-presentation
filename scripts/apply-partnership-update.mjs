@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {blankScene,validateProject} from '../public/model.js';
+import {syncProjectEditor} from '../public/editor-model.js';
 const before=JSON.parse(fs.readFileSync(new URL('../references/catalog-before-latest.json',import.meta.url))),next=JSON.parse(fs.readFileSync(new URL('../public/reference/catalog.json',import.meta.url)));
 const origin='http://127.0.0.1:4177';const current=await(await fetch(origin+'/api/project')).json();const project=structuredClone(current.project);
 const partner=value=>value.replace(/میلی[‌\s-]*گلد|نشنال[‌\s-]*گلد|ملی[‌\s-]*گلد|national\s*gold|milli\s*gold|mili\s*gold/gi,'دیجی‌کالا');
@@ -19,5 +20,5 @@ if(!proposal.scenes.some(s=>s.id==='proposal-ownership-framework')){
  const page={...blankScene(),id:'proposal-ownership-framework',chapter:'همکاری',label:'چارچوب مسئولیت‌ها',title:'چارچوب تقسیم مسئولیت‌ها',description:'',layout:'title',table,fontSize:36,transition:'none'};
  const after=proposal.scenes.reduce((last,s,i)=>s.chapter==='همکاری'?i:last,-1);proposal.scenes.splice(after<0?proposal.scenes.length:after+1,0,page);
 }
-validateProject(project);const backup=new URL('../.private/before-partnership-update.json',import.meta.url);if(!fs.existsSync(backup))fs.writeFileSync(backup,JSON.stringify(current.project,null,2),{mode:0o600});
+syncProjectEditor(project);validateProject(project);const backup=new URL('../.private/before-partnership-update.json',import.meta.url);if(!fs.existsSync(backup))fs.writeFileSync(backup,JSON.stringify(current.project,null,2),{mode:0o600});
 const saved=await fetch(origin+'/api/project',{method:'PUT',headers:{'Content-Type':'application/json','X-Talacard-Studio':'1',Origin:origin},body:JSON.stringify({project,revision:current.revision})});if(!saved.ok)throw Error(await saved.text());console.log({refreshed,replaced,table:proposal.scenes.find(s=>s.table).table.rows.length,saved:saved.status});

@@ -1,4 +1,6 @@
-import {mountHomePicker} from './home.js';
+import {mountHomePicker,deckDisplayName} from './home.js';
+import {playPageTransition,DEFAULT_PAGE_TRANSITION} from './page-transition.js';
+import {pagePlaybackFinished} from './playback.js';
 import {renderMediaItems,mediaItemBox,controlMediaItems,seekMediaItems} from './multimedia.js';
 import {paintBackdrop} from './backdrop.js';
 import {renderTitle,renderDescription,textBlocks,ensureTextBlocks,syncDescription} from './text.js';
@@ -20,11 +22,12 @@ const icons = {
 };
 const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[name] || icons.picture}</svg>`;
 function renderDecks() {
-  $('#deck-select').replaceChildren(...project.decks.map(d => { const o = new Option(d.name, d.id); o.selected = d.id === deckId; return o; }));
-  document.title = deck().name;
+  $('#deck-select').replaceChildren(...project.decks.map(d => { const o = new Option(deckDisplayName(project,d.id), d.id); o.selected = d.id === deckId; return o; }));
+  document.title = deckDisplayName(project,deckId);
 }
 function renderFlow() {
   renderNavigation(deck(), index, choose);
+  $('#autoplay').checked=Boolean(project.editor?.settings?.playback?.autoplay);
   const toggle = $('#loop-video'), video = /\.(mp4|webm)$/i.test(scene().media);
   toggle.closest('label').hidden = !video;
   toggle.checked = scene().loop;
@@ -115,8 +118,10 @@ function setPlaying(value) {
 }
 function choose(i, keepPlaying = true) {
   if (!project) return;
+  const previousIndex=index,hadScene=Boolean(sceneSignature);
   index = (i + deck().scenes.length) % deck().scenes.length; elapsed = 0;
   renderFlow(); renderStage(true); setPlaying(true); updateProgress();
+  if(hadScene)playPageTransition($('#scene-canvas'),project.editor?.settings?.playback?.transition||DEFAULT_PAGE_TRANSITION,{reduce,reverse:i<previousIndex});
 }
 function advanceLegacyTo(seconds) { let remaining = seconds * 1000; while (remaining > 0) { const step = Math.min(100, remaining); sendLegacy('advance', { delta:step }); remaining -= step; } }
 function seek(seconds) {
@@ -133,10 +138,11 @@ function updateProgress() {
 }
 function tick(now) {
   const dt = Math.min(.1, Math.max(0, (now - previousFrame) / 1000)); previousFrame = now;
-  if (project && playing && (!frame || iframeReady)) {
+  if (project && playing) {
     const advance = dt;
-    elapsed += dt; sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });
-
+    elapsed += dt;
+    if(!frame||iframeReady){sendLegacy('advance', { delta:advance * 1000 }); stageAnimations.forEach(a => { a.currentTime = elapsed * 1000; });}
+    if(pagePlaybackFinished($('#scene-canvas'),scene(),elapsed,Boolean(project.editor?.settings?.playback?.autoplay)))choose(index+1);
     paintBackdrop($('#scene-canvas'),scene(),elapsed,reduce);updateProgress();
   }
   requestAnimationFrame(tick);
@@ -144,6 +150,7 @@ function tick(now) {
 
 
 for(const [id,name] of Object.entries({prev:'prev',next:'next',play:'play',fullscreen:'fullscreen'}))$('#'+id).innerHTML=icon(name);
+$('#autoplay').onchange=()=>{project.editor||={};project.editor.settings||={};project.editor.settings.playback||={};project.editor.settings.playback.autoplay=$('#autoplay').checked;};
 $('#prev').onclick=()=>choose(index-1);$('#next').onclick=()=>choose(index+1);
 $('#restart').onclick=()=>{seek(0);setPlaying(true)};
 $('#play').onclick=()=>{setPlaying(!playing)};

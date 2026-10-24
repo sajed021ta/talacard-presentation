@@ -12,3 +12,8 @@ content.backup.json
 
 # Restored lossless video; its original bytes are tracked in video-archive/.
 /public/media/upload-2522b8c6-60f8-475e-a530-063d2a74ddeb.mp4
+
+# Local execution notes and export provenance stay on this device.
+/WORK_STATUS.md
+/exports/**/manifest.json
+/exports/app-20261024/talacard-app-complete-20261024.mp4

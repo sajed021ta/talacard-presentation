@@ -2,9 +2,25 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {validateProject,clone,validateRichScene,sceneMediaPaths,renameChapter} from '../public/model.js';
-import {splitSentences,textBlocks,ensureTextBlocks,syncDescription,sliceRuns,runsText,bulletLines} from '../public/text.js';
+import {splitSentences,textBlocks,ensureTextBlocks,syncDescription,sliceRuns,runsText,bulletLines,applyRunFormat,normalizeRuns,safeTextLink} from '../public/text.js';
 import {effectFrames,applyMediaEffect,controlMediaEffect} from '../public/effects.js';
+import {syncProjectEditor} from '../public/editor-model.js';
 const baseline=JSON.parse(fs.readFileSync(new URL('../content.json',import.meta.url)));
+
+test('a selected word keeps its link and other styles through save, reload and unlink',()=>{
+ const project=clone(baseline),scene=project.decks[0].scenes[0];
+ scene.title='خرید Gold امروز';
+ scene.titleRuns=applyRunFormat([{text:scene.title,bold:true}],5,9,{href:'https://example.com/gold',color:'#285a9f'});
+ syncProjectEditor(project);
+ const restored=validateProject(JSON.parse(JSON.stringify(project))).decks[0].scenes[0];
+ assert.deepEqual(restored.titleRuns,[{text:'خرید ',bold:true},{text:'Gold',bold:true,href:'https://example.com/gold',color:'#285a9f'},{text:' امروز',bold:true}]);
+ const unlinked=applyRunFormat(restored.titleRuns,5,9,{href:undefined});
+ assert.equal(unlinked[1].href,undefined);assert.equal(unlinked[1].color,'#285a9f');assert.equal(unlinked[1].bold,true);
+ for(const href of ['javascript:alert(1)','data:text/html,x','//untrusted.example','https:\\bad','https://example.com\n']){
+  assert.equal(safeTextLink(href),false);
+  const bad=clone(restored);bad.titleRuns[1].href=href;assert.throws(()=>validateRichScene(bad));
+ }
+});
 
 test('legacy descriptions remain plain until edited; sentence splitting preserves text and styled runs',()=>{
  const s={description:'یک جمله. جملهٔ دوم؟ مقدار ۱.۵ گرم است.\nخط آخر',title:'عنوان'};
@@ -54,4 +70,44 @@ test('renaming a chapter updates all siblings while preventing accidental merge 
 test('bullet lists preserve individual inline styles, blank lines and safe portable block formatting',()=>{
  const runs=[{text:'اول',color:'#b43838'},{text:'\nدوم\n\nسوم',bold:true}];const lines=bulletLines(runs);assert.equal(lines.length,4);assert.deepEqual(lines[0],[{text:'اول',color:'#b43838'}]);assert.deepEqual(lines[1],[{text:'دوم',bold:true}]);assert.deepEqual(lines[2],[]);assert.equal(lines.map(runsText).join('\n'),runsText(runs));
  const p=clone(baseline),s=p.decks[1].scenes[0];s.textBlocks=[{id:'bullets',runs,format:{list:'bullet',align:'right'}}];syncDescription(s);validateProject(JSON.parse(JSON.stringify(p)));s.textBlocks[0].format.list='html';assert.throws(()=>validateProject(p));
+});
+
+test('changing one selected Persian word preserves surrounding text and element geometry',()=>{
+ const original=[{text:'قیمت طلا امروز'}],start='قیمت '.length,end=start+'طلا'.length;
+ const placement={desktop:{x:12,y:18,w:44,h:22}},before=clone(placement);
+ const runs=applyRunFormat(original,start,end,{color:'#b43838'});
+ assert.deepEqual(runs,[{text:'قیمت '},{text:'طلا',color:'#b43838'},{text:' امروز'}]);
+ assert.equal(runsText(runs),'قیمت طلا امروز');assert.deepEqual(placement,before);
+});
+
+test('multiple independent inline styles coexist in one sentence',()=>{
+ let runs=[{text:'طلاکارت جریان امن طلا'}];
+ runs=applyRunFormat(runs,0,7,{bold:true,fontFamily:'Tahoma'});
+ runs=applyRunFormat(runs,8,13,{italic:true,underline:true,fontSize:28});
+ runs=applyRunFormat(runs,14,17,{strike:true,highlight:'#f4df98'});
+ assert.equal(runsText(runs),'طلاکارت جریان امن طلا');
+ assert.deepEqual(runs.find(run=>run.text==='طلاکارت'),{text:'طلاکارت',bold:true,fontFamily:'Tahoma'});
+ assert.deepEqual(runs.find(run=>run.text==='جریان'),{text:'جریان',italic:true,underline:true,fontSize:28});
+ assert.deepEqual(runs.find(run=>run.text==='امن'),{text:'امن',strike:true,highlight:'#f4df98'});
+ assert.deepEqual(normalizeRuns([{text:'الف',bold:true},{text:'ب',bold:true}]),[{text:'الفب',bold:true}]);
+});
+
+test('rich text styles survive project save, JSON refresh and editor-model synchronization',()=>{
+ const project=clone(baseline),scene=project.decks[0].scenes[0];
+ scene.titleRuns=applyRunFormat([{text:scene.title}],0,Math.min(4,scene.title.length),{color:'#285a9f',bold:true});
+ scene.titleFormat={align:'center',lineHeight:1.6,paragraphSpacing:.5,direction:'auto'};
+ scene.textBlocks=[{id:'persisted-rich-text',runs:[{text:'فارسی ',color:'#222225'},{text:'English',italic:true,highlight:'#f4df98'},{text:' ترکیبی',underline:true}],format:{list:'ordered',align:'right',direction:'auto'}}];syncDescription(scene);
+ syncProjectEditor(project);const restored=validateProject(JSON.parse(JSON.stringify(project))),restoredScene=restored.decks[0].scenes[0];
+ assert.deepEqual(restoredScene.titleRuns,scene.titleRuns);assert.deepEqual(restoredScene.titleFormat,scene.titleFormat);
+ assert.deepEqual(restoredScene.textBlocks,scene.textBlocks);
+ const surface=restored.editor.surfaces.find(value=>value.sourceId===scene.id),body=surface.elements.find(element=>element.binding?.itemId==='persisted-rich-text');
+ assert.deepEqual(body.content.runs,scene.textBlocks[0].runs);assert.deepEqual(body.content.format,scene.textBlocks[0].format);
+});
+
+test('mixed Persian and English selection keeps Unicode text and isolated LTR styling',()=>{
+ const text='قیمت Gold Card امروز',start=text.indexOf('Gold'),end=start+'Gold Card'.length;
+ const runs=applyRunFormat([{text}],start,end,{fontFamily:'Arial',fontSize:24,color:'#23754d'});
+ assert.equal(runsText(runs),text);assert.deepEqual(runs[1],{text:'Gold Card',fontFamily:'Arial',fontSize:24,color:'#23754d'});
+ const scene={title:text,description:text,titleRuns:runs,titleFormat:{direction:'auto'},textBlocks:[{id:'mixed',runs,format:{direction:'auto'}}]};
+ assert.doesNotThrow(()=>validateRichScene(scene));
 });

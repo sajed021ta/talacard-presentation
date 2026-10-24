@@ -12,8 +12,8 @@ test('reference merge refreshes source copy, keeps owner edits and original bran
  assert.equal(next.decks[0].scenes.find(s=>s.id==='app-13').legacyDeck,'previous');assert.ok(next.decks[0].scenes.some(s=>s.label===catalog.app[12].label));
  assert.equal(next.decks.find(d=>d.id==='kiosk').scenes.length,22);assert.equal(next.decks.find(d=>d.id==='deliv').scenes.length,13);assert.deepEqual(mergeReference(next),next);
 });
-test('all referenced images/fonts are exact supplied bytes and each source step maps to an editable scene',()=>{
+test('all referenced images/fonts are exact supplied bytes and retained reference scenes map to valid source steps',()=>{
  const manifest=read('references/artifact-2026-10-20.json');for(const a of manifest.assets){const p=a.path.startsWith('/original')?a.path.slice(1):'public'+a.path;assert.equal(crypto.createHash('sha256').update(fs.readFileSync(new URL(p,root))).digest('hex'),a.sha256)}
- const merged=mergeReference(current);for(const [id,list] of Object.entries(catalog)){const deck=merged.decks.find(d=>d.id===id);for(const item of list)assert.ok(deck.scenes.some(s=>s.legacyDeck===id&&s.legacyScene===item.legacyScene),id+' '+item.label)}
+ const merged=mergeReference(current);for(const [id,list] of Object.entries(catalog)){const deck=merged.decks.find(d=>d.id===id);for(const scene of deck.scenes.filter(s=>s.legacyDeck===id))assert.ok(list.some(item=>item.legacyScene===scene.legacyScene),id+' '+scene.label)}
  const bad=clone(merged);bad.decks[0].scenes[0].legacyDeck='unknown';assert.throws(()=>validateProject(bad));bad.decks[0].scenes[0].legacyDeck='app';bad.decks[0].scenes[0].presentationStyle='url(x)';assert.throws(()=>validateProject(bad));
 });

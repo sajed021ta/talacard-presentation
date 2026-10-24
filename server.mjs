@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import crypto from 'node:crypto';
-import {validateProject,sceneMediaPaths} from './public/model.js';
+import {validateProject,projectMediaPaths} from './public/model.js';
+import {ensureEditableProject} from './public/editor-model.js';
 import { createCloudSync } from './cloud/sync.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -38,12 +39,12 @@ export function createApp(root = ROOT) {
       }
       if (url.pathname === '/api/project' && req.method === 'PUT') {
         const { project, revision: expected } = JSON.parse((await body(req, 2 * 1024 * 1024)).toString());
-        validateProject(project);
+        ensureEditableProject(project);validateProject(project);
         // Serialize compare-and-write so two browser tabs cannot silently overwrite each other.
         const operation = saveQueue.then(() => {
           const current = fs.readFileSync(contentFile);
           if (expected !== revision(current)) { const e = new Error('پروژه در پنجرهٔ دیگری تغییر کرده است. ابتدا خروجی بگیرید و پروژه را دوباره بارگذاری کنید.'); e.status = 409; throw e; }
-          for (const d of project.decks) for (const s of d.scenes) for (const p of sceneMediaPaths(s)) if (p && !fs.existsSync(path.join(root, 'public', p))) throw new Error('یکی از رسانه‌ها روی دیسک پیدا نشد؛ فایل را دوباره انتخاب کنید.');
+          for (const p of projectMediaPaths(project)) if (!fs.existsSync(path.join(root, 'public', p))) throw new Error('یکی از رسانه‌ها روی دیسک پیدا نشد؛ فایل را دوباره انتخاب کنید.');
           const data = JSON.stringify(project, null, 2) + '\n';
           fs.writeFileSync(path.join(root, 'content.backup.json'), current);
           fs.writeFileSync(contentFile + '.tmp', data); fs.renameSync(contentFile + '.tmp', contentFile);

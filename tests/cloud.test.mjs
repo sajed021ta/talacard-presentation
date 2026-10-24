@@ -18,7 +18,7 @@ class Bucket {
   const etag=String(Math.random());const obj={bytes,size:bytes.length,httpEtag:'"'+etag+'"',etag,httpMetadata:options.httpMetadata||{},customMetadata:options.customMetadata||{}};this.map.set(key,obj);return obj;
  }
 }
-const project=()=>{const p=JSON.parse(fs.readFileSync(new URL('../content.json',import.meta.url)));for(const d of p.decks)for(const s of d.scenes){s.media='';s.poster='';delete s.mediaItems}return p};
+const project=()=>{const p=JSON.parse(fs.readFileSync(new URL('../content.json',import.meta.url)));for(const d of p.decks)for(const s of d.scenes){s.media='';s.poster='';delete s.mediaItems}p.homeCards={};return p};
 const url='https://site.test';
 const env=()=>({BUCKET:new Bucket(),TALACARD_SYNC_TOKEN:'test-token'});
 const headers={Authorization:'Bearer test-token','Content-Type':'application/json'};
@@ -38,6 +38,8 @@ test('public viewer stays read-only; publication requires secret and validates m
  response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers:{...headers,'If-Match':first.etag},body:JSON.stringify(p)}),e);assert.equal(response.status,200);
  p.decks[0].scenes[0].mediaItems=[{id:'extra',name:'Missing extra',media:'/media/missing.mp4',poster:'',fit:'contain',loop:true}];
  response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers:{...headers,'If-Match':(await response.json()).etag},body:JSON.stringify(p)}),e);assert.equal(response.status,409);
+ const missingHome=project();missingHome.homeCards={kiosk:{name:'طلاپرداز',description:'',image:'/media/missing-home.mp4',target:'app'}};
+ assert.equal((await createWorker().fetch(new Request(url+'/api/sync/project',{method:'PUT',headers,body:JSON.stringify(missingHome)}),env())).status,409);
  assert.equal((await worker.fetch(new Request(url+'/api/sync/media/secret.html',{method:'PUT',headers,body:'bad'}),e)).status,400);
 });
 
@@ -45,15 +47,15 @@ test('local saves publish media before the project, skip repeat uploads, retry o
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'tala-cloud-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  fs.mkdirSync(path.join(root,'.private'));fs.mkdirSync(path.join(root,'public/media'),{recursive:true});
  fs.writeFileSync(path.join(root,'.private/cloud.json'),JSON.stringify({url,token:'test-token'}));
- const p=project();p.decks[1].scenes[0].media='';p.decks[1].scenes[0].mediaItems=[{id:'extra',name:'Extra',media:'/media/test.mp4',poster:'',fit:'contain',loop:true}];
- fs.writeFileSync(path.join(root,'public/media/test.mp4'),Buffer.from('0000ftypisom1234'));fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));
+ const p=project();p.decks[1].scenes[0].media='';p.decks[1].scenes[0].mediaItems=[{id:'extra',name:'Extra',media:'/media/test.mp4',poster:'',fit:'contain',loop:true}];p.homeCards={kiosk:{name:'طلاپرداز',description:'',image:'/media/home.mp4',target:'app'}};
+ fs.writeFileSync(path.join(root,'public/media/test.mp4'),Buffer.from('0000ftypisom1234'));fs.writeFileSync(path.join(root,'public/media/home.mp4'),Buffer.from('0000ftypisom5678'));fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));
  const e=env(),worker=createWorker();let offline=true,uploads=0;
  const fetchImpl=async(input,options)=>{if(offline)throw new Error('offline');if(options.method==='PUT'&&String(input).includes('/media/'))uploads++;return worker.fetch(new Request(input,options),e)};
  const sync=createCloudSync(root,{fetchImpl,delay:100000,retryDelay:100000});t.after(()=>sync.close());
  await sync.run();assert.equal(sync.status().status,'retrying');assert.ok(fs.existsSync(path.join(root,'content.json')));
- offline=false;await sync.run();assert.equal(sync.status().status,'published');assert.equal(uploads,1);assert.ok(await e.BUCKET.head('media/test.mp4'));
- await sync.run();assert.equal(uploads,1);
- p.decks[1].scenes[0].title='a second edit';delete p.decks[1].scenes[0].titleRuns;fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));await sync.run();assert.equal(sync.status().status,'published',sync.status().error);assert.equal(uploads,1);
+ offline=false;await sync.run();assert.equal(sync.status().status,'published');assert.equal(uploads,2);assert.ok(await e.BUCKET.head('media/test.mp4'));assert.ok(await e.BUCKET.head('media/home.mp4'));
+ await sync.run();assert.equal(uploads,2);
+ p.decks[1].scenes[0].title='a second edit';delete p.decks[1].scenes[0].titleRuns;fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));await sync.run();assert.equal(sync.status().status,'published',sync.status().error);assert.equal(uploads,2);
  const remote=await e.BUCKET.get('project/current.json');await e.BUCKET.put('project/current.json',JSON.stringify({...p,activeDeck:'app'}),{customMetadata:{revision:'other-device'}});
  p.decks[1].scenes[0].title='unsent local edit';delete p.decks[1].scenes[0].titleRuns;fs.writeFileSync(path.join(root,'content.json'),JSON.stringify(p));await sync.run();assert.equal(sync.status().status,'conflict');assert.equal((await e.BUCKET.head('project/current.json')).customMetadata.revision,'other-device');
 });

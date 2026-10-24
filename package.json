@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check server.mjs && node --check public/studio.js && node --check public/legacy/app.js",
+    "check": "node --check server.mjs && node --check public/editor-model.js && node --check public/studio.js && node --check public/viewer.js && node --check public/text.js && node --check public/rich-editor.js && node --check public/playback.js && node --check public/page-transition.js && node --check public/legacy/app.js",
     "export": "node scripts/export.mjs",
     "prestart": "node scripts/restore-videos.mjs",
     "preexport": "node scripts/restore-videos.mjs"

@@ -8,7 +8,8 @@ export function renderNavigation(deck, index, choose, {addPage,renamePage} = {})
   for (const name of chapters) {
     const matching = deck.scenes.map((s, i) => [s, i]).filter(([s]) => s.chapter === name);
     const b = document.createElement('button'); b.className = 'chapter-button';
-    b.textContent = name; b.setAttribute('aria-current', name === chapter ? 'true' : 'false');
+    const label=document.createElement('span');label.textContent=name;const count=document.createElement('small');count.className='chapter-count';count.textContent=fa(matching.length);b.append(label,count);
+    b.setAttribute('aria-label',`${name}، ${fa(matching.length)} زیرصفحه`);b.setAttribute('aria-current', name === chapter ? 'true' : 'false');
     b.onclick = () => choose(matching[0][1]); list.append(b);
     if (name !== chapter) continue;
     for (const [s, i] of matching) {

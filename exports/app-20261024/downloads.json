@@ -1,0 +1,58 @@
+[
+  {
+    "id": "complete",
+    "label": "نسخه کامل اپ طلاکارت",
+    "seconds": 114.45833333333333,
+    "bytes": 55743736,
+    "sha256": "12df693149ca2b738cd1fbb386097e7d02cbfac57afa149da19d1bad975f7f3b",
+    "url": "https://talacard-presentation.sajedtavakoli68.chatgpt.site/media/talacard-app-complete-20261024-12df6931.mp4"
+  },
+  {
+    "id": "intro",
+    "label": "معرفی",
+    "seconds": 4.208333333333333,
+    "bytes": 1025164,
+    "sha256": "3f34d38b6c669f063471fe273288f082a93169d3257f9344aea9383570f3541c",
+    "url": "https://talacard-presentation.sajedtavakoli68.chatgpt.site/media/talacard-app-intro-20261024-3f34d38b.mp4"
+  },
+  {
+    "id": "home",
+    "label": "خانه",
+    "seconds": 3.5833333333333335,
+    "bytes": 758512,
+    "sha256": "278430d74b610529f98a3931e708fbf68a6898c767e064018c3c2edbcb795965",
+    "url": "https://talacard-presentation.sajedtavakoli68.chatgpt.site/media/talacard-app-home-20261024-278430d7.mp4"
+  },
+  {
+    "id": "buy",
+    "label": "خرید",
+    "seconds": 19.708333333333332,
+    "bytes": 8345610,
+    "sha256": "af1509ddeeea99b1c4bf552a15993e1547f0c5ded310454899ab36b2532847d6",
+    "url": "https://talacard-presentation.sajedtavakoli68.chatgpt.site/media/talacard-app-buy-20261024-af1509dd.mp4"
+  },
+  {
+    "id": "sell",
+    "label": "فروش",
+    "seconds": 21.083333333333332,
+    "bytes": 9021774,
+    "sha256": "810256e03858d2e78d842333428e56400d6efbbdb58ddfb2295dc6afbe5c22de",
+    "url": "https://talacard-presentation.sajedtavakoli68.chatgpt.site/media/talacard-app-sell-20261024-810256e0.mp4"
+  },
+  {
+    "id": "physical-delivery",
+    "label": "تحویل فیزیکی",
+    "seconds": 29.291666666666668,
+    "bytes": 13642325,
+    "sha256": "5453548140b062070cbe495d69e7ad74e8c690d3943dcb34d074e18c87210498",
+    "url": "https://talacard-presentation.sajedtavakoli68.chatgpt.site/media/talacard-app-physical-delivery-20261024-54535481.mp4"
+  },
+  {
+    "id": "kiosk-delivery",
+    "label": "تحویل در طلاپرداز",
+    "seconds": 36.583333333333336,
+    "bytes": 16782427,
+    "sha256": "e26d16035a04df7691b72aa4d39ec9c2843b482bb5726952c3546dea6ff3cf42",
+    "url": "https://talacard-presentation.sajedtavakoli68.chatgpt.site/media/talacard-app-kiosk-delivery-20261024-e26d1603.mp4"
+  }
+]
