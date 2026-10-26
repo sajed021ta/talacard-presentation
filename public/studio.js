@@ -1,3 +1,4 @@
+import {accessFetch,mountAccess} from './access.js';
 import {mountHomePicker,deckDisplayName} from './home.js';
 import {playPageTransition,DEFAULT_PAGE_TRANSITION} from './page-transition.js';
 import {pagePlaybackFinished} from './playback.js';
@@ -20,7 +21,7 @@ const icons = {
 const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[name] || icons.picture}</svg>`;
 for (const [id, name] of Object.entries({ undo:'undo', redo:'redo', more:'more', 'add-scene':'plus', prev:'prev', next:'next', play:'play', fullscreen:'fullscreen', 'move-up':'up', 'move-down':'down', delete:'trash', 'close-help':'close' })) $('#' + id).innerHTML = icon(name);
 
-let project, savedJSON = '', revision = '', backend = true, deckId, index = 0, tab = 'content';
+let project, savedJSON = '', revision = '', backend = true, hostedStorage=false, deckId, index = 0, tab = 'content';
 let playing = false, elapsed = 0, previousFrame = 0, frame, iframeReady = false, sceneSignature = '', stageAnimations = [], saving = false, toastTimer, draftTimer;
 let autoSaveTimer, autoSaveBlocked=false, localSaveError=false, syncState={status:'pending'}, syncPoll;
 const history = [], future = [];
@@ -40,7 +41,7 @@ function toast(message, error = false) {
 }
 function updateStatus() {
   const status = $('#save-status');
-  status.textContent = saving ? 'در حال ذخیره…' : autoSaveBlocked ? 'تداخل ذخیره؛ فایل پروژه را دریافت کن' : dirty() ? localSaveError ? 'ذخیره نشد؛ تلاش دوباره…' : 'در انتظار ذخیرهٔ خودکار…' : backend ? 'ذخیره شد روی دستگاه' : 'ذخیره شد در مرورگر';
+  status.textContent = saving ? 'در حال ذخیره…' : autoSaveBlocked ? 'تداخل ذخیره؛ فایل پروژه را دریافت کن' : dirty() ? localSaveError ? 'ذخیره نشد؛ تلاش دوباره…' : 'در انتظار ذخیرهٔ خودکار…' : backend ? hostedStorage?'ذخیره شد روی سایت':'ذخیره شد روی دستگاه' : 'ذخیره شد در مرورگر';
   const cloud=$('#cloud-status');if(cloud){const current=syncState.status;cloud.textContent=!backend?'نسخهٔ آفلاین':current==='published'&&syncState.revision===revision&&!dirty()?'همگام با لینک عمومی':current==='syncing'?'در حال ارسال به سایت…':current==='conflict'?'تداخل نسخهٔ آنلاین':current==='retrying'?'ذخیره شد؛ تلاش دوباره برای سایت':current==='disabled'?'اتصال سایت فعال نیست':'در انتظار همگام‌سازی';cloud.title=syncState.error||'ذخیره و انتشار خودکار فعال است';cloud.dataset.state=current;}
   status.classList.toggle('unsaved', dirty()); $('#save').disabled = saving;
   const contextStatus=$('#element-save-status');if(contextStatus)contextStatus.textContent=status.textContent;
@@ -59,11 +60,11 @@ function changed() { syncProjectEditor(project); updateStatus(); draft(); schedu
 async function readSyncStatus(){
  if(!backend)return;
  try{
-  const r=await fetch('/api/sync',{cache:'no-store'});if(!r.ok)return;syncState=await r.json();
+  const r=await accessFetch('/api/sync',{cache:'no-store'});if(!r.ok)return;syncState=await r.json();
   // Another local editor can save while this tab is idle. Pull its saved state
   // only when this tab has no pending edit; never overwrite an active draft.
   if(syncState.revision && syncState.revision!==revision && !dirty() && !saving && !document.activeElement?.closest('#scene-form')){
-   const response=await fetch('/api/project',{cache:'no-store'});const latest=await response.json();
+   const response=await accessFetch('/api/project',{cache:'no-store'});const latest=await response.json();
    if(response.ok && latest.revision!==revision && !dirty() && !saving){
     const previousId=scene().id;project=validateProject(latest.project);revision=latest.revision;savedJSON=JSON.stringify(project);
     if(!project.decks.some(d=>d.id===deckId))deckId=project.activeDeck;
@@ -493,10 +494,10 @@ async function save({automatic=false}={}) {
     saving = true; updateStatus();let attempts=0;
     for(;;){
       syncProjectEditor(project);const snapshot=clone(project);validateProject(snapshot);
-      const response=await fetch('/api/project',{method:'PUT',headers:{'Content-Type':'application/json','X-TalaCard-Studio':'1'},body:JSON.stringify({project:snapshot,revision})});
+      const response=await accessFetch('/api/project',{method:'PUT',headers:{'Content-Type':'application/json','X-TalaCard-Studio':'1'},body:JSON.stringify({project:snapshot,revision})});
       const result=await response.json();
       if(response.status===409&&attempts<3){
-        const latestResponse=await fetch('/api/project',{cache:'no-store'});if(!latestResponse.ok)throw Error('دریافت نسخهٔ جدید انجام نشد؛ دوباره ذخیره کن.');
+        const latestResponse=await accessFetch('/api/project',{cache:'no-store'});if(!latestResponse.ok)throw Error('دریافت نسخهٔ جدید انجام نشد؛ دوباره ذخیره کن.');
         const latest=await latestResponse.json(),merged=reconcileProjects(JSON.parse(savedJSON),project,validateProject(latest.project));
         if(merged.conflicts.length){autoSaveBlocked=true;throw Error('یک بخش از محتوا در دو پنجره هم‌زمان تغییر کرده است. تغییرات این پنجره حفظ شده؛ از گزینه‌های پروژه فایل JSON را دریافت کن تا نسخه‌ها بررسی شوند.');}
         validateProject(merged.project);const selected=scene().id;applyProjectInPlace(project,merged.project);revision=latest.revision;savedJSON=JSON.stringify(latest.project);attempts++;
@@ -507,13 +508,13 @@ async function save({automatic=false}={}) {
       }
       if(!response.ok){if(response.status===409)autoSaveBlocked=true;throw Error(result.error||'ذخیره انجام نشد.');}
       revision=result.revision;savedJSON=JSON.stringify(snapshot);autoSaveBlocked=false;localSaveError=false;draft();readSyncStatus();
-      if(!automatic)toast('روی دستگاه ذخیره شد؛ لینک عمومی خودکار به‌روز می‌شود.');break;
+      if(!automatic)toast(hostedStorage?'روی سایت ذخیره شد.':'روی دستگاه ذخیره شد؛ لینک عمومی خودکار به‌روز می‌شود.');break;
     }
 
   } catch (e) { localSaveError=true; if(!automatic||autoSaveBlocked)toast(e.message || 'ذخیره انجام نشد؛ دوباره تلاش می‌شود.', true); if(!autoSaveBlocked)autoSaveTimer=setTimeout(()=>save({automatic:true}),5000); }
   finally { saving = false; updateStatus(); if(dirty()&&!autoSaveBlocked&&!autoSaveTimer)scheduleAutoSave(); }
 }
-$('#save').onclick = () => {save();if(backend)fetch('/api/sync/retry',{method:'POST',headers:{'X-TalaCard-Studio':'1'}}).catch(()=>{});};
+$('#save').onclick = () => {save();if(backend)accessFetch('/api/sync/retry',{method:'POST',headers:{'X-TalaCard-Studio':'1'}}).catch(()=>{});};
 function downloadJSON() { const blob = new Blob([JSON.stringify(project, null, 2) + '\n'], { type:'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'talacard-project.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000); }
 $('#export-json').onclick = () => { downloadJSON(); closeMenu(); };
 $('#import-json').onclick = () => { $('#json-file').value = ''; $('#json-file').click(); closeMenu(); };
@@ -537,7 +538,8 @@ $('#media-file').onchange = async () => {
   for(const [fileIndex,file] of files.entries()){try {
     if (file.size > 95 * 1024 * 1024) throw new Error('حجم رسانه باید کمتر از ۹۵ مگابایت باشد.');
     toast('در حال کپی رسانه به پوشهٔ پروژه…');
-    const r = await fetch('/api/media', { method:'POST', headers:{ 'Content-Type':file.type, 'X-TalaCard-Studio':'1' }, body:file }); const value = await r.json(); if (!r.ok) throw new Error(value.error || 'رسانه ذخیره نشد.');
+    const uploadHeaders={'Content-Type':file.type,'X-TalaCard-Studio':'1','X-Upload-Length':String(file.size)};if(hostedStorage)uploadHeaders['X-Asset-Hash']=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await file.arrayBuffer())),b=>b.toString(16).padStart(2,'0')).join('');
+    const r=await accessFetch('/api/media',{method:'POST',headers:uploadHeaders,body:file}); const value = await r.json(); if (!r.ok) throw new Error(value.error || 'رسانه ذخیره نشد.');
     const targetScene = project.decks.find(d => d.id === target.deckId)?.scenes.find(s => s.id === target.sceneId);
     checkpoint(); project.library.push({ ...value, name:file.name.slice(0,200), originalName:file.name.slice(0,500) });
     if(target.homeElementId){updateEditorElement(project,'home',target.homeElementId,{content:{image:value.src,fit:'cover'}});homePicker.refresh();renderHomeInspector()}
@@ -571,8 +573,9 @@ window.addEventListener('hashchange', () => editMode(location.hash === '#edit'))
 
 async function init() {
   try {
+    const access=await mountAccess({editor:true});hostedStorage=access.storage==='cloud';
     let result;
-    try { const r = await fetch('/api/project'); if (!r.ok) throw new Error(); result = await r.json(); if (!result.project) throw new Error(); }
+    try { const r = await accessFetch('/api/project'); if (!r.ok) throw new Error(); result = await r.json(); if (!result.project) throw new Error(); }
     catch { backend = false; const r = await fetch('/default-content.json'); if (!r.ok) throw new Error('فایل محتوای پروژه پیدا نشد.'); const baseline = validateProject(await r.json()); result = { project:baseline, revision:'static' }; try { const stored = localStorage.getItem('talacard-static-project-v1'); if (stored) result.project = validateProject(JSON.parse(stored)); } catch {} }
     project = ensureEditableProject(validateProject(result.project)); revision = result.revision; savedJSON = JSON.stringify(project);
     try {
@@ -592,6 +595,9 @@ async function init() {
     previousFrame = performance.now(); requestAnimationFrame(tick);
   } catch (e) { $('#save-status').textContent = 'خطا در بارگذاری'; $('#scene-canvas').textContent = 'پروژه بارگذاری نشد. فایل content.json و اجرای سرور را بررسی کنید.'; toast(e.message, true); }
 }
+function preserveSessionDraft(){if(project&&dirty())try{localStorage.setItem('talacard-draft-v1',JSON.stringify({revision,project,baseProject:JSON.parse(savedJSON)}))}catch{}}
+window.addEventListener('talacard-before-logout',preserveSessionDraft);
+window.addEventListener('talacard-session-expired',()=>{clearTimeout(autoSaveTimer);autoSaveBlocked=true;preserveSessionDraft()});
 init();
 
 function canvasElement(){return $('#scene-canvas');}

@@ -5,34 +5,24 @@ import os from 'node:os';
 import path from 'node:path';
 import {createWorker} from '../cloud/worker.js';
 import {createCloudSync} from '../cloud/sync.mjs';
+import {testEnvironment,signIn} from './helpers/auth.mjs';
 
-class Bucket {
- map=new Map();
- async head(key){const x=this.map.get(key);return x?{...x,body:undefined}:null}
- async get(key){const x=this.map.get(key);return x?{...x,body:x.bytes}:null}
- async put(key,body,options={}){
-  const old=this.map.get(key),condition=options.onlyIf;
-  if(condition?.get('If-Match')&&condition.get('If-Match')!==old?.httpEtag)return null;
-  if(condition?.get('If-None-Match')==='*'&&old)return null;
-  const bytes=new Uint8Array(await new Response(body).arrayBuffer());
-  const etag=String(Math.random());const obj={bytes,size:bytes.length,httpEtag:'"'+etag+'"',etag,httpMetadata:options.httpMetadata||{},customMetadata:options.customMetadata||{}};this.map.set(key,obj);return obj;
- }
-}
 const project=()=>{const p=JSON.parse(fs.readFileSync(new URL('../content.json',import.meta.url)));for(const d of p.decks)for(const s of d.scenes){s.media='';s.poster='';delete s.mediaItems}p.homeCards={};return p};
 const url='https://site.test';
-const env=()=>({BUCKET:new Bucket(),TALACARD_SYNC_TOKEN:'test-token'});
+const env=testEnvironment;
 const headers={Authorization:'Bearer test-token','Content-Type':'application/json'};
 
-test('public viewer stays read-only; publication requires secret and validates media and revision',async()=>{
+test('signed-in viewer stays read-only; device publication requires secret and validates media and revision',async()=>{
  const e=env(),worker=createWorker({'/index.html':{type:'text/html',body:Buffer.from('<h1>viewer</h1>').toString('base64')}});
- assert.equal((await worker.fetch(new Request(url+'/'),e)).status,200);
+ assert.equal((await worker.fetch(new Request(url+'/'),e)).status,302);
+ const cookie=await signIn(worker,e);assert.equal((await worker.fetch(new Request(url+'/',{headers:{Cookie:cookie}}),e)).status,200);
  assert.equal((await worker.fetch(new Request(url+'/api/sync/status'),e)).status,401);
  const p=project(),rich=p.decks[1].scenes[0];
  rich.textBlocks=[{id:'body-1',runs:[{text:'متن قالب‌دار',bold:true}],format:{align:'center'}}];rich.description='متن قالب‌دار';rich.mediaEffect={type:'zoom-out',duration:20,delay:0,amount:20,repeat:false,easing:'ease-out'};
  let response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers,body:JSON.stringify(p)}),e);
  assert.equal(response.status,200);const first=await response.json();
- const get=await worker.fetch(new Request(url+'/default-content.json'),e);assert.deepEqual(await get.json(),p);
- assert.equal((await worker.fetch(new Request(url+'/default-content.json',{headers:{'If-None-Match':first.etag}}),e)).status,304);
+ const get=await worker.fetch(new Request(url+'/default-content.json',{headers:{Cookie:cookie}}),e);assert.deepEqual(await get.json(),p);
+ assert.equal((await worker.fetch(new Request(url+'/default-content.json',{headers:{Cookie:cookie,'If-None-Match':first.etag}}),e)).status,304);
  response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers,body:JSON.stringify(p)}),e);assert.equal(response.status,409);
  p.decks[0].scenes[0].title='new title';delete p.decks[0].scenes[0].titleRuns;
  response=await worker.fetch(new Request(url+'/api/sync/project',{method:'PUT',headers:{...headers,'If-Match':first.etag},body:JSON.stringify(p)}),e);assert.equal(response.status,200);

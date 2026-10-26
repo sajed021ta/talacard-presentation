@@ -1,3 +1,4 @@
+import {accessFetch,mountAccess} from './access.js';
 import {mountHomePicker,deckDisplayName} from './home.js';
 import {playPageTransition,DEFAULT_PAGE_TRANSITION} from './page-transition.js';
 import {pagePlaybackFinished} from './playback.js';
@@ -159,7 +160,7 @@ $('#fullscreen').onclick=async()=>{try{await $('#stage').requestFullscreen();res
 document.addEventListener('fullscreenchange',resizeStage);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false)});
 document.addEventListener('keydown',e=>{if(!project||homePicker?.visible||e.target.closest('input,select,button,a'))return;if(e.code==='Space'){e.preventDefault();$('#play').click()}else if(e.key==='ArrowLeft'){e.preventDefault();choose(index+1)}else if(e.key==='ArrowRight'){e.preventDefault();choose(index-1)}});
-try{const r=await fetch('/default-content.json',{cache:'no-store'});contentETag=r.headers.get('ETag');if(!r.ok)throw new Error();project=validateProject(await r.json());const requested=new URL(location.href).searchParams.get('deck');deckId=project.decks.some(d=>d.id===requested)?requested:project.activeDeck;renderDecks();choose(0,false);previousFrame=performance.now();requestAnimationFrame(tick);setupHome()}catch{$('#scene-canvas').textContent='بارگذاری ارائه انجام نشد؛ صفحه را دوباره باز کنید.'}
+try{await mountAccess();const r=await accessFetch('/default-content.json',{cache:'no-store'});contentETag=r.headers.get('ETag');if(!r.ok)throw new Error();project=validateProject(await r.json());const requested=new URL(location.href).searchParams.get('deck');deckId=project.decks.some(d=>d.id===requested)?requested:project.activeDeck;renderDecks();choose(0,false);previousFrame=performance.now();requestAnimationFrame(tick);setupHome()}catch{$('#scene-canvas').textContent='بارگذاری ارائه انجام نشد؛ صفحه را دوباره باز کنید.'}
 
 function canvasElement(){return $('#scene-canvas');}
 $('#loop-video').onchange=()=>{ scene().loop=$('#loop-video').checked;const v=$('#scene-canvas video');if(v){v.loop=scene().loop;if(playing && v.ended){v.currentTime=0;playVideo(v)}}};
@@ -169,7 +170,7 @@ let refreshing=false;
 setInterval(async()=>{
  if(document.hidden||refreshing||!project)return;refreshing=true;
  try{
-  const response=await fetch('/default-content.json',{cache:'no-store',headers:contentETag?{'If-None-Match':contentETag}:{}});
+  const response=await accessFetch('/default-content.json',{cache:'no-store',headers:contentETag?{'If-None-Match':contentETag}:{}});
   if(response.status===304||!response.ok)return;
   const etag=response.headers.get('ETag');if(etag&&etag===contentETag)return;
   const next=validateProject(await response.json());

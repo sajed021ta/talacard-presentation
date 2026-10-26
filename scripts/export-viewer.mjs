@@ -9,7 +9,8 @@ const mediaSource = process.argv[3] ? path.resolve(process.argv[3]) : path.join(
 validateProject(JSON.parse(fs.readFileSync(path.join(root, 'content.json'))));
 fs.mkdirSync(output, { recursive:true });
 fs.copyFileSync(path.join(root, 'public/viewer.html'), path.join(output, 'index.html'));
-for (const f of ['viewer.js', 'viewer.css', 'studio.css', 'model.js', 'editor-model.js', 'navigation.js', 'placement.js','text.js','text.css','effects.js','backdrop.js','multimedia.js','home.js','home.css','page-transition.js','playback.js']) fs.copyFileSync(path.join(root, 'public', f), path.join(output, f));
+fs.copyFileSync(path.join(root,'public/index.html'),path.join(output,'edit.html'));
+for (const f of ['viewer.js', 'viewer.css', 'studio.js','reconcile.js','rich-editor.js','login.html','login.js','access.js','access.css','studio.css', 'model.js', 'editor-model.js', 'navigation.js', 'placement.js','text.js','text.css','effects.js','backdrop.js','multimedia.js','home.js','home.css','page-transition.js','playback.js']) fs.copyFileSync(path.join(root, 'public', f), path.join(output, f));
 fs.copyFileSync(path.join(root, 'content.json'), path.join(output, 'default-content.json'));
 fs.cpSync(path.join(root, 'public/legacy'), path.join(output, 'legacy'), { recursive:true });
 fs.cpSync(path.join(root,'public/legacy-2026-10-19'),path.join(output,'legacy-2026-10-19'),{recursive:true});
@@ -26,5 +27,5 @@ for (const f of fs.readdirSync(path.join(root, 'public/media'))) {
   const destination = path.join(output, 'media', f);
   if (path.resolve(source) !== path.resolve(destination)) fs.copyFileSync(source, destination);
 }
-console.log('Viewer exported. No editor, upload endpoint, source archive, or proposal PDF is included.');
+console.log('Viewer and admin editor exported; the Worker must protect editor assets and write endpoints. No credentials or source archives are included.');
 console.log('For hosting with per-file limits, supply a directory of optimized videos as the third argument.');

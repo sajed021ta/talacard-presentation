@@ -11,3 +11,11 @@
 در چک‌اوت میزبانی، `.openai/hosting.json` همان project_id و مخاطب عمومی را حفظ می‌کند و `r2` برابر `BUCKET` است. `scripts/build.mjs` نمایشگر، فونت‌ها و تصاویر پایه را در Worker خودبسنده قرار می‌دهد؛ ویدیوها از R2 خوانده می‌شوند. سورس زیر `worker/` و `site-assets/` است و `dist/` خروجی تولیدی است.
 
 انتشار محتوا از conditional write استفاده می‌کند؛ تغییر نسخهٔ آنلاین از دستگاه دیگر، ارسال را با وضعیت تداخل متوقف می‌کند تا تغییرات قبلی بازنویسی نشوند. قرارداد R2: [Cloudflare Workers API](https://developers.cloudflare.com/r2/api/workers/workers-api-reference/).
+
+## Presentation login
+
+The live viewer and editor require server-side sessions. `viewer` can view the presentation; `admin` uses the same editor at `/edit.html` and can save/upload directly to R2. Protected assets and content use private/no-store responses. Device synchronization retains its existing bearer authentication.
+
+Run `node scripts/setup-access.mjs` once to generate local account records and a private login handoff file. Existing accounts are never overwritten. Configure `TALACARD_AUTH_ACCOUNTS` as a secret runtime variable using the `accounts` array from `.private/auth.json`; never copy private files into source assets. The hosted Worker fails closed when account configuration or R2 is missing. Local login activates when that private configuration exists.
+
+Sessions last eight hours and are stored under `auth/sessions/` with hashed random tokens. Logout removes the server record. Updating an account's salted password hash invalidates its existing sessions. Login throttling uses conditional R2 writes per account/client address. Passwords are derived with PBKDF2-SHA256 (100,000 iterations); generated passwords contain 144 random bits.

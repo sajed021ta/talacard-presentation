@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+const root=path.resolve(import.meta.dirname,'..'),folder=path.join(root,'.private'),config=path.join(folder,'auth.json'),delivery=path.join(folder,'presentation-logins.md');
+if(fs.existsSync(config))throw Error('Access is already configured; existing passwords were preserved.');
+fs.mkdirSync(folder,{recursive:true,mode:0o700});
+const credentials=[{username:'admin',role:'editor',label:'مدیر'},{username:'viewer',role:'viewer',label:'بیننده'}].map(a=>({...a,password:crypto.randomBytes(18).toString('base64url')}));
+const accounts=credentials.map(({username,role,password})=>{const salt=crypto.randomBytes(16).toString('hex'),iterations=100000;return {username,role,salt,iterations,hash:crypto.pbkdf2Sync(password,Buffer.from(salt,'hex'),iterations,32,'sha256').toString('hex')}});
+fs.writeFileSync(config,JSON.stringify({accounts},null,2)+'\n',{flag:'wx',mode:0o600});
+fs.writeFileSync(delivery,'# اطلاعات ورود پرزنتیشن طلاکارت\n\nلینک: https://talacard-presentation.sajedtavakoli68.chatgpt.site/\n\n'+credentials.map(a=>'## '+a.label+'\n\nنام کاربری: `'+a.username+'`\n\nرمز عبور:\n\n```text\n'+a.password+'\n```\n').join('\n')+'\nحساب viewer فقط برای مشاهده است. اطلاعات admin را برای دیگران ارسال نکنید.\n',{flag:'wx',mode:0o600});
+console.log('Two accounts configured. Login details are in .private/presentation-logins.md; no passwords were printed.');

@@ -6,6 +6,9 @@ import crypto from 'node:crypto';
 import {validateProject,projectMediaPaths} from './public/model.js';
 import {ensureEditableProject} from './public/editor-model.js';
 import { createCloudSync } from './cloud/sync.mjs';
+import {localAuthEnvironment} from './cloud/local-auth.mjs';
+import {handleAuth,getSession,LOGIN_ASSETS,EDITOR_ASSETS,loginRequired,sameOrigin} from './cloud/auth.js';
+import {validMediaHeader} from './cloud/media.js';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.gif': 'image/gif', '.mp4': 'video/mp4', '.webm': 'video/webm', '.ttf': 'font/ttf', '.pdf': 'application/pdf' };
@@ -27,6 +30,19 @@ export function createApp(root = ROOT) {
       const host = req.headers.host || '';
       if (!/^(127\.0\.0\.1|localhost)(:\d+)?$/.test(host)) return json(res, 403, { error: 'فقط دسترسی محلی مجاز است.' });
       const url = new URL(req.url, `http://${host}`);
+      const auth=localAuthEnvironment(root),publicAsset=LOGIN_ASSETS.has(url.pathname);
+      const authRequest=new Request(url,{method:req.method,headers:req.headers,...(url.pathname.startsWith('/api/auth/')&&req.method==='POST'?{body:await body(req,4096)}:{})});
+      const send=async response=>{res.writeHead(response.status,Object.fromEntries(response.headers));res.end(Buffer.from(await response.arrayBuffer()))};
+      if(url.pathname.startsWith('/api/auth/')){
+        if(!auth)return json(res,url.pathname==='/api/auth/me'?200:404,url.pathname==='/api/auth/me'?{required:false,role:'editor',storage:'local'}:{error:'ورود فعال نیست.'});
+        return send(await handleAuth(authRequest,auth,{ip:req.socket.remoteAddress||'local'}));
+      }
+      if(auth&&!publicAsset){
+        const session=await getSession(authRequest,auth);if(!session)return send(loginRequired(authRequest));
+        if(EDITOR_ASSETS.has(url.pathname)&&session.role!=='editor'){res.writeHead(302,{Location:'/','Cache-Control':'no-store'});return res.end()}
+        if(url.pathname.startsWith('/api/')&&session.role!=='editor')return json(res,403,{error:'این حساب فقط اجازهٔ مشاهده دارد.'});
+        if(!['GET','HEAD'].includes(req.method)&&!sameOrigin(authRequest))return json(res,403,{error:'مبدأ درخواست معتبر نیست.'});
+      }
       if (req.method !== 'GET' && req.method !== 'HEAD') {
         if (req.headers.origin && req.headers.origin !== `http://${host}`) return json(res, 403, { error: 'درخواست از این مبدأ مجاز نیست.' });
         if (req.headers['x-talacard-studio'] !== '1') return json(res, 403, { error: 'درخواست ویرایش معتبر نیست.' });
@@ -60,7 +76,7 @@ export function createApp(root = ROOT) {
         const ext = UPLOADS.get(type); if (!ext) return json(res, 415, { error: 'عکس PNG، JPG، WebP، GIF یا ویدیوی MP4 و WebM انتخاب کنید.' });
         const data = await body(req, 95 * 1024 * 1024);
         if (!data.length) throw new Error('فایل خالی است.');
-        const valid = ext === '.mp4' ? data.subarray(4, 8).toString() === 'ftyp' : ext === '.webm' ? data.subarray(0, 4).equals(Buffer.from([0x1a, 0x45, 0xdf, 0xa3])) : ext === '.jpg' ? data[0] === 0xff && data[1] === 0xd8 : ext === '.png' ? data.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10])) : ext === '.gif' ? /^GIF8[79]a$/.test(data.subarray(0, 6).toString()) : data.subarray(0, 4).toString() === 'RIFF' && data.subarray(8, 12).toString() === 'WEBP';
+        const valid=validMediaHeader(data,type);
         if (!valid) throw new Error('محتوای فایل با نوع انتخاب‌شده مطابقت ندارد.');
         const id = 'upload-' + crypto.randomUUID(); const name = id + ext;
         fs.writeFileSync(path.join(root, 'public/media', name), data, { flag: 'wx' });
@@ -72,9 +88,9 @@ export function createApp(root = ROOT) {
       let file;
       if (decoded.startsWith('/original/')) file = path.join(root, decoded);
       else if (decoded === '/content.json') file = contentFile;
-      else file = path.join(root, 'public', decoded === '/' ? 'index.html' : decoded);
+      else file = path.join(root, 'public', decoded==='/login'?'login.html':decoded==='/edit.html'?'index.html':decoded==='/'?(auth?'viewer.html':'index.html'):decoded);
       if (!fs.existsSync(file) || !fs.statSync(file).isFile() || !MIME[path.extname(file)]) return json(res, 404, { error: 'فایل پیدا نشد.' });
-      const stat = fs.statSync(file); const headers = { 'Content-Type': MIME[path.extname(file)], 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-cache', 'Accept-Ranges': 'bytes', 'Referrer-Policy': 'same-origin' };
+      const stat = fs.statSync(file); const headers = { 'Content-Type': MIME[path.extname(file)], 'X-Content-Type-Options': 'nosniff', 'Cache-Control': auth&&!publicAsset?'private, no-store':'no-cache', 'Accept-Ranges': 'bytes', 'Referrer-Policy': 'same-origin' };
       if (!decoded.startsWith('/original/')) headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob:; media-src 'self' blob:; font-src 'self'; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'";
       let start = 0, end = stat.size - 1, status = 200;
       if (req.headers.range) {
