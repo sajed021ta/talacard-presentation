@@ -58,10 +58,10 @@ export function createWorker(assets={}) {
   if(!publicAsset){
    if(!authConfigured(env))return json({error:'ورود هنوز پیکربندی نشده است.'},503);
    if(!session)return loginRequired(request);
-   if(EDITOR_ASSETS.has(p)&&session.role!=='editor')return new Response(null,{status:302,headers:{Location:'/','Cache-Control':'no-store'}});
+   if(EDITOR_ASSETS.has(p)&&!['editor','admin'].includes(session.role))return new Response(null,{status:302,headers:{Location:'/','Cache-Control':'no-store'}});
   }
   if(p.startsWith('/api/')){
-   if(session?.role!=='editor')return json({error:'این حساب فقط اجازهٔ مشاهده دارد.'},403);
+   if(!['editor','admin'].includes(session?.role))return json({error:'این حساب فقط اجازهٔ مشاهده دارد.'},403);
    if(!['GET','HEAD'].includes(request.method)&&!sameOrigin(request))return json({error:'مبدأ درخواست معتبر نیست.'},403);
    const current=await env.BUCKET.get('project/current.json');
    const text=current?await new Response(current.body).text():assets['/default-content.json']?new TextDecoder().decode(Uint8Array.from(atob(assets['/default-content.json'].body),c=>c.charCodeAt(0))):null;

@@ -10,9 +10,10 @@
   "scripts": {
     "start": "node server.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check server.mjs && node --check public/editor-model.js && node --check public/studio.js && node --check public/viewer.js && node --check public/text.js && node --check public/rich-editor.js && node --check public/playback.js && node --check public/page-transition.js && node --check public/legacy/app.js",
+    "check": "node --check server.mjs && node --check public/editor-model.js && node --check public/studio.js && node --check public/viewer.js && node --check public/text.js && node --check public/rich-editor.js && node --check public/playback.js && node --check public/page-transition.js && node --check public/legacy/app.js && node --check server/config.mjs && node --check server/storage.mjs && node --check cloud/auth.js && node --check cloud/local-auth.mjs && node --check scripts/accounts.mjs && node --check scripts/data.mjs && node --check scripts/test-docker.mjs",
     "export": "node scripts/export.mjs",
     "prestart": "node scripts/restore-videos.mjs",
-    "preexport": "node scripts/restore-videos.mjs"
+    "preexport": "node scripts/restore-videos.mjs",
+    "test:docker": "node scripts/test-docker.mjs"
   }
 }

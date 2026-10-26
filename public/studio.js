@@ -21,7 +21,7 @@ const icons = {
 const icon = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[name] || icons.picture}</svg>`;
 for (const [id, name] of Object.entries({ undo:'undo', redo:'redo', more:'more', 'add-scene':'plus', prev:'prev', next:'next', play:'play', fullscreen:'fullscreen', 'move-up':'up', 'move-down':'down', delete:'trash', 'close-help':'close' })) $('#' + id).innerHTML = icon(name);
 
-let project, savedJSON = '', revision = '', backend = true, hostedStorage=false, deckId, index = 0, tab = 'content';
+let project, savedJSON = '', revision = '', backend = true, hostedStorage=false, independentStorage=false, deckId, index = 0, tab = 'content';
 let playing = false, elapsed = 0, previousFrame = 0, frame, iframeReady = false, sceneSignature = '', stageAnimations = [], saving = false, toastTimer, draftTimer;
 let autoSaveTimer, autoSaveBlocked=false, localSaveError=false, syncState={status:'pending'}, syncPoll;
 const history = [], future = [];
@@ -42,7 +42,7 @@ function toast(message, error = false) {
 function updateStatus() {
   const status = $('#save-status');
   status.textContent = saving ? 'در حال ذخیره…' : autoSaveBlocked ? 'تداخل ذخیره؛ فایل پروژه را دریافت کن' : dirty() ? localSaveError ? 'ذخیره نشد؛ تلاش دوباره…' : 'در انتظار ذخیرهٔ خودکار…' : backend ? hostedStorage?'ذخیره شد روی سایت':'ذخیره شد روی دستگاه' : 'ذخیره شد در مرورگر';
-  const cloud=$('#cloud-status');if(cloud){const current=syncState.status;cloud.textContent=!backend?'نسخهٔ آفلاین':current==='published'&&syncState.revision===revision&&!dirty()?'همگام با لینک عمومی':current==='syncing'?'در حال ارسال به سایت…':current==='conflict'?'تداخل نسخهٔ آنلاین':current==='retrying'?'ذخیره شد؛ تلاش دوباره برای سایت':current==='disabled'?'اتصال سایت فعال نیست':'در انتظار همگام‌سازی';cloud.title=syncState.error||'ذخیره و انتشار خودکار فعال است';cloud.dataset.state=current;}
+  const cloud=$('#cloud-status');if(cloud){const current=syncState.status;cloud.textContent=!backend?'نسخهٔ آفلاین':current==='published'&&syncState.revision===revision&&!dirty()?(independentStorage?'ذخیرهٔ دائمی روی سرور':'همگام با لینک عمومی'):current==='syncing'?'در حال ارسال به سایت…':current==='conflict'?'تداخل نسخهٔ آنلاین':current==='retrying'?'ذخیره شد؛ تلاش دوباره برای سایت':current==='disabled'?'اتصال سایت فعال نیست':'در انتظار همگام‌سازی';cloud.title=syncState.error||(independentStorage?'ذخیره‌سازی مستقل روی سرور طلاکارت':'ذخیره و انتشار خودکار فعال است');cloud.dataset.state=current;}
   status.classList.toggle('unsaved', dirty()); $('#save').disabled = saving;
   const contextStatus=$('#element-save-status');if(contextStatus)contextStatus.textContent=status.textContent;
   $('#undo').disabled = !history.length; $('#redo').disabled = !future.length;
@@ -538,7 +538,7 @@ $('#media-file').onchange = async () => {
   for(const [fileIndex,file] of files.entries()){try {
     if (file.size > 95 * 1024 * 1024) throw new Error('حجم رسانه باید کمتر از ۹۵ مگابایت باشد.');
     toast('در حال کپی رسانه به پوشهٔ پروژه…');
-    const uploadHeaders={'Content-Type':file.type,'X-TalaCard-Studio':'1','X-Upload-Length':String(file.size)};if(hostedStorage)uploadHeaders['X-Asset-Hash']=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await file.arrayBuffer())),b=>b.toString(16).padStart(2,'0')).join('');
+    const uploadHeaders={'Content-Type':file.type,'X-TalaCard-Studio':'1','X-Upload-Length':String(file.size)};if(hostedStorage&&!independentStorage)uploadHeaders['X-Asset-Hash']=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',await file.arrayBuffer())),b=>b.toString(16).padStart(2,'0')).join('');
     const r=await accessFetch('/api/media',{method:'POST',headers:uploadHeaders,body:file}); const value = await r.json(); if (!r.ok) throw new Error(value.error || 'رسانه ذخیره نشد.');
     const targetScene = project.decks.find(d => d.id === target.deckId)?.scenes.find(s => s.id === target.sceneId);
     checkpoint(); project.library.push({ ...value, name:file.name.slice(0,200), originalName:file.name.slice(0,500) });
@@ -573,7 +573,7 @@ window.addEventListener('hashchange', () => editMode(location.hash === '#edit'))
 
 async function init() {
   try {
-    const access=await mountAccess({editor:true});hostedStorage=access.storage==='cloud';
+    const access=await mountAccess({editor:true});hostedStorage=['cloud','self-hosted'].includes(access.storage);independentStorage=access.storage==='self-hosted';
     let result;
     try { const r = await accessFetch('/api/project'); if (!r.ok) throw new Error(); result = await r.json(); if (!result.project) throw new Error(); }
     catch { backend = false; const r = await fetch('/default-content.json'); if (!r.ok) throw new Error('فایل محتوای پروژه پیدا نشد.'); const baseline = validateProject(await r.json()); result = { project:baseline, revision:'static' }; try { const stored = localStorage.getItem('talacard-static-project-v1'); if (stored) result.project = validateProject(JSON.parse(stored)); } catch {} }

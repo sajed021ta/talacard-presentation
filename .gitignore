@@ -17,3 +17,8 @@ content.backup.json
 /WORK_STATUS.md
 /exports/**/manifest.json
 /exports/app-20261024/talacard-app-complete-20261024.mp4
+
+# Persistent server data and private deployment inputs.
+/data/
+/backups/
+/secrets/

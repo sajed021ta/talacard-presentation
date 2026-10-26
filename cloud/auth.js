@@ -7,12 +7,12 @@ const random=()=>hex(crypto.getRandomValues(new Uint8Array(32)));
 const json=(value,status=200,headers={})=>new Response(JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store',...headers}});
 export const LOGIN_ASSETS=new Set(['/login','/login.html','/access.css','/access.js','/login.js','/media/talacard-logo.png','/original/assets/18892ffc31be2992.ttf','/original/assets/3c8442fb10f298d0.ttf']);
 export const EDITOR_ASSETS=new Set(['/edit.html','/studio.js','/rich-editor.js']);
-function accounts(env){
- try{const list=JSON.parse(env.TALACARD_AUTH_ACCOUNTS);if(!Array.isArray(list)||!list.length||list.length>10)return [];
-  if(new Set(list.map(a=>a.username)).size!==list.length)return [];
-  return list.every(a=>/^[a-z0-9_-]{1,64}$/.test(a.username)&&['viewer','editor'].includes(a.role)&&/^[a-f0-9]{32,64}$/.test(a.salt)&&/^[a-f0-9]{64}$/.test(a.hash)&&Number.isSafeInteger(a.iterations)&&a.iterations>=100000)?list:[];
- }catch{return []}
+export function validateAccounts(list){
+ if(!Array.isArray(list)||!list.length||list.length>10||new Set(list.map(a=>a?.username)).size!==list.length||!list.every(a=>a&&/^[a-z0-9_-]{1,64}$/.test(a.username)&&['viewer','editor','admin'].includes(a.role)&&/^[a-f0-9]{32,64}$/.test(a.salt)&&a.salt.length%2===0&&/^[a-f0-9]{64}$/.test(a.hash)&&Number.isSafeInteger(a.iterations)&&a.iterations>=100000&&a.iterations<=2000000))throw Error('Invalid account records');
+ return list;
 }
+function accounts(env){try{return validateAccounts(JSON.parse(env.TALACARD_AUTH_ACCOUNTS))}catch{return []}}
+const roleFor=(account,env)=>env.TALACARD_CANONICAL_ROLES&&account.role==='editor'?'admin':account.role;
 export const authConfigured=env=>Boolean(env.BUCKET&&accounts(env).length);
 export const sameOrigin=request=>request.headers.get('Origin')===new URL(request.url).origin&&request.headers.get('Sec-Fetch-Site')!=='cross-site';
 function tokenFrom(request){const token=request.headers.get('Cookie')?.split(';').map(v=>v.trim()).find(v=>v.startsWith(COOKIE+'='))?.slice(COOKIE.length+1);return /^[a-f0-9]{64}$/.test(token||'')?token:null}
@@ -30,7 +30,7 @@ export async function getSession(request,env,{now=Date.now()}={}){
  const key='auth/sessions/'+await digest(token),record=await read(env.BUCKET,key);if(!record)return null;
  const session=record.data,account=accounts(env).find(a=>a.username===session.username);
  if(!account||!Number.isFinite(session.expires)||session.expires<=now||session.fingerprint!==await fingerprint(account)){await env.BUCKET.delete(key);return null}
- return {username:account.username,role:account.role,expires:session.expires};
+ return {username:account.username,role:roleFor(account,env),expires:session.expires};
 }
 async function reserveAttempt(bucket,key,now){
  for(let attempt=0;attempt<5;attempt++){
@@ -62,9 +62,9 @@ export async function handleAuth(request,env,{ip='unknown',now=Date.now()}={}){
  if(!await reserveAttempt(env.BUCKET,limitKey,now))return json({error:'تلاش‌های ورود زیاد است؛ ۱۵ دقیقه دیگر دوباره امتحان کنید.'},429,{'Retry-After':'900'});
  const correct=await matches(input.password,account||list[0]);
  if(!account||!correct)return json({error:'نام کاربری یا رمز عبور درست نیست.'},401);
- const token=random(),expires=now+SESSION_SECONDS*1000;
+ const seconds=env.TALACARD_SESSION_SECONDS||SESSION_SECONDS,token=random(),expires=now+seconds*1000;
  if(!await write(env.BUCKET,'auth/sessions/'+await digest(token),{username:account.username,fingerprint:await fingerprint(account),expires},null))return json({error:'ورود انجام نشد؛ دوباره تلاش کنید.'},503);
  await env.BUCKET.delete(limitKey);
- return json({role:account.role,redirect:account.role==='editor'?'/edit.html#edit-home':'/'},200,{'Set-Cookie':cookie(request,token,SESSION_SECONDS)});
+ return json({role:roleFor(account,env),redirect:['admin','editor'].includes(account.role)?'/edit.html#edit-home':'/'},200,{'Set-Cookie':cookie(request,token,seconds)});
 }
 export function loginRequired(request){const url=new URL(request.url);return url.pathname.startsWith('/api/')||/\.(json|js|css|mp4|webm|png|jpg|webp|ttf)$/.test(url.pathname)?json({error:'برای ادامه وارد شوید.'},401):new Response(null,{status:302,headers:{Location:'/login','Cache-Control':'no-store'}})}

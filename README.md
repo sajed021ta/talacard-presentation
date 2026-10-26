@@ -1,3 +1,5 @@
+> Production مستقل روی Ubuntu/Docker: [راهنمای فارسی استقرار و مهاجرت](SELF_HOSTED_FA.md). برای `presentation.talacard.com` از `compose.selfhosted.yaml` و بک‌اند Node استفاده کنید؛ خروجی استاتیک Nginx API ورود و ذخیره ندارد.
+
 # استودیوی ارائهٔ طلاکارت
 
 نسخهٔ مستقل آرتیفکت طلاکارت، همراه با ویرایشگر فارسی و چهار پروژهٔ آماده بر پایهٔ [مرجع به‌روز Claude](https://claude.ai/artifact/A1CLteSL9qqvEHSW4Rpa8r)، ثبت‌شده در ۲۰۲۶-۱۰-۱۹:

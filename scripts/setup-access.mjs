@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+if(process.env.TALACARD_MODE==='self-hosted'||process.env.NODE_ENV==='production')throw Error('Production accounts must be explicitly imported with scripts/accounts.mjs; no default accounts were generated.');
 const root=path.resolve(import.meta.dirname,'..'),folder=path.join(root,'.private'),config=path.join(folder,'auth.json'),delivery=path.join(folder,'presentation-logins.md');
 if(fs.existsSync(config))throw Error('Access is already configured; existing passwords were preserved.');
 fs.mkdirSync(folder,{recursive:true,mode:0o700});
